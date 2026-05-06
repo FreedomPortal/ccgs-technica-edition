@@ -233,12 +233,10 @@ CCGS:TE skills map onto the existing 7-stage pipeline as a **parallel publishing
 
 ### Known Gaps from Base CCGS (not yet addressed in TE)
 
-| Gap | Description |
-|-----|-------------|
-| T5 | Publishing artifacts not required at Stage 6 gate — game can reach Release without store page or press kit |
-| T6 | Tooling sprint work not tracked in `/sprint-plan` |
-| T9 | Rule coverage gaps in `.claude/rules/` are silent — uncovered `src/` paths get no enforcement |
-| B2 | No solo-dev scope viability check in producer phase gate |
+* Publishing artifacts not required at Stage 6 gate — game can reach Release without store page or press kit.
+* Tooling sprint work not tracked in `/sprint-plan` .
+* Rule coverage gaps in `.claude/rules/` are silent — uncovered `src/` paths get no enforcement.
+* No solo-dev scope viability check in producer phase gate.
 
 ---
 ## Getting Started
