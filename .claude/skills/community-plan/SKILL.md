@@ -161,7 +161,13 @@ itch.io
 
 ---
 
-## 7. Confirm and Summarize
+## 7. Humanize Writing Pass
+
+Apply `/humanize-writing` to any prose content in the saved files in-place. Edit files with the humanized output. Do not include the Changes table in the exports — keep files clean. This pass runs automatically; no user approval needed before the confirmation step.
+
+---
+
+## 8. Confirm and Summarize
 After writing files:
 
 > **Community plan updated.**

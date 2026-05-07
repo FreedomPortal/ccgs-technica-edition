@@ -205,7 +205,13 @@ Create `production/publishing/` if it does not exist. Write the file with this s
 
 ---
 
-## Phase 6: Summary
+## Phase 6: Humanize Writing Pass
+
+Apply `/humanize-writing` to the saved file in-place. Edit the file with the humanized output. Do not include the Changes table in the export — keep the file clean. This pass runs automatically; no user approval needed before the next step.
+
+---
+
+## Phase 7: Summary
 
 After writing, output:
 

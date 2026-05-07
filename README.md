@@ -2,9 +2,9 @@
   <img src="./media/TechnicaLogoTransparentBG_120x120.png" />
   <h1 align="center">Claude Code Game Studios: Technica Edition</h1>
   <p align="center">
-    A CCGS fork that enhance AI agent game development framework with publishing workflow.
+    A CCGS fork that enhances AI agent game development framework with publishing workflow.
     <br />
-   Extend base framework with: Go-To-Market Layer,  Post-Launch Lifecycle, and Continuity.
+   Extend base framework with: Go-To-Market Layer,  Post-Launch Lifecycle, and Session Continuity.
   </p>
 </p>
 
@@ -334,3 +334,7 @@ CCGS: Technica Edition is a fork of **CCGS — Claude Code Game Studios** by **D
 Original repository: https://github.com/Donchitos/Claude-Code-Game-Studios
 
 All additions and modifications are by Technica Games. The MIT license text and original copyright notice are retained in all distributions.
+
+The `/humanize-writing` skill is adapted from **humanize-writing** by **jpeggdev**, licensed under MIT.
+
+Original repository: https://github.com/jpeggdev/humanize-writing
