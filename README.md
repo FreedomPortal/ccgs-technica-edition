@@ -89,7 +89,7 @@ Handles localization execution under `localization-lead` direction. String wrapp
 | Skill | Purpose |
 |-------|---------|
 | `/setup-tool` | Configure a standalone tool project — creates `TOOL_SPEC.md`, routes to `game-pipeline-developer` |
-| `/resume` | Read session state and agent memory; present a brief so you pick up immediately where you left off |
+| `/continue` | Read session state and agent memory; present a brief so you pick up immediately where you left off |
 | `/checkpoint` | Flush session discoveries to agent memory files — call proactively before crashes or `/clear` |
 | `/log-lesson` | Encode a lesson from external review, playtesting, or press feedback into `production/publishing/writing-lessons.md` |
 
@@ -186,7 +186,7 @@ The most significant architectural addition. Three parts work together:
 
 1. **`production/session-state/active.md`** — living checkpoint updated after every significant milestone. Contains: current task, progress checklist, key decisions, files in progress, open questions.
 2. **`/checkpoint`** — explicit flush to agent memory (`.claude/agent-memory/[agent]/MEMORY.md`). Call before `/clear`, before long breaks, after major decisions.
-3. **`/resume`** — reads `active.md` + agent memory + session logs and presents a brief on open. No session lost to context compaction.
+3. **`/continue`** — reads `active.md` + agent memory + session logs and presents a brief on open. No session lost to context compaction.
 
 `session-start.sh` was extended to detect and preview `active.md` automatically every session open.
 
@@ -294,7 +294,7 @@ If you need to keep the original CCGS history accessible while pulling the speci
 
 ### Best Practice Tips
 -   **Checkpointing:**  Use  `/checkpoint`  when a key decision is made (e.g., during design discussions). Follow up with  `/clear`  or  `/compact`  to manage context window size efficiently.
--   **Session Flow:**  Always end a session using  `/checkpoint`  to save the state. Resume work later using  `claude /resume`  to restore the context.
+-   **Session Flow:**  Always end a session using  `/checkpoint`  to save the state. Resume work later using  `claude /continue`  to restore the context.
 -   **Planning:**  Use  `/next`  to prompt the agent to analyze the current state and determine the optimal next action.
 ---
 

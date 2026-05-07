@@ -1,5 +1,5 @@
 ---
-name: resume
+name: continue
 description: "Recover session context and continue where you left off. Reads session
   state, user memory, and agent memory to present a concise brief of last session's
   progress and planned next steps."
@@ -9,7 +9,7 @@ allowed-tools: Read, Glob, AskUserQuestion
 model: haiku
 ---
 
-# Session Resume
+# Session Continue
 
 Read-only skill. Reads session state and memory files to give you a concise brief
 so you can pick up work immediately. Never writes files, never proposes changes.
@@ -59,7 +59,7 @@ Extract only forward-looking markers: lines under "Next:", "Pending:", "Remainin
 Keep total output under 35 lines.
 
 ```markdown
-## Session Resume — [Stage] — [Today's Date]
+## Session Continue — [Stage] — [Today's Date]
 
 ### Last Session
 [2–4 bullets of what was completed — from active.md]
@@ -95,4 +95,4 @@ After selection, one line only:
 - **Memory path not derivable**: Skip Phase 2, note "User memory not found — session
   state only."
 - **No agent memory files**: Skip Phase 3 silently.
-- **Everything empty**: "Nothing to resume — try `/start`."
+- **Everything empty**: "Nothing to continue — try `/start`."
