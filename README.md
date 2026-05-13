@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
   <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-52-blueviolet" alt="52 Agents"></a>
-  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-106-green" alt="106 Skills"></a>
+  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-107-green" alt="107 Skills"></a>
   <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-14-orange" alt="14 Hooks"></a>
   <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-11-red" alt="11 Rules"></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
@@ -21,6 +21,8 @@
 
 ---
 > **Fork of:** [CCGS — Claude Code Game Studios](https://github.com/Donchitos/Claude-Code-Game-Studios) by Donchitos
+>
+> **CCGS base version:** v1.0.0 stable release (2026/05/14)
 > 
 > **License:** MIT (fork — original copyright retained)
 > 
