@@ -12,7 +12,7 @@ When this skill is invoked:
 
 Two modes:
 
-- **Named**: `/setup-tool HoopMaker` — tool name provided, guided questions follow
+- **Named**: `/setup-tool [tool name]` — tool name provided, guided questions follow
 - **No args**: `/setup-tool` — fully guided mode
 
 ---
@@ -71,7 +71,7 @@ After gathering answers, draft the spec in conversation — do NOT write to file
 ## Pipeline Position
 
 [Where in the game development workflow this tool fits]
-Example: "Runs between Unity F2 (level division) and F1 (number placement)."
+Example: "Runs between the content structuring stage and the gameplay data generation stage."
 
 ## Target Engine
 
