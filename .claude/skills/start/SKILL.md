@@ -9,7 +9,7 @@ model: sonnet
 
 # Guided Onboarding
 
-This skill writes two files: `production/review-mode.txt` (Phase 3b) and `production/autosave-mode.txt` (Phase 3c).
+This skill writes one file: `production/review-mode.txt` (Phase 3b).
 
 This skill is the entry point for new users. It does NOT assume you have a game idea, an engine preference, or any prior experience. It asks first, then routes you to the right workflow.
 
@@ -230,27 +230,6 @@ consequence of the selection:
 - `Solo` → write `solo`
 
 Create the `production/` directory if it does not exist.
-
----
-
-## Phase 3c: Set Autosave Mode
-
-Check if `production/autosave-mode.txt` already exists.
-
-**If it exists**: Read it and show the current mode — "Autosave mode is set to `[current]`." — then proceed to Phase 4. Do not ask again.
-
-**If it does not exist**: Use `AskUserQuestion`:
-
-- **Prompt**: "Last setup choice: how should Claude protect against crashes and token limits during long tasks like code review and sprint planning?"
-- **Options**:
-  - `Enforce (hard block)` — Claude cannot ask for approval until it has written the work product to disk first. Best for unstable machines or high-stakes production work.
-  - `Remind (recommended)` — Claude gets a reminder to save before approval gates. Non-blocking but relies on Claude following through.
-  - `Off` — No protection. Best for reliable machines or when you want maximum iteration speed.
-
-Write the choice to `production/autosave-mode.txt` immediately — no separate "May I write?" needed:
-- `Enforce (hard block)` → write `enforce`
-- `Remind (recommended)` → write `remind`
-- `Off` → write `off`
 
 ---
 
