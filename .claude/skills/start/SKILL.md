@@ -275,12 +275,12 @@ Verdict: **COMPLETE** — user oriented and handed off to next step.
 
 ## Edge Cases
 
-
 - **User picks D but project is empty**: Gently redirect — "It looks like the project is a fresh template with no artifacts yet. Would Path A or B be a better fit?"
-- **User picks A but project has code**: Mention what you found — "I noticed there's already code in `src/`. Did you mean to pick D (existing work)?"
-- **User is returning (engine configured, concept exists)**: Skip onboarding entirely — "It looks like you're already set up! Your engine is [X] and you have a game concept at `design/gdd/game-concept.md`. Review mode: `[read from production/review-mode.txt, or 'lean (default)' if missing]`. Want to pick up where you left off? Try `/sprint-plan` or just tell me what you'd like to work on."
+- **User picks A but project has code**: Mention what you found — "I noticed there's already code in `src/`. Did you mean to pick D (existing work)? Or would you like to start fresh with a new concept?"
+- **User picks A/B/C but tooling scripts detected**: Gently surface it — "I noticed scripts already exist in `tools/` but no game concept or engine is configured. Are you building a development tool (Path E) rather than a game?"
+- **User is returning (engine configured, concept exists)**: Skip onboarding entirely — "It looks like you're already set up! Your engine is [X] and you have a game concept at `design/gdd/game-concept.md`. Want to pick up where you left off? Try `/sprint-plan` or just tell me what you'd like to work on."
 - **User is returning (tool spec exists)**: Skip onboarding entirely — "It looks like you're already set up with a tooling project. Your spec is at `tools/TOOL_SPEC.md`. Want to pick up where you left off?"
-- **User doesn't fit any option**: Let them describe their situation in their own words and adapt.
+- **User doesn't fit any option**: Let them describe their situation in their own words and adapt. The 5 options are starting points, not a prison.
 
 ---
 
