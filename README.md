@@ -161,22 +161,12 @@ Handles localization execution under `localization-lead` direction. String wrapp
 
 ---
 
-### Art Production
-
-| Skill | Purpose |
-|-------|---------|
-| `/taste-gate` | Human taste approval checkpoint before batch AI image generation. Reads reference art and the art bible, extracts style parameters via the art-director agent, generates 1–3 pilots, and loops APPROVED / ITERATE / REJECT until the direction is locked. Writes a locked prompt template that gates downstream batch generation. Run once per asset type before any batch begins. |
-
----
-
 ### Production Additions
 
 | Skill | Purpose |
 |-------|---------|
 | `/export-build` | Export release build via engine headless export — logs version, platform, timestamp to `production/qa/builds.md` |
-| `/security-audit` | Audit game for cheating vectors, save data security, network exposure |
-| `/skill-improve` | Review and improve a skill file using lessons from past runs |
-| `/day-one-patch` | Structured day-one patch preparation — known issues list, severity triage, comms draft |
+| `/taste-gate` | Human taste approval checkpoint before batch AI image generation. |
 
 ---
 
@@ -248,7 +238,7 @@ CCGS:TE skills map onto the existing 7-stage pipeline as a **parallel publishing
 | 4 — Pre-Production | `/taste-gate`, `/community-plan`, `/demo-scope` |
 | 5 — Production | `/export-devlog`, `/export-social`, `/live-ops-plan` |
 | 6 — Polish | `/export-steam-page`, `/press-outreach`, `/export-pitch`, `/demo-build`, `/demo-playtest`, `/localization-*` |
-| 7 — Release | `/export-build`, `/team-publish`, `/day-one-patch`, `/post-mortem` |
+| 7 — Release | `/export-build`, `/team-publish`, `/post-mortem` |
 | Post-Launch | `/dlc-design`, `/mod-support`, `/live-ops-plan` (operational) |
 
 `/publish-check` runs automatically at **every session start** via `session-start.sh` — surfaces overdue publishing tasks and unlocked actions without interrupting workflow.
