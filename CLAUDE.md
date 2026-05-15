@@ -1,7 +1,7 @@
 # Claude Code Game Studios: Technica Edition
 **Agent-Driven Game Development & Publishing Architecture**
 
-CCGS is a modular framework for independent game development managed through 48+ specialized agents. By enforcing a strict separation of concerns, this architecture ensures quality across all domains—from core mechanics to automated publishing pipelines.
+CCGS:TE is a modular framework for independent game development managed through 52 specialized agents. By enforcing a strict separation of concerns, this architecture ensures quality across all domains—from core mechanics to automated publishing pipelines.
 
 **Technica Edition** extends the base framework by integrating end-to-end publishing workflows, bridging the gap between active development and post-launch operations by introducing new agents, skills, hooks and workflows.
 

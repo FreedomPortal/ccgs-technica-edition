@@ -1,6 +1,6 @@
 # Available Skills (Slash Commands)
 
-73 slash commands organized by phase. Type `/` in Claude Code to access any of them.
+108 slash commands organized by phase. Type `/` in Claude Code to access any of them.
 
 ## Onboarding & Navigation
 
@@ -11,6 +11,11 @@
 | `/project-stage-detect` | Full project audit — detect phase, identify existence gaps, recommend next steps |
 | `/setup-engine` | Configure engine + version, detect knowledge gaps, populate version-aware reference docs |
 | `/adopt` | Brownfield format audit — checks internal structure of existing GDDs/ADRs/stories, produces migration plan |
+| `/continue` | Read session state and agent memory; present a brief so you resume immediately where you left off |
+| `/checkpoint` | Flush session discoveries to agent memory files — call before crashes, /clear, or long breaks |
+| `/autosave-mode` | Configure crash-protection level for long tasks: off / remind / enforce |
+| `/setup-tool` | Configure a standalone pipeline tool project outside the engine |
+| `/log-lesson` | Encode a lesson from review, playtesting, or press feedback into writing-lessons.md |
 
 ## Game Design
 
@@ -28,6 +33,7 @@
 | Command | Purpose |
 |---------|---------|
 | `/art-bible` | Guided, section-by-section Art Bible authoring — creates visual identity spec before asset production begins |
+| `/taste-gate` | Human taste approval checkpoint — extract style parameters, generate pilots, loop until approved, lock template |
 | `/asset-spec` | Generate per-asset visual specifications and AI generation prompts from GDDs, level docs, or character profiles |
 | `/asset-audit` | Audit assets for naming conventions, file size budgets, and pipeline compliance |
 
@@ -111,6 +117,7 @@
 | `/patch-notes` | Generate player-facing patch notes from git history and internal data |
 | `/hotfix` | Emergency fix workflow with audit trail, bypassing normal sprint process |
 | `/day-one-patch` | Prepare a focused day-one patch for known issues discovered after gold master but before or at public launch |
+| `/export-build` | Export release build via engine headless export — logs version, platform, timestamp to production/qa/builds.md |
 
 ## Creative & Content
 
@@ -119,6 +126,7 @@
 | `/prototype` | Concept prototype — throwaway build right after brainstorm to validate core idea (Phase 1) |
 | `/vertical-slice` | Pre-Production validation — production-quality end-to-end build before committing to Production (Phase 4) |
 | `/onboard` | Generate contextual onboarding document for a new contributor or agent |
+| `/humanize-writing` | Remove AI-writing signals from player-facing copy before publishing |
 | `/localize` | **DEPRECATED** — use modular pipeline: `/localization-prepare`, `/localization-integrate`, `/localization-qa`, `/localization-sync`, `/localization-cultural-review`, `/localization-vo`, `/localization-rtl` |
 
 ## Team Orchestration
@@ -136,3 +144,55 @@ Coordinate multiple agents on a single feature area:
 | `/team-level` | level-designer + narrative-director + world-builder + art-director + systems-designer + qa-tester |
 | `/team-live-ops` | live-ops-designer + economy-designer + community-manager + analytics-engineer |
 | `/team-qa` | qa-lead + qa-tester + gameplay-programmer + producer |
+| `/team-publish` | publishing-manager + community-manager + writer |
+
+## Marketing & Growth — CCGS:TE
+
+| Command | Purpose |
+|---------|---------|
+| `/marketing-plan` | Full publishing roadmap — community strategy, pre-launch milestones, content cadence |
+| `/community-plan` | Platform setup, content calendar, metric tracking (wishlists, followers, engagement) |
+| `/analytics-setup` | Design player event tracking — what to instrument, platform choice, engine implementation |
+| `/press-outreach` | Build media contact list, draft outreach templates, track status in press-contacts.md |
+
+## Publishing & Distribution — CCGS:TE
+
+| Command | Purpose |
+|---------|---------|
+| `/publish-check` | Audit publishing roadmap vs. dev stage — surfaces overdue tasks and unlocked actions (also runs at session start) |
+| `/export-steam-page` | Compile store page copy from GDDs and writing-lessons.md |
+| `/export-devlog` | Draft devlog post from session state, sprint history, and GDDs; enforces writing-lessons rules |
+| `/export-social` | Batch social content for scheduled platforms |
+| `/export-pitch` | Investor/publisher pitch deck content |
+| `/export-review` | Structured press/review copy |
+| `/export-crowdfunding` | Crowdfunding campaign content |
+
+## Post-Launch Lifecycle — CCGS:TE
+
+| Command | Purpose |
+|---------|---------|
+| `/live-ops-plan` | Strategic post-launch plan — content cadence, seasonal events calendar, retention mechanics |
+| `/monetization-design` | Revenue model design with ethical guardrails — flags pay-to-win and dark patterns |
+| `/dlc-design` | DLC content package design — scope, pricing, content list, timeline |
+| `/mod-support` | Mod support architecture — what to expose, tooling for modders, community integration |
+| `/post-mortem` | Structured retrospective after milestone or release |
+
+## Demo Workflow — CCGS:TE
+
+| Command | Purpose |
+|---------|---------|
+| `/demo-scope` | Define demo boundaries — included content, what is cut, target impression |
+| `/demo-build` | Export and validate a playable demo build |
+| `/demo-playtest` | Structured playtest protocol for demo-specific goals (first impressions, conversion) |
+
+## Localization Suite — CCGS:TE
+
+| Command | Purpose |
+|---------|---------|
+| `/localization-prepare` | Scan for unwrapped strings, wrap in tr(), scaffold string table |
+| `/localization-integrate` | Mid-pipeline — import translations, resolve merge conflicts |
+| `/localization-sync` | Detect stale translations when source text changes |
+| `/localization-qa` | Dedicated LQA pass — overflow, tone, placeholder, cultural checks |
+| `/localization-cultural-review` | Standalone cultural sensitivity review per locale |
+| `/localization-rtl` | RTL layout validation for Arabic/Hebrew locales |
+| `/localization-vo` | Voice-over pipeline — script export, casting brief, sync validation |

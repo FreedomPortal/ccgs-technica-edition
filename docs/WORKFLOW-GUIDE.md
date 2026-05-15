@@ -3,7 +3,7 @@
 > **How to go from zero to a shipped game using the Agent Architecture.**
 >
 > This guide walks you through every phase of game development using the
-> 49-agent system, 73 slash commands, and 12 automated hooks. It assumes you
+> 52-agent system, 108 slash commands, and 14 automated hooks. It assumes you
 > have Claude Code installed and are working from the project root.
 >
 > The pipeline has 7 phases. Each phase has a formal gate (`/gate-check`)
@@ -556,30 +556,31 @@ reference this tier — it is a design prerequisite, not a UX deliverable.
 
 ### What Happens in This Phase
 
-You create UX specs for key screens, prototype risky mechanics, turn design
-documents into implementable stories, plan your first sprint, and build a
-Vertical Slice that proves the core loop is fun.
+You lock art style templates for planned AI image generation, create UX specs
+for key screens, prototype risky mechanics, turn design documents into
+implementable stories, plan your first sprint, and build a Vertical Slice that
+proves the core loop is fun.
 
 ### Phase 4 Pipeline
 
 ```
-/ux-design  -->  /vertical-slice  -->  /create-epics  -->  /create-stories  -->  /sprint-plan
-    |                   |                   |                   |                       |
-    v                   v                   v                   v                       v
-  UX specs       Production-quality   Epic files in       Story files in          First sprint with
-  design/ux/     end-to-end build     production/         production/             prioritized stories
-                 in prototypes/       epics/*/EPIC.md     epics/*/story-*.md      production/sprints/
-                 PROCEED/PIVOT/KILL   (one per module)    (one per behaviour)     sprint-*.md
-    |                                                          |
-    v                                                          v
- /ux-review                                             /story-readiness
- (validates specs                                       (validates each story
-  before epics)                                          before pickup)
-                                                               |
-                                                               v
-                                                           /dev-story
-                                                         (implements the story,
-                                                          routes to right agent)
+/taste-gate  -->  /ux-design  -->  /vertical-slice  -->  /create-epics  -->  /create-stories  -->  /sprint-plan
+    |                   |                   |                   |                   |                       |
+    v                   v                   v                   v                   v                       v
+  Locked prompt     UX specs       Production-quality   Epic files in       Story files in          First sprint with
+  templates         design/ux/     end-to-end build     production/         production/             prioritized stories
+  design/art/                      in prototypes/       epics/*/EPIC.md     epics/*/story-*.md      production/sprints/
+  prompt-templates/                PROCEED/PIVOT/KILL   (one per module)    (one per behaviour)     sprint-*.md
+  (per asset type)      |                                                        |
+                        v                                                        v
+                     /ux-review                                           /story-readiness
+                     (validates specs                                     (validates each story
+                      before epics)                                        before pickup)
+                                                                                 |
+                                                                                 v
+                                                                             /dev-story
+                                                                           (implements the story,
+                                                                            routes to right agent)
 ```
 
 ### Step 4.1: UX Specs for Key Screens
@@ -1422,18 +1423,23 @@ conflicts go to `producer`.
 
 ## Appendix B: Slash Command Quick-Reference
 
-### All 73 Commands by Category
+### All 108 Commands by Category
 
-#### Onboarding and Navigation (6)
+#### Onboarding and Navigation (11)
 
 | Command | Purpose | Phase |
 |---------|---------|-------|
 | `/start` | Guided onboarding, routes to right workflow | Any (first session) |
-| `/help` | Context-aware "what do I do next?" | Any |
+| `/next` | Context-aware "what do I do next?" | Any |
 | `/project-stage-detect` | Full project audit to determine current phase | Any |
 | `/setup-engine` | Configure engine, pin version, set preferences | 1 |
 | `/adopt` | Brownfield audit and migration plan | Any (existing projects) |
 | `/skill-improve` | Improve a skill via test-fix-retest loop | Any |
+| `/continue` | Read session state and agent memory; resume where you left off | Any |
+| `/checkpoint` | Flush session discoveries to agent memory files | Any |
+| `/autosave-mode` | Configure crash-protection level: off / remind / enforce | Any |
+| `/setup-tool` | Configure a standalone pipeline tool project | Any |
+| `/log-lesson` | Encode a lesson from review or playtest feedback into writing-lessons.md | Any |
 
 #### Game Design (6)
 
@@ -1518,7 +1524,7 @@ conflicts go to `producer`.
 | `/playtest-report` | Structured playtest session report | 4-6 |
 | `/onboard` | Onboard a new team member | Any |
 
-#### Release (6)
+#### Release (7)
 
 | Command | Purpose | Phase |
 |---------|---------|-------|
@@ -1528,15 +1534,17 @@ conflicts go to `producer`.
 | `/patch-notes` | Player-facing patch notes | 7 |
 | `/hotfix` | Emergency fix workflow | 7+ |
 | `/day-one-patch` | Scoped patch for issues found after gold master | 7+ |
+| `/export-build` | Export release build via engine headless export; logs to production/qa/builds.md | 7 |
 
-#### Creative (4)
+#### Creative (5)
 
 | Command | Purpose | Phase |
 |---------|---------|-------|
 | `/prototype` | Concept prototype — validate core idea before GDDs | 1 |
 | `/art-bible` | Guided Art Bible authoring — visual identity spec | 1-2 |
+| `/taste-gate` | Human taste approval — lock AI image generation templates | 4 |
 | `/vertical-slice` | Production-quality end-to-end build before Production | 4 |
-| `/localize` | String extraction and validation | 6-7 |
+| `/humanize-writing` | Remove AI-writing signals from player-facing copy | Any |
 
 #### Team Orchestration (9)
 
@@ -1551,6 +1559,59 @@ conflicts go to `producer`.
 | `/team-release` | Release coordination: build + QA + deployment | 7 |
 | `/team-live-ops` | Live-ops planning: seasonal events, battle pass, retention | 7+ |
 | `/team-qa` | Full QA cycle: strategy, execution, coverage, sign-off | 6-7 |
+
+#### Marketing & Growth — CCGS:TE (4)
+
+| Command | Purpose | Phase |
+|---------|---------|-------|
+| `/marketing-plan` | Full publishing roadmap — community strategy, pre-launch milestones, content cadence | 1+ |
+| `/community-plan` | Platform setup, content calendar, metric tracking | 4 |
+| `/analytics-setup` | Design player event tracking — what to instrument, platform choice, engine implementation | 2 |
+| `/press-outreach` | Build media contact list, draft outreach templates, track status | 6 |
+
+#### Publishing & Distribution — CCGS:TE (8)
+
+| Command | Purpose | Phase |
+|---------|---------|-------|
+| `/publish-check` | Audit publishing roadmap vs. dev stage; surfaces overdue tasks (also runs at session start) | Any |
+| `/export-steam-page` | Compile store page copy from GDDs and writing-lessons.md | 6 |
+| `/export-devlog` | Draft devlog post from session state, sprint history, and GDDs | 5 |
+| `/export-social` | Batch social content for scheduled platforms | 5-7 |
+| `/export-pitch` | Investor/publisher pitch deck content | Any |
+| `/export-review` | Structured press/review copy | 6-7 |
+| `/export-crowdfunding` | Crowdfunding campaign content | Any |
+| `/team-publish` | Parallel run: publishing-manager + community-manager + writer | 7 |
+
+#### Post-Launch Lifecycle — CCGS:TE (5)
+
+| Command | Purpose | Phase |
+|---------|---------|-------|
+| `/live-ops-plan` | Strategic post-launch plan — content cadence, seasonal events, retention mechanics | 7+ |
+| `/monetization-design` | Revenue model design with ethical guardrails | Any |
+| `/dlc-design` | DLC content package design — scope, pricing, content list, timeline | 7+ |
+| `/mod-support` | Mod support architecture — what to expose, tooling for modders | 7+ |
+| `/post-mortem` | Structured retrospective after milestone or release | Any |
+
+#### Demo Workflow — CCGS:TE (3)
+
+| Command | Purpose | Phase |
+|---------|---------|-------|
+| `/demo-scope` | Define demo boundaries — included content, what to cut, target impression | 4-6 |
+| `/demo-build` | Export and validate a playable demo build | 6 |
+| `/demo-playtest` | Structured playtest protocol for demo-specific goals | 6 |
+
+#### Localization Suite — CCGS:TE (8)
+
+| Command | Purpose | Phase |
+|---------|---------|-------|
+| `/localize` | Full pipeline — scan → wrap → translate → QA | 6 |
+| `/localization-prepare` | Scan for unwrapped strings, wrap in tr(), scaffold string table | 6 |
+| `/localization-integrate` | Mid-pipeline — import translations, resolve merge conflicts | 6 |
+| `/localization-sync` | Detect stale translations when source text changes | 6-7 |
+| `/localization-qa` | Dedicated LQA pass — overflow, tone, placeholder, cultural checks | 6-7 |
+| `/localization-cultural-review` | Standalone cultural sensitivity review per locale | 6-7 |
+| `/localization-rtl` | RTL layout validation for Arabic/Hebrew locales | 6-7 |
+| `/localization-vo` | Voice-over pipeline — script export, casting brief, sync validation | 6-7 |
 
 ---
 
