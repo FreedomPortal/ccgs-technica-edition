@@ -124,6 +124,14 @@ Read all source material **before** asking the user anything.
   > "No art bible found. Run `/art-bible` first — asset specs are anchored to the art bible's visual rules and asset standards."
   Extract: Visual Identity Statement, Color System (semantic colors), Shape Language, Asset Standards (Section 8 — dimensions, formats, polycount budgets, texture resolution tiers).
 
+- **Taste-gate template** (for asset types that will use batch AI image generation): Glob `design/art/prompt-templates/[target-name]-template.md`.
+  - If found with `Status: LOCKED`: note it — generation prompts in this spec should align with the locked template parameters.
+  - If found but **not** `Status: LOCKED` (draft): warn:
+    > "⚠️ A taste-gate template exists for **[target-name]** but is not yet locked. If this spec will feed batch AI image generation, run `/taste-gate [target-name]` to lock the template before generating."
+  - If not found: warn:
+    > "⚠️ No taste-gate template found for **[target-name]**. If batch AI image generation is planned for these assets, run `/taste-gate [target-name]` before generating to avoid regenerating a full batch that misses the mark."
+    - This is advisory, not a hard block — proceeding is allowed if batch generation is not yet planned.
+
 - **Technical preferences**: Read `.claude/docs/technical-preferences.md` — extract performance budgets and naming conventions.
 
 ### Source doc reads (by target type):

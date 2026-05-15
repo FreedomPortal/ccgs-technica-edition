@@ -209,6 +209,7 @@ Before presenting next steps, check project state:
 - Does `design/gdd/` contain any `*.md` files? → design-system has been run, skip that option
 - Does `design/gdd/gdd-cross-review-*.md` exist? → review-all-gdds is done
 - Do GDDs exist (check above)? → include /consistency-check option
+- Does `design/art/prompt-templates/` contain any files with `Status: LOCKED`? → taste-gate is done for those asset types; if none locked, include /taste-gate option
 
 Use `AskUserQuestion` for next steps. Only include options that are genuinely next based on the state check above:
 
@@ -217,6 +218,7 @@ Use `AskUserQuestion` for next steps. Only include options that are genuinely ne
 - `[_] Run /setup-engine — configure the engine (asset standards may need revisiting after engine is set)` (skip if engine configured)
 - `[_] Run /design-system — start the first GDD` (skip if any GDDs exist)
 - `[_] Run /review-all-gdds — cross-GDD consistency check (required before Technical Setup gate)` (skip if gdd-cross-review-*.md exists)
+- `[_] Run /taste-gate [asset-type] — lock style parameters before batch AI image generation` (include if no LOCKED templates exist in `design/art/prompt-templates/`)
 - `[_] Run /asset-spec — generate per-asset visual specs and AI generation prompts from approved GDDs` (include if GDDs exist)
 - `[_] Run /consistency-check — scan existing GDDs against the art bible for visual direction conflicts` (include if GDDs exist)
 - `[_] Run /create-architecture — author the master architecture document (next Technical Setup step)`
@@ -245,5 +247,6 @@ After the art bible is approved:
 - Run `/map-systems` to decompose the concept into game systems before authoring GDDs
 - Run `/setup-engine` if the engine is not yet configured (asset standards may need revisiting after engine selection)
 - Run `/design-system [first-system]` to start authoring per-system GDDs
+- Run `/taste-gate [asset-type]` before batch AI image generation — locks style parameters per asset type so full batches are not regenerated due to direction drift
 - Run `/consistency-check` once GDDs exist to validate them against the art bible's visual rules
 - Run `/create-architecture` to produce the master architecture document

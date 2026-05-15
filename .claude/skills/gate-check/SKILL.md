@@ -148,6 +148,7 @@ A depends on B). If any cycle is detected (e.g. A→B→A, or A→B→C→A):
 - [ ] First sprint plan exists in `production/sprints/`
 - [ ] Art bible is complete (all 9 sections) and AD-ART-BIBLE sign-off verdict is recorded in `design/art/art-bible.md`
 - [ ] Entity inventory exists at `design/assets/entity-inventory.md` (recommended — run `/asset-spec` with no arguments to generate collaboratively from GDDs + art bible)
+- [ ] Taste-gate templates locked for all asset types planned for batch AI image generation (`design/art/prompt-templates/[type]-template.md` with `Status: LOCKED`) — **recommended, not blocking**; if batch AI generation is planned but templates are absent, surface as CONCERNS
 - [ ] All MVP-tier GDDs from systems index are complete
 - [ ] Master architecture document exists at `docs/architecture/architecture.md`
 - [ ] At least 3 ADRs covering Foundation-layer decisions exist in `docs/architecture/`
@@ -517,6 +518,7 @@ For all other gates, offer the two most logical next steps for that phase plus "
 Based on the verdict, suggest specific next steps:
 
 - **No art bible?** → `/art-bible` to create the visual identity specification
+- **Art bible complete but no taste-gate templates?** → `/taste-gate [asset-type]` before batch AI image generation — prevents costly full-batch regeneration after style misalignment
 - **Art bible exists but no asset specs?** → `/asset-spec system:[name]` to generate per-asset visual specs and generation prompts from approved GDDs
 - **No game concept?** → `/brainstorm` to create one
 - **No systems index?** → `/map-systems` to decompose the concept into systems

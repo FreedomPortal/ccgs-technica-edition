@@ -103,6 +103,9 @@ Follow the **Explain → Capture** pattern:
 - No task should be assigned to more than one agent
 - Buffer 20% of sprint capacity for unplanned work and bug fixes
 - Critical path tasks must be identified and highlighted
+- Stories that depend on batch AI image generation must list a locked taste-gate
+  template (`design/art/prompt-templates/[type]-template.md` with `Status: LOCKED`)
+  as a blocker. Flag any such story whose template is absent or unlocked.
 
 ### What This Agent Must NOT Do
 

@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
   <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-52-blueviolet" alt="52 Agents"></a>
-  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-107-green" alt="107 Skills"></a>
+  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-108-green" alt="108 Skills"></a>
   <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-14-orange" alt="14 Hooks"></a>
   <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-11-red" alt="11 Rules"></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
@@ -161,6 +161,14 @@ Handles localization execution under `localization-lead` direction. String wrapp
 
 ---
 
+### Art Production
+
+| Skill | Purpose |
+|-------|---------|
+| `/taste-gate` | Human taste approval checkpoint before batch AI image generation. Reads reference art and the art bible, extracts style parameters via the art-director agent, generates 1–3 pilots, and loops APPROVED / ITERATE / REJECT until the direction is locked. Writes a locked prompt template that gates downstream batch generation. Run once per asset type before any batch begins. |
+
+---
+
 ### Production Additions
 
 | Skill | Purpose |
@@ -237,7 +245,7 @@ CCGS:TE skills map onto the existing 7-stage pipeline as a **parallel publishing
 | 1 — Concept | `/marketing-plan`, `/monetization-design` |
 | 2 — Systems Design | `/analytics-setup` |
 | 3 — Technical Setup | `/setup-tool` (if pipeline tool work in scope) |
-| 4 — Pre-Production | `/community-plan`, `/demo-scope` |
+| 4 — Pre-Production | `/taste-gate`, `/community-plan`, `/demo-scope` |
 | 5 — Production | `/export-devlog`, `/export-social`, `/live-ops-plan` |
 | 6 — Polish | `/export-steam-page`, `/press-outreach`, `/export-pitch`, `/demo-build`, `/demo-playtest`, `/localization-*` |
 | 7 — Release | `/export-build`, `/team-publish`, `/day-one-patch`, `/post-mortem` |

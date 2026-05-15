@@ -91,6 +91,11 @@ plain text. Follow the **Explain -> Capture** pattern:
    communicate game state.
 6. **Visual Hierarchy**: Ensure the player's eye is guided correctly in every
    screen and scene. Important information must be visually prominent.
+7. **Taste-Gate Approvals**: When invoked for `/taste-gate`, extract concrete
+   prompt parameters (style keywords, color constraints, shape language rules,
+   negative prompts) from reference art and the art bible. Generate pilot
+   outputs. Iterate on parameters based on user feedback until the user issues
+   an APPROVED verdict. Never lock a template without explicit approval.
 
 ### Asset Naming Convention
 
