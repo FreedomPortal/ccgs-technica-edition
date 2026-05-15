@@ -13,7 +13,7 @@
   <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-52-blueviolet" alt="52 Agents"></a>
   <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-108-green" alt="108 Skills"></a>
   <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-14-orange" alt="14 Hooks"></a>
-  <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-11-red" alt="11 Rules"></a>
+  <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-13-red" alt="13 Rules"></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
   <br />
   <a href="https://wise.com/pay/me/wams1"><img src="https://img.shields.io/badge/Wise-Support%20this%20project-9FE870?logo=wise&logoColor=white" alt="Wise"></a>
@@ -259,13 +259,6 @@ CCGS:TE skills map onto the existing 7-stage pipeline as a **parallel publishing
 - `/economy-simulation` — simulate economy balance before shipping changes
 
 **New Agent: `growth-analyst`** — or expand `analytics-engineer` into a hybrid data + product thinking role. Owns the Player Insight Loop skills.
-
-### Known Gaps from Base CCGS (not yet addressed in TE)
-
-* Publishing artifacts not required at Stage 6 gate — game can reach Release without store page or press kit.
-* Tooling sprint work not tracked in `/sprint-plan` .
-* Rule coverage gaps in `.claude/rules/` are silent — uncovered `src/` paths get no enforcement.
-* No solo-dev scope viability check in producer phase gate.
 
 ---
 ## Getting Started
