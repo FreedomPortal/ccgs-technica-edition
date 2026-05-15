@@ -1,7 +1,7 @@
 ---
 name: demo-plan
 description: "Plan the demo production effort: set goals, identify target event/window, define milestones, estimate effort, and produce a risk register. Outputs design/demo/demo-plan.md. Run before /demo-scope for any non-trivial demo effort."
-argument-hint: "[--review full|lean|solo]"
+argument-hint: "(no argument) [--review full|lean|solo]"
 user-invocable: true
 allowed-tools: Read, Glob, Grep, Write, Task, AskUserQuestion
 ---

@@ -1,7 +1,7 @@
 ---
 name: demo-scope
 description: "Define the demo's scope: what content is included, what's locked, target playthrough duration, save handling, and how the demo ends. Outputs design/demo/demo-scope.md. Run before /demo-build."
-argument-hint: "[--review full|lean|solo]"
+argument-hint: "(no argument) [--review full|lean|solo]"
 user-invocable: true
 allowed-tools: Read, Glob, Grep, Write, Edit, Task, AskUserQuestion
 ---

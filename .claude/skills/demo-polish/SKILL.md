@@ -1,7 +1,7 @@
 ---
 name: demo-polish
 description: "Demo-specific polish pass focused on first-impression quality, onboarding clarity, and end-state CTA conversion — not general content polish. Scoped to the first 2 minutes, the onboarding sequence, and the wishlist/buy prompt. Run after /demo-feedback clears P1 blockers and before the final /demo-build."
-argument-hint: "[--review full|lean|solo]"
+argument-hint: "(no argument) [--review full|lean|solo]"
 user-invocable: true
 allowed-tools: Read, Glob, Grep, Write, Task, AskUserQuestion
 ---

@@ -52,6 +52,10 @@ Create `production/` directory if it does not exist.
 Confirm: "Autosave mode set to `[mode]`." followed by one sentence describing what
 will now happen at approval gates.
 
+Verdict: COMPLETE
+
+Recommended next: run any long-running skill (`/code-review`, `/sprint-plan`, `/gate-check`) — the configured protection level now applies at each approval gate.
+
 ## Levels Reference
 
 **`off`**: The `pre-approval-check.sh` hook exits immediately on all calls.

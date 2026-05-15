@@ -129,3 +129,7 @@ After writing:
 > - Target: [publisher / investor / grant]
 > - Comparables used: [list]
 > - The Ask: [one line summary]
+
+Verdict: COMPLETE
+
+Recommended next: `/export-review` to prepare a supporting materials package, or `/press-outreach` to identify contacts for distribution.

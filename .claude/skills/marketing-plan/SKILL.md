@@ -198,3 +198,5 @@ After writing:
 >
 > Run `/publish-check` at any time to audit your current status.
 > Run `/community-plan` to set up your community platforms.
+
+Verdict: COMPLETE

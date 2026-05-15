@@ -103,3 +103,7 @@ After writing:
 > **Devlog saved to:** `production/publishing/devlog-[N]-[YYYY-MM-DD].md`
 > - Visuals needed: [count] flagged with [NEEDS]
 > - Estimated read time: ~[N] minutes
+
+Verdict: COMPLETE
+
+Recommended next: `/export-social` to generate announcement posts for this devlog, or `/community-plan` to schedule distribution.

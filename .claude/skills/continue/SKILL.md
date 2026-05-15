@@ -86,6 +86,8 @@ After selection, one line only:
 - Known skill → "Type `[skill command]` to begin."
 - Open-ended → "Tell me what you'd like to work on and I'll help."
 
+Verdict: COMPLETE — session brief delivered.
+
 ---
 
 ## Edge Cases

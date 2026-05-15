@@ -141,4 +141,6 @@ After writing:
 > - Visuals flagged as needed: [count]
 > - Risks section: included
 >
+Verdict: COMPLETE
+
 > ⚠️ Before launching: validate reward tier deliverability with `/scope-check`.

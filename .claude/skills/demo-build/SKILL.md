@@ -1,7 +1,7 @@
 ---
 name: demo-build
 description: "Export and validate a demo build with demo-specific gates: content boundary enforcement, save isolation, end-state screen, and build verification. Requires /demo-scope to have been run first."
-argument-hint: "[platform: windows|linux|mac|web] [--review full|lean|solo]"
+argument-hint: "[windows|linux|mac|web] (optional: --review full|lean|solo)"
 user-invocable: true
 allowed-tools: Read, Glob, Grep, Bash, Write, Edit, Task, AskUserQuestion
 ---

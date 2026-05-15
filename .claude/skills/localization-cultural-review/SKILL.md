@@ -1,6 +1,9 @@
 ---
-skill: localization-cultural-review
+name: localization-cultural-review
 description: Standalone cultural sensitivity audit of SOURCE content before translation begins. Checks symbols, numbers, humour, names, violence ratings, and text-in-images for cultural landmines across target locales.
+argument-hint: "[locale] [full|scoped]"
+user-invocable: true
+allowed-tools: Read, Glob, Grep, Write, Task, AskUserQuestion
 model: sonnet
 ---
 

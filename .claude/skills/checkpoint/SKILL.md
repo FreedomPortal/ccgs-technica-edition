@@ -62,3 +62,7 @@ Append a checkpoint entry to `production/session-state/active.md`:
 > **Checkpoint complete.**
 > [N] discoveries written to agent memory.
 > These facts will survive a crash or compaction.
+
+Verdict: COMPLETE
+
+Recommended next: `/continue` to review pending tasks, or `/clear` + `/compact` to free context window.

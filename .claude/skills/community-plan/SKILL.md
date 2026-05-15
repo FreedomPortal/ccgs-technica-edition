@@ -176,3 +176,5 @@ After writing files:
 >
 > Next content action: [most urgent item from calendar]
 > Run `/export-social` or `/export-devlog` to produce content now.
+
+Verdict: COMPLETE

@@ -78,6 +78,8 @@ Ask: "May I append this lesson to
 After writing, confirm:
 > "Lesson encoded. All export skills will apply this rule going forward."
 
+Verdict: COMPLETE
+
 ---
 
 ## 6. Offer to Log More

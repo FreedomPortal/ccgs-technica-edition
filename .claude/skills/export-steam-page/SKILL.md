@@ -132,3 +132,7 @@ After writing:
 > - Tags generated: 15
 >
 > Note: Steam requires a Coming Soon page to be live for at least 2 weeks before launch.
+
+Verdict: COMPLETE
+
+Recommended next: `/press-outreach` to build your media contact list, or `/export-social` to announce the Steam page.

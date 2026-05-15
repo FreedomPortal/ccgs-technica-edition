@@ -108,3 +108,7 @@ After writing:
 > **Social post batch saved to:** `review/social-posts-[YYYY-MM-DD].md`
 > - Posts written: [count] across [count] platforms
 > - Visuals needed: [count] flagged with [NEEDS]
+
+Verdict: COMPLETE
+
+Recommended next: `/community-plan` to schedule these posts, or `/export-devlog` to write an accompanying devlog.

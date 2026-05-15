@@ -417,6 +417,8 @@ When called by an export skill (automatic pass):
 - Do NOT include the Changes table in the saved file — keep the output clean
 - No user approval needed before the edit
 
+After any mode completes: **Verdict: COMPLETE** (or note which passes had no changes to report).
+
 ---
 
 ## Full Example

@@ -109,3 +109,7 @@ After writing, confirm:
 > - Open questions captured: [count]
 >
 > Ready to share with your external consultant.
+
+Verdict: COMPLETE
+
+Recommended next: `/export-pitch` if this review is for a publisher meeting, or `/design-review` to run an internal review before sharing.

@@ -1,6 +1,9 @@
 ---
-skill: localization-vo
+name: localization-vo
 description: Voice-over pipeline for localization. Subcommands: scan (recording manifest by character), script [locale] (per-character recording scripts with direction notes), validate [locale] (audio file existence + naming check), integrate [locale] (verify VO file references in code).
+argument-hint: "[scan | script locale | validate locale | integrate locale]"
+user-invocable: true
+allowed-tools: Read, Glob, Grep, Write, Task, AskUserQuestion
 model: sonnet
 ---
 

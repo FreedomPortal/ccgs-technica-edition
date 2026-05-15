@@ -1,7 +1,7 @@
 ---
 name: localize
 description: "Full localization pipeline: scan for hardcoded strings, extract and manage string tables, validate translations, generate translator briefings, run cultural/sensitivity review, manage VO localization, test RTL/platform requirements, enforce string freeze, and report coverage."
-argument-hint: "[scan|extract|validate|status|brief|cultural-review|vo-pipeline|rtl-check|freeze|qa]"
+argument-hint: "DEPRECATED — use /localization-prepare, /localization-sync, /localization-qa etc."
 user-invocable: true
 agent: localization-lead
 allowed-tools: Read, Glob, Grep, Write, Bash, Task, AskUserQuestion
