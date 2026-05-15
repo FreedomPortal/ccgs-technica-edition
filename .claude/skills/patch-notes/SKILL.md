@@ -180,7 +180,7 @@ internal archive copy.
 
 ## Phase 7: Humanize Writing Pass
 
-Apply `/humanize-writing` to the saved file in-place. Edit the file with the humanized output. Do not include the Changes table in the export — keep the file clean. This pass runs automatically; no user approval needed before the next step.
+Apply `/refine-copy` to the saved file in-place. Edit the file with the humanized output. Do not include the Changes table in the export — keep the file clean. This pass runs automatically; no user approval needed before the next step.
 
 ---
 

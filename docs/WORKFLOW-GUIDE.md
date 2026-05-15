@@ -1544,7 +1544,7 @@ conflicts go to `producer`.
 | `/art-bible` | Guided Art Bible authoring — visual identity spec | 1-2 |
 | `/taste-gate` | Human taste approval — lock AI image generation templates | 4 |
 | `/vertical-slice` | Production-quality end-to-end build before Production | 4 |
-| `/humanize-writing` | Remove AI-writing signals from player-facing copy | Any |
+| `/refine-copy` | Remove AI writing patterns from player-facing copy | Any |
 
 #### Team Orchestration (9)
 

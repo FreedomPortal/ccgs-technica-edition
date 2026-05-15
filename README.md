@@ -332,6 +332,6 @@ Original repository: https://github.com/Donchitos/Claude-Code-Game-Studios
 
 All additions and modifications are by Technica Games. The MIT license text and original copyright notice are retained in all distributions.
 
-The `/humanize-writing` skill is adapted from **humanize-writing** by **jpeggdev**, licensed under MIT.
+The `/refine-copy` skill is adapted from **humanize-writing** by **jpeggdev**, licensed under MIT.
 
 Original repository: https://github.com/jpeggdev/humanize-writing

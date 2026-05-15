@@ -126,7 +126,7 @@
 | `/prototype` | Concept prototype — throwaway build right after brainstorm to validate core idea (Phase 1) |
 | `/vertical-slice` | Pre-Production validation — production-quality end-to-end build before committing to Production (Phase 4) |
 | `/onboard` | Generate contextual onboarding document for a new contributor or agent |
-| `/humanize-writing` | Remove AI-writing signals from player-facing copy before publishing |
+| `/refine-copy` | Remove AI writing patterns from player-facing copy — called automatically by all export skills |
 | `/localize` | **DEPRECATED** — use modular pipeline: `/localization-prepare`, `/localization-integrate`, `/localization-qa`, `/localization-sync`, `/localization-cultural-review`, `/localization-vo`, `/localization-rtl` |
 
 ## Team Orchestration
