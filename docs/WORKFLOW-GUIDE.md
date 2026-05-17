@@ -3,7 +3,7 @@
 > **How to go from zero to a shipped game using the Agent Architecture.**
 >
 > This guide walks you through every phase of game development using the
-> 52-agent system, 108 slash commands, and 14 automated hooks. It assumes you
+> 52-agent system, 112 slash commands, and 14 automated hooks. It assumes you
 > have Claude Code installed and are working from the project root.
 >
 > The pipeline has 7 phases. Each phase has a formal gate (`/gate-check`)
@@ -1423,7 +1423,7 @@ conflicts go to `producer`.
 
 ## Appendix B: Slash Command Quick-Reference
 
-### All 108 Commands by Category
+### All 112 Commands by Category
 
 #### Onboarding and Navigation (11)
 
@@ -1592,13 +1592,19 @@ conflicts go to `producer`.
 | `/mod-support` | Mod support architecture — what to expose, tooling for modders | 7+ |
 | `/post-mortem` | Structured retrospective after milestone or release | Any |
 
-#### Demo Workflow — CCGS:TE (3)
+#### Demo Workflow — CCGS:TE (7)
+
+Full chain: `/demo-plan` → `/demo-scope` → `/demo-build` → `/demo-playtest` → `/demo-feedback` → `/demo-iterate` → `/demo-polish` → final build.
 
 | Command | Purpose | Phase |
 |---------|---------|-------|
+| `/demo-plan` | Goals, milestones, effort estimate, and risk register for the demo production effort | 4 |
 | `/demo-scope` | Define demo boundaries — included content, what to cut, target impression | 4-6 |
 | `/demo-build` | Export and validate a playable demo build | 6 |
 | `/demo-playtest` | Structured playtest protocol for demo-specific goals | 6 |
+| `/demo-feedback` | Aggregate 2+ playtest sessions into cross-session patterns with a go/no-go release verdict | 5-6 |
+| `/demo-iterate` | Targeted blocker resolution: scope minimum fix → delegate to `/dev-story` or `/bug-report` → verify | 5-6 |
+| `/demo-polish` | Demo-specific polish pass scoped to first-impression, onboarding clarity, and end-state CTA conversion | 6 |
 
 #### Localization Suite — CCGS:TE (8)
 
