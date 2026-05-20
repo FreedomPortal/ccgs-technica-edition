@@ -5,21 +5,21 @@
 ```
                            [Human Developer]
                                    |
-                 +-----------------+----------------+
-                 |                 |                |
-         creative-director  technical-director   producer
-                 |                 |                |
-        +--------+--------+        |        (coordinates all)
-        |        |        |        |
-  game-designer art-dir narr-dir lead-programme r    qa-lead  audio-dir
-        |        |        |        |                     |        |
-     +--+--+     |     +--+--+  +--+--+--+---+--+---+    |        |
-     |  |  |     |     |     |  |  |  |  |   |  |   |    |        |
-    sys lvl eco  ta   wrt  wrld gp ep ai net tl ui gpd  qa-t     snd
-                                 |
-                             +---+---+
-                             |       |
-                          perf-a   devops   analytics
+                 +-----------------+----------------+------------+
+                 |                 |                |            |
+         creative-director  technical-director  producer    pub-manager
+                 |                      |           |
+        +--------+--------+             |   (coordinates all)
+        |        |        |             |
+  game-designer art-dir narr-dir  lead-programmer        qa-lead  audio-dir
+        |        |        |             |                   |        |
+     +--+--+     |     +--+--+    +--+--+--+---+--+---+     |        |
+     |  |  |     |     |     |    |  |  |  |   |  |   |     |        |
+    sys lvl eco  ta   wrt  wrld  gp ep ai net tl ui  gpd   qa-t     snd
+                                  |
+                              +---+---+                       loc-lead
+                              |       |                          |
+                           perf-a   devops   analytics     loc-specialist
 
   Additional Leads (report to producer/directors):
     release-manager         -- Release pipeline, versioning, deployment
