@@ -20,16 +20,18 @@
 </p>
 
 ---
-> **Fork of:** [CCGS — Claude Code Game Studios](https://github.com/Donchitos/Claude-Code-Game-Studios) by Donchitos
->
-> **CCGS base version:** v1.0.0 stable release (2026/05/14)
-> 
-> **License:** MIT (fork — original copyright retained)
-> 
-> **Maintained by:** FreedomPortal (Technica Games)
-> 
-> **Edition:** Technica Edition (CCGS:TE)
 
+> _**Fork of:** [CCGS — Claude Code Game Studios](https://github.com/Donchitos/Claude-Code-Game-Studios) by Donchitos_
+>
+> _**CCGS base version:** v1.0.0 stable release (2026/05/14)_
+>
+> _**License:** MIT (fork — original copyright retained)_
+>
+> _**Maintained by:** FreedomPortal (Technica Games)_
+>
+> _**Edition:** Technica Edition (CCGS:TE)_
+
+<br />
 
 ## What Is CCGS:TE?
 
@@ -47,10 +49,14 @@ CCGS:TE is a fork that extends the base framework in three directions:
 
 The result: CCGS covers *Build → Ship* —  CCGS:TE covers *Build → Ship → Operate → Grow*
 
----
+<br />
+  <img src="./media/CCGS-TE_Hierachy.png" />
+
 > _**Disclaimer:** The CCGS:TE repo remains a fork of CCGS and maintains only the extension works. 
 > The existing game development aspects of the framework are maintained in the CCGS base repo._
----
+
+<br />
+
 ## Table of Contents
 - [New Agents](#new-agents)
 - [New Skills](#new-skills)
