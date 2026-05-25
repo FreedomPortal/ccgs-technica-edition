@@ -9,6 +9,9 @@ model: opus
 
 # Phase Gate Validation
 
+> **Tip:** Run `/memory-prune` before this skill. Stale "Pending" or "Next" entries
+> in agent memory can cause false blockers or missed resolutions in the verdict.
+
 This skill validates whether the project is ready to advance to the next development
 phase. It checks for required artifacts, quality standards, and blockers.
 

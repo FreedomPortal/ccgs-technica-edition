@@ -10,6 +10,9 @@ model: opus
 
 # Architecture Review
 
+> **Tip:** Run `/memory-prune` before this skill. Stale entries in technical-director
+> memory can cause the review to flag resolved issues or miss current constraints.
+
 The architecture review validates that the complete body of architectural decisions
 covers all game design requirements, is internally consistent, and correctly targets
 the project's pinned engine version. It is the quality gate between Technical Setup

@@ -75,6 +75,10 @@ Write to agent memory the moment any of these are established:
 
 Use `/checkpoint` to explicitly flush all session discoveries to memory at any time.
 
+Use `/memory-prune` at sprint boundaries or before `/gate-check` and `/architecture-review` to remove stale
+forward-looking entries from agent memory files and `session-state/active.md`. Stale "Pending:" and "Next:"
+entries can cause those skills to report false blockers or miss resolved issues.
+
 ### Incremental File Writing
 
 When creating multi-section documents (design docs, architecture docs, lore entries):
