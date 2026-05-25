@@ -324,8 +324,8 @@ skills:
     priority: low
     category: utility
 
-  - name: help
-    spec: CCGS Skill Testing Framework/skills/utility/help.md
+  - name: next
+    spec: CCGS Skill Testing Framework/skills/utility/next.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -788,6 +788,473 @@ skills:
 
   - name: day-one-patch
     spec: CCGS Skill Testing Framework/skills/utility/day-one-patch.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  # CCGS:TE additions — Session Continuity
+  - name: autosave-mode
+    spec: CCGS Skill Testing Framework/skills/utility/autosave-mode.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: medium
+    category: utility
+
+  - name: checkpoint
+    spec: CCGS Skill Testing Framework/skills/utility/checkpoint.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: medium
+    category: utility
+
+  - name: continue
+    spec: CCGS Skill Testing Framework/skills/utility/continue.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: medium
+    category: utility
+
+  - name: memory-prune
+    spec: CCGS Skill Testing Framework/skills/utility/memory-prune.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: medium
+    category: utility
+
+  # CCGS:TE additions — Publishing & Go-To-Market
+  - name: publish-check
+    spec: CCGS Skill Testing Framework/skills/utility/publish-check.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: medium
+    category: utility
+
+  - name: marketing-plan
+    spec: CCGS Skill Testing Framework/skills/utility/marketing-plan.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: community-plan
+    spec: CCGS Skill Testing Framework/skills/utility/community-plan.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: analytics-setup
+    spec: CCGS Skill Testing Framework/skills/utility/analytics-setup.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: press-outreach
+    spec: CCGS Skill Testing Framework/skills/utility/press-outreach.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: export-steam-page
+    spec: CCGS Skill Testing Framework/skills/utility/export-steam-page.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: export-devlog
+    spec: CCGS Skill Testing Framework/skills/utility/export-devlog.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: export-social
+    spec: CCGS Skill Testing Framework/skills/utility/export-social.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: export-pitch
+    spec: CCGS Skill Testing Framework/skills/utility/export-pitch.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: export-review
+    spec: CCGS Skill Testing Framework/skills/utility/export-review.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: export-crowdfunding
+    spec: CCGS Skill Testing Framework/skills/utility/export-crowdfunding.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: export-build
+    spec: CCGS Skill Testing Framework/skills/utility/export-build.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: refine-copy
+    spec: CCGS Skill Testing Framework/skills/utility/refine-copy.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: log-lesson
+    spec: CCGS Skill Testing Framework/skills/utility/log-lesson.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: team-publish
+    spec: CCGS Skill Testing Framework/skills/team/team-publish.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: team
+
+  # CCGS:TE additions — Post-Launch Lifecycle
+  - name: live-ops-plan
+    spec: CCGS Skill Testing Framework/skills/utility/live-ops-plan.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: dlc-design
+    spec: CCGS Skill Testing Framework/skills/utility/dlc-design.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: mod-support
+    spec: CCGS Skill Testing Framework/skills/utility/mod-support.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: monetization-design
+    spec: CCGS Skill Testing Framework/skills/utility/monetization-design.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: post-mortem
+    spec: CCGS Skill Testing Framework/skills/sprint/post-mortem.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: sprint
+
+  - name: taste-gate
+    spec: CCGS Skill Testing Framework/skills/utility/taste-gate.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: setup-tool
+    spec: CCGS Skill Testing Framework/skills/pipeline/setup-tool.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: pipeline
+
+  - name: vertical-slice
+    spec: CCGS Skill Testing Framework/skills/pipeline/vertical-slice.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: high
+    category: pipeline
+
+  # CCGS:TE additions — Demo Workflow
+  - name: demo-plan
+    spec: CCGS Skill Testing Framework/skills/utility/demo-plan.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: demo-scope
+    spec: CCGS Skill Testing Framework/skills/utility/demo-scope.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: demo-build
+    spec: CCGS Skill Testing Framework/skills/utility/demo-build.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: demo-playtest
+    spec: CCGS Skill Testing Framework/skills/utility/demo-playtest.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: demo-feedback
+    spec: CCGS Skill Testing Framework/skills/utility/demo-feedback.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: demo-iterate
+    spec: CCGS Skill Testing Framework/skills/utility/demo-iterate.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: demo-polish
+    spec: CCGS Skill Testing Framework/skills/utility/demo-polish.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  # CCGS:TE additions — Localization Suite
+  - name: localization-prepare
+    spec: CCGS Skill Testing Framework/skills/utility/localization-prepare.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: localization-integrate
+    spec: CCGS Skill Testing Framework/skills/utility/localization-integrate.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: localization-qa
+    spec: CCGS Skill Testing Framework/skills/utility/localization-qa.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: localization-sync
+    spec: CCGS Skill Testing Framework/skills/utility/localization-sync.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: localization-cultural-review
+    spec: CCGS Skill Testing Framework/skills/utility/localization-cultural-review.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: localization-rtl
+    spec: CCGS Skill Testing Framework/skills/utility/localization-rtl.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: localization-vo
+    spec: CCGS Skill Testing Framework/skills/utility/localization-vo.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: studio-help
+    spec: CCGS Skill Testing Framework/skills/utility/studio-help.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
