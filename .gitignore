@@ -147,3 +147,6 @@ Thumbs.db
 
 # === MCP CONFIG ===
 .mcp.json
+
+# === GRAPHIFY ===
+graphify-out/
