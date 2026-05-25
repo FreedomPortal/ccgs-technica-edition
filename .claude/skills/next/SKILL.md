@@ -220,6 +220,8 @@ Only show this if the user's input suggested confusion (e.g. "I don't know", "st
 
 ## Collaborative Protocol
 
+This skill is **read-only** — no Write or Edit calls. No approval gates needed.
+
 - **Never auto-run the next skill.** Recommend it, let the user invoke it.
 - **Ask about MANUAL steps** rather than assuming complete or incomplete.
 - **Match the user's tone** — if they sound stressed ("I'm totally lost"), be
