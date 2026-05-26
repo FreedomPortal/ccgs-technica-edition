@@ -254,3 +254,11 @@ Verdict: **COMPLETE** — regression suite updated. (If user declined write: Ver
   quarantined (noted in manifest) but not removed; they should be fixed by
   `/test-flakiness`
 - **Ask before writing** — always confirm before creating or updating the manifest
+
+---
+
+## Recommended Next Steps
+
+- Run `/test-helpers [system]` to scaffold missing regression test files flagged as HIGH priority gaps
+- Run `/test-flakiness` to investigate and fix any quarantined tests
+- Run `/gate-check polish` — regression suite must exist and be current before the polish gate

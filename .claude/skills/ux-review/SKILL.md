@@ -3,7 +3,7 @@ name: ux-review
 description: "Validates a UX spec, HUD design, or interaction pattern library for completeness, accessibility compliance, GDD alignment, and implementation readiness. Produces APPROVED / NEEDS REVISION / MAJOR REVISION NEEDED verdict with specific gaps."
 argument-hint: "[file-path or 'all' or 'hud' or 'patterns']"
 user-invocable: true
-allowed-tools: Read, Glob, Grep
+allowed-tools: Read, Glob, Grep, Write
 model: sonnet
 agent: ux-designer
 ---
@@ -248,7 +248,9 @@ Recommend returning to `/ux-design` to rework [sections].
 
 ## Phase 5: Collaborative Protocol
 
-This skill is READ-ONLY — it never edits or writes files. It reports findings only.
+After delivering the verdict, ask: "May I write this review report to `design/ux/reviews/[filename]-review-[date].md`?"
+
+Write only after receiving approval.
 
 After delivering the verdict:
 - For **APPROVED**: suggest running `/team-ui` to begin implementation coordination

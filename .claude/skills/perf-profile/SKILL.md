@@ -109,7 +109,7 @@ Present significant-effort items and ask the user to choose for each:
 
 If multiple items are deferred to Polish (choice C), record them under `### Deferred to Polish`.
 
-This skill is read-only — no files are written. Verdict: **COMPLETE** — performance profile generated.
+This skill is read-only — no files are written. No write approval required. Verdict: **COMPLETE** — performance profile generated.
 
 ---
 

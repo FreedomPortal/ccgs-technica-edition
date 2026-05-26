@@ -235,6 +235,16 @@ A summary covering: stories in scope, smoke check result, manual QA results, bug
 Verdict: **COMPLETE** — QA cycle finished.
 Verdict: **BLOCKED** — smoke check failed or critical blocker prevented cycle completion; partial report produced.
 
+## Next Steps
+
+- **APPROVED**: Run `/gate-check [stage]` to formally advance the stage — QA sign-off report is a required artifact
+- **APPROVED WITH CONDITIONS**: Resolve S3/S4 conditions, then run `/gate-check [stage]`
+- **NOT APPROVED**: Fix S1/S2 bugs, re-run `/smoke-check sprint`, then re-run `/team-qa`
+- **BLOCKED** (smoke check failed): Fix smoke check failures and re-run `/smoke-check sprint` before re-running `/team-qa`
+- Use `/regression-suite update` to ensure fixed bugs have regression tests before the next sprint
+
+---
+
 ## Session State Update
 
 After the final phase completes (sign-off report written or BLOCKED verdict reached), silently append to `production/session-state/active.md`:

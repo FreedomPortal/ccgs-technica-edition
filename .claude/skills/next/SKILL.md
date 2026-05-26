@@ -220,7 +220,7 @@ Only show this if the user's input suggested confusion (e.g. "I don't know", "st
 
 ## Collaborative Protocol
 
-This skill is **read-only** — no Write or Edit calls. No approval gates needed.
+This skill is **read-only** — no Write or Edit calls. No write approval required.
 
 - **Never auto-run the next skill.** Recommend it, let the user invoke it.
 - **Ask about MANUAL steps** rather than assuming complete or incomplete.

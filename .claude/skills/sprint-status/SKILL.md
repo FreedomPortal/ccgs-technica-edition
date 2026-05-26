@@ -206,3 +206,5 @@ or run `/story-readiness [path]`.
 
 For sprint replanning, use `/sprint-plan update`.
 For end-of-sprint retrospective, use `/retrospective`.
+
+Verdict: **COMPLETE** — sprint status report generated.

@@ -261,6 +261,8 @@ Silently append to `production/session-state/active.md` (create the file if it d
 <!-- QA-PLAN: [date] | System: [system/sprint identifier] | Plan written: production/qa/qa-plan-[identifier]-[date].md -->
 ```
 
+Verdict: **COMPLETE** — QA plan written and team notified.
+
 ---
 
 ## Collaborative Protocol

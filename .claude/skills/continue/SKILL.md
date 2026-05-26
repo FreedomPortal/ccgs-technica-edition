@@ -98,3 +98,7 @@ Verdict: COMPLETE — session brief delivered.
   state only."
 - **No agent memory files**: Skip Phase 3 silently.
 - **Everything empty**: "Nothing to continue — try `/start`."
+
+---
+
+This skill is read-only — no write approval required.

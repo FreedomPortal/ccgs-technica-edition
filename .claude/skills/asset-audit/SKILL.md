@@ -3,9 +3,8 @@ name: asset-audit
 description: "Audits game assets for compliance with naming conventions, file size budgets, format standards, and pipeline requirements. Identifies orphaned assets, missing references, and standard violations."
 argument-hint: "[category|all]"
 user-invocable: true
-allowed-tools: Read, Glob, Grep
+allowed-tools: Read, Glob, Grep, Write
 model: sonnet
-# Read-only diagnostic skill — no specialist agent delegation needed
 ---
 
 ## Phase 1: Read Standards
@@ -84,7 +83,9 @@ Scan the target asset directory using Glob:
 ## Verdict: [COMPLIANT / WARNINGS / NON-COMPLIANT]
 ```
 
-This skill is read-only — it produces a report but does not write files.
+Ask: "May I write this audit report to `production/qa/asset-audit-[date].md`?"
+
+Write only after receiving approval.
 
 ---
 

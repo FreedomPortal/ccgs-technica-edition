@@ -291,3 +291,13 @@ Verdict: **COMPLETE** — user oriented and handed off to next step.
 3. **User decides** — they pick the direction
 4. **No auto-execution** — recommend the next skill, don't run it without asking
 5. **Adapt** — if the user's situation doesn't fit a template, listen and adjust
+
+---
+
+## Recommended Next Steps
+
+After handoff, the user types the skill command shown in Phase 5. Common first steps:
+- `/brainstorm [hint]` — concept exploration
+- `/setup-engine` — configure the engine for an existing concept
+- `/project-stage-detect` — gap inventory for existing work
+- `/adopt` — format compliance audit for existing artifacts

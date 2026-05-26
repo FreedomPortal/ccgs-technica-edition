@@ -231,9 +231,14 @@ After remediating findings, re-run: `/security-audit quick` to confirm CRITICAL/
 
 If CRITICAL findings exist:
 > "⛔ CRITICAL security findings must be resolved before any public release. Do not proceed to `/launch-checklist` until these are addressed."
+> Verdict: **FAIL** — critical findings block release.
+
+If HIGH findings only (no CRITICAL):
+> Verdict: **CONCERNS** — high severity findings must be remediated before release.
 
 If no CRITICAL/HIGH findings:
 > "✅ No blocking security findings. Report written to `production/security/`. Include this path when running `/gate-check release`."
+> Verdict: **APPROVED** — no blocking security findings.
 
 ---
 

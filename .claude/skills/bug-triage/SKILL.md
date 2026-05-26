@@ -232,6 +232,15 @@ If user declined write: Verdict: **BLOCKED** — user declined write.
 
 ---
 
+## Recommended Next Steps
+
+- Run `/sprint-status` to check current sprint capacity before assigning P1 bugs
+- Run `/smoke-check sprint` if any S1/S2 bugs were filed against recently completed stories
+- Run `/regression-suite update` after fixing a bug to ensure a regression test guards it
+- Run `/sprint-plan update` if P1 overflow requires scope replanning
+
+---
+
 ## Collaborative Protocol
 
 - **Never close or mark bugs Won't Fix without user approval** — surface them

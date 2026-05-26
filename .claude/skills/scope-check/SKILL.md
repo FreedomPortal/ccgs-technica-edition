@@ -9,7 +9,7 @@ model: haiku
 
 # Scope Check
 
-This skill is read-only — it reports findings but writes no files.
+This skill is read-only — it reports findings but writes no files. No write approval required.
 
 Compares original planned scope against current state to detect, quantify, and triage
 scope creep.

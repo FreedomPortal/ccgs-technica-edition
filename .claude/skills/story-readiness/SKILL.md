@@ -274,7 +274,7 @@ Resolve these before the sprint begins or replan with `/sprint-plan update`.
 
 ## 6. Collaborative Protocol
 
-This skill is read-only. It never proposes edits or asks to write files.
+This skill is read-only. It never proposes edits or asks to write files. No write approval required.
 
 After reporting findings, offer:
 

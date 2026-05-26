@@ -114,7 +114,7 @@ Generated: [Date]
 
 Output the estimate with a brief summary: recommended budget, confidence level, and the single biggest risk factor.
 
-This skill is read-only — no files are written. Verdict: **COMPLETE** — estimate generated.
+This skill is read-only — no files are written. No write approval required. Verdict: **COMPLETE** — estimate generated.
 
 ---
 
