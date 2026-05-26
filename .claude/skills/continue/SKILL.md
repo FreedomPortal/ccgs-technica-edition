@@ -5,7 +5,7 @@ description: "Recover session context and continue where you left off. Reads ses
   progress and planned next steps."
 argument-hint: "[no arguments]"
 user-invocable: true
-allowed-tools: Read, Glob, AskUserQuestion
+allowed-tools: Read, Glob, Grep, AskUserQuestion
 model: haiku
 ---
 
@@ -25,7 +25,25 @@ Read `production/session-state/active.md`.
 - **File found**: Extract:
   - Current development **stage**
   - What was **completed last session** (bulleted lists above the "Next session" section)
-  - The **"Next session — pick up here"** section — the planned agenda
+  - The **"Next session — pick up here"** section — use the **last occurrence** in the
+    file (or the one marked `CANONICAL` if present). Earlier occurrences are historical
+    and must be ignored.
+
+---
+
+## Phase 1b: Filter Done Stories
+
+If `production/sprint-status.yaml` exists, read it.
+
+Extract every story ID where `status: done` (e.g. `S3-09`, `S3-01`).
+
+When building "Planned Next Steps" for Phase 4, **drop any item whose text contains
+a done story ID**. If one or more items are dropped, prepend this note to the
+Planned Next Steps block:
+
+> _(N step(s) omitted — already done per sprint-status.yaml)_
+
+If `sprint-status.yaml` does not exist, skip this phase silently.
 
 ---
 

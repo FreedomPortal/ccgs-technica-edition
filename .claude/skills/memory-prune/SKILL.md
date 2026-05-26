@@ -22,6 +22,10 @@ Read-heavy, low-risk. Never deletes permanent architectural decisions or pattern
 
 Read each of these files (skip if missing):
 
+**Sprint status (read first):**
+- `production/sprint-status.yaml` — extract the set of story IDs where `status: done`
+  (e.g. `S3-01`, `S3-09`). Used in Phase 2 to validate "Next session" items.
+
 **Agent memory:**
 - `.claude/agent-memory/producer/MEMORY.md`
 - `.claude/agent-memory/technical-director/MEMORY.md`
@@ -51,7 +55,7 @@ Read each of these files (skip if missing):
 | Class | Keep? | Examples |
 |-------|-------|---------|
 | **Current STATUS block** | Always keep | `<!-- STATUS -->` block at top of file |
-| **Most recent "Next session — pick up here"** | Always keep | The last planned agenda — still the active handoff |
+| **Most recent "Next session — pick up here"** | Keep, then validate (see below) | The last planned agenda |
 | **Recent session extracts** | Keep last 2–3 sprints | Useful context window for `/continue` |
 | **Old session extracts** | Remove | Sprint 1/2 extracts when Sprint 3+ is active; individual story extracts for stories closed 2+ sprints ago |
 | **Memory checkpoints** | Remove all but last 3 | Checkpoint text is already flushed to agent memory — duplicate in active.md is pure bulk |
@@ -59,6 +63,18 @@ Read each of these files (skip if missing):
 | **"Prior Sessions" marker** | Keep | Signals where detail was truncated |
 
 **Hard rule for active.md**: Never remove the most recent `### Next session — pick up here` section or the STATUS block. Everything else is a judgment call — prefer keeping when uncertain.
+
+**Additional step — validate kept "Next session" items against sprint-status.yaml:**
+After identifying the most recent `### Next session — pick up here` section to keep,
+scan each numbered item in that section for story ID references (e.g. `S3-09`, `S3-01`).
+If the story ID appears in the done-story set from Phase 1, mark that **individual line**
+for removal (not the whole section). Record each pruned line in the Phase 3 report as:
+
+```
+REMOVE line N: "[text]" — story ID [ID] is done per sprint-status.yaml
+```
+
+This is the only valid reason to modify a line inside the kept "Next session" section.
 
 **Rule (both file types):** If in doubt, keep. Only remove when the entry clearly describes a past state or a resolved action item.
 
