@@ -46,12 +46,15 @@ Use `AskUserQuestion`:
   - `[A] I'll add files now — pause and resume when ready`
   - `[B] I'll describe the references in text — no files needed`
   - `[C] Use the art bible's Section 9 (Reference Direction) as the sole reference`
+  - `[D] No reference image yet — generate prompt from art bible only to test in image generator`
 
 If [A]: pause. When user signals they're ready, re-Glob to confirm files are present, then continue.
 
 If [B]: use `AskUserQuestion` (free text — let the user describe their reference: visual targets, comparable games or films, mood, distinguishing features). Store the description as the reference input for Phase 2.
 
 If [C]: use art bible Section 9 content as the sole reference input.
+
+If [D]: treat the same as [C] — extract parameters from the art bible only (Sections 1–4 plus any asset-type-relevant section). Note in the template's Pilot Record that no reference images were used. This is appropriate when no visual references exist yet and the goal is to test whether the art bible rules alone produce acceptable output.
 
 If files are present: Read each file if they are text/markdown. For binary image files, note their filenames and ask the user to describe what they contain in one sentence each — the art-director agent will work from these descriptions.
 
