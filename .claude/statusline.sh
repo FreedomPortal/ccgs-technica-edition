@@ -33,7 +33,7 @@ pct_label() {
   if [ "$val" -ge 80 ] 2>/dev/null; then
     printf "\033[1;31m%s: %s%%\033[0m" "$prefix" "$val"
   elif [ "$val" -ge 50 ] 2>/dev/null; then
-    printf "\033[1;33m%s: %s%%\033[0m" "$prefix" "$val"
+    printf "\033[33m%s: %s%%\033[0m" "$prefix" "$val"
   else
     printf "\033[1;32m%s: %s%%\033[0m" "$prefix" "$val"
   fi
