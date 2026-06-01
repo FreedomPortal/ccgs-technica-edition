@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Claude Code Game Studios — Status Line
+# Claude Code Game Studios: Technica Edition — Status Line
 # Receives JSON on stdin, outputs a single-line status.
 #
 # Segments: ctx% | model | production stage [| Epic > Feature > Task]
@@ -10,10 +10,14 @@ input=$(cat)
 if command -v jq &>/dev/null; then
   model=$(echo "$input" | jq -r '.model.display_name // "Unknown"')
   used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
+  rl_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
+  wl_pct=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
   cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // ""')
 else
   model=$(echo "$input" | grep -oE '"display_name"\s*:\s*"[^"]*"' | head -1 | sed 's/.*: *"//;s/"//')
   used_pct=$(echo "$input" | grep -oE '"used_percentage"\s*:\s*[0-9]+' | head -1 | sed 's/.*: *//')
+  rl_pct=$(echo "$input" | grep -oE '"five_hour"\s*:\s*\{[^}]*"used_percentage"\s*:\s*[0-9]+' | grep -oE '[0-9]+$')
+  wl_pct=$(echo "$input" | grep -oE '"seven_day"\s*:\s*\{[^}]*"used_percentage"\s*:\s*[0-9]+' | grep -oE '[0-9]+$')
   cwd=$(echo "$input" | grep -oE '"current_dir"\s*:\s*"[^"]*"' | head -1 | sed 's/.*: *"//;s/"//')
   [ -z "$model" ] && model="Unknown"
 fi
@@ -22,12 +26,22 @@ fi
 cwd=$(echo "$cwd" | sed 's|\\|/|g')
 [ -z "$cwd" ] && cwd="."
 
-# --- Context usage ---
-if [ -n "$used_pct" ]; then
-  ctx_label="ctx: ${used_pct}%"
-else
-  ctx_label="ctx: --"
-fi
+# --- Colored percentage label (50-80% yellow, >80% red) ---
+pct_label() {
+  local prefix="$1" val="$2"
+  if [ -z "$val" ]; then printf "%s: --" "$prefix"; return; fi
+  if [ "$val" -ge 80 ] 2>/dev/null; then
+    printf "\033[1;31m%s: %s%%\033[0m" "$prefix" "$val"
+  elif [ "$val" -ge 50 ] 2>/dev/null; then
+    printf "\033[1;33m%s: %s%%\033[0m" "$prefix" "$val"
+  else
+    printf "\033[1;32m%s: %s%%\033[0m" "$prefix" "$val"
+  fi
+}
+
+ctx_label=$(pct_label "ctx" "$used_pct")
+rl_label=$(pct_label "5h" "$rl_pct")
+wl_label=$(pct_label "7d" "$wl_pct")
 
 # --- Production stage ---
 # Priority 1: Explicit stage from stage.txt
@@ -118,4 +132,4 @@ if [ "$stage" = "Production" ] || [ "$stage" = "Polish" ] || [ "$stage" = "Relea
 fi
 
 # --- Assemble ---
-printf "%s" "${ctx_label} | ${model} | ${stage}${breadcrumb}"
+printf "%s" "${ctx_label} | ${rl_label} | ${wl_label} | ${model} | ${stage}${breadcrumb}"
