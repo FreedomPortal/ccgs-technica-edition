@@ -205,7 +205,17 @@ if [ "$stage" = "Production" ] || [ "$stage" = "Polish" ] || [ "$stage" = "Relea
   fi
 fi
 
+# --- Repo / branch ---
+repo_branch=""
+git_root=$(git -C "$cwd" rev-parse --show-toplevel 2>/dev/null)
+if [ -n "$git_root" ]; then
+  repo_name=$(basename "$git_root")
+  branch=$(git -C "$cwd" branch --show-current 2>/dev/null)
+  [ -z "$branch" ] && branch=$(git -C "$cwd" rev-parse --short HEAD 2>/dev/null)
+  [ -n "$branch" ] && repo_branch="${repo_name} (${branch})"
+fi
+
 # --- Assemble ---
 printf "%s\n%s" \
-  "${model} | ${stage}${breadcrumb}" \
-  "${ctx_label} | ${rl_label} ${rl_reset_label} | ${wl_label} ${wl_reset_label}"
+  "🤖 ${model} | ${ctx_label} | ${rl_label} ${rl_reset_label} | ${wl_label} ${wl_reset_label} | ${repo_branch}" \
+  "${stage}${breadcrumb}"  
