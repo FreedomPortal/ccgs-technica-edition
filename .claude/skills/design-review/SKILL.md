@@ -29,6 +29,8 @@ Read the target design document in full. Read CLAUDE.md to understand project co
 
 **Prior review check:** Check whether `design/gdd/reviews/[doc-name]-review-log.md` exists. If it does, read the most recent entry — note what verdict was given and what blocking items were listed. This session is a re-review; track whether prior items were addressed.
 
+Count all `## Review —` entries in the log. Store as `prior_pass_count`. If `prior_pass_count ≥ 3`, activate **spec-polish mode**: skip Phase 3b adversarial agents entirely (treat as `--depth lean`) and proceed directly to Phase 3.5 reclassification check after Phase 3.
+
 ---
 
 ## Phase 2: Completeness Check
@@ -68,8 +70,9 @@ Evaluate against the Design Document Standard checklist:
 ## Phase 3b: Adversarial Specialist Review (full mode only)
 
 **Skip this phase in `lean` or `solo` mode.**
+**Skip this phase if `prior_pass_count ≥ 3` (spec-polish cap active) — go to Phase 3.5 directly.**
 
-**This phase is MANDATORY in full mode.** Do not skip it.
+**This phase is MANDATORY in full mode with fewer than 3 prior passes.** Do not skip it otherwise.
 
 **Before spawning any agents**, print this notice:
 > "Full review: spawning specialist agents in parallel. This typically takes 8–15 minutes. Use `--review lean` for faster single-session analysis."
@@ -114,7 +117,12 @@ Issue all Task calls simultaneously. Do NOT spawn one at a time.
 > Your job is NOT to validate this design — your job is to find problems.
 > Challenge the design choices from your domain expertise. What is wrong,
 > underspecified, likely to cause problems, or missing entirely?
-> Be specific and critical. Disagreement with the main review is welcome."
+> Be specific and critical. Disagreement with the main review is welcome.
+>
+> Tag every finding with its type:
+> - `[DESIGN]` — affects player-facing experience, economy stability, or core loop
+> - `[IMPL]` — affects engineer clarity (formula completeness, interface definition, edge case handling)
+> - `[SPEC]` — documentation consistency, wording, AC determinism, test fixture detail"
 
 **Additional instructions per agent type:**
 
@@ -139,6 +147,22 @@ Mark every finding with its source: `[game-designer]`, `[economy-designer]`, `[c
 
 ---
 
+## Phase 3.5: Severity Reclassification Check
+
+Run this check before writing the Phase 4 output. Apply after Phase 3b (or directly after Phase 3 if spec-polish mode is active).
+
+**Reclassification condition** — ALL of the following must be true:
+1. Architecture is coherent — no structural design flaws found
+2. All formulas are mathematically correct (boundary values don't go degenerate)
+3. Zero `[DESIGN]` blocking items remain
+4. All remaining blockers are `[IMPL]` or `[SPEC]` only
+
+**If ALL conditions are met:** force verdict to **APPROVED WITH IMPLEMENTATION NOTES**. Do not issue NEEDS REVISION. The `[IMPL]` and `[SPEC]` items are listed as implementation tickets in Phase 4 output, not as blockers. Design is frozen.
+
+**If any condition is NOT met:** proceed with normal verdict selection (NEEDS REVISION or MAJOR REVISION NEEDED).
+
+---
+
 ## Phase 4: Output Review
 
 ```
@@ -155,10 +179,16 @@ Re-review: [Yes — prior verdict was X on YYYY-MM-DD / No — first review]
 - ✗ loot-system.md — NOT FOUND (file does not exist yet)
 
 ### Required Before Implementation
-[Numbered list — blocking issues only. Each item tagged with source agent.]
+[Numbered list — blocking issues only. Each item tagged with source agent AND finding type: `[DESIGN]`, `[IMPL]`, or `[SPEC]`.]
+[Example: `1. [economy-designer][DESIGN] Drop rates produce negative expected value at level cap.`]
+[Omit this section if verdict is APPROVED WITH IMPLEMENTATION NOTES — use Implementation Tickets instead.]
 
 ### Recommended Revisions
-[Numbered list — important but not blocking. Source-tagged.]
+[Numbered list — important but not blocking. Source-tagged with finding type.]
+
+### Implementation Tickets
+[Only present when verdict is APPROVED WITH IMPLEMENTATION NOTES.]
+[List all `[IMPL]` and `[SPEC]` items here as actionable tickets for engineers/QA. These do NOT block implementation.]
 
 ### Specialist Disagreements
 [Any cases where agents disagreed with each other or with the main review.
@@ -179,7 +209,8 @@ systems touched, and whether new ADRs are required.
 - **XL** — cross-cutting concern, 5+ dependencies, multiple new ADRs likely
 Label clearly: "Rough scope signal: M (producer should verify before sprint planning)"
 
-### Verdict: [APPROVED / NEEDS REVISION / MAJOR REVISION NEEDED]
+### Verdict: [APPROVED / APPROVED WITH IMPLEMENTATION NOTES / NEEDS REVISION / MAJOR REVISION NEEDED]
+<!-- APPROVED WITH IMPLEMENTATION NOTES: design frozen; no [DESIGN] blockers; [IMPL]/[SPEC] items moved to tickets -->
 ```
 
 **Immediately after generating the review output above**, write the draft to disk:
