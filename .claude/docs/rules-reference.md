@@ -1,9 +1,19 @@
-# Path-Specific Rules
+# Rules Reference
 
-Rules in `.claude/rules/` are automatically enforced when editing files in matching paths:
+## Global Rules (no path restriction — apply everywhere)
+
+| Rule File | Enforces |
+| ---- | ---- |
+| `workflow.md` | Sprint close-out sequence, retro-before-plan enforcement |
+| `coding-agent-behavior.md` | Think before execute, simplicity, surgical changes, goal-driven execution — passed to all coding agent Task prompts via `dev-story` |
+
+## Path-Specific Rules
+
+Rules automatically enforced when editing files in matching paths:
 
 | Rule File | Path Pattern | Enforces |
 | ---- | ---- | ---- |
+| `src-baseline.md` | `src/**` | Doc comments, data-driven values, DI, ADR requirement, engine-reference check |
 | `gameplay-code.md` | `src/gameplay/**` | Data-driven values, delta time, no UI references |
 | `engine-code.md` | `src/core/**` | Zero allocs in hot paths, thread safety, API stability |
 | `ai-code.md` | `src/ai/**` | Performance budgets, debuggability, data-driven params |

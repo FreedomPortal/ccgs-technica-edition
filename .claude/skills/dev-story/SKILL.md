@@ -186,6 +186,7 @@ Brief the agent with file paths and targeted reading instructions — do not ser
 6. **Test file path**: `[path from story's Test Evidence section]` — this file must be created as part of implementation
 7. **Test requirement** (Logic and Integration stories only): The test file MUST be created at `[path from the story's Test Evidence section]`. Write the test alongside the implementation — do not defer it. The story cannot be closed via `/story-done` without this file present. Each acceptance criterion must have at least one test function covering it. Test file naming: `[system]_[feature]_test.[ext]`. Function naming: `test_[scenario]_[expected_outcome]`. No random seeds, no time-dependent assertions, no external I/O.
 8. **Explicit instruction**: implement this story following the ADR guidelines, respect the manifest rules, stay within the story's Out of Scope boundaries. Write clean, doc-commented public APIs.
+9. **Coding principles**: `.claude/rules/coding-agent-behavior.md` — read the four guidelines (Think Before Execute, Simplicity First, Surgical Changes, Goal-Driven Execution) before writing any code. These are behavioral rules, not style preferences.
 
 The agent should:
 - Create or modify files in `src/` following the ADR guidelines
