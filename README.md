@@ -235,6 +235,73 @@ Configure the enforcement level with `/autosave-mode` (or set at onboarding via 
 
 ---
 
+### Status Line: Rate Limit Awareness
+
+`statusline.sh` upgraded to a dual-line display that surfaces token pressure before it hits:
+
+```
+🤖 Claude Haiku 4.5 | ctx: 42% | 5h: 61% 1h 20m | 7d: 38% 4d 2h | my-game (main)
+🎯 Production | Combat System > Melee Combat > Hitbox detection
+```
+
+New segments: `5h` (5-hour rate limit %) and `7d` (7-day rate limit %) with relative reset countdowns. All three percentage indicators are color-coded: green < 50%, yellow 50–79%, red ≥ 80%. Also added: repo name + current branch in the first line.
+
+---
+
+### Design Review: Error Horizon Collapse Prevention
+
+`/design-review` now classifies every finding before deciding whether it blocks:
+
+| Tag | Meaning | Action |
+|-----|---------|--------|
+| `[DESIGN]` | Fundamental design flaw — logic broken, player fantasy unmet | Always blocks |
+| `[IMPL]` | Implementation detail — solvable in code without GDD change | Never blocks |
+| `[SPEC]` | Ambiguity or imprecision — can be resolved with a note | Blocks only pass 1–2 |
+
+**Phase 3.5 Reclassification Gate**: before the verdict, the review agent reclassifies any finding that escalated from recommended → blocking across passes. Pass ≥ 3 requires new external evidence to sustain a blocking escalation. Pass ≥ 6 auto-offers a minimum viable fix path. New verdict: `APPROVED WITH IMPLEMENTATION NOTES` — design is sound; remaining items are `[IMPL]` concerns logged for `/dev-story`.
+
+`/review-all-gdds` and `/architecture-review` use equivalent classification schemes (`[STRUCTURAL]/[DESIGN]/[SPEC]` and `[COVERAGE]/[CONFLICT]/[SPEC]` respectively) with the same reclassification gate at their Phase 4.5 / Phase 6.5.
+
+---
+
+### Coding Agent Behavioral Guidelines
+
+`.claude/rules/coding-agent-behavior.md` encodes four non-negotiable principles for all coding agents (`gameplay-programmer`, `engine-programmer`, `ui-programmer`, `godot-gdscript-specialist`, etc.):
+
+1. **Think Before Execute** — state assumptions; present alternatives; stop and ask when confused
+2. **Simplicity First** — minimum code that satisfies acceptance criteria; no speculative features
+3. **Surgical Changes** — touch only what the story requires; don't "improve" adjacent code
+4. **Goal-Driven Execution** — derive verifiable goals from ACs; write tests first; clarify before implementing
+
+Applied by `/dev-story` Phase 4 as item 9 in the programmer agent brief.
+
+---
+
+### Sprint Close-Out Sequence Enforcement
+
+`.claude/rules/workflow.md` now hard-enforces the close-out order:
+
+```
+/smoke-check sprint → /team-qa sprint → /retrospective → /gate-check → /sprint-plan new
+```
+
+`/sprint-plan new` checks for `production/retrospectives/retro-sprint-[N]-*.md` before generating a plan. If the file is missing: **BLOCKED** — must run `/retrospective` first. Prevents velocity data loss and repeated process failures across sprint boundaries.
+
+---
+
+### Code Review Auto-Detection in Story-Done
+
+`/dev-story` now makes `/code-review` the sole next step — `/story-done` is not mentioned until after code review passes.
+
+`/story-done` Phase 5 replaces the manual "did you run code review?" question with session state detection:
+
+1. Reads `production/session-state/active.md` for a `Session Extract — /code-review` block referencing the story's files
+2. **Found** → skip re-run silently
+3. **Not found + lean mode** → ask: "Run it now / Skip / Before sprint close-out"
+4. **Not found + full mode** → spawn LP-CODE-REVIEW immediately, no question
+
+---
+
 ### `writing-lessons.md` Knowledge Base
 Located at `production/publishing/writing-lessons.md`. All `/export-*` skills read this file before generating output. Use `/log-lesson` to add entries. Format: context → problem → rule → example. Decisions marked as settled are not re-debated by agents.
 
