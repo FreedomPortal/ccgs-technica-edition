@@ -53,8 +53,8 @@ print(ws.get('current_dir', d.get('cwd', '')))
 else
   model=$(echo "$input" | grep -oE '"display_name"\s*:\s*"[^"]*"' | head -1 | sed 's/.*: *"//;s/"//')
   used_pct=$(echo "$input" | grep -oE '"used_percentage"\s*:\s*[0-9]+' | head -1 | sed 's/.*: *//')
-  rl_pct=$(echo "$input" | grep -oE '"five_hour"\s*:\s*\{[^}]+\}' | grep -oE '"used_percentage"\s*:\s*[0-9]+' | grep -oE '[0-9]+$')
-  wl_pct=$(echo "$input" | grep -oE '"seven_day"\s*:\s*\{[^}]+\}' | grep -oE '"used_percentage"\s*:\s*[0-9]+' | grep -oE '[0-9]+$')
+  rl_pct=$(echo "$input" | grep -oE '"five_hour"\s*:\s*\{[^}]+\}' | grep -oE '"used_percentage"\s*:\s*[0-9.]+' | grep -oE '[0-9]+' | head -1)
+  wl_pct=$(echo "$input" | grep -oE '"seven_day"\s*:\s*\{[^}]+\}' | grep -oE '"used_percentage"\s*:\s*[0-9.]+' | grep -oE '[0-9]+' | head -1)
   rl_reset=$(echo "$input" | grep -oE '"five_hour"\s*:\s*\{[^}]+\}' | grep -oE '"resets_at"\s*:\s*([0-9]+|"[^"]+")' | sed 's/.*:\s*//;s/"//g')
   wl_reset=$(echo "$input" | grep -oE '"seven_day"\s*:\s*\{[^}]+\}' | grep -oE '"resets_at"\s*:\s*([0-9]+|"[^"]+")' | sed 's/.*:\s*//;s/"//g')
   cwd=$(echo "$input" | grep -oE '"current_dir"\s*:\s*"[^"]*"' | head -1 | sed 's/.*: *"//;s/"//')
@@ -218,4 +218,4 @@ fi
 # --- Assemble ---
 printf "%s\n%s" \
   "🤖 ${model} | ${ctx_label} | ${rl_label} ${rl_reset_label} | ${wl_label} ${wl_reset_label} | ${repo_branch}" \
-  "${stage}${breadcrumb}"  
+  "🎯 ${stage}${breadcrumb}"  
