@@ -257,14 +257,10 @@ Skip this phase for Config/Data stories (no code tests required).
 
 **Review mode check** — apply before spawning LP-CODE-REVIEW:
 - `solo` → skip. Note: "LP-CODE-REVIEW skipped — Solo mode." Proceed to Phase 6 (completion report).
-- `lean` → use `AskUserQuestion` before proceeding:
-  - Prompt: "Code review is skipped in lean mode. Did you run `/code-review` on the implemented files?"
-  - Options:
-    - `Yes — /code-review passed or was approved with suggestions`
-    - `No — skipping code review for this story`
-    - `No — I'll run /code-review before the sprint close-out`
-  - Record the answer in the completion notes (Phase 7). All three options proceed to Phase 6.
-- `full` → spawn as normal.
+- `lean` or `full` → auto-detect, then act:
+  1. Read `production/session-state/active.md`. Search for a `Session Extract — /code-review` block that references any of this story's implementation files or the story file path.
+  2. **Found** → code review already run. Note: "Code review detected in session state — skipping re-run." Proceed to Phase 6.
+  3. **Not found** → spawn LP-CODE-REVIEW via Task (see below). No AskUserQuestion.
 
 Spawn `lead-programmer` via Task using gate **LP-CODE-REVIEW** (`.claude/docs/director-gates.md`).
 

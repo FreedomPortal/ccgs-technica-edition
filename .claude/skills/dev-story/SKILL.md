@@ -255,7 +255,8 @@ Present a concise implementation summary:
 
 **Before running `/story-done`:** run your test suite locally and confirm the tests you wrote pass. `/story-done` will re-run them automatically, but a failing test discovered there means returning to implementation context.
 
-Ready for: `/code-review [file1] [file2]` then `/story-done [story-path]`
+**Next required step:** `/code-review [file1] [file2]`
+Run `/story-done [story-path]` only after code review passes.
 ```
 
 ---
@@ -270,7 +271,7 @@ Silently append to `production/session-state/active.md`:
 - Files changed: [comma-separated list]
 - Test written: [path, or "None — Visual/Feel/Config story"]
 - Blockers: [None, or description]
-- Next: /code-review [files] then /story-done [story-path]
+- Next: /code-review [files]
 ```
 
 Create `active.md` if it does not exist. Confirm: "Session state updated."
