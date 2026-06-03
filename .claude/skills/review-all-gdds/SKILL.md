@@ -475,6 +475,20 @@ step where the issue occurs, and the nature of the failure mode.
 
 ---
 
+## Phase 4.5: Severity Reclassification Check
+
+Before writing the Phase 5 report, classify every blocking finding by type:
+
+- `[STRUCTURAL]` — cross-GDD rule contradiction, ownership conflict, stale reference with gameplay impact, formula range incompatibility
+- `[DESIGN]` — dominant strategy, economic imbalance, cognitive overload, pillar drift, player fantasy conflict
+- `[SPEC]` — acceptance criteria wording cross-check, dependency documentation asymmetry, minor reference inconsistency with no gameplay or architecture impact
+
+**Reclassification rule:** If all FAIL-level blocking items are `[SPEC]` only (zero `[STRUCTURAL]` or `[DESIGN]` blockers), downgrade verdict to **CONCERNS**. Spec findings mean documents need cleanup — not that the design is broken. Architecture can begin on a CONCERNS verdict.
+
+Add the type tag to every finding in the Phase 5 output at both blocking and warning level.
+
+---
+
 ## Phase 5: Output the Review Report
 
 ```
@@ -488,11 +502,11 @@ Systems Covered: [list]
 ### Consistency Issues
 
 #### Blocking (must resolve before architecture begins)
-🔴 [Issue title]
+🔴 [Issue title] [STRUCTURAL / SPEC]
 [What GDDs are involved, what the contradiction is, what needs to change]
 
 #### Warnings (should resolve, but won't block)
-⚠️  [Issue title]
+⚠️  [Issue title] [STRUCTURAL / SPEC]
 [What GDDs are involved, what the concern is]
 
 ---
@@ -500,11 +514,11 @@ Systems Covered: [list]
 ### Game Design Issues
 
 #### Blocking
-🔴 [Issue title]
+🔴 [Issue title] [DESIGN / SPEC]
 [What the problem is, which GDDs are involved, design recommendation]
 
 #### Warnings
-⚠️  [Issue title]
+⚠️  [Issue title] [DESIGN / SPEC]
 [What the concern is, which GDDs are affected, recommendation]
 
 ---
@@ -541,11 +555,11 @@ Scenarios walked: [N]
 ### Verdict: [PASS / CONCERNS / FAIL]
 
 PASS: No blocking issues. Warnings present but don't prevent architecture.
-CONCERNS: Warnings present that should be resolved but are not blocking.
-FAIL: One or more blocking issues must be resolved before architecture begins.
+CONCERNS: Warnings present that should be resolved but are not blocking. Also: all blockers are [SPEC] only — architecture can proceed (see Phase 4.5).
+FAIL: One or more [STRUCTURAL] or [DESIGN] blocking issues must be resolved before architecture begins. [SPEC]-only blockers cannot produce FAIL.
 
 ### If FAIL — required actions before re-running:
-[Specific list of what must change in which GDD]
+[Specific list of what must change in which GDD — [STRUCTURAL] and [DESIGN] items only]
 ```
 
 ---

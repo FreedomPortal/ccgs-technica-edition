@@ -398,6 +398,20 @@ If `docs/architecture/architecture.md` exists, validate it against GDDs:
 
 ---
 
+## Phase 6.5: Severity Reclassification Check
+
+Before writing the Phase 7 report, classify every blocking finding by type:
+
+- `[COVERAGE]` — genuine ADR gap: a GDD technical requirement has no architectural decision
+- `[CONFLICT]` — cross-ADR contradiction: two ADRs make incompatible claims about the same system or state
+- `[SPEC]` — missing doc section, stale version reference, ADR lacks Engine Compatibility section, deprecated API flag where no runtime impact is confirmed
+
+**Reclassification rule:** If all FAIL-level blocking items are `[SPEC]` only (zero `[COVERAGE]` or `[CONFLICT]` blockers), downgrade verdict to **CONCERNS**. Documentation gaps in ADRs do not block implementation if the architectural decision itself is clear and correct. Implementation can proceed on a CONCERNS verdict.
+
+Add the type tag to every finding in the Phase 7 output.
+
+---
+
 ## Phase 7: Output the Review Report
 
 ```
@@ -443,13 +457,12 @@ For each gap:
 
 ### Verdict: [PASS / CONCERNS / FAIL]
 
-PASS: All requirements covered, no conflicts, engine consistent
-CONCERNS: Some gaps or partial coverage, but no blocking conflicts
-FAIL: Critical gaps (Foundation/Core layer requirements uncovered),
-      or blocking cross-ADR conflicts detected
+PASS: All requirements covered, no conflicts, engine consistent.
+CONCERNS: Some gaps or partial coverage, but no [COVERAGE] or [CONFLICT] blockers. Also: all blockers are [SPEC] only — implementation can proceed (see Phase 6.5).
+FAIL: One or more [COVERAGE] or [CONFLICT] blocking issues — architecture cannot support implementation. [SPEC]-only blockers cannot produce FAIL.
 
 ### Blocking Issues (must resolve before PASS)
-[List items that must be resolved — FAIL verdict only]
+[List items that must be resolved — FAIL verdict only — [COVERAGE] and [CONFLICT] items only]
 
 ### Required ADRs
 [Prioritised list of ADRs to create, most foundational first]
