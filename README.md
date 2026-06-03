@@ -410,3 +410,7 @@ All additions and modifications are by Technica Games. The MIT license text and 
 The `/refine-copy` skill is adapted from **humanize-writing** by **jpeggdev**, licensed under MIT.
 
 Original repository: https://github.com/jpeggdev/humanize-writing
+
+The `coding-agent-behavior` rules is adapted from **andrej-karpathy-skills** by **multica-ai**, licensed under MIT.
+
+Original repository: https://github.com/multica-ai/andrej-karpathy-skills
