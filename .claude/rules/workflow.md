@@ -13,7 +13,7 @@ The sprint close-out sequence is non-negotiable and must run in this order:
 If no retrospective file exists at `production/retrospectives/retro-sprint-[N]-*.md`
 when `/sprint-plan new` is invoked: STOP. Run `/retrospective` first.
 
-**Why**: Sprints 3 and 4 both closed without a retrospective. Lessons went uncaptured.
+**Why**: Sprint can be closed without a retrospective. Lessons went uncaptured.
 Velocity data became estimated rather than measured. The same process failures recurred
 across sprints. A missing retro breaks the compound-improvement loop.
 
