@@ -258,9 +258,11 @@ New segments: `5h` (5-hour rate limit %) and `7d` (7-day rate limit %) with rela
 | `[IMPL]` | Implementation detail — solvable in code without GDD change | Never blocks |
 | `[SPEC]` | Ambiguity or imprecision — can be resolved with a note | Blocks only pass 1–2 |
 
-**Phase 3.5 Reclassification Gate**: before the verdict, the review agent reclassifies any finding that escalated from recommended → blocking across passes. Pass ≥ 3 requires new external evidence to sustain a blocking escalation. Pass ≥ 6 auto-offers a minimum viable fix path. New verdict: `APPROVED WITH IMPLEMENTATION NOTES` — design is sound; remaining items are `[IMPL]` concerns logged for `/dev-story`.
+**Reclassification Gate**: before the verdict, the review agent reclassifies any finding that escalated from recommended → blocking across passes. Pass ≥ 3 requires new external evidence to sustain a blocking escalation. Pass ≥ 6 auto-offers a minimum viable fix path. 
 
-`/review-all-gdds` and `/architecture-review` use equivalent classification schemes (`[STRUCTURAL]/[DESIGN]/[SPEC]` and `[COVERAGE]/[CONFLICT]/[SPEC]` respectively) with the same reclassification gate at their Phase 4.5 / Phase 6.5.
+New verdict: `APPROVED WITH IMPLEMENTATION NOTES` — design is sound; remaining items are `[IMPL]` concerns logged for `/dev-story`.
+
+`/review-all-gdds` and `/architecture-review` use equivalent classification schemes (`[STRUCTURAL]/[DESIGN]/[SPEC]` and `[COVERAGE]/[CONFLICT]/[SPEC]` respectively) with the same reclassification gate style.
 
 ---
 
@@ -273,7 +275,7 @@ New segments: `5h` (5-hour rate limit %) and `7d` (7-day rate limit %) with rela
 3. **Surgical Changes** — touch only what the story requires; don't "improve" adjacent code
 4. **Goal-Driven Execution** — derive verifiable goals from ACs; write tests first; clarify before implementing
 
-Applied by `/dev-story` Phase 4 as item 9 in the programmer agent brief.
+Applied by `/dev-story` in the programmer agent brief.
 
 ---
 
@@ -293,12 +295,7 @@ Applied by `/dev-story` Phase 4 as item 9 in the programmer agent brief.
 
 `/dev-story` now makes `/code-review` the sole next step — `/story-done` is not mentioned until after code review passes.
 
-`/story-done` Phase 5 replaces the manual "did you run code review?" question with session state detection:
-
-1. Reads `production/session-state/active.md` for a `Session Extract — /code-review` block referencing the story's files
-2. **Found** → skip re-run silently
-3. **Not found + lean mode** → ask: "Run it now / Skip / Before sprint close-out"
-4. **Not found + full mode** → spawn LP-CODE-REVIEW immediately, no question
+`/story-done` replaces the manual "did you run code review?" question with session state detection in lean and full mode. If evidence of code review is found, it will proceed silently without asking.
 
 ---
 
