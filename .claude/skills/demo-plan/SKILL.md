@@ -1,13 +1,18 @@
 ---
 name: demo-plan
 description: "Plan the demo production effort: set goals, identify target event/window, define milestones, estimate effort, and produce a risk register. Outputs design/demo/demo-plan.md. Run before /demo-scope for any non-trivial demo effort."
-argument-hint: "(no argument) [--review full|lean|solo]"
+argument-hint: "[--early-access] [--review full|lean|solo]"
 user-invocable: true
 allowed-tools: Read, Glob, Grep, Write, Task, AskUserQuestion
 ---
 
-## Phase 0: Resolve Review Mode
+## Phase 0: Resolve Flags and Review Mode
 
+**Early Access mode:** Check `$ARGUMENTS` for `--early-access`. Store as `EA_MODE = true/false`.
+When EA mode is active, the plan includes EA-specific sections (pricing strategy, roadmap commitments,
+exit timeline) and the campaign's sub-stages extend to `Publishing` → `Live` after `Released`.
+
+**Review mode:**
 1. If `--review [mode]` was passed → use that
 2. Else read `production/review-mode.txt` → use that value
 3. Else → default to `lean`
@@ -66,6 +71,33 @@ Ask the following using `AskUserQuestion` (batch into one call):
   - Demo is a future milestone — planning ahead only
 
 Store all answers for Phase 3.
+
+**If `EA_MODE = true`**, ask one additional batch using `AskUserQuestion`:
+
+**Question 5** — EA pricing strategy:
+- Prompt: "What is your Early Access pricing approach?"
+- Options:
+  - Discount from planned 1.0 price (e.g., 20–30% off) — standard EA signal
+  - Same as planned 1.0 price — uncommon; requires strong content justification
+  - Not decided yet — I'll figure it out before publishing
+
+**Question 6** — EA roadmap commitments:
+- Prompt: "What are you committing to players before 1.0?"
+- Options:
+  - I have a specific feature list — I'll describe it
+  - I know the content areas but not specific features yet
+  - I'll communicate direction only, no specific commitments
+
+**Question 7** — EA exit timeline:
+- Prompt: "When do you expect to exit Early Access?"
+- Options:
+  - Fixed target date — [user specifies]
+  - Within 6 months
+  - 6–12 months
+  - 12+ months
+  - Unknown — depends on player feedback
+
+Store all EA answers. These feed the EA-specific sections in Phase 3.
 
 ---
 
@@ -154,6 +186,35 @@ Any constraints not captured elsewhere:
 - Press embargo dates
 
 Flag any items marked [DECISION NEEDED] if the user's answers left key questions open.
+
+[Include the following section only when EA_MODE = true:]
+
+## Early Access Plan
+
+### EA Overview
+One paragraph: what Early Access means for this specific game, who it's for, and what state the game
+will be in at EA launch versus 1.0. Be honest — EA players are buying access to an unfinished game.
+
+### Pricing Strategy
+Recommended EA price, planned 1.0 price, and the rationale for the discount level (or lack of one).
+Flag if the pricing approach is unusual for the genre.
+
+### Roadmap Commitments
+What the developer is committing to deliver before 1.0:
+- List each commitment as a measurable feature or content area (not vague promises)
+- Flag any commitment that could be scope-risky (large feature, unknown implementation time)
+- These commitments will be tracked as Required 1.0 Stories by `/demo-integrate --early-access`
+
+### EA Exit Criteria
+What "done" looks like for exiting Early Access:
+- Target date or condition (e.g., "all roadmap commitments complete + 1 full QA pass")
+- Content and feature completeness bar
+- Any external conditions (minimum review count, wishlist target, etc.)
+
+### EA-Specific Milestones
+Add to the main Milestones section:
+10. EA Publishing Requirements met (`/demo-gate [id] publishing` PASS)
+11. EA Live (`/demo-gate [id] live` PASS)
 ```
 
 Present the draft. Discuss and revise until approved.
@@ -202,6 +263,9 @@ Next steps:
 - /demo-scope — define exactly what content is included and locked in the demo
 - /demo-build — once scope is locked and content is ready
 - /demo-playtest — validate first impression and conversion after first build
+[EA only:]
+- /demo-gate [id] publishing — when demo is Released; validates EA store requirements before going live
+- /demo-integrate --early-access — after EA launch; flags roadmap commitments as Required 1.0 stories
 ```
 
 ---

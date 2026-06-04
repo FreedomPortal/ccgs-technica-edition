@@ -6,7 +6,7 @@
 > 52-agent system, 112 slash commands, and 14 automated hooks. It assumes you
 > have Claude Code installed and are working from the project root.
 >
-> The pipeline has 7 phases. Each phase has a formal gate (`/gate-check`)
+> The pipeline has 9 stages. Each stage has a formal gate (`/gate-check`)
 > that must pass before you advance. The authoritative phase sequence is
 > defined in `.claude/docs/workflow-catalog.yaml` and read by `/help`.
 
@@ -1152,6 +1152,29 @@ Ask Claude to create a post-mortem using the template at
 
 These topics apply across all phases.
 
+### Demo Track
+
+The demo track runs **in parallel** with the main pipeline — it is not a stage. You can launch a demo campaign at Production (stage 7) or Polish (stage 8).
+
+**Multiple campaigns can be active simultaneously.** Each campaign has its own ID (e.g., `steam-next-fest-2026-10`, `always-on-store-demo`) and its own state file at `production/demo/[id]/state.txt`.
+
+**Sub-stages (standard):** Planning → Scoping → Building → Playtesting → Evaluating → Iterating → Polishing → Released
+
+**EA mode adds:** Publishing → Live
+
+The state file is written only by `/demo-gate` on PASS. Never edit it manually unless recovering from a known-bad state.
+
+```
+/demo-status                     # Check all active campaigns
+/demo-status steam-next-fest-2026-10  # Check specific campaign
+/demo-gate steam-next-fest-2026-10 playtesting  # Advance to Playtesting
+/demo-integrate steam-next-fest-2026-10  # Back-integrate after campaign wraps
+```
+
+See `.claude/docs/templates/demo-state-template.md` for full directory structure, state values, and file formats.
+
+---
+
 ### Director Review Modes
 
 Director gates are specialist agents that review your work at key workflow steps.
@@ -1315,10 +1338,12 @@ These detect which sections are present vs. missing and fill only the gaps.
 Phase gates are formal checkpoints. Run `/gate-check` with the transition name:
 
 ```
-/gate-check concept              # Concept -> Systems Design
+/gate-check concept              # Concept -> Prototype
+/gate-check prototype            # Prototype -> Systems Design
 /gate-check systems-design       # Systems Design -> Technical Setup
 /gate-check technical-setup      # Technical Setup -> Pre-Production
-/gate-check pre-production       # Pre-Production -> Production
+/gate-check pre-production       # Pre-Production -> Vertical Slice
+/gate-check vertical-slice       # Vertical Slice -> Production
 /gate-check production           # Production -> Polish
 /gate-check polish               # Polish -> Release
 ```
@@ -1592,19 +1617,24 @@ conflicts go to `producer`.
 | `/mod-support` | Mod support architecture — what to expose, tooling for modders | 7+ |
 | `/post-mortem` | Structured retrospective after milestone or release | Any |
 
-#### Demo Workflow — CCGS:TE (7)
+#### Demo Workflow — CCGS:TE (10)
 
-Full chain: `/demo-plan` → `/demo-scope` → `/demo-build` → `/demo-playtest` → `/demo-feedback` → `/demo-iterate` → `/demo-polish` → final build.
+The demo track is a **parallel branch**, not a pipeline stage — it runs alongside Production or Polish. Each campaign tracks its own state at `production/demo/[id]/state.txt`, advanced only by `/demo-gate`. Add `--early-access` to `/demo-plan` and `/demo-build` to enable EA mode (adds Publishing → Live sub-stages).
+
+Full chain: `/demo-plan` → `/demo-scope` → `/demo-build` → `/demo-playtest` → `/demo-feedback` → `/demo-iterate` → `/demo-polish` → `/demo-gate [id] released` → `/demo-integrate`.
 
 | Command | Purpose | Phase |
 |---------|---------|-------|
-| `/demo-plan` | Goals, milestones, effort estimate, and risk register for the demo production effort | 4 |
-| `/demo-scope` | Define demo boundaries — included content, what to cut, target impression | 4-6 |
-| `/demo-build` | Export and validate a playable demo build | 6 |
-| `/demo-playtest` | Structured playtest protocol for demo-specific goals | 6 |
-| `/demo-feedback` | Aggregate 2+ playtest sessions into cross-session patterns with a go/no-go release verdict | 5-6 |
-| `/demo-iterate` | Targeted blocker resolution: scope minimum fix → delegate to `/dev-story` or `/bug-report` → verify | 5-6 |
-| `/demo-polish` | Demo-specific polish pass scoped to first-impression, onboarding clarity, and end-state CTA conversion | 6 |
+| `/demo-plan` | Goals, milestones, effort estimate, and risk register for the demo production effort | 7 |
+| `/demo-scope` | Define demo boundaries — included content, what to cut, target impression | 7-8 |
+| `/demo-build` | Export and validate a playable demo build | 7-8 |
+| `/demo-playtest` | Structured playtest protocol for demo-specific goals | 7-8 |
+| `/demo-feedback` | Aggregate 2+ playtest sessions into cross-session patterns with a go/no-go release verdict | 7-8 |
+| `/demo-iterate` | Targeted blocker resolution: scope minimum fix → delegate to `/dev-story` or `/bug-report` → verify | 7-8 |
+| `/demo-polish` | Demo-specific polish pass scoped to first-impression, onboarding clarity, and end-state CTA conversion | 7-8 |
+| `/demo-status` | Read-only snapshot of all active demo campaigns — confidence, artifact status, blockers | Any |
+| `/demo-gate` | Formal demo sub-stage gate — evaluates checklist, writes `state.txt` on PASS | Any |
+| `/demo-integrate` | Post-demo back-integration — keep-demo-only / backport / needs-story; EA roadmap → Required 1.0 stories | Any |
 
 #### Localization Suite — CCGS:TE (8)
 

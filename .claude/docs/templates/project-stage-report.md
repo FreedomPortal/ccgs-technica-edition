@@ -1,7 +1,7 @@
 # Project Stage Analysis Report
 
 **Generated**: [DATE]
-**Stage**: [Concept | Systems Design | Technical Setup | Pre-Production | Production | Polish | Release]
+**Stage**: [Concept | Prototype | Systems Design | Technical Setup | Pre-Production | Vertical Slice | Production | Polish | Release]
 **Analysis Scope**: [Full project | Specific role: programmer/designer/producer]
 
 ---
