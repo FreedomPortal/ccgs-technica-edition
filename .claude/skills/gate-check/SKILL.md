@@ -1,7 +1,7 @@
 ---
 name: gate-check
 description: "Validate readiness to advance between development phases. Produces a PASS/CONCERNS/FAIL verdict with specific blockers and required artifacts. Use when user says 'are we ready to move to X', 'can we advance to production', 'check if we can start the next phase', 'pass the gate'."
-argument-hint: "[target-phase: systems-design | technical-setup | pre-production | production | polish | release] [--review full|lean|solo]"
+argument-hint: "[target-phase: prototype | systems-design | technical-setup | pre-production | vertical-slice | production | polish | release] [--review full|lean|solo]"
 user-invocable: true
 allowed-tools: Read, Glob, Grep, Bash, Write, Task, AskUserQuestion
 model: opus
@@ -18,17 +18,19 @@ phase. It checks for required artifacts, quality standards, and blockers.
 **Distinct from `/project-stage-detect`**: That skill is diagnostic ("where are we?").
 This skill is prescriptive ("are we ready to advance?" with a formal verdict).
 
-## Production Stages (7)
+## Production Stages (9)
 
 The project progresses through these stages:
 
 1. **Concept** — Brainstorming, game concept document
-2. **Systems Design** — Mapping systems, writing GDDs
-3. **Technical Setup** — Engine config, architecture decisions
-4. **Pre-Production** — Prototyping, vertical slice validation
-5. **Production** — Feature development (Epic/Feature/Task tracking active)
-6. **Polish** — Performance, playtesting, bug fixing
-7. **Release** — Launch prep, certification
+2. **Prototype** — Throwaway mechanic validation; PROCEED verdict required to advance
+3. **Systems Design** — Mapping systems, writing GDDs
+4. **Technical Setup** — Engine config, architecture decisions
+5. **Pre-Production** — Design docs, art bible, architecture, UX specs, epics
+6. **Vertical Slice** — Production-quality core loop build; personal playtest required to advance
+7. **Production** — Feature development (Epic/Feature/Task tracking active)
+8. **Polish** — Performance, playtesting, bug fixing
+9. **Release** — Launch prep, certification
 
 **When a gate passes**, write the new stage name to `production/stage.txt`
 (single line, e.g. `Production`). This updates the status line immediately.
@@ -54,7 +56,7 @@ Note: in `solo` mode, director spawns (CD-PHASE-GATE, TD-PHASE-GATE, PR-PHASE-GA
   - Prompt: "Detected stage: **[current stage]**. Running gate for [Current] → [Next] transition. Is this correct?"
   - Options:
     - `[A] Yes — run this gate`
-    - `[B] No — pick a different gate` (if selected, show a second widget listing all gate options: Concept → Systems Design, Systems Design → Technical Setup, Technical Setup → Pre-Production, Pre-Production → Production, Production → Polish, Polish → Release)
+    - `[B] No — pick a different gate` (if selected, show a second widget listing all gate options: Concept → Prototype, Prototype → Systems Design, Systems Design → Technical Setup, Technical Setup → Pre-Production, Pre-Production → Vertical Slice, Vertical Slice → Production, Production → Polish, Polish → Release)
   
   Do not skip this confirmation step when no argument is provided.
 
@@ -62,23 +64,39 @@ Note: in `solo` mode, director spawns (CD-PHASE-GATE, TD-PHASE-GATE, PR-PHASE-GA
 
 ## 2. Phase Gate Definitions
 
-### Gate: Concept → Systems Design
+### Gate: Concept → Prototype
+
+**Required Artifacts:**
+- [ ] `design/gdd/game-concept.md` exists with at least: game idea, target feeling, one core mechanic described
+- [ ] A falsifiable hypothesis can be formed from the concept (e.g., "If the player does X, they will feel Y")
+
+**Recommended (not blocking):**
+- [ ] Game pillars defined — can be refined after prototype, but early clarity helps
+- [ ] `/brainstorm` session completed and output saved to `design/gdd/game-concept.md`
+
+**Quality Checks:**
+- [ ] Concept is specific enough to prototype — not "make a fun game" but "test whether [mechanic] feels right"
+- [ ] Riskiest assumption in the concept is identified
+
+---
+
+### Gate: Prototype → Systems Design
 
 **Required Artifacts:**
 - [ ] `design/gdd/game-concept.md` exists and has content
 - [ ] Game pillars defined (in concept doc or `design/gdd/game-pillars.md`)
 - [ ] Visual Identity Anchor section exists in `design/gdd/game-concept.md` (from brainstorm Phase 4 art-director output)
+- [ ] Prototype REPORT.md exists in `prototypes/` with a PROCEED verdict (`/prototype` output)
 
 **Recommended (not blocking):**
-- [ ] Concept prototype exists in `prototypes/` with a REPORT.md showing PROCEED verdict
-      (`/prototype [core-mechanic]`) — skipping this means GDDs may be written for an
-      idea that hasn't been played. Acceptable if the concept is proven by other means.
+- [ ] Multiple prototype variants attempted if first returned PIVOT — natural selection between concepts produces better results than iterating one concept
 
 **Quality Checks:**
 - [ ] Game concept has been reviewed (`/design-review` verdict not MAJOR REVISION NEEDED)
-- [ ] Core loop is described and understood
+- [ ] Core loop is described and understood, informed by prototype learnings
 - [ ] Target audience is identified
 - [ ] Visual Identity Anchor contains a one-line visual rule and at least 2 supporting visual principles
+- [ ] Prototype report findings are reflected in `design/gdd/game-concept.md` (tuning knobs, edge cases, or mechanic adjustments noted)
 
 ---
 
@@ -144,11 +162,9 @@ A depends on B). If any cycle is detected (e.g. A→B→A, or A→B→C→A):
 
 ---
 
-### Gate: Pre-Production → Production
+### Gate: Pre-Production → Vertical Slice
 
 **Required Artifacts:**
-- [ ] Vertical slice exists in `prototypes/` with a REPORT.md (run `/vertical-slice`) — **recommended, not blocking**; if absent, surface as CONCERNS
-- [ ] First sprint plan exists in `production/sprints/`
 - [ ] Art bible is complete (all 9 sections) and AD-ART-BIBLE sign-off verdict is recorded in `design/art/art-bible.md`
 - [ ] Entity inventory exists at `design/assets/entity-inventory.md` (recommended — run `/asset-spec` with no arguments to generate collaboratively from GDDs + art bible)
 - [ ] Taste-gate templates locked for all asset types planned for batch AI image generation (`design/art/prompt-templates/[type]-template.md` with `Status: LOCKED`) — **recommended, not blocking**; if batch AI generation is planned but templates are absent, surface as CONCERNS
@@ -162,41 +178,45 @@ A depends on B). If any cycle is detected (e.g. A→B→A, or A→B→C→A):
       layer epics present (use `/create-epics layer: foundation` and
       `/create-epics layer: core` to create them, then `/create-stories [epic-slug]`
       for each epic)
-- [ ] Vertical Slice build exists and is playable (not just scope-defined) — **recommended, not blocking**; if absent, surface as CONCERNS
-- [ ] Vertical Slice has been playtested with at least 1 documented session — **recommended, not blocking**; if absent, surface as CONCERNS
-- [ ] Vertical Slice playtest report exists at `production/playtests/` or equivalent — **recommended, not blocking**; if absent, surface as CONCERNS
 - [ ] UX specs exist for key screens: main menu, core gameplay HUD (at `design/ux/`), pause menu
 - [ ] HUD design document exists at `design/ux/hud.md` (if game has in-game HUD)
 - [ ] All key screen UX specs have passed `/ux-review` (verdict APPROVED or NEEDS REVISION accepted)
 
 **Quality Checks:**
-- [ ] **Core loop fun is validated** — playtest data confirms the central mechanic is enjoyable, not just functional. Explicitly check the Vertical Slice playtest report.
 - [ ] UX specs cover all UI Requirements sections from MVP-tier GDDs
 - [ ] Interaction pattern library documents patterns used in key screens
 - [ ] Accessibility tier from `design/accessibility-requirements.md` is addressed in all key screen UX specs
-- [ ] Sprint plan references real story file paths from `production/epics/`
-      (not just GDDs — stories must embed GDD req ID + ADR reference)
-- [ ] **Vertical Slice is COMPLETE**, not just scoped — the build demonstrates the full core loop end-to-end. At least one complete [start → challenge → resolution] cycle works.
 - [ ] Architecture document has no unresolved open questions in Foundation or Core layers
 - [ ] All ADRs have Engine Compatibility sections stamped with the engine version
 - [ ] All ADRs have ADR Dependencies sections (even if all fields are "None")
 - [ ] Manual validation confirms GDDs + architecture + epics are coherent
       (run `/review-all-gdds` and `/architecture-review` if not done recently)
-- [ ] **Core fantasy is delivered** — at least one playtester independently described an experience that matches the Player Fantasy section of the core system GDDs (without being prompted).
 
-**Vertical Slice Validation** (only run these checks if a Vertical Slice was built):
-- [ ] A human has played through the core loop without developer guidance
+---
+
+### Gate: Vertical Slice → Production
+
+**Required Artifacts:**
+- [ ] Vertical slice REPORT.md exists in `prototypes/` with a PROCEED verdict (run `/vertical-slice`) — **BLOCKING**
+- [ ] First sprint plan exists in `production/sprints/`
+- [ ] Vertical Slice build is complete and playable — at least one complete [start → challenge → resolution] cycle works
+- [ ] Vertical Slice has been playtested with at least 1 documented session
+- [ ] Vertical Slice playtest report exists at `production/playtests/` or equivalent
+
+**Quality Checks:**
+- [ ] **Core loop fun is validated** — playtest data confirms the central mechanic is enjoyable, not just functional
+- [ ] **Developer has personally played the Vertical Slice** — not just built it; artifact evidence alone is insufficient
+- [ ] Sprint plan references real story file paths from `production/epics/`
+      (not just GDDs — stories must embed GDD req ID + ADR reference)
 - [ ] The game communicates what to do within the first 2 minutes of play
 - [ ] No critical "fun blocker" bugs exist in the Vertical Slice build
 - [ ] The core mechanic feels good to interact with (this is a subjective check — ask the user)
+- [ ] **Core fantasy is delivered** — at least one playtester independently described an experience that matches the Player Fantasy section of the core system GDDs (without being prompted)
 
-> **Verdict rules for Vertical Slice:**
-> - **Slice was built AND any validation item is NO** → verdict is automatically FAIL. A broken
->   or unfun vertical slice should not advance to Production.
-> - **Slice was not built (skipped)** → downgrade to CONCERNS only, not FAIL. Surface the risk
->   clearly: "Advancing without a validated Vertical Slice increases the risk of late-stage design
->   pivots. Recommended before committing full production scope." The user decides.
-> - Skipping is a valid solo dev or time-constrained call. Shipping a broken one is not.
+> **Verdict rules:**
+> - **Any validation item is NO** → verdict is automatically FAIL. An unfun or incomplete Vertical Slice must not advance to Production.
+> - **Developer has not personally played** → verdict is FAIL regardless of other checks. Artifact-only PASS is insufficient.
+> - All checks YES → eligible for PASS.
 
 ---
 
@@ -519,6 +539,22 @@ After the verdict is presented and any stage.txt update is complete, close with 
 
 **Tailor the options to the gate that just ran:**
 
+For **concept PASS** (Concept → Prototype):
+```
+Gate passed. What would you like to do next?
+[A] Run /prototype [mechanic] — build a throwaway prototype to validate the core idea (recommended)
+[B] Run /brainstorm — refine the concept further before prototyping
+[C] Stop here for this session
+```
+
+For **prototype PASS** (Prototype → Systems Design):
+```
+Gate passed. What would you like to do next?
+[A] Run /map-systems — decompose the concept into all game systems (recommended next step)
+[B] Run /design-system [mechanic] — start writing individual GDDs informed by prototype learnings
+[C] Stop here for this session
+```
+
 For **systems-design PASS**:
 ```
 Gate passed. What would you like to do next?
@@ -552,6 +588,14 @@ Gate passed. What would you like to do next?
 > **Why prototype before epics?** If the prototype reveals the core loop needs to change,
 > epics written before that discovery will be partially wrong. Validate fun cheaply first,
 > then plan in detail. This is the #1 lesson from GDC postmortem data.
+
+For **vertical-slice PASS** (Vertical Slice → Production):
+```
+Gate passed. What would you like to do next?
+[A] Run /sprint-plan new — plan the first full Production sprint (recommended)
+[B] Run /sprint-status — check current sprint state before planning the next one
+[C] Stop here for this session
+```
 
 For all other gates, offer the two most logical next steps for that phase plus "Stop here".
 

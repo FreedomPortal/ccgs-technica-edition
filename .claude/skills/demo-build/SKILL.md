@@ -30,6 +30,12 @@ Read `export_presets.cfg`. If it does not exist:
 > editor before a headless build can run (Project → Export → Add preset)."
 Stop.
 
+**Detect Early Access mode:**
+
+Read `design/demo/demo-plan.md` (or `production/demo/*/demo-plan.md` if demo-id is known).
+Check for `--early-access` in arguments OR `Early Access: true` in the plan header.
+Store as `EA_MODE = true/false`. Used in Phase 1b below.
+
 **Detect Godot binary** — check in this order:
 
 a) `godot --version` — succeeds if `godot` is on PATH
@@ -53,6 +59,53 @@ Store binary as `[GODOT_BIN]`.
 4. Else use current date as `YYYY-MM-DD`
 
 Store as `[VERSION]`.
+
+---
+
+## Phase 1b: Early Access Publishing Checklist *(EA mode only — skip if EA_MODE = false)*
+
+Before exporting an EA build, verify publishing requirements are in place. An EA build that ships
+without these is a missed opportunity that cannot be undone after players buy in.
+
+Check each item using `Glob` and `Read`. For items that can't be auto-verified, use `AskUserQuestion`.
+
+**Required before EA build ships publicly:**
+- [ ] EA store page is live (not just drafted) — check `production/publishing/store-page*` or ask
+- [ ] EA pricing is set and published on the target store — ask user to confirm
+- [ ] EA roadmap has been communicated to players (store page, community post, or in-game) — ask
+- [ ] EA roadmap commitments are documented at `production/demo/[id]/ea-roadmap.md` — Glob check
+- [ ] Known issues list is ready to publish — ask if user has prepared one
+- [ ] Player feedback channel is active (Discord, Steam forums, etc.) — ask
+
+**Advisory (CONCERNS if missing — not blocking for this build):**
+- [ ] `/publish-check` has been run and EA requirements satisfied
+- [ ] Press kit updated to reflect EA status
+
+Present the checklist results:
+
+```
+## EA Publishing Checklist
+
+Required:
+- [x] Store page live
+- [ ] EA pricing set — NOT CONFIRMED
+- ...
+
+Advisory:
+- [ ] /publish-check run — not verified
+
+EA Checklist: [PASS | CONCERNS | FAIL]
+```
+
+If **FAIL** (any Required item is missing):
+Use `AskUserQuestion`:
+- Prompt: "EA publishing checklist has unmet required items. Build will produce a valid binary but should not be distributed publicly until these are resolved. How do you want to proceed?"
+- Options:
+  - `[A] Continue — this is an internal EA build or I'll resolve these before publishing`
+  - `[B] Stop — I'll complete the publishing checklist first`
+
+If Stop: end here.
+If Continue: log the unmet items as known risks in the build log (Phase 7).
 
 ---
 
@@ -242,6 +295,9 @@ Next steps:
 4. If blockers found: run /demo-iterate to resolve them, then rebuild
 5. When feedback clears: run /demo-polish, then /demo-build for the final public build
 6. For Steam Next Fest: submit via Steamworks → Demos section
+[EA only:]
+7. Run /demo-gate [id] publishing — validate EA store requirements before going live
+8. After EA launch: run /demo-integrate --early-access — flags roadmap commitments as Required 1.0 stories
 
 [If FAIL:]
 Error output:

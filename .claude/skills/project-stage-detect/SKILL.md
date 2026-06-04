@@ -73,9 +73,11 @@ auto-detect using these heuristics (check from most-advanced backward):
 |-------|-----------|
 | **Tooling Project** | Scripts in `tools/`, no engine configured, no game concept — this is a pipeline/tool project, not a game. Skip game stage detection entirely and use the Tooling Gap Analysis below. |
 | **Concept** | No game concept doc, brainstorming phase |
-| **Systems Design** | Game concept exists, systems index missing or incomplete |
+| **Prototype** | Explicit only (set by `/gate-check` Concept → Prototype gate) OR game concept exists but no systems index and no prototype PROCEED report |
+| **Systems Design** | Game concept exists, prototype PROCEED report exists (or Prototype stage skipped), systems index missing or incomplete |
 | **Technical Setup** | Systems index exists, engine not configured |
-| **Pre-Production** | Engine configured, `src/` has <10 source files |
+| **Pre-Production** | Engine configured, `src/` has <10 source files, no VS PROCEED report |
+| **Vertical Slice** | Explicit only (set by `/gate-check` Pre-Production → Vertical Slice gate) — epics exist, VS build in progress |
 | **Production** | `src/` has 10+ source files, active development |
 | **Polish** | Explicit only (set by `/gate-check` Production → Polish gate) |
 | **Release** | Explicit only (set by `/gate-check` Polish → Release gate) |
@@ -115,7 +117,7 @@ Use template: `.claude/docs/templates/project-stage-report.md`
 # Project Stage Analysis
 
 **Date**: [date]
-**Stage**: [Concept/Systems Design/Technical Setup/Pre-Production/Production/Polish/Release]
+**Stage**: [Concept/Prototype/Systems Design/Technical Setup/Pre-Production/Vertical Slice/Production/Polish/Release]
 **Stage Confidence**: [PASS — clearly detected / CONCERNS — ambiguous signals / FAIL — critical gaps block progress]
 
 ## Completeness Overview

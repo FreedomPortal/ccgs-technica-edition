@@ -6,9 +6,9 @@
 the current development stage. It runs on the Haiku model (read-only) and
 examines `production/stage.txt` (if present), design documents in `design/`,
 source code in `src/`, sprint and milestone files in `production/`, and the
-presence of engine configuration to classify the project into one of seven
-stages: Concept, Systems Design, Technical Setup, Pre-Production, Production,
-Polish, or Release.
+presence of engine configuration to classify the project into one of nine
+stages: Concept, Prototype, Systems Design, Technical Setup, Pre-Production,
+Vertical Slice, Production, Polish, or Release.
 
 The skill is advisory — it never writes `stage.txt`. That file is only updated
 when `/gate-check` passes and the user confirms advancement. The skill reports
@@ -23,7 +23,7 @@ Verified automatically by `/skill-test static` — no fixture needed.
 
 - [ ] Has required frontmatter fields: `name`, `description`, `argument-hint`, `user-invocable`, `allowed-tools`
 - [ ] Has ≥2 phase headings
-- [ ] Contains all seven stage names: Concept, Systems Design, Technical Setup, Pre-Production, Production, Polish, Release
+- [ ] Contains all nine stage names: Concept, Prototype, Systems Design, Technical Setup, Pre-Production, Vertical Slice, Production, Polish, Release
 - [ ] Does NOT contain "May I write" language (skill is detection-only)
 - [ ] Has a next-step handoff (e.g., `/gate-check` to formally advance stage)
 

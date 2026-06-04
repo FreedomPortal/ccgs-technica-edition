@@ -35,7 +35,7 @@
 
 ## What Is CCGS:TE?
 
-CCGS is a Claude Code agent framework for game development — 48+ specialized AI agents organized as a studio hierarchy, coordinated around a 7-stage production pipeline.
+CCGS is a Claude Code agent framework for game development — 48+ specialized AI agents organized as a studio hierarchy, coordinated around a 9-stage production pipeline.
 
 The base framework covers everything from concept to release. What it doesn't cover is what comes after you ship, or what you need to reach players in the first place.
 
@@ -145,7 +145,11 @@ Handles localization execution under `localization-lead` direction. String wrapp
 
 ### Demo Workflow
 
-Full chain: `/demo-plan` → `/demo-scope` → `/demo-build` → `/demo-playtest` → `/demo-feedback` → `/demo-iterate` → `/demo-polish` → final build.
+The demo track is a **parallel branch**, not a pipeline stage. It can run alongside Production or Polish. Each demo campaign has its own state at `production/demo/[id]/state.txt`, advanced only by `/demo-gate`.
+
+Full chain: `/demo-plan` → `/demo-scope` → `/demo-build` → `/demo-playtest` → `/demo-feedback` → `/demo-iterate` → `/demo-polish` → `/demo-gate [id] released` → `/demo-integrate`.
+
+For Early Access: add `--early-access` to `/demo-plan` and `/demo-build`. Two additional sub-stages (Publishing → Live) activate, along with EA pricing/roadmap requirements.
 
 | Skill | Purpose |
 |-------|---------|
@@ -156,6 +160,9 @@ Full chain: `/demo-plan` → `/demo-scope` → `/demo-build` → `/demo-playtest
 | `/demo-feedback` | Aggregate 2+ playtest sessions into cross-session patterns with a go/no-go release verdict |
 | `/demo-iterate` | Targeted blocker resolution: scope minimum fix → delegate to `/dev-story` or `/bug-report` → verify |
 | `/demo-polish` | Demo-specific polish scoped to first-impression, onboarding clarity, and end-state CTA conversion |
+| `/demo-status` | Read-only snapshot of all active demo campaigns — confidence, artifact status, blockers for next advance |
+| `/demo-gate` | Formal sub-stage gate — evaluates checklist, writes `state.txt` on PASS |
+| `/demo-integrate` | Post-demo back-integration — classifies changes as keep-demo-only / backport / needs-story; EA mode flags roadmap commitments as Required 1.0 stories |
 
 ---
 
@@ -306,18 +313,21 @@ Located at `production/publishing/writing-lessons.md`. All `/export-*` skills re
 
 ## Pipeline Integration
 
-CCGS:TE skills map onto the existing 7-stage pipeline as a **parallel publishing track**. No base pipeline stages are removed or restructured.
+CCGS:TE skills map onto the 9-stage pipeline as a **parallel publishing track**. No base pipeline stages are removed or restructured.
 
 | Stage | New skills that activate |
 |-------|--------------------------|
 | 1 — Concept | `/marketing-plan`, `/monetization-design` |
-| 2 — Systems Design | `/analytics-setup` |
-| 3 — Technical Setup | `/setup-tool` (if pipeline tool work in scope) |
-| 4 — Pre-Production | `/taste-gate`, `/community-plan`, `/demo-plan`, `/demo-scope` |
-| 5 — Production | `/export-devlog`, `/export-social`, `/live-ops-plan`, `/demo-build`, `/demo-playtest`, `/demo-feedback`, `/demo-iterate` |
-| 6 — Polish | `/export-steam-page`, `/press-outreach`, `/export-pitch`, `/demo-polish`, `/demo-build` (final), `/localization-*` |
-| 7 — Release | `/export-build`, `/team-publish`, `/post-mortem` |
+| 2 — Prototype | *(no new skills — `/prototype` is a base skill)* |
+| 3 — Systems Design | `/analytics-setup` |
+| 4 — Technical Setup | `/setup-tool` (if pipeline tool work in scope) |
+| 5 — Pre-Production | `/taste-gate`, `/community-plan` |
+| 6 — Vertical Slice | *(no new skills — `/vertical-slice` is a base skill)* |
+| 7 — Production | `/export-devlog`, `/export-social`, `/live-ops-plan` |
+| 8 — Polish | `/export-steam-page`, `/press-outreach`, `/export-pitch`, `/localization-*` |
+| 9 — Release | `/export-build`, `/team-publish`, `/post-mortem` |
 | Post-Launch | `/dlc-design`, `/mod-support`, `/live-ops-plan` (operational) |
+| **Demo track** (parallel — branches from Production or Polish) | `/demo-plan`, `/demo-scope`, `/demo-build`, `/demo-playtest`, `/demo-feedback`, `/demo-iterate`, `/demo-polish`, `/demo-status`, `/demo-gate`, `/demo-integrate` |
 
 `/publish-check` runs automatically at **every session start** via `session-start.sh` — surfaces overdue publishing tasks and unlocked actions without interrupting workflow.
 

@@ -1175,6 +1175,39 @@ skills:
     priority: low
     category: utility
 
+  - name: demo-status
+    spec: CCGS Skill Testing Framework/skills/utility/demo-status.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: demo-gate
+    spec: CCGS Skill Testing Framework/skills/utility/demo-gate.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: demo-integrate
+    spec: CCGS Skill Testing Framework/skills/utility/demo-integrate.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
   # CCGS:TE additions — Localization Suite
   - name: localization-prepare
     spec: CCGS Skill Testing Framework/skills/utility/localization-prepare.md
