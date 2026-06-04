@@ -35,17 +35,18 @@
 
 ## What Is CCGS:TE?
 
-CCGS is a Claude Code agent framework for game development — 48+ specialized AI agents organized as a studio hierarchy, coordinated around a 9-stage production pipeline.
+CCGS is a Claude Code agent framework for game development — 48+ specialized AI agents organized as a studio hierarchy, coordinated around a 7-stage production pipeline.
 
 The base framework covers everything from concept to release. What it doesn't cover is what comes after you ship, or what you need to reach players in the first place.
 
-CCGS:TE is a fork that extends the base framework in three directions:
+CCGS:TE is a fork that extends the base framework in three directions and expand the pipeline to 9 stages, covering real world game development business life cycle:
 
 | Addition | What it adds |
 |----------|-------------|
 | **Go-To-Market Layer** | Marketing, community, press outreach, store presence, social publishing |
 | **Post-Launch Lifecycle** | Live ops strategy, DLC design, monetization, post-mortems |
-| **Pipeline & Continuity** | Session resume, knowledge persistence, toolchain setup, demo workflow, expanded localization |
+| **Workflow & Continuity** | Session resume, knowledge persistence, toolchain setup, demo workflow, expanded localization |
+| **9-stage Pipeline** | 'Prototype' added after Conceptual and 'Vertical Slice' is put between Pre-Production and Production |
 
 The result: CCGS covers *Build → Ship* —  CCGS:TE covers *Build → Ship → Operate → Grow*
 
@@ -69,17 +70,17 @@ The result: CCGS covers *Build → Ship* —  CCGS:TE covers *Build → Ship →
 
 ## New Agents
 
-### `game-pipeline-developer`
-Owns pipeline tools that operate outside the game engine: asset processors, data exporters, format converters, and automation scripts. Also owns the system-level workflow skills (setup-tool, checkpoint, resume, publish-check, export-build).
-
-**Domain:** Tools that bridge content creation and the game engine. Runs isolated from `src/`.
-
----
-
 ### `publishing-manager`
 The business-side director-lite. Owns the entire player-facing lifecycle from pre-launch positioning through post-launch community. Runs a publishing roadmap parallel to the development pipeline.
 
 **Domain:** All `/export-*` skills, press outreach, marketing plan, community plan, team-publish.
+
+---
+
+### `game-pipeline-developer`
+Owns pipeline tools that operate outside the game engine: asset processors, data exporters, format converters, and automation scripts. Also owns the system-level workflow skills (setup-tool, checkpoint, resume, publish-check, export-build).
+
+**Domain:** Tools that bridge content creation and the game engine. Runs isolated from `src/`.
 
 ---
 
