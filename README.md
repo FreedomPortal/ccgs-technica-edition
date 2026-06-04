@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
   <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-52-blueviolet" alt="52 Agents"></a>
-  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-113-green" alt="113 Skills"></a>
+  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-114-green" alt="114 Skills"></a>
   <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-14-orange" alt="14 Hooks"></a>
   <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-13-red" alt="13 Rules"></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
@@ -379,7 +379,6 @@ All hooks fail gracefully if optional tools are missing — nothing breaks, you 
    - `/project-stage-detect` — analyze an existing project
    - `/publish-check` — start publishing workflow (Recommended if migrating project from CCGS)
 
-
 ### Migrating an Existing Project from CCGS
 
 **Prerequisite:** This guide assumes your local repository already has two configured remotes: `origin` (your game project remote) and `upstream` (pointing to the original CCGS base repository).
@@ -398,6 +397,19 @@ If you need to keep the original CCGS history accessible while pulling the speci
    git remote rename upstream maintainer
    git remote add upstream https://github.com/FreedomPortal/ccgs-technica-edition.git
    ```
+
+### Keeping CCGS:TE in Sync with Upstream CCGS
+
+Use `/ccgs-merge` to pull framework updates from CCGS base into your CCGS:TE folder without a shared git history. The skill does a full repo-to-repo diff, analyzes every diverged file during a planning phase (with per-hunk apply/skip/rewrite decisions), then executes the approved plan mechanically and writes a merge report.
+
+**Setup** (one-time): point the skill at your clean CCGS source folder:
+```bash
+# run from your CCGS:TE folder
+/ccgs-merge /absolute/path/to/ccgs-clean-folder
+```
+Path is saved to `.claude/ccgs-merge-paths.txt` (machine-local, gitignored) for future runs.
+
+---
 
 ### Best Practice Tips
 -   **Checkpointing:**  Use  `/checkpoint`  when a key decision is made (e.g., during design discussions). Follow up with  `/clear`  or  `/compact`  to manage context window size efficiently.
