@@ -230,6 +230,41 @@ For `status`:
 
 ---
 
+## Phase 2.5: Framework Task Filter
+
+**Run this after the story list is assembled, before writing anything.**
+
+Scan every story in the draft plan for framework-related signals. A story is **framework-related** if any of these match:
+
+| Signal | Example |
+|--------|---------|
+| Name contains `SKILL.md`, a slash-command (e.g. `/design-review`), `framework`, or `CCGS` | "Update /design-review SKILL.md" |
+| Name contains `agent` or `hook` (referring to dev tooling, not game AI) | "Update session-start hook", "Fix producer agent memory" |
+| File path is under `.claude/` or in a `foundation` epic | `production/epics/foundation/story-002-*.md` |
+| Owner is `"developer"` AND name describes modifying dev tooling | "Add process rules to skill" |
+
+**Note**: game data pipeline tools (`tools/`) are NOT framework tasks — they have their own `Pipeline Tools` section and are not affected by this filter.
+
+If **no** framework stories are detected, skip this phase silently.
+
+If **one or more** framework stories are detected, present them and use `AskUserQuestion`:
+- Prompt: "These stories modify the development framework (skills, CCGS tooling), not the game. Include in this sprint?"
+- List each detected story with a checkbox option per story
+- Also offer:
+  - `[All] Include all framework stories`
+  - `[None] Exclude all framework stories`
+
+For any story the user excludes: remove it from the draft plan's task tables and from the sprint-status.yaml draft. Do not silently drop it — note at the bottom of the plan:
+
+```markdown
+> **Excluded (framework):** The following stories were removed from this sprint — they modify dev tooling, not game content:
+> - [story name]
+```
+
+Framework stories are not lost — they persist in their epic files and can be picked up outside the sprint cadence.
+
+---
+
 ## Phase 3: Prepare Sprint Status File
 
 After generating a new sprint plan, also prepare the `production/sprint-status.yaml` content.

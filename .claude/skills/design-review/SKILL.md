@@ -31,6 +31,10 @@ Read the target design document in full. Read CLAUDE.md to understand project co
 
 Count all `## Review —` entries in the log. Store as `prior_pass_count`. If `prior_pass_count ≥ 3`, activate **spec-polish mode**: skip Phase 3b adversarial agents entirely (treat as `--depth lean`) and proceed directly to Phase 3.5 reclassification check after Phase 3.
 
+**Re-review depth rule**: If this is a re-review (prior review log exists) AND the revision was applied in the same session as the prior review, force `--depth lean` for this run unless new system domains are touched that were absent from the prior review. Do not re-run full specialist delegation on revisions that only addressed previously identified items.
+
+**Cross-pass immunity** (spec-polish mode): When `prior_pass_count ≥ 3`, any item previously tagged `recommended` in the review log may NOT be elevated to `blocking`. New external evidence is required to justify elevation — evidence from the document itself or prior session context does not qualify. If elevation is attempted, downgrade it back to `recommended` and add a note: "was recommended in pass N — cross-pass immunity applies."
+
 ---
 
 ## Phase 2: Completeness Check
@@ -236,6 +240,9 @@ If NEEDS REVISION or MAJOR REVISION NEEDED, options:
 - `[A] Revise the GDD now — address blocking items together`
 - `[B] Stop here — revise in a separate session`
 - `[C] Accept as-is and move on (only if all items are advisory)`
+
+If `prior_pass_count ≥ 6`, also offer:
+- `[D] Min-viable fix — resolve [DESIGN] blockers only; log remaining [IMPL]/[SPEC] blockers as known issues in the review log. Design approved once [DESIGN] items are cleared.`
 
 **If user selects [A] — Revise now:**
 
