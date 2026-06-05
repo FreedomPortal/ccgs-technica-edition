@@ -52,7 +52,10 @@ publish     → export-build, export-crowdfunding, export-devlog, export-pitch,
 localization → localization-audit, localization-export, localization-import,
               localization-review, localization-setup, localization-sync,
               localization-test
-utility     → all remaining skills (ccgs-merge, memory-shard, onboard, etc.)
+workflow    → start, onboard, setup-engine, adopt, continue, next, checkpoint,
+              autosave-mode, project-stage-detect, log-lesson, memory-prune,
+              memory-shard
+utility     → all remaining skills (ccgs-merge, brainstorm, prototype, etc.)
 ```
 
 ## Agent tiers

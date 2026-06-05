@@ -314,7 +314,8 @@ skills:
     category: utility
 
   - name: start
-    spec: CCGS Skill Testing Framework/skills/utility/start.md
+    spec: CCGS Skill Testing Framework/skills/workflow/start.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -325,7 +326,8 @@ skills:
     category: utility
 
   - name: next
-    spec: CCGS Skill Testing Framework/skills/utility/next.md
+    spec: CCGS Skill Testing Framework/skills/workflow/next.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -347,7 +349,8 @@ skills:
     category: utility
 
   - name: project-stage-detect
-    spec: CCGS Skill Testing Framework/skills/utility/project-stage-detect.md
+    spec: CCGS Skill Testing Framework/skills/workflow/project-stage-detect.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -358,7 +361,8 @@ skills:
     category: utility
 
   - name: setup-engine
-    spec: CCGS Skill Testing Framework/skills/utility/setup-engine.md
+    spec: CCGS Skill Testing Framework/skills/workflow/setup-engine.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -644,7 +648,8 @@ skills:
     category: sprint
 
   - name: onboard
-    spec: CCGS Skill Testing Framework/skills/utility/onboard.md
+    spec: CCGS Skill Testing Framework/skills/workflow/onboard.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -690,7 +695,8 @@ skills:
     category: utility
 
   - name: adopt
-    spec: CCGS Skill Testing Framework/skills/utility/adopt.md
+    spec: CCGS Skill Testing Framework/skills/workflow/adopt.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -802,7 +808,8 @@ skills:
 
   # CCGS:TE additions — Session Continuity
   - name: autosave-mode
-    spec: CCGS Skill Testing Framework/skills/utility/autosave-mode.md
+    spec: CCGS Skill Testing Framework/skills/workflow/autosave-mode.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -813,7 +820,8 @@ skills:
     category: utility
 
   - name: checkpoint
-    spec: CCGS Skill Testing Framework/skills/utility/checkpoint.md
+    spec: CCGS Skill Testing Framework/skills/workflow/checkpoint.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -824,7 +832,8 @@ skills:
     category: utility
 
   - name: continue
-    spec: CCGS Skill Testing Framework/skills/utility/continue.md
+    spec: CCGS Skill Testing Framework/skills/workflow/continue.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -835,7 +844,8 @@ skills:
     category: utility
 
   - name: memory-prune
-    spec: CCGS Skill Testing Framework/skills/utility/memory-prune.md
+    spec: CCGS Skill Testing Framework/skills/workflow/memory-prune.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -995,7 +1005,8 @@ skills:
     category: utility
 
   - name: log-lesson
-    spec: CCGS Skill Testing Framework/skills/utility/log-lesson.md
+    spec: CCGS Skill Testing Framework/skills/workflow/log-lesson.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1331,7 +1342,8 @@ skills:
     category: analysis
 
   - name: memory-shard
-    spec: CCGS Skill Testing Framework/skills/utility/memory-shard.md
+    spec: CCGS Skill Testing Framework/skills/workflow/memory-shard.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
