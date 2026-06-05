@@ -3,7 +3,7 @@
 > **How to go from zero to a shipped game using the Agent Architecture.**
 >
 > This guide walks you through every phase of game development using the
-> 52-agent system, 112 slash commands, and 14 automated hooks. It assumes you
+> 49-agent system, 120 slash commands, and 15 automated hooks. It assumes you
 > have Claude Code installed and are working from the project root.
 >
 > The pipeline has 9 stages. Each stage has a formal gate (`/gate-check`)
@@ -1142,8 +1142,7 @@ Bypasses normal sprint processes with a full audit trail:
 **Post-mortem** after launch stabilizes:
 
 ```
-Ask Claude to create a post-mortem using the template at
-.claude/docs/templates/post-mortem.md
+/post-mortem
 ```
 
 ---
@@ -1265,7 +1264,7 @@ Tier 3 (Specialists):  gameplay-programmer, engine-programmer,
 
 ### Automated Hooks (Safety Net)
 
-The system has 12 hooks that run automatically:
+The system has 15 hooks that run automatically:
 
 | Hook | Trigger | What It Does |
 |------|---------|-------------|
@@ -1281,6 +1280,9 @@ The system has 12 hooks that run automatically:
 | `log-agent.sh` | Agent start | Logs agent invocations for audit trail |
 | `log-agent-stop.sh` | Agent stop | Completes agent audit trail (start + stop) |
 | `session-stop.sh` | Session end | Final session logging |
+| `git-guardrails.sh` | Before Bash tool | Blocks destructive git ops: reset --hard, push --force, clean -f, branch -D |
+| `pre-approval-check.sh` | Before AskUserQuestion | Draft-first enforcement — checks for recent draft before approval gates (per autosave-mode.txt) |
+| `memory-checkpoint.sh` | After Write/Edit | Reminds Claude to flush session discoveries to agent memory after significant writes |
 
 ### Context Resilience
 
@@ -1411,6 +1413,7 @@ Reads existing code and generates GDD-format design documentation from it.
 | Communicate with players | `community-manager` | 3 |
 | Godot-specific help | `godot-specialist` | 3 |
 | GDScript-specific help | `godot-gdscript-specialist` | 3 |
+| Godot C# code | `godot-csharp-specialist` | 3 |
 | Godot shader help | `godot-shader-specialist` | 3 |
 | GDExtension modules | `godot-gdextension-specialist` | 3 |
 | Unity-specific help | `unity-specialist` | 3 |
@@ -1448,7 +1451,7 @@ conflicts go to `producer`.
 
 ## Appendix B: Slash Command Quick-Reference
 
-### All 112 Commands by Category
+### All 120 Commands by Category
 
 #### Onboarding and Navigation (11)
 
@@ -1506,7 +1509,7 @@ conflicts go to `producer`.
 | `/story-done` | 8-phase story completion review | 5 |
 | `/estimate` | Effort estimation with risk assessment | 4-5 |
 
-#### Reviews and Analysis (13)
+#### Reviews and Analysis (15)
 
 | Command | Purpose | Phase |
 |---------|---------|-------|
@@ -1523,6 +1526,8 @@ conflicts go to `producer`.
 | `/gate-check` | Formal phase gate with PASS/CONCERNS/FAIL | All transitions |
 | `/reverse-document` | Generate design docs from existing code | Any |
 | `/security-audit` | Security vulnerability audit (save, network, input) | 6-7 |
+| `/diagnose` | Structured 6-phase debug workflow — feedback loop, ranked hypotheses, specialist delegation | 5+ |
+| `/code-recon` | Read-only dependency map for a file or system — callers, signals, exports, risk zones | Any |
 
 #### QA and Testing (9)
 
