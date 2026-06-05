@@ -174,6 +174,18 @@ if [ -z "$stage" ]; then
   fi
 fi
 
+# --- Sprint number (Pre-Production through Release) ---
+sprint_label=""
+case "$stage" in
+  "Pre-Production"|"Vertical Slice"|"Production"|"Polish"|"Release")
+    sprint_yaml="$cwd/production/sprint-status.yaml"
+    if [ -f "$sprint_yaml" ]; then
+      sprint_num=$(grep -m1 '^sprint:' "$sprint_yaml" 2>/dev/null | sed 's/sprint:[[:space:]]*//')
+      [ -n "$sprint_num" ] && sprint_label="Sprint ${sprint_num}"
+    fi
+    ;;
+esac
+
 # --- Epic/Feature/Task breadcrumb (Production+ only) ---
 breadcrumb=""
 if [ "$stage" = "Production" ] || [ "$stage" = "Polish" ] || [ "$stage" = "Release" ]; then
@@ -201,7 +213,7 @@ if [ "$stage" = "Production" ] || [ "$stage" = "Polish" ] || [ "$stage" = "Relea
     [ -n "$epic" ] && parts="$epic"
     [ -n "$feature" ] && parts="${parts:+$parts > }$feature"
     [ -n "$task" ] && parts="${parts:+$parts > }$task"
-    [ -n "$parts" ] && breadcrumb=" | $parts"
+    [ -n "$parts" ] && breadcrumb="$parts"
   fi
 fi
 
@@ -218,4 +230,4 @@ fi
 # --- Assemble ---
 printf "%s\n%s" \
   "🤖 ${model} | ${ctx_label} | ${rl_label} ${rl_reset_label} | ${wl_label} ${wl_reset_label} | ${repo_branch}" \
-  "🎯 ${stage}${breadcrumb}"  
+  "🎯 ${stage}$ | {sprint_label} | ${breadcrumb}"

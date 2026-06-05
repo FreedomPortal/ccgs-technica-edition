@@ -89,6 +89,8 @@ Only run `git checkout -b hotfix/[short-name] [base-ref]` if user selects [A]. I
 
 Focus on the minimal change that resolves the issue. Do NOT refactor, clean up, or add features alongside the hotfix.
 
+If root cause is not clear within the first inspection pass, use `/diagnose [symptom]` to structure the investigation before writing any fix. A hotfix that targets the wrong cause is worse than the original bug.
+
 Validate the fix by running targeted tests for the affected system. Check for regressions in adjacent systems.
 
 Update the hotfix record with root cause, fix details, and test results.

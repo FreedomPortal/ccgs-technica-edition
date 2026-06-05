@@ -154,6 +154,7 @@ After saving, suggest based on mode:
 **After filing (Description/Analyze mode):**
 - Run `/bug-triage` to prioritize alongside existing open bugs
 - If S1 or S2: run `/hotfix [BUG-ID]` for emergency fix workflow
+- If root cause is unknown: run `/diagnose [symptom]` before attempting a fix — structured investigation prevents thrashing on the wrong hypothesis
 
 **After fixing the bug (developer confirms fix is in):**
 - Run `/bug-report verify [BUG-ID]` — confirm the fix actually works before closing

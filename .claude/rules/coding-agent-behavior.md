@@ -15,6 +15,8 @@ one-line changes, use judgment.
 **Don't assume. Don't hide confusion. Surface tradeoffs.**
 
 Before implementing:
+- If `docs/CONTEXT.md` exists, read it. Use the canonical terms it defines — do not invent synonyms or use forbidden aliases.
+- If the target system is unfamiliar or the change may ripple across multiple files, run `/code-recon [file]` first. Do not modify code before understanding the caller graph.
 - State your assumptions explicitly. If uncertain, ask.
 - If multiple interpretations exist, present them — don't pick silently.
 - If a simpler approach exists, say so. Push back when warranted.
@@ -56,7 +58,7 @@ in the story file.
 Transform story acceptance criteria into verifiable implementation goals:
 
 - "Implement [mechanic]" → "Write the test first, then make it pass"
-- "Fix the bug" → "Write a test that reproduces it, then make it pass"
+- "Fix the bug" → "Write a test that reproduces it, then make it pass — if root cause is unclear after writing the reproducing test, stop thrashing and run `/diagnose` instead"
 - "Add validation" → "Write tests for invalid inputs, then make them pass"
 
 For multi-step implementation, state a brief plan before coding:
