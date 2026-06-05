@@ -1286,6 +1286,51 @@ skills:
     priority: low
     category: utility
 
+  # Uncatalogued skills present in .claude/skills/ — added 2026-06-05
+  - name: ccgs-merge
+    spec: CCGS Skill Testing Framework/skills/utility/ccgs-merge.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: medium
+    category: utility
+
+  - name: code-recon
+    spec: CCGS Skill Testing Framework/skills/analysis/code-recon.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: high
+    category: analysis
+
+  - name: diagnose
+    spec: CCGS Skill Testing Framework/skills/analysis/diagnose.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: high
+    category: analysis
+
+  - name: memory-shard
+    spec: CCGS Skill Testing Framework/skills/utility/memory-shard.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: medium
+    category: utility
+
 agents:
   # Tier 1 Directors (Opus)
   - name: creative-director
