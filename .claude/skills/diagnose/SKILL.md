@@ -94,6 +94,8 @@ Root cause is confirmed. Fix it and lock it with a test.
 
 **Step 2: Write the regression test first.**
 
+Ask: "May I write the regression test to `tests/[unit|integration]/[system]/[system]_[feature]_test.gd`?"
+
 The test must:
 - Reproduce the original failure condition as it existed before the fix
 - Assert the correct expected behavior

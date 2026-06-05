@@ -175,7 +175,7 @@ Include only applicable risks found during the recon.
 
 ## Phase 5 — Finish
 
-State: **Recon complete.** No changes made. Engine: [detected].
+Verdict: **COMPLETE** — recon done. No changes made. Engine: [detected].
 
 If engine was unconfigured: "Run `/setup-engine` to enable engine-specific pattern detection."
 
