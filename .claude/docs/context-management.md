@@ -15,6 +15,22 @@ When proposing 'Options' for the Collaboration Protocol (Question -> Options -> 
 **The file is the memory, not the conversation.** Conversations are ephemeral and
 will be compacted or lost. Files on disk persist across compactions and session crashes.
 
+### Domain Glossary (`docs/CONTEXT.md`)
+
+`docs/CONTEXT.md` is the project's living vocabulary file — canonical names for game
+concepts, systems, entities, and UI elements. It is NOT a mechanics spec (that lives in
+`design/gdd/`). Its sole purpose is preventing naming drift across sessions and agents.
+
+- **Coding agents:** If `docs/CONTEXT.md` exists, read it before working on any system.
+  Use the canonical terms it defines — do not invent synonyms.
+- **Design agents:** When a GDD establishes new terminology, add it to `docs/CONTEXT.md`
+  immediately. One row per term. Do not defer this to a later session.
+- **All agents:** If you encounter a term conflict (code uses "X" but CONTEXT.md says "Y"),
+  flag it before proceeding — do not silently adopt either.
+
+The file starts as a template and fills as the game concept matures. An empty CONTEXT.md
+is not a problem — a missing or ignored one is.
+
 ### Session State File
 
 Maintain `production/session-state/active.md` as a living checkpoint. Update it

@@ -16,3 +16,5 @@ paths:
 - Design documents MUST be written incrementally: create skeleton first, then fill
   each section one at a time with user approval between sections. Write each
   approved section to the file immediately to persist decisions and manage context
+- When a GDD establishes new terminology (system names, mechanic names, entity names),
+  add it to `docs/CONTEXT.md` immediately — one row per term, with the GDD as reference

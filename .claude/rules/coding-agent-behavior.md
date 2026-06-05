@@ -15,6 +15,7 @@ one-line changes, use judgment.
 **Don't assume. Don't hide confusion. Surface tradeoffs.**
 
 Before implementing:
+- If `docs/CONTEXT.md` exists, read it. Use the canonical terms it defines — do not invent synonyms or use forbidden aliases.
 - State your assumptions explicitly. If uncertain, ask.
 - If multiple interpretations exist, present them — don't pick silently.
 - If a simpler approach exists, say so. Push back when warranted.
