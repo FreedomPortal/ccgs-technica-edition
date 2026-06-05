@@ -447,20 +447,15 @@ Path is saved to `.claude/ccgs-merge-paths.txt` (machine-local, gitignored) for 
 
 ## Attribution
 
-CCGS: Technica Edition is a fork of **CCGS — Claude Code Game Studios** by **Donchitos**, licensed under MIT.
-
-Original repository: https://github.com/Donchitos/Claude-Code-Game-Studios
-
+- CCGS: Technica Edition is a fork of **CCGS — Claude Code Game Studios** by **Donchitos**, licensed under MIT.<br />
+Original repository: https://github.com/Donchitos/Claude-Code-Game-Studios <br />
 All additions and modifications are by Technica Games. The MIT license text and original copyright notice are retained in all distributions.
 
-The `/refine-copy` skill is adapted from **humanize-writing** by **jpeggdev**, licensed under MIT.
-
+- The `/refine-copy` skill is adapted from **humanize-writing** by **jpeggdev**, licensed under MIT.<br />
 Original repository: https://github.com/jpeggdev/humanize-writing
 
-The `coding-agent-behavior` rules is adapted from **andrej-karpathy-skills** by **multica-ai**, licensed under MIT.
-
+- The `coding-agent-behavior` rules is adapted from **andrej-karpathy-skills** by **multica-ai**, licensed under MIT.<br />
 Original repository: https://github.com/multica-ai/andrej-karpathy-skills
 
-The `/diagnose` and `/code-recon` skills are adapted from **skills** by **mattpocock**, licensed under MIT.
-
+- The `/diagnose` and `/code-recon` skills are adapted from **skills** by **mattpocock**, licensed under MIT.<br />
 Original repository: https://github.com/mattpocock/skills
