@@ -16,6 +16,7 @@ one-line changes, use judgment.
 
 Before implementing:
 - If `docs/CONTEXT.md` exists, read it. Use the canonical terms it defines — do not invent synonyms or use forbidden aliases.
+- If the target system is unfamiliar or the change may ripple across multiple files, run `/code-recon [file]` first. Do not modify code before understanding the caller graph.
 - State your assumptions explicitly. If uncertain, ask.
 - If multiple interpretations exist, present them — don't pick silently.
 - If a simpler approach exists, say so. Push back when warranted.
