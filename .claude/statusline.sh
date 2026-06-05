@@ -170,7 +170,7 @@ if [ -z "$stage" ]; then
   elif [ "$has_concept" = true ]; then
     stage="Concept"
   else
-    stage="Concept"
+    stage="No project — type /start to begin"
   fi
 fi
 
