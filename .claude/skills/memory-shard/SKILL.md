@@ -150,6 +150,19 @@ If an oversized group has no `###` sub-headers:
 Propose shard filename for each group/sub-group: lowercase, hyphen-separated, no spaces.
 Example: "Skill Authoring Conventions" → `skills.md`; "### File Layout" within a group → `skills-layout.md`
 
+**Scan for promotion candidates** (do this while content is in memory):
+
+| High-signal pattern | Suggested target |
+|---------------------|-----------------|
+| Canonical / known file paths | `.claude/docs/technical-preferences.md` |
+| Forbidden patterns, banned APIs | `.claude/docs/technical-preferences.md` |
+| Allowed libraries / addons | `.claude/docs/technical-preferences.md` |
+| Naming conventions, coding standards | `.claude/docs/coding-standards.md` |
+| Architecture decisions (ADRs) | `docs/architecture/` |
+
+Store as `PROMOTE_CANDIDATES`: list of `{entry_text, source_shard, suggested_target}`.
+Suppress if none found — do not show an empty section in Phase 3.
+
 Display proposed mapping:
 ```
 Proposed shards → .claude/agent-memory/[AGENT]/shards/
@@ -161,33 +174,47 @@ Proposed shards → .claude/agent-memory/[AGENT]/shards/
 
 ---
 
-## Phase 3 — User Approval
+## Phase 3 — Plan Review & Approval
+
+Show the full plan in one block — shards and promotions together:
 
 ```
-AskUserQuestion:
-  prompt: "Proposed shard mapping above. Approve, or rename any shards?
-           Enter renames as 'old → new' (e.g. 'general.md → patterns.md'), comma-separated.
-           Press Enter to accept as-is:"
-  (free text)
-```
+══════════════════════════════════════════════════════
+SHARD PLAN — [AGENT]
+══════════════════════════════════════════════════════
 
-Apply any renames to the mapping.
-
-Show final plan:
-```
-Final shard plan:
-  shards/[file].md — [N] lines — "[## header summary]"
+Shards:
+  shards/[file].md — [N] lines — "[topic summary]"
+  shards/[file].md — [N] lines — "[topic summary]"  ⚠️ >150
   ...
 
-  MEMORY.md → rewritten as index ([~20] lines)
-  Original MEMORY.md → backed up to shards/_legacy-flat.md
+  MEMORY.md → rewritten as index (~[N] lines)
+  Backup    → shards/_legacy-flat.md
+
+[If PROMOTE_CANDIDATES not empty:]
+Promote to docs (removes from agent memory):
+  [1] "[entry text]"
+      from: shards/[source].md → to: [suggested target]
+  [2] "[entry text]"
+      from: shards/[source].md → to: [suggested target]
+  ...
+══════════════════════════════════════════════════════
 ```
 
 ```
 AskUserQuestion:
-  prompt: "Proceed with sharding?"
+  prompt: "Rename shards? Enter 'old → new', comma-separated (or Enter to skip).
+           Drop promotions? Enter numbers to keep in memory (or Enter to accept all shown):"
+  (free text — two optional inputs, one prompt)
+```
+
+Apply renames and any dropped promotions to the plan.
+
+```
+AskUserQuestion:
+  prompt: "Proceed — write shards and apply promotions?"
   options:
-    - "yes — write shards now"
+    - "yes — execute"
     - "no — abort"
 ```
 
@@ -216,6 +243,12 @@ for f in $SOURCE_FILES; do
   [ "$f" != "$AGENT_DIR/MEMORY.md" ] && rm "$f"
 done
 ```
+
+**Apply promotions** (approved entries from Phase 3 `PROMOTE_CANDIDATES`):
+
+For each promoted entry:
+1. Append to target doc file under an appropriate section header (create section if absent)
+2. Remove the entry from its source shard content before writing that shard
 
 **Write each shard file** at `.claude/agent-memory/[AGENT]/shards/[filename].md`:
 
@@ -276,57 +309,18 @@ If any shard exceeds 150 lines:
     Run /memory-shard [agent] again after review to restructure.
 ```
 
-Verdict: **SHARDING COMPLETE**
-
-Recommended: run `/memory-prune [agent]` to clean stale entries within each shard.
-
----
-
-## Phase 6 — Promote to Docs (Optional)
-
-Scan all written shard content for entries that are project-wide facts rather than
-agent-specific context. Skip this phase silently if no candidates found.
-
-**High-signal patterns:**
-
-| Pattern | Likely target |
-|---------|--------------|
-| Canonical / known file paths | `.claude/docs/technical-preferences.md` or new `canonical-paths.md` |
-| Forbidden patterns, banned APIs | `.claude/docs/technical-preferences.md` |
-| Allowed libraries / addons | `.claude/docs/technical-preferences.md` |
-| Naming conventions, coding standards | `.claude/docs/coding-standards.md` |
-| Architecture decisions (ADRs) | `docs/architecture/` |
-
-Display candidates (skip phase if none):
+If any shard exceeds 150 lines:
 ```
-Promotion candidates — project-wide facts found in [AGENT] shards:
-
-  shards/[file].md:
-    "[entry text]" → suggested: [target doc]
-  ...
-
-  [N] candidate(s). Promoting removes them from the shard.
+⚠️  [filename].md is [N] lines. Run /memory-shard [agent] again to sub-split.
 ```
 
-```
-AskUserQuestion:
-  prompt: "Promote entries to .claude/docs/? Removes them from agent memory (project-wide facts don't belong there)."
-  options:
-    - "yes — select entries to promote"
-    - "no — skip"
-```
-
-If yes: for each candidate, confirm target file (accept suggestion or enter path), then:
-1. Append the entry to the target doc file under an appropriate section header
-2. Remove the entry from its shard via Edit
-3. Update the shard's line count in the index if count changed materially
-
-Report:
+If promotions were applied:
 ```
 Promoted [N] entries:
   "[entry]" → [target doc]
   ...
-Shards updated. Shard sizes unchanged for entries not promoted.
 ```
 
-Verdict: **COMPLETE** (with or without promotions)
+Verdict: **COMPLETE**
+
+Recommended: run `/memory-prune [agent]` to clean stale entries within each shard.
