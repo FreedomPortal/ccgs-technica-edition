@@ -1,6 +1,6 @@
 ---
 name: memory-shard
-description: "Split a flat agent MEMORY.md into topic shards. Rewrites MEMORY.md as a lightweight index with inline loading instructions. Run when an agent's MEMORY.md exceeds ~150 lines."
+description: "Split a flat agent MEMORY.md into topic shards. Rewrites MEMORY.md as a lightweight index. Handles oversized shards via ### sub-splitting. Optionally promotes project-wide facts to .claude/docs/. Run when MEMORY.md exceeds ~150 lines or shards exceed 150 lines."
 argument-hint: "[agent-name]"
 user-invocable: true
 allowed-tools: Read, Write, Edit, Glob, Bash, AskUserQuestion
@@ -71,35 +71,44 @@ Count lines:
 wc -l < "$MEMORY_PATH" | tr -d ' '
 ```
 
-Parse `##` headers as natural topic boundaries. Each `##` header and its content
+Parse `##` headers as primary topic boundaries. Each `##` header and its content
 below (until the next `##` or EOF) is one candidate shard.
+
+**Oversized group handling**: If any `##` group exceeds 150 lines, parse its `###`
+sub-headers as split points — each `###` block becomes a separate shard candidate.
+If no `###` sub-headers exist in an oversized group, flag it for manual review.
 
 Display:
 ```
-[AGENT]/MEMORY.md — [N] lines
+[AGENT]/MEMORY.md — [N] lines  (or: [N] lines across [M] shard files)
 
 Detected topic groups:
   1. [## Header text] — [N] lines
-  2. [## Header text] — [N] lines
+  2. [## Header text] — 280 lines → sub-split by ### into:
+       2a. [### Sub-header] — [N] lines
+       2b. [### Sub-header] — [N] lines
+       2c. (ungrouped content) — [N] lines
+  3. [## Header text] — [N] lines
   ...
   [N]. Ungrouped entries (no header) — [N] lines
 ```
 
-If any group exceeds 150 lines, flag it:
+If an oversized group has no `###` sub-headers:
 ```
-  ⚠️  Group [N] ([header]) is [N] lines — will need a sub-split after sharding.
+  ⚠️  Group [N] ([header]) is [N] lines with no sub-headers — flag for manual split.
+      Shard will be written as-is; prune stale entries first to reduce size.
 ```
 
-Propose shard filename for each group: lowercase, hyphen-separated, no spaces.
-Example: "Skill Authoring Conventions" → `skills.md`; "Known Canonical Paths" → `paths.md`
+Propose shard filename for each group/sub-group: lowercase, hyphen-separated, no spaces.
+Example: "Skill Authoring Conventions" → `skills.md`; "### File Layout" within a group → `skills-layout.md`
 
 Display proposed mapping:
 ```
 Proposed shards → .claude/agent-memory/[AGENT]/shards/
 
-  [## Header]         → shards/[filename].md
-  [## Header]         → shards/[filename].md
-  [Ungrouped]         → shards/general.md
+  [## Header]              → shards/[filename].md
+  [## Header / ### Sub]    → shards/[filename].md
+  [Ungrouped]              → shards/general.md
 ```
 
 ---
@@ -209,3 +218,54 @@ If any shard exceeds 150 lines:
 Verdict: **SHARDING COMPLETE**
 
 Recommended: run `/memory-prune [agent]` to clean stale entries within each shard.
+
+---
+
+## Phase 6 — Promote to Docs (Optional)
+
+Scan all written shard content for entries that are project-wide facts rather than
+agent-specific context. Skip this phase silently if no candidates found.
+
+**High-signal patterns:**
+
+| Pattern | Likely target |
+|---------|--------------|
+| Canonical / known file paths | `.claude/docs/technical-preferences.md` or new `canonical-paths.md` |
+| Forbidden patterns, banned APIs | `.claude/docs/technical-preferences.md` |
+| Allowed libraries / addons | `.claude/docs/technical-preferences.md` |
+| Naming conventions, coding standards | `.claude/docs/coding-standards.md` |
+| Architecture decisions (ADRs) | `docs/architecture/` |
+
+Display candidates (skip phase if none):
+```
+Promotion candidates — project-wide facts found in [AGENT] shards:
+
+  shards/[file].md:
+    "[entry text]" → suggested: [target doc]
+  ...
+
+  [N] candidate(s). Promoting removes them from the shard.
+```
+
+```
+AskUserQuestion:
+  prompt: "Promote entries to .claude/docs/? Removes them from agent memory (project-wide facts don't belong there)."
+  options:
+    - "yes — select entries to promote"
+    - "no — skip"
+```
+
+If yes: for each candidate, confirm target file (accept suggestion or enter path), then:
+1. Append the entry to the target doc file under an appropriate section header
+2. Remove the entry from its shard via Edit
+3. Update the shard's line count in the index if count changed materially
+
+Report:
+```
+Promoted [N] entries:
+  "[entry]" → [target doc]
+  ...
+Shards updated. Shard sizes unchanged for entries not promoted.
+```
+
+Verdict: **COMPLETE** (with or without promotions)
