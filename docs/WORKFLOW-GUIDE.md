@@ -3,7 +3,7 @@
 > **How to go from zero to a shipped game using the Agent Architecture.**
 >
 > This guide walks you through every phase of game development using the
-> 49-agent system, 120 slash commands, and 15 automated hooks. It assumes you
+> 52-agent system, 120 slash commands, and 15 automated hooks. It assumes you
 > have Claude Code installed and are working from the project root.
 >
 > The pipeline has 9 stages. Each stage has a formal gate (`/gate-check`)
@@ -16,16 +16,18 @@
 
 1. [Quick Start](#quick-start)
 2. [Phase 1: Concept](#phase-1-concept)
-3. [Phase 2: Systems Design](#phase-2-systems-design)
-4. [Phase 3: Technical Setup](#phase-3-technical-setup)
-5. [Phase 4: Pre-Production](#phase-4-pre-production)
-6. [Phase 5: Production](#phase-5-production)
-7. [Phase 6: Polish](#phase-6-polish)
-8. [Phase 7: Release](#phase-7-release)
-9. [Cross-Cutting Concerns](#cross-cutting-concerns)
-10. [Appendix A: Agent Quick-Reference](#appendix-a-agent-quick-reference)
-11. [Appendix B: Slash Command Quick-Reference](#appendix-b-slash-command-quick-reference)
-12. [Appendix C: Common Workflows](#appendix-c-common-workflows)
+3. [Phase 2: Prototype](#phase-2-prototype)
+4. [Phase 3: Systems Design](#phase-3-systems-design)
+5. [Phase 4: Technical Setup](#phase-4-technical-setup)
+6. [Phase 5: Pre-Production](#phase-5-pre-production)
+7. [Phase 6: Vertical Slice](#phase-6-vertical-slice)
+8. [Phase 7: Production](#phase-7-production)
+9. [Phase 8: Polish](#phase-8-polish)
+10. [Phase 9: Release](#phase-9-release)
+11. [Cross-Cutting Concerns](#cross-cutting-concerns)
+12. [Appendix A: Agent Quick-Reference](#appendix-a-agent-quick-reference)
+13. [Appendix B: Slash Command Quick-Reference](#appendix-b-slash-command-quick-reference)
+14. [Appendix C: Common Workflows](#appendix-c-common-workflows)
 
 ---
 
@@ -277,7 +279,58 @@ risks. FAIL blocks advancement.
 
 ---
 
-## Phase 2: Systems Design
+## Phase 2: Prototype
+
+### What Happens in This Phase
+
+You build a throwaway concept prototype to validate the core idea is fun before investing in full design documentation. This is fast, disposable work — real architecture and naming conventions are not required. The question is: is the core mechanic worth building?
+
+### Phase 2 Pipeline
+
+```
+/prototype  -->  Play it  -->  PROCEED / PIVOT / KILL
+    |                               |
+    v                               v
+  Throwaway build             PROCEED: advance to Systems Design
+  prototypes/                 PIVOT: adjust concept, re-prototype
+  (isolated from src/)        KILL: return to /brainstorm
+```
+
+### Step 2.1: Build the Concept Prototype
+
+```
+/prototype
+```
+
+Or with a specific mechanic to validate:
+
+```
+/prototype "card-based movement system"
+```
+
+**What /prototype does:** Builds a fast, isolated proof-of-concept in `prototypes/`. Standards are intentionally relaxed for speed — no full architecture, no test suite, no data-driven values required. The prototype answers one question: is the core mechanic fun?
+
+**Verdict:** PROCEED / PIVOT / KILL.
+- **PROCEED** → move to Phase 3 (Systems Design). The concept prototype is archived, not thrown away — it becomes a reference.
+- **PIVOT** → adjust the concept and re-prototype. Return to `/brainstorm` if the pivot is significant.
+- **KILL** → the idea does not work. Return to `/brainstorm` with what you learned.
+
+**Note:** The concept prototype validates fun. The Vertical Slice (Phase 6) validates that you can build the full loop properly. They answer different questions.
+
+### Phase 2 Gate
+
+```
+/gate-check prototype
+```
+
+**Requirements to pass:**
+
+- At least one prototype exists in `prototypes/` with a README
+- Prototype has been played (PROCEED verdict recorded)
+
+---
+
+## Phase 3: Systems Design
 
 ### What Happens in This Phase
 
@@ -286,7 +339,7 @@ gets coded yet -- this is pure design. Each system identified in the systems
 index gets its own GDD, authored section by section, reviewed individually,
 and then all GDDs are cross-checked for consistency.
 
-### Phase 2 Pipeline
+### Phase 3 Pipeline
 
 ```
 /map-systems next  -->  /design-system  -->  /design-review
@@ -305,7 +358,7 @@ and then all GDDs are cross-checked for consistency.
   PASS / CONCERNS / FAIL
 ```
 
-### Step 2.1: Author System GDDs
+### Step 3.1: Author System GDDs
 
 Design each system in dependency order using the guided workflow:
 
@@ -349,7 +402,7 @@ You can also design a specific system directly:
 Plus a **Game Feel** section: feel reference, input responsiveness (ms/frames),
 animation feel targets (startup/active/recovery), impact moments, weight profile.
 
-### Step 2.2: Review Each GDD
+### Step 3.2: Review Each GDD
 
 Before the next system starts, validate the current one:
 
@@ -363,7 +416,7 @@ bidirectional dependencies, and testable acceptance criteria.
 **Verdict:** APPROVED / NEEDS REVISION / MAJOR REVISION. Only APPROVED GDDs
 should proceed.
 
-### Step 2.3: Small Changes Without Full GDDs
+### Step 3.3: Small Changes Without Full GDDs
 
 For tuning changes, small additions, or tweaks that do not warrant a full GDD:
 
@@ -374,7 +427,7 @@ For tuning changes, small additions, or tweaks that do not warrant a full GDD:
 This creates a lightweight spec in `design/quick-specs/` instead of a full
 8-section GDD. Use it for tuning, number changes, and small additions.
 
-### Step 2.4: Cross-GDD Consistency Review
+### Step 3.4: Cross-GDD Consistency Review
 
 After all MVP system GDDs are approved individually:
 
@@ -403,7 +456,7 @@ This reads ALL GDDs simultaneously and runs two analysis phases:
 
 **Output:** `design/gdd/gdd-cross-review-[date].md` with a verdict.
 
-### Step 2.5: Narrative Design (If Applicable)
+### Step 3.5: Narrative Design (If Applicable)
 
 If your game has story, lore, or dialogue, this is when you build it:
 
@@ -413,7 +466,7 @@ If your game has story, lore, or dialogue, this is when you build it:
    character arcs, and narrative beats
 3. **Character sheets** -- Use the `narrative-character-sheet.md` template
 
-### Phase 2 Gate
+### Phase 3 Gate
 
 ```
 /gate-check systems-design
@@ -428,7 +481,7 @@ If your game has story, lore, or dialogue, this is when you build it:
 
 ---
 
-## Phase 3: Technical Setup
+## Phase 4: Technical Setup
 
 ### What Happens in This Phase
 
@@ -436,7 +489,7 @@ You make key technical decisions, document them as Architecture Decision Records
 (ADRs), validate them through review, and produce a control manifest that
 gives programmers flat, actionable rules. You also establish UX foundations.
 
-### Phase 3 Pipeline
+### Phase 4 Pipeline
 
 ```
 /create-architecture  -->  /architecture-decision (x N)  -->  /architecture-review
@@ -460,7 +513,7 @@ gives programmers flat, actionable rules. You also establish UX foundations.
         Interaction pattern library
 ```
 
-### Step 3.1: Master Architecture Document
+### Step 4.1: Master Architecture Document
 
 ```
 /create-architecture
@@ -469,7 +522,7 @@ gives programmers flat, actionable rules. You also establish UX foundations.
 Creates the overarching architecture document in `docs/architecture/architecture.md`
 covering system boundaries, data flow, and integration points.
 
-### Step 3.2: Architecture Decision Records (ADRs)
+### Step 4.2: Architecture Decision Records (ADRs)
 
 For each significant technical decision:
 
@@ -499,7 +552,7 @@ project:
 This detects which template sections are missing and adds only those, never
 overwriting existing content.
 
-### Step 3.3: Architecture Review
+### Step 4.3: Architecture Review
 
 ```
 /architecture-review
@@ -511,7 +564,7 @@ Validates all ADRs together:
 - GDD Revision Flags (flags GDD sections that need updates based on ADR choices)
 - TR-ID registry maintenance (`docs/architecture/tr-registry.yaml`)
 
-### Step 3.4: Control Manifest
+### Step 4.4: Control Manifest
 
 ```
 /create-control-manifest
@@ -527,16 +580,16 @@ This contains Required patterns, Forbidden patterns, and Guardrails organized
 by code layer. Stories created later embed the manifest version date so
 staleness can be detected.
 
-### Step 3.5: Accessibility Requirements
+### Step 4.5: Accessibility Requirements
 
 Create `design/accessibility-requirements.md` using the template. Commit to a
 tier (Basic / Standard / Comprehensive / Exemplary) and fill the 4-axis feature
 matrix (visual, motor, cognitive, auditory).
 
-This document is required in Phase 3 because UX specs (written in Phase 4)
+This document is required in Phase 4 because UX specs (written in Phase 5)
 reference this tier — it is a design prerequisite, not a UX deliverable.
 
-### Phase 3 Gate
+### Phase 4 Gate
 
 ```
 /gate-check technical-setup
@@ -552,25 +605,24 @@ reference this tier — it is a design prerequisite, not a UX deliverable.
 
 ---
 
-## Phase 4: Pre-Production
+## Phase 5: Pre-Production
 
 ### What Happens in This Phase
 
 You lock art style templates for planned AI image generation, create UX specs
-for key screens, prototype risky mechanics, turn design documents into
-implementable stories, plan your first sprint, and build a Vertical Slice that
-proves the core loop is fun.
+for key screens, turn design documents into implementable stories, and plan
+your first sprint.
 
-### Phase 4 Pipeline
+### Phase 5 Pipeline
 
 ```
-/taste-gate  -->  /ux-design  -->  /vertical-slice  -->  /create-epics  -->  /create-stories  -->  /sprint-plan
-    |                   |                   |                   |                   |                       |
-    v                   v                   v                   v                   v                       v
-  Locked prompt     UX specs       Production-quality   Epic files in       Story files in          First sprint with
-  templates         design/ux/     end-to-end build     production/         production/             prioritized stories
-  design/art/                      in prototypes/       epics/*/EPIC.md     epics/*/story-*.md      production/sprints/
-  prompt-templates/                PROCEED/PIVOT/KILL   (one per module)    (one per behaviour)     sprint-*.md
+/taste-gate  -->  /ux-design  -->  /create-epics  -->  /create-stories  -->  /sprint-plan
+    |                   |                   |                   |                       |
+    v                   v                   v                   v                       v
+  Locked prompt     UX specs       Epic files in       Story files in          First sprint with
+  templates         design/ux/     production/         production/             prioritized stories
+  design/art/                      epics/*/EPIC.md     epics/*/story-*.md      production/sprints/
+  prompt-templates/                (one per module)    (one per behaviour)     sprint-*.md
   (per asset type)      |                                                        |
                         v                                                        v
                      /ux-review                                           /story-readiness
@@ -583,7 +635,7 @@ proves the core loop is fun.
                                                                             routes to right agent)
 ```
 
-### Step 4.1: UX Specs for Key Screens
+### Step 5.1: UX Specs for Key Screens
 
 Before writing epics, create UX specs so that story authors know what screens
 exist and what player interactions they must support.
@@ -599,7 +651,7 @@ Three modes: screen/flow, HUD, and interaction patterns. Output goes to
 `design/ux/`. Each spec includes: player need, layout zones, states,
 interaction map, data requirements, events fired, accessibility, localization.
 
-Reads your `accessibility-requirements.md` (written in Phase 3) and your
+Reads your `accessibility-requirements.md` (written in Phase 4) and your
 input method config from `technical-preferences.md` to drive accessibility
 and input coverage checks — no need to re-specify them per screen.
 
@@ -625,36 +677,7 @@ etc.) with animation and sound standards.
 Validates UX specs for GDD alignment and accessibility tier compliance.
 Produces APPROVED / NEEDS REVISION / MAJOR REVISION NEEDED verdict.
 
-### Step 4.2: Build the Vertical Slice
-
-The vertical slice is the production-quality proof that you can build the full
-game loop end-to-end before committing to full Production.
-
-```
-/vertical-slice
-```
-
-**What it proves:** Does a player, starting from nothing, experience the core
-fantasy within a few minutes, without developer guidance?
-
-**What it builds:** A near-production-quality playable build covering at least
-one complete [start → challenge → resolution] cycle. Uses real architecture
-layers, real naming conventions, no hardcoded values — but not final art or
-audio. This is not a throwaway like the concept prototype; it demonstrates
-production pipeline feasibility.
-
-**Note on concept prototyping:** If you ran `/prototype` in Phase 1 (Concept),
-you already validated the core idea is fun. The vertical slice now validates
-you can build it properly. They answer different questions. If you skipped the
-concept prototype, now is a reasonable time to run one first before investing
-in the full slice.
-
-**Verdict:** The vertical slice produces a PROCEED / PIVOT / KILL verdict.
-- **PROCEED** → move to Step 4.3 (epics and stories)
-- **PIVOT** → revise affected GDDs with `/design-system [mechanic]`, then re-run `/vertical-slice`
-- **KILL** → return to `/brainstorm` with what you learned
-
-### Step 4.3: Create Epics and Stories From Design Artifacts
+### Step 5.2: Create Epics and Stories From Design Artifacts
 
 ```
 /create-epics layer: foundation
@@ -675,7 +698,7 @@ implementable story files in `production/epics/[slug]/`. Each story embeds:
 Once stories exist, run `/dev-story [story-path]` to implement one — it routes
 automatically to the correct programmer agent.
 
-### Step 4.4: Validate Stories Before Pickup
+### Step 5.3: Validate Stories Before Pickup
 
 ```
 /story-readiness production/epics/combat/story-combat-damage-calc.md
@@ -684,7 +707,7 @@ automatically to the correct programmer agent.
 Checks: Design completeness, Architecture coverage, Scope clarity, Definition
 of Done. Verdict: READY / NEEDS WORK / BLOCKED.
 
-### Step 4.5: Effort Estimation
+### Step 5.4: Effort Estimation
 
 ```
 /estimate production/epics/combat/story-combat-damage-calc.md
@@ -692,7 +715,7 @@ of Done. Verdict: READY / NEEDS WORK / BLOCKED.
 
 Provides effort estimates with risk assessment.
 
-### Step 4.6: Plan Your First Sprint
+### Step 5.5: Plan Your First Sprint
 
 ```
 /sprint-plan new
@@ -705,19 +728,7 @@ Provides effort estimates with risk assessment.
 - Creates `production/sprints/sprint-01.md`
 - Populates `production/sprint-status.yaml` (machine-readable story tracking)
 
-### Step 4.7: Vertical Slice (Hard Gate)
-
-Before advancing to Production, you must build and playtest a Vertical Slice:
-
-- One complete end-to-end core loop, playable from start to finish
-- Representative quality (not placeholder everything)
-- Played unguided in at least 3 sessions
-- Playtest report written (`/playtest-report`)
-
-This is a **hard gate** -- `/gate-check` will auto-FAIL if a human has not
-played the build unguided.
-
-### Phase 4 Gate
+### Phase 5 Gate
 
 ```
 /gate-check pre-production
@@ -727,14 +738,71 @@ played the build unguided.
 
 - At least 1 UX spec reviewed in `design/ux/`
 - UX review completed (APPROVED or NEEDS REVISION with documented risks)
-- At least 1 prototype with README
 - Story files exist in `production/epics/[epic-slug]/`
 - At least 1 sprint plan exists
-- At least 1 playtest report exists (Vertical Slice played in 3+ sessions)
 
 ---
 
-## Phase 5: Production
+## Phase 6: Vertical Slice
+
+### What Happens in This Phase
+
+You build a production-quality, end-to-end playable build that proves the full core loop works before committing the whole team to Production. Unlike the concept prototype (Phase 2), this uses real architecture, real naming conventions, and no hardcoded values. It is not throwaway — it is the foundation Production builds on.
+
+### Phase 6 Pipeline
+
+```
+/vertical-slice  -->  Unguided playtesting (3+ sessions)  -->  PROCEED / PIVOT / KILL
+       |                                                              |
+       v                                                              v
+  Production-quality                                       PROCEED: advance to Production
+  end-to-end build                                         PIVOT: revise GDDs, re-slice
+  in prototypes/                                           KILL: return to /brainstorm
+  (real arch, real naming,
+   no hardcoded values)
+```
+
+### Step 6.1: Build the Vertical Slice
+
+```
+/vertical-slice
+```
+
+**What it proves:** Does a player, starting from nothing, experience the core fantasy within a few minutes, without developer guidance?
+
+**What it builds:** A near-production-quality playable build covering at least one complete [start → challenge → resolution] cycle. Uses real architecture layers, real naming conventions, no hardcoded values — but not final art or audio.
+
+**Verdict:** PROCEED / PIVOT / KILL.
+- **PROCEED** → move to Phase 7 (Production)
+- **PIVOT** → revise affected GDDs with `/design-system [mechanic]`, then re-run `/vertical-slice`
+- **KILL** → return to `/brainstorm` with what you learned
+
+### Step 6.2: Playtest the Vertical Slice
+
+Three unguided playtest sessions are required before the gate passes:
+
+```
+/playtest-report
+```
+
+Each session should cover a different player profile. The vertical slice is a **hard gate** — `/gate-check` will auto-FAIL if a human has not played the build unguided.
+
+### Phase 6 Gate
+
+```
+/gate-check vertical-slice
+```
+
+**Requirements to pass:**
+
+- Vertical slice build exists in `prototypes/` with a README
+- At least 3 unguided playtest sessions recorded
+- PROCEED verdict from playtest analysis
+- No confusion loops in playtest data
+
+---
+
+## Phase 7: Production
 
 ### What Happens in This Phase
 
@@ -743,7 +811,7 @@ implementing features story by story, tracking progress, and closing stories
 through a structured completion review. This phase repeats until your game
 is content-complete.
 
-### Phase 5 Pipeline (Per Sprint)
+### Phase 7 Pipeline (Per Sprint)
 
 ```
 /sprint-plan new  -->  /story-readiness  -->  implement  -->  /story-done
@@ -761,7 +829,7 @@ is content-complete.
   /retrospective  (at sprint end)
 ```
 
-### Step 5.1: The Story Lifecycle
+### Step 7.1: The Story Lifecycle
 
 The production phase centers on the **story lifecycle**:
 
@@ -810,7 +878,7 @@ This runs an 8-phase completion review:
 
 Tech debt discovered during review is logged to `docs/tech-debt-register.md`.
 
-### Step 5.2: Sprint Tracking
+### Step 7.2: Sprint Tracking
 
 Check progress anytime:
 
@@ -829,7 +897,7 @@ If scope is growing:
 This compares current scope against the original plan and flags scope increase,
 recommends cuts.
 
-### Step 5.3: Content Tracking
+### Step 7.3: Content Tracking
 
 ```
 /content-audit
@@ -838,7 +906,7 @@ recommends cuts.
 Compares GDD-specified content against what has been implemented. Catches
 content gaps early.
 
-### Step 5.4: Design Change Propagation
+### Step 7.4: Design Change Propagation
 
 When a GDD changes after stories have been created:
 
@@ -849,7 +917,7 @@ When a GDD changes after stories have been created:
 Git-diffs the GDD, finds affected ADRs, generates an impact report, and
 walks you through Superseded/update/keep decisions.
 
-### Step 5.5: Multi-System Features (Team Orchestration)
+### Step 7.5: Multi-System Features (Team Orchestration)
 
 For features spanning multiple domains, use team skills:
 
@@ -871,7 +939,7 @@ Each team skill coordinates a 6-phase collaborative workflow:
 
 The orchestration is automated, but **decision points stay with you**.
 
-### Step 5.6: Sprint Review and Next Sprint
+### Step 7.6: Sprint Review and Next Sprint
 
 At the end of a sprint:
 
@@ -887,7 +955,7 @@ Then plan the next sprint:
 /sprint-plan new
 ```
 
-### Step 5.7: Milestone Reviews
+### Step 7.7: Milestone Reviews
 
 At milestone checkpoints:
 
@@ -898,7 +966,7 @@ At milestone checkpoints:
 Produces feature completeness, quality metrics, risk assessment, and go/no-go
 recommendation.
 
-### Phase 5 Gate
+### Phase 7 Gate
 
 ```
 /gate-check production
@@ -913,14 +981,14 @@ recommendation.
 
 ---
 
-## Phase 6: Polish
+## Phase 8: Polish
 
 ### What Happens in This Phase
 
 Your game is feature-complete. Now you make it good. This phase focuses on
 performance, balance, accessibility, audio, visual polish, and playtesting.
 
-### Phase 6 Pipeline
+### Phase 8 Pipeline
 
 ```
 /perf-profile  -->  /balance-check  -->  /asset-audit  -->  /playtest-report (x3)
@@ -938,7 +1006,7 @@ performance, balance, accessibility, audio, visual polish, and playtesting.
   debt items       audio + UX + QA
 ```
 
-### Step 6.1: Performance Profiling
+### Step 8.1: Performance Profiling
 
 ```
 /perf-profile
@@ -949,7 +1017,7 @@ Guides you through structured performance profiling:
 - Identify bottlenecks ranked by impact
 - Generate actionable optimization tasks with code locations and expected gains
 
-### Step 6.2: Balance Analysis
+### Step 8.2: Balance Analysis
 
 ```
 /balance-check assets/data/combat_damage.json
@@ -958,7 +1026,7 @@ Guides you through structured performance profiling:
 Analyzes balance data for statistical outliers, broken progression curves,
 degenerate strategies, and economy imbalances.
 
-### Step 6.3: Asset Audit
+### Step 8.3: Asset Audit
 
 ```
 /asset-audit
@@ -967,7 +1035,7 @@ degenerate strategies, and economy imbalances.
 Verifies naming conventions, file format standards, and size budgets across
 all assets.
 
-### Step 6.4: Playtesting (Required: 3 Sessions)
+### Step 8.4: Playtesting (Required: 3 Sessions)
 
 ```
 /playtest-report
@@ -978,7 +1046,7 @@ Generates structured playtest reports. Three sessions are required, covering:
 - Mid-game systems
 - Difficulty curve
 
-### Step 6.5: Technical Debt Assessment
+### Step 8.5: Technical Debt Assessment
 
 ```
 /tech-debt
@@ -987,7 +1055,7 @@ Generates structured playtest reports. Three sessions are required, covering:
 Scans for TODO/FIXME/HACK comments, code duplication, overly complex functions,
 missing tests, and outdated dependencies. Each item categorized and prioritized.
 
-### Step 6.6: Coordinated Polish Pass
+### Step 8.6: Coordinated Polish Pass
 
 ```
 /team-polish "combat system"
@@ -1001,7 +1069,7 @@ Coordinates 4 specialists in parallel:
 
 You set priorities; the team executes with your approval at each step.
 
-### Step 6.7: Localization and Accessibility
+### Step 8.7: Localization and Accessibility
 
 ```
 /localize src/
@@ -1010,10 +1078,10 @@ You set priorities; the team executes with your approval at each step.
 Scans for hardcoded strings, concatenation that breaks translation, text that
 does not account for expansion, and missing locale files.
 
-Accessibility is audited against the tier committed in Phase 3's accessibility
+Accessibility is audited against the tier committed in Phase 4's accessibility
 requirements document.
 
-### Phase 6 Gate
+### Phase 8 Gate
 
 ```
 /gate-check polish
@@ -1028,13 +1096,13 @@ requirements document.
 
 ---
 
-## Phase 7: Release
+## Phase 9: Release
 
 ### What Happens in This Phase
 
 Your game is polished, tested, and ready. Now you ship it.
 
-### Phase 7 Pipeline
+### Phase 9 Pipeline
 
 ```
 /release-checklist  -->  /launch-checklist  -->  /team-release
@@ -1047,7 +1115,7 @@ Your game is polished, tested, and ready. Now you ship it.
                     Also: /changelog, /patch-notes, /hotfix
 ```
 
-### Step 7.1: Release Checklist
+### Step 9.1: Release Checklist
 
 ```
 /release-checklist v1.0.0
@@ -1061,7 +1129,7 @@ Generates a comprehensive pre-release checklist covering:
 - Save game compatibility
 - Analytics verification
 
-### Step 7.2: Launch Readiness (Full Validation)
+### Step 9.2: Launch Readiness (Full Validation)
 
 ```
 /launch-checklist
@@ -1087,7 +1155,7 @@ Complete cross-department validation:
 
 Each item gets a **Go / No-Go** status. All must be Go to ship.
 
-### Step 7.3: Generate Player-Facing Content
+### Step 9.3: Generate Player-Facing Content
 
 ```
 /patch-notes v1.0.0
@@ -1102,7 +1170,7 @@ Translates developer language into player language.
 
 Generates an internal changelog (more technical, for the team).
 
-### Step 7.4: Coordinate the Release
+### Step 9.4: Coordinate the Release
 
 ```
 /team-release
@@ -1115,7 +1183,7 @@ Coordinates release-manager, QA, and DevOps through:
 4. Deployment preparation
 5. Go/No-Go decision
 
-### Step 7.5: Ship
+### Step 9.5: Ship
 
 The `validate-push` hook will warn you when pushing to `main` or `develop`.
 This is intentional -- release pushes should be deliberate:
@@ -1125,7 +1193,7 @@ git tag v1.0.0
 git push origin main --tags
 ```
 
-### Step 7.6: Post-Launch
+### Step 9.6: Post-Launch
 
 **Hotfix workflow** for critical production bugs:
 
@@ -1153,7 +1221,7 @@ These topics apply across all phases.
 
 ### Demo Track
 
-The demo track runs **in parallel** with the main pipeline — it is not a stage. You can launch a demo campaign at Production (stage 7) or Polish (stage 8).
+The demo track runs **in parallel** with the main pipeline — it is not a stage. You can launch a demo campaign at Production (stage 7) or Polish (stage 8), referring to Phase 7 and Phase 8 respectively.
 
 **Multiple campaigns can be active simultaneously.** Each campaign has its own ID (e.g., `steam-next-fest-2026-10`, `always-on-store-demo`) and its own state file at `production/demo/[id]/state.txt`.
 
@@ -1411,6 +1479,9 @@ Reads existing code and generates GDD-format design documentation from it.
 | Prototype quickly | `prototyper` | 3 |
 | Audit security | `security-engineer` | 3 |
 | Communicate with players | `community-manager` | 3 |
+| Plan and run publishing | `publishing-manager` | Director |
+| Build pipeline tools | `game-pipeline-developer` | 3 |
+| Execute string localization | `localization-specialist` | 3 |
 | Godot-specific help | `godot-specialist` | 3 |
 | GDScript-specific help | `godot-gdscript-specialist` | 3 |
 | Godot C# code | `godot-csharp-specialist` | 3 |
@@ -1430,7 +1501,7 @@ Reads existing code and generates GDD-format design documentation from it.
 ### Agent Hierarchy
 
 ```
-                    creative-director / technical-director / producer
+                    creative-director / technical-director / producer / publishing-manager
                                          |
           ---------------------------------------------------------------
           |            |           |           |          |        |       |
@@ -1438,9 +1509,13 @@ Reads existing code and generates GDD-format design documentation from it.
           |            |           |           |          |        |        |
      specialists  programmers  tech-art  snd-design  writer   qa-tester  devops
      (systems,    (gameplay,             (sound)     (world-  (perf,     (analytics,
-      economy,     engine,                           builder)  access.)   security)
-      level)       ai, net,
-                   ui, tools)
+      economy,     engine,                           builder)  access.)   security,
+      level)       ai, net,                                               game-pipeline-
+                   ui, tools)                                             developer)
+
+    localization-lead
+          |
+    localization-specialist
 ```
 
 **Escalation rule:** If two agents disagree, go up. Design conflicts go to
@@ -1453,7 +1528,7 @@ conflicts go to `producer`.
 
 ### All 120 Commands by Category
 
-#### Onboarding and Navigation (11)
+#### Onboarding and Navigation (13)
 
 | Command | Purpose | Phase |
 |---------|---------|-------|
@@ -1468,6 +1543,8 @@ conflicts go to `producer`.
 | `/autosave-mode` | Configure crash-protection level: off / remind / enforce | Any |
 | `/setup-tool` | Configure a standalone pipeline tool project | Any |
 | `/log-lesson` | Encode a lesson from review or playtest feedback into writing-lessons.md | Any |
+| `/memory-shard` | Split agent memory file into topic shards when it exceeds ~150 lines | Any |
+| `/memory-prune` | Remove stale forward-looking entries from agent memory and active.md | Any |
 
 #### Game Design (6)
 
