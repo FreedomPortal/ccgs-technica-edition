@@ -2,24 +2,6 @@
 
 When authoring or editing files in this directory, follow these standards.
 
-## WORKFLOW-GUIDE.md — Living Document (Must Stay Current)
-
-`docs/WORKFLOW-GUIDE.md` is the canonical end-user guide for the full 9-stage pipeline.
-**Update it whenever any of the following change:**
-
-| Change | What to update in the guide |
-|--------|----------------------------|
-| New skill added | Add to correct Appendix B category; update section count and total |
-| Skill removed | Remove from Appendix B |
-| New agent added | Add to Appendix A lookup table and hierarchy diagram |
-| Hook added/removed | Update hook table in Cross-Cutting Concerns; update count in header |
-| Pipeline stage added/renamed | Update Table of Contents, add/rename phase section, update gate-check list |
-| Agent count changes | Update header: "52-agent system" |
-| Skill count changes | Update header: "120 slash commands" and Appendix B title |
-| Hook count changes | Update header: "15 automated hooks" and hook table intro |
-
-This file is easy to miss because it lives in `docs/` with no auto-generation.
-**Treat it as documentation debt if skipped.**
 
 ## Architecture Decision Records (`docs/architecture/`)
 
