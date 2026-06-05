@@ -56,7 +56,7 @@ in the story file.
 Transform story acceptance criteria into verifiable implementation goals:
 
 - "Implement [mechanic]" → "Write the test first, then make it pass"
-- "Fix the bug" → "Write a test that reproduces it, then make it pass"
+- "Fix the bug" → "Write a test that reproduces it, then make it pass — if root cause is unclear after writing the reproducing test, stop thrashing and run `/diagnose` instead"
 - "Add validation" → "Write tests for invalid inputs, then make them pass"
 
 For multi-step implementation, state a brief plan before coding:
