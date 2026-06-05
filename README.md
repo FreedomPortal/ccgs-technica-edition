@@ -15,20 +15,14 @@
   <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-14-orange" alt="14 Hooks"></a>
   <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-15-red" alt="15 Rules"></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
-  <br />
   <a href="https://wise.com/pay/me/wams1"><img src="https://img.shields.io/badge/Wise-Support%20this%20project-9FE870?logo=wise&logoColor=white" alt="Wise"></a>
 </p>
 
 ---
 
-> _**Fork of:** [CCGS — Claude Code Game Studios](https://github.com/Donchitos/Claude-Code-Game-Studios) by Donchitos - MIT License (fork — original copyright retained)_
+> _**Fork of:** [CCGS — Claude Code Game Studios](https://github.com/Donchitos/Claude-Code-Game-Studios) by Donchitos - MIT License (original copyright retained)_
 >
-> _**CCGS base version:** v1.0.0 stable release (2026/05/14) _
->
-> _**Maintained by:** FreedomPortal (Technica Games)_
-
-
-<br />
+> _**CCGS base version:** v1.0.0 stable release (2026/05/14) - **Technica Edition:** Maintained by FreedomPortal (Technica Games)_
 
 ## What Is CCGS:TE?
 
