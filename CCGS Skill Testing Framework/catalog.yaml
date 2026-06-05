@@ -666,7 +666,8 @@ skills:
     category: utility
 
   - name: launch-checklist
-    spec: CCGS Skill Testing Framework/skills/utility/launch-checklist.md
+    spec: CCGS Skill Testing Framework/skills/publish/launch-checklist.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -677,7 +678,8 @@ skills:
     category: utility
 
   - name: release-checklist
-    spec: CCGS Skill Testing Framework/skills/utility/release-checklist.md
+    spec: CCGS Skill Testing Framework/skills/publish/release-checklist.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -787,7 +789,8 @@ skills:
     category: utility
 
   - name: day-one-patch
-    spec: CCGS Skill Testing Framework/skills/utility/day-one-patch.md
+    spec: CCGS Skill Testing Framework/skills/publish/day-one-patch.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -844,7 +847,8 @@ skills:
 
   # CCGS:TE additions — Publishing & Go-To-Market
   - name: publish-check
-    spec: CCGS Skill Testing Framework/skills/utility/publish-check.md
+    spec: CCGS Skill Testing Framework/skills/publish/publish-check.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -855,7 +859,8 @@ skills:
     category: utility
 
   - name: marketing-plan
-    spec: CCGS Skill Testing Framework/skills/utility/marketing-plan.md
+    spec: CCGS Skill Testing Framework/skills/publish/marketing-plan.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -866,7 +871,8 @@ skills:
     category: utility
 
   - name: community-plan
-    spec: CCGS Skill Testing Framework/skills/utility/community-plan.md
+    spec: CCGS Skill Testing Framework/skills/publish/community-plan.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -888,7 +894,8 @@ skills:
     category: utility
 
   - name: press-outreach
-    spec: CCGS Skill Testing Framework/skills/utility/press-outreach.md
+    spec: CCGS Skill Testing Framework/skills/publish/press-outreach.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -899,7 +906,7 @@ skills:
     category: utility
 
   - name: export-steam-page
-    spec: CCGS Skill Testing Framework/skills/export/export-steam-page.md
+    spec: CCGS Skill Testing Framework/skills/publish/export-steam-page.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -907,10 +914,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: export
+    category: publish
 
   - name: export-devlog
-    spec: CCGS Skill Testing Framework/skills/export/export-devlog.md
+    spec: CCGS Skill Testing Framework/skills/publish/export-devlog.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -918,10 +925,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: export
+    category: publish
 
   - name: export-social
-    spec: CCGS Skill Testing Framework/skills/export/export-social.md
+    spec: CCGS Skill Testing Framework/skills/publish/export-social.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -929,10 +936,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: export
+    category: publish
 
   - name: export-pitch
-    spec: CCGS Skill Testing Framework/skills/export/export-pitch.md
+    spec: CCGS Skill Testing Framework/skills/publish/export-pitch.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -940,10 +947,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: export
+    category: publish
 
   - name: export-review
-    spec: CCGS Skill Testing Framework/skills/export/export-review.md
+    spec: CCGS Skill Testing Framework/skills/publish/export-review.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -951,10 +958,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: export
+    category: publish
 
   - name: export-crowdfunding
-    spec: CCGS Skill Testing Framework/skills/export/export-crowdfunding.md
+    spec: CCGS Skill Testing Framework/skills/publish/export-crowdfunding.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -962,10 +969,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: export
+    category: publish
 
   - name: export-build
-    spec: CCGS Skill Testing Framework/skills/export/export-build.md
+    spec: CCGS Skill Testing Framework/skills/publish/export-build.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -973,10 +980,11 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: export
+    category: publish
 
   - name: refine-copy
-    spec: CCGS Skill Testing Framework/skills/utility/refine-copy.md
+    spec: CCGS Skill Testing Framework/skills/publish/refine-copy.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1010,7 +1018,8 @@ skills:
 
   # CCGS:TE additions — Post-Launch Lifecycle
   - name: live-ops-plan
-    spec: CCGS Skill Testing Framework/skills/utility/live-ops-plan.md
+    spec: CCGS Skill Testing Framework/skills/publish/live-ops-plan.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1021,7 +1030,8 @@ skills:
     category: utility
 
   - name: dlc-design
-    spec: CCGS Skill Testing Framework/skills/utility/dlc-design.md
+    spec: CCGS Skill Testing Framework/skills/publish/dlc-design.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""

@@ -44,8 +44,11 @@ sprint      → sprint-plan, sprint-status, milestone-review, retrospective,
               changelog, patch-notes
 demo        → demo-build, demo-feedback, demo-gate, demo-integrate, demo-iterate,
               demo-plan, demo-playtest, demo-polish, demo-scope, demo-status
-export      → export-build, export-crowdfunding, export-devlog, export-localization,
-              export-marketing, export-presskit, export-roadmap
+publish     → export-build, export-crowdfunding, export-devlog, export-pitch,
+              export-review, export-social, export-steam-page,
+              community-plan, day-one-patch, dlc-design, launch-checklist,
+              live-ops-plan, marketing-plan, press-outreach, publish-check,
+              refine-copy, release-checklist
 localization → localization-audit, localization-export, localization-import,
               localization-review, localization-setup, localization-sync,
               localization-test
