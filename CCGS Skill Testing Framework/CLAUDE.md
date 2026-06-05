@@ -42,7 +42,14 @@ team        → team-combat, team-narrative, team-audio, team-level, team-ui,
               team-qa, team-release, team-polish, team-live-ops
 sprint      → sprint-plan, sprint-status, milestone-review, retrospective,
               changelog, patch-notes
-utility     → all remaining skills
+demo        → demo-build, demo-feedback, demo-gate, demo-integrate, demo-iterate,
+              demo-plan, demo-playtest, demo-polish, demo-scope, demo-status
+export      → export-build, export-crowdfunding, export-devlog, export-localization,
+              export-marketing, export-presskit, export-roadmap
+localization → localization-audit, localization-export, localization-import,
+              localization-review, localization-setup, localization-sync,
+              localization-test
+utility     → all remaining skills (ccgs-merge, memory-shard, onboard, etc.)
 ```
 
 ## Agent tiers
