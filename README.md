@@ -11,8 +11,8 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
   <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-52-blueviolet" alt="52 Agents"></a>
-  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-118-green" alt="118 Skills"></a>
-  <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-14-orange" alt="14 Hooks"></a>
+  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-120-green" alt="120 Skills"></a>
+  <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-15-orange" alt="15 Hooks"></a>
   <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-15-red" alt="15 Rules"></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
   <a href="https://wise.com/pay/me/wams1"><img src="https://img.shields.io/badge/Wise-Support%20this%20project-9FE870?logo=wise&logoColor=white" alt="Wise"></a>
@@ -50,7 +50,7 @@ The result: CCGS covers *Build → Ship* —  CCGS:TE covers *Build → Ship →
 ## Table of Contents
 - [New Agents](#new-agents)
 - [New Skills](#new-skills)
-- [New Hook](#new-hook)
+- [New Hooks](#new-hooks)
 - [Workflow Changes](#workflow-changes)
 - [Pipeline Integration](#pipeline-integration)
 - [Roadmap](#roadmap)
@@ -182,7 +182,26 @@ For Early Access: add `--early-access` to `/demo-plan` and `/demo-build`. Two ad
 
 ---
 
+### Coding Agent Tools
+
+Skills that improve how coding agents understand and debug code. Engine-aware: detect the active engine from `technical-preferences.md` and apply Godot, Unity, or Unreal heuristics.
+
+| Skill | Purpose |
+|-------|---------|
+| `/code-recon` | Map the full dependency footprint of a file or system before touching it — callers, callees, signals/events/delegates, scene/prefab refs, global singletons. Read-only. Produces a map, makes no changes. |
+| `/diagnose` | Structured 6-phase debugging workflow: establish a fast feedback loop (hard gate) → reproduce → hypothesize → instrument → fix + regression test → cleanup + post-mortem. Prevents thrashing on non-obvious bugs. |
+
+---
+
 ## New Hooks
+
+### `git-guardrails.sh`
+**Event:** `PreToolUse` (Bash)
+**Function:** Blocks destructive git commands before they execute — `reset --hard`, `push --force/-f`, `clean -f`, `branch -D`, and bare `checkout --`. Each block explains the danger, offers a safe alternative, and shows the user how to bypass with `! <command>` if they have confirmed intent. Warn-only for single-file `checkout -- <file>`.
+
+This hook turns the `workflow.md` git safety guidance from documentation into enforcement.
+
+---
 
 ### `memory-checkpoint.sh`
 **Event:** `PostToolUse` (Write \| Edit)
@@ -233,16 +252,32 @@ Configure the enforcement level with `/autosave-mode` (or set at onboarding via 
 
 ---
 
-### Status Line: Rate Limit Awareness
+### Domain Glossary (`docs/CONTEXT.md`)
 
-`statusline.sh` upgraded to a dual-line display that surfaces token pressure before it hits:
+A living vocabulary file at `docs/CONTEXT.md` — canonical names for game concepts, systems, entities, and UI elements, distinct from GDDs (which are mechanics specs). Its sole purpose is preventing naming drift across sessions and agents.
+
+- **Coding agents:** Read it before implementing in any system. Use canonical terms only — do not invent synonyms.
+- **Design agents:** When a GDD introduces new terminology, add it to `docs/CONTEXT.md` immediately — do not defer.
+- **All agents:** If a term conflict exists between code and CONTEXT.md, flag it before proceeding.
+
+`docs/CONTEXT.md` ships as a template with five sections: Core Game Concepts, Systems Vocabulary, Character/Entity Names, UI Terminology, and Forbidden Aliases. It stays empty until the game concept is established and fills as design matures.
+
+---
+
+### Status Line: Rate Limit Awareness + Sprint Tracking
+
+`statusline.sh` upgraded to a dual-line display that surfaces token pressure and sprint context:
 
 ```
 🤖 Claude Haiku 4.5 | ctx: 42% | 5h: 61% 1h 20m | 7d: 38% 4d 2h | my-game (main)
-🎯 Production | Combat System > Melee Combat > Hitbox detection
+🎯 Production | Sprint 3 | Combat System > Melee Combat > Hitbox detection
 ```
 
-New segments: `5h` (5-hour rate limit %) and `7d` (7-day rate limit %) with relative reset countdowns. All three percentage indicators are color-coded: green < 50%, yellow 50–79%, red ≥ 80%. Also added: repo name + current branch in the first line.
+New segments:
+- `5h` / `7d` — rate limit percentage and relative reset countdown
+- `Sprint N` — current sprint number from `production/sprint-status.yaml`, shown for Pre-Production through Release stages
+- Color coding on all three percentage indicators: green < 50%, yellow 50–79%, red ≥ 80%
+- Repo name + current branch in the first line
 
 ---
 
@@ -425,3 +460,7 @@ Original repository: https://github.com/jpeggdev/humanize-writing
 The `coding-agent-behavior` rules is adapted from **andrej-karpathy-skills** by **multica-ai**, licensed under MIT.
 
 Original repository: https://github.com/multica-ai/andrej-karpathy-skills
+
+The `/diagnose` and `/code-recon` skills are adapted from **skills** by **mattpocock**, licensed under MIT.
+
+Original repository: https://github.com/mattpocock/skills
