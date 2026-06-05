@@ -660,7 +660,8 @@ skills:
     category: utility
 
   - name: localize
-    spec: CCGS Skill Testing Framework/skills/utility/localize.md
+    spec: CCGS Skill Testing Framework/skills/localization/localize.md
+    category: localization
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1053,7 +1054,8 @@ skills:
     category: utility
 
   - name: mod-support
-    spec: CCGS Skill Testing Framework/skills/utility/mod-support.md
+    spec: CCGS Skill Testing Framework/skills/authoring/mod-support.md
+    category: authoring
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1064,7 +1066,8 @@ skills:
     category: utility
 
   - name: monetization-design
-    spec: CCGS Skill Testing Framework/skills/utility/monetization-design.md
+    spec: CCGS Skill Testing Framework/skills/publish/monetization-design.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1086,7 +1089,8 @@ skills:
     category: sprint
 
   - name: taste-gate
-    spec: CCGS Skill Testing Framework/skills/utility/taste-gate.md
+    spec: CCGS Skill Testing Framework/skills/gate/taste-gate.md
+    category: gate
     last_static: ""
     last_static_result: ""
     last_spec: ""
