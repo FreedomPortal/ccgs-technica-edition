@@ -11,9 +11,9 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
   <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-52-blueviolet" alt="52 Agents"></a>
-  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-114-green" alt="114 Skills"></a>
+  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-118-green" alt="118 Skills"></a>
   <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-14-orange" alt="14 Hooks"></a>
-  <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-13-red" alt="13 Rules"></a>
+  <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-15-red" alt="15 Rules"></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
   <br />
   <a href="https://wise.com/pay/me/wams1"><img src="https://img.shields.io/badge/Wise-Support%20this%20project-9FE870?logo=wise&logoColor=white" alt="Wise"></a>
@@ -21,23 +21,18 @@
 
 ---
 
-> _**Fork of:** [CCGS — Claude Code Game Studios](https://github.com/Donchitos/Claude-Code-Game-Studios) by Donchitos_
+> _**Fork of:** [CCGS — Claude Code Game Studios](https://github.com/Donchitos/Claude-Code-Game-Studios) by Donchitos - MIT License (fork — original copyright retained)_
 >
-> _**CCGS base version:** v1.0.0 stable release (2026/05/14)_
->
-> _**License:** MIT (fork — original copyright retained)_
+> _**CCGS base version:** v1.0.0 stable release (2026/05/14) _
 >
 > _**Maintained by:** FreedomPortal (Technica Games)_
->
-> _**Edition:** Technica Edition (CCGS:TE)_
+
 
 <br />
 
 ## What Is CCGS:TE?
 
-CCGS is a Claude Code agent framework for game development — 48+ specialized AI agents organized as a studio hierarchy, coordinated around a 7-stage production pipeline.
-
-The base framework covers everything from concept to release. What it doesn't cover is what comes after you ship, or what you need to reach players in the first place.
+CCGS is a Claude Code agent framework for game development — 48+ specialized AI agents organized as a studio hierarchy, coordinated around a 7-stage production pipeline. The base framework covers everything from concept to release. What it doesn't cover is what comes after you ship, or what you need to reach players in the first place.
 
 CCGS:TE is a fork that extends the base framework in three directions and expand the pipeline to 9 stages, covering real world game development business life cycle:
 
@@ -100,6 +95,7 @@ Handles localization execution under `localization-lead` direction. String wrapp
 | `/setup-tool` | Configure a standalone tool project — creates `TOOL_SPEC.md`, routes to `game-pipeline-developer` |
 | `/continue` | Read session state and agent memory; present a brief so you pick up immediately where you left off |
 | `/checkpoint` | Flush session discoveries to agent memory files — call proactively before crashes or `/clear` |
+| `/memory-shard` | Split an agent's flat `MEMORY.md` into topic shards — run when any agent's memory exceeds ~150 lines |
 | `/memory-prune` | Remove stale forward-looking entries from agent memory and session state — run at sprint boundaries or before `/gate-check` and `/architecture-review` |
 | `/autosave-mode` | Configure crash-protection level for long tasks: `off` / `remind` / `enforce` — set once per project, survives sessions |
 | `/log-lesson` | Encode a lesson from external review, playtesting, or press feedback into `production/publishing/writing-lessons.md` |
@@ -417,6 +413,7 @@ Path is saved to `.claude/ccgs-merge-paths.txt` (machine-local, gitignored) for 
 -   **Session Flow:**  Always end a session using  `/checkpoint`  to save the state. Resume work later using  `claude /continue`  to restore the context.
 -   **Planning:**  Use  `/next`  to prompt the agent to analyze the current state and determine the optimal next action.
 -   **Crash Protection:**  Run `/autosave-mode` once per project to set your protection level. Use `enforce` on unstable machines or during long multi-agent reviews. Drafts accumulate in `production/session-state/drafts/` and can be safely deleted after each session.
+-   **Memory Hygiene:**  When an agent's `MEMORY.md` grows past ~150 lines, run `/memory-shard [agent]` to split it into topic shards — agents then load only what's relevant. At sprint boundaries or before `/gate-check`, run `/memory-prune [agent]` to remove stale forward-looking entries that would otherwise cause false blockers.
 ---
 
 ## Attribution
