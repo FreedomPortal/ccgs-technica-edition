@@ -31,18 +31,35 @@ Always read it rather than guessing the path.
 gate        → gate-check
 review      → design-review, architecture-review, review-all-gdds
 authoring   → design-system, quick-design, architecture-decision, art-bible,
-              create-architecture, ux-design, ux-review
+              create-architecture, ux-design, ux-review, brainstorm, asset-spec,
+              mod-support
 readiness   → story-readiness, story-done
 pipeline    → create-epics, create-stories, dev-story, create-control-manifest,
-              propagate-design-change, map-systems
+              propagate-design-change, map-systems, prototype, reverse-document,
+              analytics-setup, test-setup
 analysis    → consistency-check, balance-check, content-audit, code-review,
               tech-debt, scope-check, estimate, perf-profile, asset-audit,
               security-audit, test-evidence-review, test-flakiness
+qa          → bug-report, bug-triage, qa-plan, regression-suite, smoke-check,
+              soak-test, test-helpers, playtest-report
 team        → team-combat, team-narrative, team-audio, team-level, team-ui,
               team-qa, team-release, team-polish, team-live-ops
 sprint      → sprint-plan, sprint-status, milestone-review, retrospective,
               changelog, patch-notes
-utility     → all remaining skills
+demo        → demo-build, demo-feedback, demo-gate, demo-integrate, demo-iterate,
+              demo-plan, demo-playtest, demo-polish, demo-scope, demo-status
+publish     → export-build, export-crowdfunding, export-devlog, export-pitch,
+              export-review, export-social, export-steam-page,
+              community-plan, day-one-patch, dlc-design, launch-checklist,
+              live-ops-plan, marketing-plan, press-outreach, publish-check,
+              refine-copy, release-checklist
+localization → localization-audit, localization-export, localization-import,
+              localization-review, localization-setup, localization-sync,
+              localization-test
+workflow    → start, onboard, setup-engine, adopt, continue, next, checkpoint,
+              autosave-mode, project-stage-detect, log-lesson, memory-prune,
+              memory-shard
+utility     → ccgs-merge, hotfix, skill-improve, skill-test
 ```
 
 ## Agent tiers

@@ -4,10 +4,10 @@ skills:
   # Critical — gate skills that control phase transitions
   - name: gate-check
     spec: CCGS Skill Testing Framework/skills/gate/gate-check.md
-    last_static: ""
-    last_static_result: ""
-    last_spec: ""
-    last_spec_result: ""
+    last_static: "2026-06-05"
+    last_static_result: "COMPLIANT"
+    last_spec: "2026-06-05"
+    last_spec_result: "PARTIAL"
     last_category: ""
     last_category_result: ""
     priority: critical
@@ -314,7 +314,8 @@ skills:
     category: utility
 
   - name: start
-    spec: CCGS Skill Testing Framework/skills/utility/start.md
+    spec: CCGS Skill Testing Framework/skills/workflow/start.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -325,7 +326,8 @@ skills:
     category: utility
 
   - name: next
-    spec: CCGS Skill Testing Framework/skills/utility/next.md
+    spec: CCGS Skill Testing Framework/skills/workflow/next.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -336,7 +338,8 @@ skills:
     category: utility
 
   - name: brainstorm
-    spec: CCGS Skill Testing Framework/skills/utility/brainstorm.md
+    spec: CCGS Skill Testing Framework/skills/authoring/brainstorm.md
+    category: authoring
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -347,7 +350,8 @@ skills:
     category: utility
 
   - name: project-stage-detect
-    spec: CCGS Skill Testing Framework/skills/utility/project-stage-detect.md
+    spec: CCGS Skill Testing Framework/skills/workflow/project-stage-detect.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -358,7 +362,8 @@ skills:
     category: utility
 
   - name: setup-engine
-    spec: CCGS Skill Testing Framework/skills/utility/setup-engine.md
+    spec: CCGS Skill Testing Framework/skills/workflow/setup-engine.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -545,7 +550,8 @@ skills:
     category: analysis
 
   - name: reverse-document
-    spec: CCGS Skill Testing Framework/skills/utility/reverse-document.md
+    spec: CCGS Skill Testing Framework/skills/pipeline/reverse-document.md
+    category: pipeline
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -556,7 +562,8 @@ skills:
     category: utility
 
   - name: bug-report
-    spec: CCGS Skill Testing Framework/skills/utility/bug-report.md
+    spec: CCGS Skill Testing Framework/skills/qa/bug-report.md
+    category: qa
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -578,7 +585,8 @@ skills:
     category: utility
 
   - name: prototype
-    spec: CCGS Skill Testing Framework/skills/utility/prototype.md
+    spec: CCGS Skill Testing Framework/skills/pipeline/prototype.md
+    category: pipeline
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -589,7 +597,8 @@ skills:
     category: utility
 
   - name: playtest-report
-    spec: CCGS Skill Testing Framework/skills/utility/playtest-report.md
+    spec: CCGS Skill Testing Framework/skills/qa/playtest-report.md
+    category: qa
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -644,7 +653,8 @@ skills:
     category: sprint
 
   - name: onboard
-    spec: CCGS Skill Testing Framework/skills/utility/onboard.md
+    spec: CCGS Skill Testing Framework/skills/workflow/onboard.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -655,7 +665,8 @@ skills:
     category: utility
 
   - name: localize
-    spec: CCGS Skill Testing Framework/skills/utility/localize.md
+    spec: CCGS Skill Testing Framework/skills/localization/localize.md
+    category: localization
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -666,7 +677,8 @@ skills:
     category: utility
 
   - name: launch-checklist
-    spec: CCGS Skill Testing Framework/skills/utility/launch-checklist.md
+    spec: CCGS Skill Testing Framework/skills/publish/launch-checklist.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -677,7 +689,8 @@ skills:
     category: utility
 
   - name: release-checklist
-    spec: CCGS Skill Testing Framework/skills/utility/release-checklist.md
+    spec: CCGS Skill Testing Framework/skills/publish/release-checklist.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -688,7 +701,8 @@ skills:
     category: utility
 
   - name: adopt
-    spec: CCGS Skill Testing Framework/skills/utility/adopt.md
+    spec: CCGS Skill Testing Framework/skills/workflow/adopt.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -699,7 +713,8 @@ skills:
     category: utility
 
   - name: smoke-check
-    spec: CCGS Skill Testing Framework/skills/utility/smoke-check.md
+    spec: CCGS Skill Testing Framework/skills/qa/smoke-check.md
+    category: qa
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -710,7 +725,8 @@ skills:
     category: utility
 
   - name: soak-test
-    spec: CCGS Skill Testing Framework/skills/utility/soak-test.md
+    spec: CCGS Skill Testing Framework/skills/qa/soak-test.md
+    category: qa
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -721,7 +737,8 @@ skills:
     category: utility
 
   - name: test-setup
-    spec: CCGS Skill Testing Framework/skills/utility/test-setup.md
+    spec: CCGS Skill Testing Framework/skills/pipeline/test-setup.md
+    category: pipeline
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -732,7 +749,8 @@ skills:
     category: utility
 
   - name: test-helpers
-    spec: CCGS Skill Testing Framework/skills/utility/test-helpers.md
+    spec: CCGS Skill Testing Framework/skills/qa/test-helpers.md
+    category: qa
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -743,7 +761,8 @@ skills:
     category: utility
 
   - name: regression-suite
-    spec: CCGS Skill Testing Framework/skills/utility/regression-suite.md
+    spec: CCGS Skill Testing Framework/skills/qa/regression-suite.md
+    category: qa
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -754,7 +773,8 @@ skills:
     category: utility
 
   - name: qa-plan
-    spec: CCGS Skill Testing Framework/skills/utility/qa-plan.md
+    spec: CCGS Skill Testing Framework/skills/qa/qa-plan.md
+    category: qa
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -765,7 +785,8 @@ skills:
     category: utility
 
   - name: bug-triage
-    spec: CCGS Skill Testing Framework/skills/utility/bug-triage.md
+    spec: CCGS Skill Testing Framework/skills/qa/bug-triage.md
+    category: qa
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -776,7 +797,8 @@ skills:
     category: utility
 
   - name: asset-spec
-    spec: CCGS Skill Testing Framework/skills/utility/asset-spec.md
+    spec: CCGS Skill Testing Framework/skills/authoring/asset-spec.md
+    category: authoring
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -787,7 +809,8 @@ skills:
     category: utility
 
   - name: day-one-patch
-    spec: CCGS Skill Testing Framework/skills/utility/day-one-patch.md
+    spec: CCGS Skill Testing Framework/skills/publish/day-one-patch.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -799,7 +822,8 @@ skills:
 
   # CCGS:TE additions — Session Continuity
   - name: autosave-mode
-    spec: CCGS Skill Testing Framework/skills/utility/autosave-mode.md
+    spec: CCGS Skill Testing Framework/skills/workflow/autosave-mode.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -810,7 +834,8 @@ skills:
     category: utility
 
   - name: checkpoint
-    spec: CCGS Skill Testing Framework/skills/utility/checkpoint.md
+    spec: CCGS Skill Testing Framework/skills/workflow/checkpoint.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -821,7 +846,8 @@ skills:
     category: utility
 
   - name: continue
-    spec: CCGS Skill Testing Framework/skills/utility/continue.md
+    spec: CCGS Skill Testing Framework/skills/workflow/continue.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -832,7 +858,8 @@ skills:
     category: utility
 
   - name: memory-prune
-    spec: CCGS Skill Testing Framework/skills/utility/memory-prune.md
+    spec: CCGS Skill Testing Framework/skills/workflow/memory-prune.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -844,7 +871,8 @@ skills:
 
   # CCGS:TE additions — Publishing & Go-To-Market
   - name: publish-check
-    spec: CCGS Skill Testing Framework/skills/utility/publish-check.md
+    spec: CCGS Skill Testing Framework/skills/publish/publish-check.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -855,7 +883,8 @@ skills:
     category: utility
 
   - name: marketing-plan
-    spec: CCGS Skill Testing Framework/skills/utility/marketing-plan.md
+    spec: CCGS Skill Testing Framework/skills/publish/marketing-plan.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -866,7 +895,8 @@ skills:
     category: utility
 
   - name: community-plan
-    spec: CCGS Skill Testing Framework/skills/utility/community-plan.md
+    spec: CCGS Skill Testing Framework/skills/publish/community-plan.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -877,7 +907,8 @@ skills:
     category: utility
 
   - name: analytics-setup
-    spec: CCGS Skill Testing Framework/skills/utility/analytics-setup.md
+    spec: CCGS Skill Testing Framework/skills/pipeline/analytics-setup.md
+    category: pipeline
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -888,7 +919,8 @@ skills:
     category: utility
 
   - name: press-outreach
-    spec: CCGS Skill Testing Framework/skills/utility/press-outreach.md
+    spec: CCGS Skill Testing Framework/skills/publish/press-outreach.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -899,7 +931,7 @@ skills:
     category: utility
 
   - name: export-steam-page
-    spec: CCGS Skill Testing Framework/skills/utility/export-steam-page.md
+    spec: CCGS Skill Testing Framework/skills/publish/export-steam-page.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -907,10 +939,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: publish
 
   - name: export-devlog
-    spec: CCGS Skill Testing Framework/skills/utility/export-devlog.md
+    spec: CCGS Skill Testing Framework/skills/publish/export-devlog.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -918,10 +950,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: publish
 
   - name: export-social
-    spec: CCGS Skill Testing Framework/skills/utility/export-social.md
+    spec: CCGS Skill Testing Framework/skills/publish/export-social.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -929,10 +961,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: publish
 
   - name: export-pitch
-    spec: CCGS Skill Testing Framework/skills/utility/export-pitch.md
+    spec: CCGS Skill Testing Framework/skills/publish/export-pitch.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -940,10 +972,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: publish
 
   - name: export-review
-    spec: CCGS Skill Testing Framework/skills/utility/export-review.md
+    spec: CCGS Skill Testing Framework/skills/publish/export-review.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -951,10 +983,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: publish
 
   - name: export-crowdfunding
-    spec: CCGS Skill Testing Framework/skills/utility/export-crowdfunding.md
+    spec: CCGS Skill Testing Framework/skills/publish/export-crowdfunding.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -962,10 +994,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: publish
 
   - name: export-build
-    spec: CCGS Skill Testing Framework/skills/utility/export-build.md
+    spec: CCGS Skill Testing Framework/skills/publish/export-build.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -973,10 +1005,11 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: publish
 
   - name: refine-copy
-    spec: CCGS Skill Testing Framework/skills/utility/refine-copy.md
+    spec: CCGS Skill Testing Framework/skills/publish/refine-copy.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -987,7 +1020,8 @@ skills:
     category: utility
 
   - name: log-lesson
-    spec: CCGS Skill Testing Framework/skills/utility/log-lesson.md
+    spec: CCGS Skill Testing Framework/skills/workflow/log-lesson.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1010,7 +1044,8 @@ skills:
 
   # CCGS:TE additions — Post-Launch Lifecycle
   - name: live-ops-plan
-    spec: CCGS Skill Testing Framework/skills/utility/live-ops-plan.md
+    spec: CCGS Skill Testing Framework/skills/publish/live-ops-plan.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1021,7 +1056,8 @@ skills:
     category: utility
 
   - name: dlc-design
-    spec: CCGS Skill Testing Framework/skills/utility/dlc-design.md
+    spec: CCGS Skill Testing Framework/skills/publish/dlc-design.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1032,7 +1068,8 @@ skills:
     category: utility
 
   - name: mod-support
-    spec: CCGS Skill Testing Framework/skills/utility/mod-support.md
+    spec: CCGS Skill Testing Framework/skills/authoring/mod-support.md
+    category: authoring
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1043,7 +1080,8 @@ skills:
     category: utility
 
   - name: monetization-design
-    spec: CCGS Skill Testing Framework/skills/utility/monetization-design.md
+    spec: CCGS Skill Testing Framework/skills/publish/monetization-design.md
+    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1065,7 +1103,8 @@ skills:
     category: sprint
 
   - name: taste-gate
-    spec: CCGS Skill Testing Framework/skills/utility/taste-gate.md
+    spec: CCGS Skill Testing Framework/skills/gate/taste-gate.md
+    category: gate
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1099,7 +1138,7 @@ skills:
 
   # CCGS:TE additions — Demo Workflow
   - name: demo-plan
-    spec: CCGS Skill Testing Framework/skills/utility/demo-plan.md
+    spec: CCGS Skill Testing Framework/skills/demo/demo-plan.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1107,10 +1146,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: demo
 
   - name: demo-scope
-    spec: CCGS Skill Testing Framework/skills/utility/demo-scope.md
+    spec: CCGS Skill Testing Framework/skills/demo/demo-scope.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1118,10 +1157,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: demo
 
   - name: demo-build
-    spec: CCGS Skill Testing Framework/skills/utility/demo-build.md
+    spec: CCGS Skill Testing Framework/skills/demo/demo-build.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1129,10 +1168,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: demo
 
   - name: demo-playtest
-    spec: CCGS Skill Testing Framework/skills/utility/demo-playtest.md
+    spec: CCGS Skill Testing Framework/skills/demo/demo-playtest.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1140,10 +1179,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: demo
 
   - name: demo-feedback
-    spec: CCGS Skill Testing Framework/skills/utility/demo-feedback.md
+    spec: CCGS Skill Testing Framework/skills/demo/demo-feedback.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1151,10 +1190,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: demo
 
   - name: demo-iterate
-    spec: CCGS Skill Testing Framework/skills/utility/demo-iterate.md
+    spec: CCGS Skill Testing Framework/skills/demo/demo-iterate.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1162,10 +1201,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: demo
 
   - name: demo-polish
-    spec: CCGS Skill Testing Framework/skills/utility/demo-polish.md
+    spec: CCGS Skill Testing Framework/skills/demo/demo-polish.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1173,10 +1212,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: demo
 
   - name: demo-status
-    spec: CCGS Skill Testing Framework/skills/utility/demo-status.md
+    spec: CCGS Skill Testing Framework/skills/demo/demo-status.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1184,10 +1223,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: demo
 
   - name: demo-gate
-    spec: CCGS Skill Testing Framework/skills/utility/demo-gate.md
+    spec: CCGS Skill Testing Framework/skills/demo/demo-gate.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1195,10 +1234,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: demo
 
   - name: demo-integrate
-    spec: CCGS Skill Testing Framework/skills/utility/demo-integrate.md
+    spec: CCGS Skill Testing Framework/skills/demo/demo-integrate.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1206,11 +1245,11 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: demo
 
   # CCGS:TE additions — Localization Suite
   - name: localization-prepare
-    spec: CCGS Skill Testing Framework/skills/utility/localization-prepare.md
+    spec: CCGS Skill Testing Framework/skills/localization/localization-prepare.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1218,10 +1257,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: localization
 
   - name: localization-integrate
-    spec: CCGS Skill Testing Framework/skills/utility/localization-integrate.md
+    spec: CCGS Skill Testing Framework/skills/localization/localization-integrate.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1229,10 +1268,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: localization
 
   - name: localization-qa
-    spec: CCGS Skill Testing Framework/skills/utility/localization-qa.md
+    spec: CCGS Skill Testing Framework/skills/localization/localization-qa.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1240,10 +1279,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: localization
 
   - name: localization-sync
-    spec: CCGS Skill Testing Framework/skills/utility/localization-sync.md
+    spec: CCGS Skill Testing Framework/skills/localization/localization-sync.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1251,10 +1290,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: localization
 
   - name: localization-cultural-review
-    spec: CCGS Skill Testing Framework/skills/utility/localization-cultural-review.md
+    spec: CCGS Skill Testing Framework/skills/localization/localization-cultural-review.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1262,10 +1301,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: localization
 
   - name: localization-rtl
-    spec: CCGS Skill Testing Framework/skills/utility/localization-rtl.md
+    spec: CCGS Skill Testing Framework/skills/localization/localization-rtl.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1273,10 +1312,10 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: localization
 
   - name: localization-vo
-    spec: CCGS Skill Testing Framework/skills/utility/localization-vo.md
+    spec: CCGS Skill Testing Framework/skills/localization/localization-vo.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1284,7 +1323,7 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: localization
 
   # Uncatalogued skills present in .claude/skills/ — added 2026-06-05
   - name: ccgs-merge
@@ -1321,7 +1360,8 @@ skills:
     category: analysis
 
   - name: memory-shard
-    spec: CCGS Skill Testing Framework/skills/utility/memory-shard.md
+    spec: CCGS Skill Testing Framework/skills/workflow/memory-shard.md
+    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
