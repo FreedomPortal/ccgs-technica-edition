@@ -59,7 +59,45 @@ CCGS_BRANCH=$(git -C "$CCGS_PATH" rev-parse --abbrev-ref HEAD 2>/dev/null || ech
 CCGS_COMMIT=$(git -C "$CCGS_PATH" log -1 --format="%h — %s (%ci)" 2>/dev/null || echo "n/a")
 CCGS_DIRTY=$(git -C "$CCGS_PATH" status --porcelain 2>/dev/null | wc -l | tr -d ' ')
 CCGS_SKILLS=$(find "$CCGS_PATH/.claude/skills" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
+
+# Guard 1: target must not be a game project
+TE_IS_GAME=false
+if find "$TE_PATH/src" -type f 2>/dev/null | grep -q '.'; then TE_IS_GAME=true; fi
+if find "$TE_PATH/design/gdd" -type f 2>/dev/null | grep -q '.'; then TE_IS_GAME=true; fi
+
+# Guard 2: source must not be CCGS:TE
+CCGS_IS_TE=false
+if [ -f "$CCGS_PATH/.claude/skills/ccgs-merge/SKILL.md" ]; then CCGS_IS_TE=true; fi
 ```
+
+If `TE_IS_GAME=true`, hard stop:
+
+```
+⛔ Target folder looks like a live game project — src/ or design/gdd/ contains files.
+   /ccgs-merge only operates between a clean CCGS:TE folder and a clean CCGS base.
+
+   To bring CCGS updates into your game project:
+   1. Merge CCGS → a fresh TE clone first, review diffs there, then backport to your game.
+   2. Cherry-pick specific skill/hook files manually from CCGS into your game project.
+   3. Track TE as a git remote and pull only the .claude/ subtree:
+      git subtree pull --prefix=.claude <te-remote> main --squash
+
+   Aborting.
+```
+
+Verdict: **ABORTED — target is a game project**
+
+If `CCGS_IS_TE=true`, hard stop:
+
+```
+⛔ Source folder looks like CCGS:TE, not clean CCGS base (.claude/skills/ccgs-merge detected).
+   /ccgs-merge merges CCGS → TE, not TE → TE.
+   Point the source path at your clean CCGS base folder.
+
+   Aborting.
+```
+
+Verdict: **ABORTED — source is CCGS:TE**
 
 Display:
 
