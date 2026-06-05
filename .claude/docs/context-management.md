@@ -70,14 +70,22 @@ Write to agent memory the moment any of these are established:
 | Creative / design / art | `creative-director/MEMORY.md` |
 | Technical / engine / architecture | `technical-director/MEMORY.md` |
 | Production / scope / schedule | `producer/MEMORY.md` |
-| Code standards / skill conventions | `lead-programmer/MEMORY.md` |
+| Code standards / skill conventions | `lead-programmer/MEMORY.md` (or relevant shard) |
 | Workflow / collaboration preferences | User memory (`~/.claude/projects/.../memory/`) |
+
+**Sharded agents**: When an agent's MEMORY.md has been split into topic shards via
+`/memory-shard`, write new entries directly to the relevant shard file
+(e.g. `lead-programmer/shards/skills.md`), not to MEMORY.md (index only).
+See `.claude/docs/agent-memory-protocol.md` for the full format spec.
 
 Use `/checkpoint` to explicitly flush all session discoveries to memory at any time.
 
 Use `/memory-prune` at sprint boundaries or before `/gate-check` and `/architecture-review` to remove stale
 forward-looking entries from agent memory files and `session-state/active.md`. Stale "Pending:" and "Next:"
 entries can cause those skills to report false blockers or miss resolved issues.
+
+When an agent's MEMORY.md exceeds ~150 lines, run `/memory-shard [agent]` to split it
+into topic shards. Each shard stays under 150 lines; agents load only relevant shards.
 
 ### Incremental File Writing
 

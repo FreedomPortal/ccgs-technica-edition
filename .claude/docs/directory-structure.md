@@ -4,6 +4,7 @@
 /
 ├── CLAUDE.md                    # Master configuration
 ├── .claude/                     # Agent definitions, skills, hooks, rules, docs
+│   └── agent-memory/            # Per-agent persistent memory (MEMORY.md index + shards/)
 ├── src/                         # Game source code (core, gameplay, ai, networking, ui, tools)
 ├── assets/                      # Game assets (art, audio, vfx, shaders, data)
 ├── design/                      # Game design documents (gdd, narrative, levels, balance)

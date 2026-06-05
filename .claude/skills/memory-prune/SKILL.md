@@ -27,10 +27,19 @@ Read each of these files (skip if missing):
   (e.g. `S3-01`, `S3-09`). Used in Phase 2 to validate "Next session" items.
 
 **Agent memory:**
-- `.claude/agent-memory/producer/MEMORY.md`
-- `.claude/agent-memory/technical-director/MEMORY.md`
-- `.claude/agent-memory/creative-director/MEMORY.md`
-- `.claude/agent-memory/lead-programmer/MEMORY.md`
+
+For each of these agents: `producer`, `technical-director`, `creative-director`, `lead-programmer`
+
+Check if the agent uses sharded memory:
+```bash
+[ -f ".claude/agent-memory/[agent]/MEMORY.md" ] && \
+  grep -q "Shard loading protocol" ".claude/agent-memory/[agent]/MEMORY.md" \
+  && echo "SHARDED" || echo "FLAT"
+```
+
+- **FLAT**: read `.claude/agent-memory/[agent]/MEMORY.md` as before
+- **SHARDED**: read `.claude/agent-memory/[agent]/MEMORY.md` (index only — skip it, no prunable content)
+  then read each shard: `.claude/agent-memory/[agent]/shards/*.md` (skip `_legacy-flat.md`)
 
 **Session state:**
 - `production/session-state/active.md`
@@ -87,7 +96,7 @@ Before making any changes, print a summary:
 ```
 ## Memory Prune — [Date]
 
-### producer/MEMORY.md
+### producer/MEMORY.md  [or shards/[file].md for sharded agents]
 KEEP   [entry summary]
 REMOVE [entry summary] — reason: resolved / superseded / completed
 ...
@@ -98,7 +107,7 @@ REMOVE [entry summary] — reason: resolved / superseded / completed
 ### creative-director/MEMORY.md
 ...
 
-### lead-programmer/MEMORY.md
+### lead-programmer/shards/[file].md  [one section per shard if sharded]
 ...
 
 ### session-state/active.md
