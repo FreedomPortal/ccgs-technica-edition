@@ -1,6 +1,6 @@
 ---
 name: memory-shard
-description: "Split a flat agent MEMORY.md into topic shards. Rewrites MEMORY.md as a lightweight index. Handles oversized shards via ### sub-splitting. Optionally promotes project-wide facts to .claude/docs/. Run when MEMORY.md exceeds ~150 lines or shards exceed 150 lines."
+description: "Split agent memory into topic shards. Handles flat MEMORY.md, oversized shards (### sub-splitting), and multi-file directories (art-director style). Rewrites MEMORY.md as a lightweight index. Optionally promotes project-wide facts to .claude/docs/."
 argument-hint: "[agent-name]"
 user-invocable: true
 allowed-tools: Read, Write, Edit, Glob, Bash, AskUserQuestion
@@ -24,32 +24,46 @@ AskUserQuestion:
   (free text)
 ```
 
-Set `MEMORY_PATH=.claude/agent-memory/[AGENT]/MEMORY.md`.
+Set `AGENT_DIR=.claude/agent-memory/[AGENT]` and `MEMORY_PATH=$AGENT_DIR/MEMORY.md`.
 
-Check file exists:
+Detect directory state:
 ```bash
-[ -f "$MEMORY_PATH" ] || echo "NOT FOUND"
+AGENT_DIR=".claude/agent-memory/$AGENT"
+
+MEMORY_EXISTS=false
+[ -f "$AGENT_DIR/MEMORY.md" ] && MEMORY_EXISTS=true
+
+LOOSE_FILES=$(find "$AGENT_DIR" -maxdepth 1 -name "*.md" ! -name "MEMORY.md" -type f 2>/dev/null | sort)
+LOOSE_COUNT=$(echo "$LOOSE_FILES" | grep -c '.md' 2>/dev/null || echo 0)
+
+ALREADY_SHARDED=false
+$MEMORY_EXISTS && grep -q "Shard loading protocol" "$AGENT_DIR/MEMORY.md" 2>/dev/null \
+  && ALREADY_SHARDED=true
 ```
 
-If not found: stop.
+**Route by detected state:**
+
+| State | Action |
+|-------|--------|
+| Nothing in `AGENT_DIR` | Stop — no memory to shard |
+| `MEMORY.md` only, flat | Normal flow → Phase 2 |
+| `MEMORY.md` with "Shard loading protocol" | Already sharded → offer re-shard |
+| `MEMORY.md` + loose `.md` files | Multi-file mode → Phase 1b |
+| Loose `.md` files only (no `MEMORY.md`) | Multi-file mode → Phase 1b |
+
+**Stop condition:**
 ```
-⛔ No MEMORY.md found at [MEMORY_PATH].
-   Agent memory directory must exist before sharding.
+⛔ No memory files found at [AGENT_DIR].
+   Create .claude/agent-memory/[AGENT]/MEMORY.md first.
    Aborting.
 ```
 
-Check if already sharded (index format present):
-```bash
-grep -q "Shard loading protocol" "$MEMORY_PATH" && echo "ALREADY_SHARDED"
-```
-
-If already sharded:
+**Already sharded:**
 ```
 ℹ️  [AGENT]/MEMORY.md is already in sharded index format.
    To add a new shard: write directly to shards/[topic].md and add a row to the index.
    To re-shard (restructure existing shards): confirm below.
 ```
-
 ```
 AskUserQuestion:
   prompt: "MEMORY.md is already sharded. Re-shard from scratch (reads all shard content and restructures)?"
@@ -57,8 +71,42 @@ AskUserQuestion:
     - "yes — re-shard"
     - "no — abort"
 ```
+If re-sharding: read MEMORY.md and all files in `shards/` (skip `_legacy-flat.md`) before Phase 2.
 
-If re-sharding: read both MEMORY.md and all existing shard files before Phase 2.
+### Phase 1b — Multi-File Consolidation
+
+Reached when loose `.md` files exist alongside or instead of a flat MEMORY.md.
+
+List all files with line counts:
+```bash
+for f in $LOOSE_FILES; do echo "$f: $(wc -l < "$f") lines"; done
+[ -f "$AGENT_DIR/MEMORY.md" ] && echo "MEMORY.md: $(wc -l < "$AGENT_DIR/MEMORY.md") lines"
+```
+
+Display:
+```
+[AGENT] has multiple loose memory files — not yet in sharded format:
+
+  [filename].md   — [N] lines
+  [filename].md   — [N] lines
+  MEMORY.md       — [N] lines  (if present)
+
+These will be treated as pre-separated shards.
+Files already under 150 lines → promoted to shards/ as-is.
+Files over 150 lines → analyzed for ## / ### sub-splitting in Phase 2.
+```
+
+```
+AskUserQuestion:
+  prompt: "Consolidate into sharded format? MEMORY.md will be rewritten as an index."
+  options:
+    - "yes — consolidate"
+    - "no — abort"
+```
+
+If yes: set `SOURCE_FILES` = all loose files + MEMORY.md (if flat). Proceed to Phase 2
+treating each file as a single `##`-level group (filename → shard name). Phase 2 will
+further sub-split any file over 150 lines using its internal `##` / `###` headers.
 
 ---
 
@@ -151,9 +199,22 @@ AskUserQuestion:
 mkdir -p ".claude/agent-memory/$AGENT/shards"
 ```
 
-**Backup original:**
+**Backup originals:**
 ```bash
-cp "$MEMORY_PATH" ".claude/agent-memory/$AGENT/shards/_legacy-flat.md"
+# Single flat MEMORY.md
+cp "$AGENT_DIR/MEMORY.md" "$AGENT_DIR/shards/_legacy-flat.md"
+
+# Multi-file mode: concatenate all source files into one backup
+# (only when SOURCE_FILES was set in Phase 1b)
+cat $SOURCE_FILES > "$AGENT_DIR/shards/_legacy-flat.md"
+```
+
+In multi-file mode: after writing shards and index, delete the original loose files
+from `AGENT_DIR` root (they are now replaced by `shards/` + `MEMORY.md` index):
+```bash
+for f in $SOURCE_FILES; do
+  [ "$f" != "$AGENT_DIR/MEMORY.md" ] && rm "$f"
+done
 ```
 
 **Write each shard file** at `.claude/agent-memory/[AGENT]/shards/[filename].md`:
