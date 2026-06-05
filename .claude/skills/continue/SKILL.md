@@ -5,14 +5,15 @@ description: "Recover session context and continue where you left off. Reads ses
   progress and planned next steps."
 argument-hint: "[no arguments]"
 user-invocable: true
-allowed-tools: Read, Glob, Grep, AskUserQuestion
+allowed-tools: Read, Glob, Grep, Edit, AskUserQuestion
 model: haiku
 ---
 
 # Session Continue
 
-Read-only skill. Reads session state and memory files to give you a concise brief
-so you can pick up work immediately. Never writes files, never proposes changes.
+Reads session state and memory files to give you a concise brief so you can pick
+up work immediately. May write to `active.md` only when stale meta-tasks are
+confirmed by the user in Phase 1d — otherwise read-only.
 
 ---
 
@@ -67,6 +68,55 @@ Then replace Planned Next Steps with stories from `sprint-status.yaml` that are
 **not** `done`, ordered: must-have → should-have → nice-to-have.
 
 If no stale condition is detected, proceed with active.md CANONICAL as normal.
+
+---
+
+## Phase 1d: Fact-Check Pending Items
+
+Scan the CANONICAL for lines that are verifiable against current disk state —
+any line that combines an **action verb** with a **file path or skill reference**.
+
+**Detection patterns** (flag a line if it matches one or more):
+- File path in backticks: `` `path/to/file.ext` `` or `` `src/...` `` or `` `assets/...` ``
+- Skill reference: `` `/skill-name` ``
+- Action verb present: "create", "author", "add", "fix", "update", "implement",
+  "encode", "write", "remove", "delete"
+
+**Check type per line:**
+
+| Line pattern | Check | Stale when |
+|---|---|---|
+| "create `path`" / "author `path`" | `Glob` for that exact path | File exists on disk |
+| `` `/skill`: [behavior] `` | Grep `.claude/skills/[skill]/SKILL.md` for 2–3 keywords from behavior | All keywords found |
+| "update `path` to [add/fix] X" | Grep `path` for 2–3 keywords extracted from X | All keywords found |
+| "fix [issue] in `path`" | Grep `path` for keywords describing the issue | All keywords found |
+
+Extract keywords by taking the most distinctive nouns/identifiers from the
+description — skip stop words and generic verbs. E.g., "gate on must-have stories
+done" → `must-have`, `gate`; "add `damage_dealt` field" → `damage_dealt`.
+
+When uncertain whether a check result means stale, err toward flagging it
+(user confirms before anything is deleted).
+
+---
+
+**When 1+ items appear stale**, present before Planned Next Steps:
+
+> ⚠️ **Possibly stale items in active.md** — these appear already resolved on disk:
+> - "[item text]" — _reason: file exists / keywords `X`, `Y` found in `path`_
+
+Then `AskUserQuestion`:
+- **Prompt**: "These items may already be done. How do you want to proceed?"
+- **Options**:
+  - `[A] Remove stale items from active.md — clean up CANONICAL`
+  - `[B] Keep them — I'll verify manually`
+  - `[C] Show me the check details before deciding`
+
+If **[A]**: edit `active.md` to remove those lines. Report: "Removed N stale item(s)."
+If **[B]**: include in Planned Next Steps with ⚠️ prefix.
+If **[C]**: list each item with path + matched keywords, then re-ask [A] or [B] only.
+
+If no verifiable pending items found, skip this phase silently.
 
 ---
 
