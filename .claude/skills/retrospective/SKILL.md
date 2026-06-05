@@ -7,6 +7,35 @@ allowed-tools: Read, Glob, Grep, Write, Bash, AskUserQuestion
 model: sonnet
 ---
 
+## Phase 0: Must-Have Gate (sprint retrospectives only)
+
+If `production/sprint-status.yaml` exists and this is a sprint retrospective:
+
+1. Read `sprint-status.yaml`.
+2. Collect all stories where `priority: must-have` AND `status` is **not** `done`.
+3. If any such stories exist, output:
+
+> **BLOCKED** — Sprint N has [X] must-have stories not yet done:
+> - [S5-XX: story name] — status: [status]
+>
+> A retrospective on an incomplete sprint produces misleading velocity data and
+> legitimizes an unfinished sprint.
+
+Then use `AskUserQuestion`:
+- Prompt: "Must-have stories are incomplete. How do you want to proceed?"
+- Options:
+  - `[A] Stop — I'll complete the must-haves first`
+  - `[B] Override — sprint is being force-closed (date-driven end, stories carry over)`
+
+If [A]: stop. Verdict: **BLOCKED** — must-haves incomplete.
+
+If [B]: continue. Note in the retrospective header that the sprint was force-closed,
+and record all incomplete must-haves in the Carryover Analysis section.
+
+If no incomplete must-haves (or `sprint-status.yaml` missing), proceed to Phase 1.
+
+---
+
 ## Phase 1: Parse Arguments
 
 Determine whether this is a sprint retrospective (`sprint-N`) or a milestone retrospective (`milestone-name`).

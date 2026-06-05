@@ -47,6 +47,29 @@ If `sprint-status.yaml` does not exist, skip this phase silently.
 
 ---
 
+## Phase 1c: Validate CANONICAL Against Evidence
+
+**Stale CANONICAL check** — `active.md` CANONICAL can lag if a session ends without
+`/checkpoint`. Cross-check before presenting next steps:
+
+1. Note `sprint: N` from `sprint-status.yaml` (skip if yaml missing).
+2. Glob `production/retrospectives/retro-sprint-[N-1]-*.md`.
+3. If a retro file **exists** AND the CANONICAL text contains `/retrospective` or
+   `retrospective` referencing sprint N-1 → CANONICAL is stale.
+
+When stale, prepend this warning to Planned Next Steps:
+
+> ⚠️ **Stale session state** — `sprint-status.yaml` shows Sprint N active and a
+> Sprint N-1 retro exists, but `active.md` CANONICAL references Sprint N-1
+> close-out work. Showing active sprint stories instead.
+
+Then replace Planned Next Steps with stories from `sprint-status.yaml` that are
+**not** `done`, ordered: must-have → should-have → nice-to-have.
+
+If no stale condition is detected, proceed with active.md CANONICAL as normal.
+
+---
+
 ## Phase 2: Read User Memory
 
 Derive the project slug from the current working directory:
