@@ -94,7 +94,7 @@ Verified automatically by `/skill-test static` — no fixture needed.
 4. Output clearly states which transition is being validated
 
 **Assertions:**
-- [ ] Skill reads `production/stage.txt` (or uses project-stage-detect heuristics) to determine current stage
+- [ ] Skill determines current stage via heuristics (which may include reading `production/stage.txt`) — exact mechanism not asserted
 - [ ] Output header names both current and target phases (e.g., "Gate Check: Concept → Systems Design")
 - [ ] Skill does not ask the user which gate to check if current stage is determinable
 
@@ -160,13 +160,13 @@ Verified automatically by `/skill-test static` — no fixture needed.
 
 **Expected behavior:**
 1. Skill reads review mode — determines `solo`
-2. Each director is noted as skipped: "[CD-PHASE-GATE] skipped — Solo mode"
+2. Output notes at panel level: "Director Panel skipped — Solo mode"
 3. Gate verdict is derived from artifact/quality checks only
 4. No director gates spawn
 
 **Assertions (5b):**
 - [ ] No director gates are spawned in solo mode
-- [ ] Each skipped gate is explicitly noted in output: "[GATE-ID] skipped — Solo mode"
+- [ ] Solo mode skip noted in output at panel level (e.g., "Director Panel skipped — Solo mode") — per-gate notation not required
 - [ ] Verdict is based on artifact and quality checks only
 
 **Note on Case 3 correction:**
