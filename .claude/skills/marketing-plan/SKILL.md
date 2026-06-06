@@ -15,6 +15,13 @@ Read the following files before asking anything:
 - `design/gdd/game-concept.md` — required for game title, genre, platforms
 - `production/milestones/*.md` — current dev stage
 - `production/publishing/publishing-roadmap.md` — load if exists (update, don't recreate)
+- `production/publishing/market-research.md` — load if exists (use comp titles, pricing, audience data to populate roadmap tasks)
+
+If `market-research.md` does not exist, note:
+> "No market research file found. Run `/market-research` first for accurate
+> comp titles, pricing benchmarks, and audience data — these directly inform
+> your positioning and roadmap priorities."
+> This is advisory — do not stop. The user may proceed without it.
 
 If no game concept exists, fail with:
 > "No game concept found. Run `/brainstorm` first."

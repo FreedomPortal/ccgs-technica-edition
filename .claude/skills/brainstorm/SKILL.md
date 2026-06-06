@@ -311,16 +311,17 @@ If yes, generate the document using the template at `.claude/docs/templates/game
    pre-production pipeline). List ALL steps — do not abbreviate or truncate:
 
 **Path A — Design-First** (recommended if the concept is well-defined):
-   1. "Run `/setup-engine` to configure the engine and populate version-aware reference docs"
-   2. "Run `/art-bible` to create the visual identity specification — do this BEFORE writing GDDs. **The art bible is required before the Technical Setup gate.** It gates asset production and shapes technical architecture decisions (rendering, VFX, UI systems)."
-   3. "Use `/design-review design/gdd/game-concept.md` to validate concept completeness before going downstream"
-   4. "Discuss vision with the `creative-director` agent for pillar refinement"
-   5. "Decompose the concept into individual systems with `/map-systems` — maps dependencies, assigns priorities, and creates the systems index"
-   6. "Author per-system GDDs with `/design-system` — guided, section-by-section GDD writing for each system identified in step 5"
-   7. "Plan the technical architecture with `/create-architecture` — produces the master architecture blueprint and Required ADR list"
-   8. "Record key architectural decisions with `/architecture-decision (×N)` — write one ADR per decision in the Required ADR list from `/create-architecture`"
-   9. "Run `/architecture-review` — bootstraps the TR registry and Requirements Traceability Matrix from your GDDs and ADRs (required before the Pre-Production gate)"
-   10. "Validate readiness to advance with `/gate-check` — phase gate before committing to production"
+   1. "Run `/market-research` to validate the market before committing to production — comp titles, pricing benchmarks, audience locations, and release timing guidance"
+   2. "Run `/setup-engine` to configure the engine and populate version-aware reference docs"
+   3. "Run `/art-bible` to create the visual identity specification — do this BEFORE writing GDDs. **The art bible is required before the Technical Setup gate.** It gates asset production and shapes technical architecture decisions (rendering, VFX, UI systems)."
+   4. "Use `/design-review design/gdd/game-concept.md` to validate concept completeness before going downstream"
+   5. "Discuss vision with the `creative-director` agent for pillar refinement"
+   6. "Decompose the concept into individual systems with `/map-systems` — maps dependencies, assigns priorities, and creates the systems index"
+   7. "Author per-system GDDs with `/design-system` — guided, section-by-section GDD writing for each system identified in step 6"
+   8. "Plan the technical architecture with `/create-architecture` — produces the master architecture blueprint and Required ADR list"
+   9. "Record key architectural decisions with `/architecture-decision (×N)` — write one ADR per decision in the Required ADR list from `/create-architecture`"
+   10. "Run `/architecture-review` — bootstraps the TR registry and Requirements Traceability Matrix from your GDDs and ADRs (required before the Pre-Production gate)"
+   11. "Validate readiness to advance with `/gate-check` — phase gate before committing to production"
 
 **Path B — Prototype-First** (use if the core mechanic is unproven or the concept needs validation):
    1. "Run `/setup-engine` to configure the engine"
@@ -350,10 +351,11 @@ append this notice to the current response before continuing:
 ## Recommended Next Steps
 
 After the game concept is written, follow the pre-production pipeline in order:
-1. `/setup-engine` — configure the engine and populate version-aware reference docs
-2. `/art-bible` — establish visual identity before writing any GDDs
-3. `/map-systems` — decompose the concept into individual systems with dependencies
-4. `/design-system [first-system]` — author per-system GDDs in dependency order
-5. `/create-architecture` — produce the master architecture blueprint
-6. `/architecture-review` — bootstrap TR registry and Requirements Traceability Matrix
-7. `/gate-check pre-production` — validate readiness before committing to production
+1. `/market-research` — validate market fit: comp titles, pricing, audience, timing
+2. `/setup-engine` — configure the engine and populate version-aware reference docs
+3. `/art-bible` — establish visual identity before writing any GDDs
+4. `/map-systems` — decompose the concept into individual systems with dependencies
+5. `/design-system [first-system]` — author per-system GDDs in dependency order
+6. `/create-architecture` — produce the master architecture blueprint
+7. `/architecture-review` — bootstrap TR registry and Requirements Traceability Matrix
+8. `/gate-check pre-production` — validate readiness before committing to production
