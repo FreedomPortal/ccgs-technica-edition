@@ -38,6 +38,7 @@ Current engine: see `docs/engine-reference/godot/VERSION.md`
 External documents, research, and third-party content imported into the project for reference. Not authored by the team — brought in from outside.
 
 - `docs/reference/prompt/` — prompt files for external AI tools (image generators, LLMs). Not game code, not CCGS skills.
+- `docs/reference/platform/` — date-stamped platform submission guides (Steam, PlayStation, Xbox, Nintendo, iOS, Google Play, Epic, itch.io). **release-manager agent must read the relevant platform directory before any submission task.** Console cert files (trc.md, tcr.md, lotcheck.md) are stubs — fill from dev portal after signing NDA.
 - Naming: keep original filename where possible; add date prefix if version matters.
 
 **Do NOT put here:** Internal design docs, ADRs, architecture notes, CCGS skill outputs — those go in `docs/architecture/` or `docs/export/`.
