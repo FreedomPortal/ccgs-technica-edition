@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
   <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-52-blueviolet" alt="52 Agents"></a>
-  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-120-green" alt="120 Skills"></a>
+  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-121-green" alt="121 Skills"></a>
   <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-15-orange" alt="15 Hooks"></a>
   <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-15-red" alt="15 Rules"></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
@@ -100,6 +100,7 @@ Handles localization execution under `localization-lead` direction. String wrapp
 
 | Skill | Purpose |
 |-------|---------|
+| `/market-research` | Competitive intelligence — comp titles, pricing benchmarks, audience profile, platform fit, release timing, market gap analysis. Output feeds `/marketing-plan` and `/press-outreach` |
 | `/marketing-plan` | Full publishing roadmap — community strategy, pre-launch milestones, content cadence |
 | `/community-plan` | Platform setup, content calendar, metric tracking (wishlists, followers, engagement) |
 | `/analytics-setup` | Design player event tracking — what to instrument, platform choice, implementation in engine |
@@ -332,6 +333,25 @@ Applied by `/dev-story` in the programmer agent brief.
 
 ---
 
+### Platform Reference Docs (`docs/reference/platform/`)
+
+Date-stamped submission guides for every major storefront, mirroring the `docs/engine-reference/` pattern. Exists because LLM training data goes stale and platform policies change constantly.
+
+| Platform | Coverage |
+|----------|----------|
+| Steam | OVERVIEW, submission checklist, store page asset requirements |
+| Epic Games Store | OVERVIEW, EOS SDK requirements, submission checklist |
+| itch.io | OVERVIEW, submission checklist, butler CLI workflow |
+| iOS App Store | OVERVIEW, Review Guidelines summary, submission checklist |
+| Google Play | OVERVIEW, policy summary, submission checklist |
+| PlayStation | OVERVIEW, TRC stub (fill from dev portal — NDA), submission checklist |
+| Xbox | OVERVIEW, TCR stub (fill from dev portal — NDA), submission checklist |
+| Nintendo Switch | OVERVIEW, Lotcheck stub (fill from dev portal — NDA), submission checklist |
+
+Console cert files (TRC/TCR/Lotcheck) are intentional stubs — the actual requirements are NDA-gated. Fill them from your dev portal after signing the developer agreement. The `release-manager` agent reads the relevant platform directory before any submission task.
+
+---
+
 ### `writing-lessons.md` Knowledge Base
 Located at `production/publishing/writing-lessons.md`. All `/export-*` skills read this file before generating output. Use `/log-lesson` to add entries. Format: context → problem → rule → example. Decisions marked as settled are not re-debated by agents.
 
@@ -343,7 +363,7 @@ CCGS:TE skills map onto the 9-stage pipeline as a **parallel publishing track**.
 
 | Stage | New skills that activate |
 |-------|--------------------------|
-| 1 — Concept | `/marketing-plan`, `/monetization-design` |
+| 1 — Concept | `/market-research`, `/marketing-plan`, `/monetization-design` |
 | 2 — Prototype | *(no new skills — `/prototype` is a base skill)* |
 | 3 — Systems Design | `/analytics-setup` |
 | 4 — Technical Setup | `/setup-tool` (if pipeline tool work in scope) |
