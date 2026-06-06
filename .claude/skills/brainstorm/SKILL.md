@@ -350,12 +350,16 @@ append this notice to the current response before continuing:
 
 ## Recommended Next Steps
 
-After the game concept is written, follow the pre-production pipeline in order:
+After the game concept is written, follow the 9-stage pipeline in order:
 1. `/market-research` — validate market fit: comp titles, pricing, audience, timing
 2. `/setup-engine` — configure the engine and populate version-aware reference docs
-3. `/art-bible` — establish visual identity before writing any GDDs
-4. `/map-systems` — decompose the concept into individual systems with dependencies
-5. `/design-system [first-system]` — author per-system GDDs in dependency order
-6. `/create-architecture` — produce the master architecture blueprint
-7. `/architecture-review` — bootstrap TR registry and Requirements Traceability Matrix
-8. `/gate-check pre-production` — validate readiness before committing to production
+3. `/gate-check concept` — advance to Stage 2 (Prototype)
+4. `/prototype [core-mechanic]` — validate the core mechanic is fun before writing GDDs
+5. `/gate-check prototype` — advance to Stage 3 (Systems Design)
+6. `/art-bible` — establish visual identity before writing GDDs
+7. `/map-systems` — decompose the concept into individual systems with dependencies
+8. `/design-system [first-system]` — author per-system GDDs in dependency order
+9. `/create-architecture` — produce the master architecture blueprint
+10. `/architecture-review` — bootstrap TR registry and Requirements Traceability Matrix
+11. `/gate-check pre-production` — advance to Stage 6 (Vertical Slice)
+12. `/vertical-slice` — prove the full game loop works before committing to Production
