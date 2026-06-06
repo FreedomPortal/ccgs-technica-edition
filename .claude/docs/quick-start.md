@@ -126,8 +126,8 @@ Ask yourself: "What department would handle this in a real studio?"
 | `/patch-notes` | Generate player-facing patch notes |
 | `/hotfix` | Emergency fix with audit trail |
 | `/day-one-patch` | Prepare a focused day-one patch for known issues discovered after gold master |
-| `/prototype` | Concept prototype — validate core idea before writing GDDs (Phase 1) |
-| `/vertical-slice` | Production-quality end-to-end build — validate full game loop (Phase 4) |
+| `/prototype` | Concept prototype — Stage 2 (Prototype), validate core idea before Systems Design |
+| `/vertical-slice` | Stage 6 (Vertical Slice) — production-quality end-to-end build to prove the game loop before Production |
 | `/localization-prepare` | Localization — scan, wrap strings, scaffold string table |
 | `/team-combat` | Orchestrate full combat team pipeline |
 | `/team-narrative` | Orchestrate full narrative team pipeline |
@@ -284,7 +284,7 @@ CLAUDE.md                          -- Master config (read this first, ~60 lines)
     coordination-rules.md          -- Agent coordination rules
     context-management.md          -- Context budgets and compaction instructions
     directory-structure.md         -- Project directory layout
-    workflow-catalog.yaml          -- 7-phase pipeline definition (read by /help)
+    workflow-catalog.yaml          -- 9-stage pipeline definition (read by /next)
     setup-requirements.md          -- System prerequisites (Git Bash, jq, Python)
     settings-local-template.md     -- Personal settings.local.json guide
     templates/                     -- 41 document templates

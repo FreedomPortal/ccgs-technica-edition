@@ -19,7 +19,7 @@ phases:
   concept:
     label: "Concept"
     description: "Develop your game idea into a documented concept"
-    next_phase: systems-design
+    next_phase: prototype
     steps:
       - id: brainstorm
         name: "Brainstorm"
@@ -65,6 +65,26 @@ phases:
         artifact:
           glob: "design/gdd/systems-index.md"
         description: "Decompose concept into systems with dependency ordering and priority tiers"
+
+  prototype:
+    label: "Prototype"
+    description: "Validate the core mechanic is worth designing before writing GDDs"
+    next_phase: systems-design
+    steps:
+      - id: prototype
+        name: "Concept Prototype"
+        command: /prototype
+        required: false
+        artifact:
+          glob: "prototypes/*/REPORT.md"
+          min_count: 1
+        description: "Build a throwaway prototype to validate the core mechanic is fun. Vibe-coding, HTML builds, and paper prototypes all count. Exit artifact: REPORT.md with PROCEED verdict carries forward into Systems Design — no re-explaining the game concept."
+
+      - id: gate-check-prototype
+        name: "Prototype Gate"
+        command: /gate-check
+        required: false
+        description: "Advance to Systems Design once the prototype has a PROCEED verdict. Skipping is valid for proven mechanics or simple projects."
 
   systems-design:
     label: "Systems Design"
@@ -150,8 +170,8 @@ phases:
 
   pre-production:
     label: "Pre-Production"
-    description: "Visual entity inventory, UX specs, asset specs, prototype the core mechanic, define stories, validate fun"
-    next_phase: production
+    description: "Visual entity inventory, UX specs, asset specs, define stories"
+    next_phase: vertical-slice
     steps:
       - id: entity-inventory
         name: "Visual Entity & Screen Inventory"
@@ -185,15 +205,6 @@ phases:
         command: /ux-review
         required: true
         description: "Validate all key screen UX specs for GDD alignment and accessibility tier compliance. Run before creating epics."
-
-      - id: prototype
-        name: "Prototype"
-        command: /prototype
-        required: false
-        artifact:
-          glob: "prototypes/*/README.md"
-          min_count: 1
-        description: "Build a throwaway prototype to validate the core mechanic is fun before committing to full production. Recommended for first-time mechanics or high-risk design decisions. Solo devs with proven concepts may skip."
 
       - id: create-epics
         name: "Create Epics"
@@ -232,14 +243,25 @@ phases:
           min_count: 1
         description: "Plan the first sprint with prioritized stories from epics"
 
+  vertical-slice:
+    label: "Vertical Slice"
+    description: "Validate the full game loop works at production quality before committing to content production"
+    next_phase: production
+    steps:
       - id: vertical-slice
-        name: "Vertical Slice"
+        name: "Vertical Slice Build"
         command: /vertical-slice
         required: false
         artifact:
           glob: "prototypes/*/REPORT.md"
           min_count: 1
-        description: "Build and playtest a vertical slice — a complete end-to-end pass through the core loop. Recommended before committing epics and stories to production. Skipping is a valid solo dev call but increases risk of late-stage design pivots. If built, must be played and documented before advancing."
+        description: "Build and personally playtest a complete end-to-end pass through the core loop at production quality. 'Production' now means the game works — this is the proof. Skipping is a valid solo dev call but increases risk of late-stage design pivots."
+
+      - id: gate-check-vs
+        name: "Vertical Slice Gate"
+        command: /gate-check
+        required: false
+        description: "Advance to Production once the vertical slice is personally playtested with a PROCEED verdict."
 
   production:
     label: "Production"

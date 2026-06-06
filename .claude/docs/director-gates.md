@@ -4,7 +4,7 @@ This document defines the standard gate prompts for all director and lead review
 across every workflow stage. Skills reference gate IDs from this document instead
 of embedding full prompts inline — eliminating drift when prompts need updating.
 
-**Scope**: All 7 production stages (Concept → Release), all 3 Tier 1 directors,
+**Scope**: All 9 production stages (Concept → Release), all 3 Tier 1 directors,
 all key Tier 2 leads. Any skill, team orchestrator, or workflow may invoke these gates.
 
 ---
@@ -859,9 +859,11 @@ When a new gate is needed for a new skill or workflow:
 | Stage | Required Gates | Optional Gates |
 |-------|---------------|----------------|
 | **Concept** | CD-PILLARS, AD-CONCEPT-VISUAL | TD-FEASIBILITY, PR-SCOPE |
+| **Prototype** | All four PHASE-GATEs (via gate-check) | TD-FEASIBILITY, CD-PLAYTEST |
 | **Systems Design** | TD-SYSTEM-BOUNDARY, CD-SYSTEMS, PR-SCOPE, CD-GDD-ALIGN (per GDD) | ND-CONSISTENCY, AD-VISUAL |
 | **Technical Setup** | TD-ARCHITECTURE, TD-ADR (per ADR), LP-FEASIBILITY, AD-ART-BIBLE | TD-ENGINE-RISK |
 | **Pre-Production** | PR-EPIC, QL-STORY-READY (per story), PR-SPRINT, all four PHASE-GATEs (via gate-check) | CD-PLAYTEST |
+| **Vertical Slice** | CD-PLAYTEST, all four PHASE-GATEs (via gate-check) | PR-SCOPE |
 | **Production** | LP-CODE-REVIEW (per story), QL-STORY-READY, PR-SPRINT (per sprint) | PR-MILESTONE, QL-TEST-COVERAGE (per sprint close-out), AD-VISUAL |
 | **Polish** | QL-TEST-COVERAGE, CD-PLAYTEST, PR-MILESTONE | AD-VISUAL |
 | **Release** | All four PHASE-GATEs + RM-PHASE-GATE (via gate-check) | QL-TEST-COVERAGE |

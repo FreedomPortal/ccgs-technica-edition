@@ -123,8 +123,8 @@
 
 | Command | Purpose |
 |---------|---------|
-| `/prototype` | Concept prototype — throwaway build right after brainstorm to validate core idea (Phase 1) |
-| `/vertical-slice` | Pre-Production validation — production-quality end-to-end build before committing to Production (Phase 4) |
+| `/prototype` | Concept prototype — throwaway build in Stage 2 (Prototype) to validate core idea before Systems Design |
+| `/vertical-slice` | Stage 6 (Vertical Slice) — production-quality end-to-end build to prove the game loop before Production |
 | `/onboard` | Generate contextual onboarding document for a new contributor or agent |
 | `/refine-copy` | Remove AI writing patterns from player-facing copy — called automatically by all export skills |
 | `/localize` | **DEPRECATED** — use modular pipeline: `/localization-prepare`, `/localization-integrate`, `/localization-qa`, `/localization-sync`, `/localization-cultural-review`, `/localization-vo`, `/localization-rtl` |
@@ -188,6 +188,9 @@ Coordinate multiple agents on a single feature area:
 | `/demo-feedback` | Aggregate 2+ playtest sessions into patterns and a go/no-go release verdict |
 | `/demo-iterate` | Targeted blocker resolution: scope → delegate to dev-story/bug-report → verify |
 | `/demo-polish` | Demo-specific polish scoped to first-impression, onboarding, and end-state CTA |
+| `/demo-status` | Read-only snapshot of all active demo campaigns — confidence, artifact status, blockers |
+| `/demo-gate` | Formal demo sub-stage gate — evaluates checklist, writes `state.txt` on PASS |
+| `/demo-integrate` | Post-demo back-integration — classify changes as keep-demo-only/backport/needs-story; EA mode flags roadmap commitments |
 
 ## Localization Suite — CCGS:TE
 
