@@ -882,6 +882,18 @@ skills:
     priority: medium
     category: utility
 
+  - name: market-research
+    spec: CCGS Skill Testing Framework/skills/publish/market-research.md
+    category: publish
+    last_static: ""
+    last_static_result: ""
+    last_spec: "2026-06-07"
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: medium
+    category: publish
+
   - name: marketing-plan
     spec: CCGS Skill Testing Framework/skills/publish/marketing-plan.md
     category: publish
