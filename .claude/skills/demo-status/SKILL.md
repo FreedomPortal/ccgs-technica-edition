@@ -100,9 +100,9 @@ For each campaign:
 - [ ] demo-scope.md — MISSING (expected at Scoping+)
 ...
 
-### Status
-[CONSISTENT — artifacts match sub-stage]
-[DISCREPANCY — state.txt says X but artifact Y is missing]
+### Status Verdict
+[COMPLIANT — artifacts match sub-stage]
+[NON-COMPLIANT — state.txt says X but artifact Y is missing]
 
 ### Blockers for Next Advance
 1. [Specific artifact or action blocking advance to next sub-stage]

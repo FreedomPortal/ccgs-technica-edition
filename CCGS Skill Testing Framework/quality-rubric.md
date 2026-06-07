@@ -156,6 +156,22 @@ They have a PR-SPRINT or PR-MILESTONE gate at specific mode thresholds.
 
 ---
 
+### `demo`
+
+**Skills**: demo-build, demo-feedback, demo-gate, demo-integrate, demo-iterate, demo-plan, demo-playtest, demo-polish, demo-scope, demo-status
+
+Demo skills manage the isolated vertical slice pipeline. They must ensure that demo state does not leak into main production without explicit integration and that all quality gates are verified.
+
+| Metric | PASS criteria |
+|---|---|
+| **D1 — State tracking** | Skill reads/updates `production/demo/[id]/state.txt` to track sub-stage progression |
+| **D2 — Content verification** | Artifact checks verify meaningful content (not just existence) before PASS |
+| **D3 — Manual check handling** | Unverifiable quality checks marked as `MANUAL CHECK NEEDED`, never assumed PASS |
+| **D4 — Draft-first verdict** | Verdict written to `production/session-state/drafts/` before requesting approval |
+| **D5 — Demo-track handoff** | Recommends correct subsequent demo skill in Next-Step widget |
+
+---
+
 ### `utility`
 
 **Skills**: start, help, brainstorm, onboard, adopt, hotfix, prototype, localize,
