@@ -496,6 +496,8 @@ This file exists so the same mistake doesn't get made twice on the next concept.
 - Run `/brainstorm open` or `/brainstorm [new-hint]` to explore a different concept
 - The prototype report is the deliverable — no further action needed
 
+Prototype session: COMPLETE
+
 ---
 
 ---

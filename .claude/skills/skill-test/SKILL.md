@@ -1,7 +1,7 @@
 ---
 name: skill-test
-description: "Validate skill files for structural compliance and behavioral correctness. Three modes: static (linter), spec (behavioral), audit (coverage report)."
-argument-hint: "static [skill-name | all] | spec [skill-name] | category [skill-name | all] | audit"
+description: "Validate skill files for structural compliance and behavioral correctness. Modes: full (all checks), static (linter), spec (behavioral), category (rubric), audit (coverage report)."
+argument-hint: "full [skill-name] | static [skill-name | all] | spec [skill-name] | category [skill-name | all] | audit"
 user-invocable: true
 allowed-tools: Read, Glob, Grep, Write
 model: sonnet
@@ -13,10 +13,11 @@ Validates `.claude/skills/*/SKILL.md` files for structural compliance and
 behavioral correctness. No external dependencies — runs entirely within the
 existing skill/hook/template architecture.
 
-**Four modes:**
+**Five modes:**
 
 | Mode | Command | Purpose | Token Cost |
 |------|---------|---------|------------|
+| `full` | `/skill-test full [name]` | All checks: static + category + spec (if available) | Medium (~8k/skill) |
 | `static` | `/skill-test static [name\|all]` | Structural linter — 7 compliance checks per skill | Low (~1k/skill) |
 | `spec` | `/skill-test spec [name]` | Behavioral verifier — evaluates assertions in test spec | Medium (~5k/skill) |
 | `category` | `/skill-test category [name\|all]` | Category rubric — checks skill against its category-specific metrics | Low (~2k/skill) |
@@ -28,14 +29,16 @@ existing skill/hook/template architecture.
 
 Determine mode from the first argument:
 
+- `full [name]` → run static + category + spec on one skill (all applicable checks)
 - `static [name]` → run 7 structural checks on one skill
 - `static all` → run 7 structural checks on all skills (Glob `.claude/skills/*/SKILL.md`)
 - `spec [name]` → read skill + test spec, evaluate assertions
 - `category [name]` → run category-specific rubric from `CCGS Skill Testing Framework/quality-rubric.md`
 - `category all` → run category rubric for every skill that has a `category:` in catalog
 - `audit` (or no argument) → read catalog, list all skills and agents, show coverage
+- bare `[name]` (no mode prefix, skill exists) → treat as `full [name]`
 
-If argument is missing or unrecognized, output usage and stop.
+If argument is missing, unrecognized, or no matching skill found, output usage and stop.
 
 ---
 
@@ -272,6 +275,78 @@ Fix: Add TD-PHASE-GATE, PR-PHASE-GATE, and AD-PHASE-GATE to the full-mode direct
 
 ---
 
+## Phase 2E: Full Mode — All Checks
+
+Runs static + category + spec for one skill in sequence. Skips unavailable checks gracefully.
+
+### Step 1 — Run Static
+
+Apply all 7 checks from Phase 2A. Record: FAILs, WARNs, which checks failed.
+
+### Step 2 — Run Category
+
+Look up `category:` in `CCGS Skill Testing Framework/catalog.yaml`.
+
+- If no category assigned: note "Category: not assigned — skipped."
+- If category assigned but no rubric section exists: note "Category: [name] — no rubric section found — skipped."
+- If rubric section found: apply Phase 2D logic, record FAILs and WARNs.
+
+### Step 3 — Run Spec
+
+Look up `spec:` path in catalog.
+
+- If no spec path in catalog: note "Spec: not assigned — skipped."
+- If spec file missing at path: note "Spec: file missing at [path] — skipped."
+- If spec file found: apply Phase 2B logic, record case verdicts and protocol compliance.
+
+### Step 4 — Output Combined Scorecard
+
+```
+=== Skill Full Check: /[name] ===
+Date: [date]
+
+STATIC (7 checks)
+  Check 1 — Frontmatter:          PASS
+  Check 2 — Multiple Phases:      PASS (N phases)
+  Check 3 — Verdict Keywords:     PASS
+  Check 4 — Collaborative:        PASS
+  Check 5 — Next-Step Handoff:    PASS
+  Check 6 — Fork Complexity:      PASS
+  Check 7 — Argument Hint:        PASS
+  Static verdict: COMPLIANT (0 failures, 0 warnings)
+
+CATEGORY ([category] rubric)
+  Metric X1 — ...:   PASS
+  Metric X2 — ...:   FAIL
+    Gap: [description]
+  Category verdict: FAIL (1 failure, 0 warnings)
+
+SPEC ([spec file path])
+  Case 1: [name] — PASS
+  Case 2: [name] — FAIL
+    [assertion failure summary]
+  Protocol Compliance: PASS
+  Spec verdict: FAIL (1 case failed)
+
+──────────────────────────────────
+COMBINED SCORE
+  Static:   0 FAILs  0 WARNs
+  Category: 1 FAILs  0 WARNs
+  Spec:     1 cases failed
+
+Overall verdict: FAIL — fix category and spec failures before marking COMPLIANT.
+```
+
+If a check was skipped, show `SKIPPED — [reason]` in place of its section.
+
+### Step 5 — Offer to Update Catalog
+
+"May I update `CCGS Skill Testing Framework/catalog.yaml` to record all results
+(`last_static`, `last_static_result`, `last_category`, `last_category_result`,
+`last_spec`, `last_spec_result`) for [name]?"
+
+---
+
 ## Phase 2C: Audit Mode — Coverage Report
 
 ### Step 1 — Read Catalog
@@ -345,13 +420,10 @@ checks? Or `/skill-test spec [name]` to run a specific behavioral test?"
 
 After any mode completes, offer contextual follow-up:
 
-- After `static [name]`: "Run `/skill-test spec [name]` to validate behavioral
-  correctness if a test spec exists."
-- After `static all` with failures: "Address NON-COMPLIANT skills first. Run
-  `/skill-test static [name]` individually for detailed remediation guidance."
-- After `spec [name]` PASS: "Update `CCGS Skill Testing Framework/catalog.yaml` to record this
-  pass date. Consider running `/skill-test audit` to find the next spec gap."
-- After `spec [name]` FAIL: "Review the failing assertions and update the skill
-  or the test spec to resolve the mismatch."
-- After `audit`: "Start with the critical-priority gaps. Use the spec template
-  at `CCGS Skill Testing Framework/templates/skill-test-spec.md` to create new specs."
+- After `full [name]` PASS: "All checks passed. Run `/skill-test full [next-name]` to continue, or `/skill-test audit` for coverage overview."
+- After `full [name]` FAIL: "Run `/skill-improve [name]` to fix failures automatically, or address manually and re-run `/skill-test full [name]`."
+- After `static [name]`: "Run `/skill-test full [name]` for a complete check including category and spec."
+- After `static all` with failures: "Address NON-COMPLIANT skills first. Run `/skill-improve [name]` for automated fix loop."
+- After `spec [name]` PASS: "Update `CCGS Skill Testing Framework/catalog.yaml` to record this pass date. Consider running `/skill-test audit` to find the next spec gap."
+- After `spec [name]` FAIL: "Review the failing assertions and update the skill or the test spec to resolve the mismatch."
+- After `audit`: "Start with the critical-priority gaps. Use the spec template at `CCGS Skill Testing Framework/templates/skill-test-spec.md` to create new specs."

@@ -91,7 +91,7 @@ This is the only valid reason to modify a line inside the kept "Next session" se
 
 ## Phase 3: Report Findings
 
-Before making any changes, print a summary:
+Before making any changes, print a summary (omit sections for files that were skipped in Phase 1):
 
 ```
 ## Memory Prune — [Date]
@@ -121,7 +121,9 @@ Total: N entries/sections to remove across M files.
 Estimated active.md reduction: ~NNN lines.
 ```
 
-Ask: "May I apply these removals?"
+If total removals = 0: print "Nothing to prune — all entries are current." and skip to Phase 5.
+
+Otherwise, ask: "May I apply these removals?"
 
 ---
 
