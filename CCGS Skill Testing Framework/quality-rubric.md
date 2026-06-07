@@ -190,6 +190,67 @@ gates, the gate mode logic must also be correct.
 
 ---
 
+### `qa`
+
+**Skills**: bug-report, bug-triage, qa-plan, regression-suite, smoke-check, soak-test, test-helpers, playtest-report
+
+QA skills produce test artifacts, coverage reports, and defect documentation. They surface issues for humans to act on — must not implement fixes themselves.
+
+| Metric | PASS criteria |
+|---|---|
+| **QS1 — Artifacts not implementation** | Primary output is test plan, bug report, checklist, or coverage report — not game code or bug fixes |
+| **QS2 — Structured findings** | Output uses consistent schema with severity/priority fields per entry (not free prose only) |
+| **QS3 — No scope creep** | Skill flags gaps and defects; does not propose new features or design changes |
+| **QS4 — May-I-write before artifacts** | All test plans, bug reports, QA reports gated behind "May I write" before writing to disk |
+
+---
+
+### `publish`
+
+**Skills**: export-build, export-crowdfunding, export-devlog, export-pitch, export-review, export-social, export-steam-page, community-plan, day-one-patch, dlc-design, launch-checklist, live-ops-plan, marketing-plan, press-outreach, publish-check, refine-copy, release-checklist
+
+Publish skills compile project materials into external-facing artifacts or manage the publishing roadmap. Read project state before generating output; never auto-push to external platforms.
+
+| Metric | PASS criteria |
+|---|---|
+| **PB1 — Source aggregation** | Skill reads from project sources (GDDs, `publishing-roadmap.md`, design docs) before producing output |
+| **PB2 — May-I-write before output** | All generated artifacts (documents, copy, checklists) gated behind "May I write" before writing to disk |
+| **PB3 — No auto-publish** | Skill never pushes content to external platforms (stores, social, press lists) without explicit user confirmation |
+| **PB4 — Retrofit detection** | If target file or roadmap already exists, skill detects it and offers to update rather than recreate |
+| **PB5 — Destination-appropriate format** | Output format matches intended destination (store page copy, social post, press kit, pitch deck, checklist, etc.) |
+
+---
+
+### `workflow`
+
+**Skills**: start, onboard, setup-engine, adopt, continue, next, checkpoint, autosave-mode, project-stage-detect, log-lesson, memory-prune, memory-shard
+
+Workflow skills manage session state, project setup, and meta-operations. Surface options without making binding decisions; gate config and memory writes.
+
+| Metric | PASS criteria |
+|---|---|
+| **WF1 — Session-state aware** | Skill reads `production/session-state/active.md` or relevant config before acting (read-only reporting skills exempt) |
+| **WF2 — No unilateral design decisions** | Skill surfaces options for user; does not make binding design, architecture, or scope decisions |
+| **WF3 — Config writes gated** | Writes to `CLAUDE.md`, settings files, or agent memory gated behind "May I write" (trivial single-line state writes explicitly noted as exempt are acceptable) |
+| **WF4 — Idempotent handling** | Skill detects existing config or state and offers to update rather than silently overwrite |
+
+---
+
+### `localization`
+
+**Skills**: localization-cultural-review, localization-integrate, localization-prepare, localization-qa, localization-rtl, localization-sync, localization-vo, localize
+
+Localization skills manage the string pipeline from source to translated delivery. Each skill must scope its pipeline stage clearly, gate all string table writes, and hand off to the next step.
+
+| Metric | PASS criteria |
+|---|---|
+| **LC1 — Scope declaration** | Skill explicitly states whether it operates on source strings, translation files, or both |
+| **LC2 — May-I-write for string tables** | Any modifications to string table files (`strings-*.json`) or locale files gated behind "May I write" |
+| **LC3 — No silent exclusions** | Locale exclusions, key omissions, or scope reductions are explicit user decisions — never automatic |
+| **LC4 — Pipeline handoff** | Skill ends with clear reference to next step in localization pipeline |
+
+---
+
 ## Agent Categories
 
 Used to validate agent spec files in `tests/agents/`.
