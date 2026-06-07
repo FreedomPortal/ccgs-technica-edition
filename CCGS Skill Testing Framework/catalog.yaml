@@ -859,13 +859,12 @@ skills:
 
   - name: memory-prune
     spec: CCGS Skill Testing Framework/skills/workflow/memory-prune.md
-    category: workflow
-    last_static: ""
-    last_static_result: ""
-    last_spec: ""
-    last_spec_result: ""
-    last_category: ""
-    last_category_result: ""
+    last_static: "2026-06-08"
+    last_static_result: "COMPLIANT"
+    last_spec: "2026-06-08"
+    last_spec_result: "PARTIAL"
+    last_category: "2026-06-08"
+    last_category_result: "PASS"
     priority: medium
     category: utility
 
@@ -1306,12 +1305,12 @@ skills:
 
   - name: localization-cultural-review
     spec: CCGS Skill Testing Framework/skills/localization/localization-cultural-review.md
-    last_static: ""
-    last_static_result: ""
+    last_static: "2026-06-08"
+    last_static_result: "COMPLIANT"
     last_spec: ""
     last_spec_result: ""
-    last_category: ""
-    last_category_result: ""
+    last_category: "2026-06-08"
+    last_category_result: "PASS"
     priority: low
     category: localization
 
