@@ -429,6 +429,8 @@ Use `AskUserQuestion`:
 
 > **Adoption plan saved to `docs/adoption-plan-[date].md`.** Re-run `/adopt` at any time to re-check remaining gaps as you complete them.
 
+Process status: COMPLETE
+
 ---
 
 ## Collaborative Protocol

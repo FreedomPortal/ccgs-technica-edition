@@ -116,8 +116,9 @@ If [A]:
   > "This value is defined in a design document. Run `/propagate-design-change [path]` on the affected GDD to find downstream impacts before committing."
 
 If [B]:
-- Write the report to `design/balance/balance-check-[system]-[date].md` (create the directory if needed). Use the current date for [date] in YYYY-MM-DD format.
-- Confirm the file was written, then end with: "Re-run `/balance-check` after fixes to verify."
+- Ask: "May I write this report to design/balance/balance-check-[system]-[date].md?"
+- If approved, write the report (create directory if needed) using current date in YYYY-MM-DD format.
+- Confirm write, then end with: "Re-run /balance-check after fixes to verify."
 
 If [C]:
 - Summarize open issues and end with: "Re-run `/balance-check` after fixes to verify."
