@@ -343,7 +343,7 @@ IDENTICAL → skipped ([n] files): [not listed in detail]
 
 ```
 AskUserQuestion:
-  prompt: "Plan complete. Approve and execute? (yes/no — no returns to beginning)"
+  prompt: "Plan complete. May I write these changes to disk and execute the plan? (yes/no — no returns to beginning)"
   options:
     - "yes — execute this plan now"
     - "no — abort, do not execute"
@@ -470,3 +470,16 @@ Verdict: **MERGE COMPLETE** — report at `docs/export/ccgs-merge-report-[timest
 
 If patch failures or unresolved files:
 > ⚠️  [n] file(s) need attention. See report.
+
+---
+
+## Phase 7 — Follow-Up Actions
+
+- Verdict: **MERGE COMPLETE** — changes are on disk, uncommitted.
+
+After reviewing the merge:
+
+- Run `/skill-test static all` to verify no SKILL.md files were broken by the merge.
+- If new skills were added: run `/skill-test audit` to update coverage tracking.
+
+Would you like to run `/skill-test static all` now to verify the merged skill files?
