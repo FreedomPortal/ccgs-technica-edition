@@ -161,8 +161,8 @@ skills:
     spec: CCGS Skill Testing Framework/skills/analysis/consistency-check.md
     last_static: ""
     last_static_result: ""
-    last_spec: ""
-    last_spec_result: ""
+    last_spec: "2026-06-07"
+    last_spec_result: "FAIL"
     last_category: ""
     last_category_result: ""
     priority: high
