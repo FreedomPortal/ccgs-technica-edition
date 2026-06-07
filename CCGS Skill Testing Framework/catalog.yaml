@@ -586,15 +586,14 @@ skills:
 
   - name: prototype
     spec: CCGS Skill Testing Framework/skills/pipeline/prototype.md
-    category: pipeline
-    last_static: ""
-    last_static_result: ""
+    last_static: "2026-06-08"
+    last_static_result: "COMPLIANT"
     last_spec: ""
     last_spec_result: ""
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: pipeline
 
   - name: playtest-report
     spec: CCGS Skill Testing Framework/skills/qa/playtest-report.md
@@ -1127,14 +1126,14 @@ skills:
 
   - name: setup-tool
     spec: CCGS Skill Testing Framework/skills/pipeline/setup-tool.md
-    last_static: ""
-    last_static_result: ""
-    last_spec: ""
-    last_spec_result: ""
-    last_category: ""
-    last_category_result: ""
+    last_static: "2026-06-08"
+    last_static_result: "COMPLIANT"
+    last_spec: "2026-06-08"
+    last_spec_result: "PASS"
+    last_category: "2026-06-08"
+    last_category_result: "PASS"
     priority: low
-    category: pipeline
+    category: workflow
 
   - name: vertical-slice
     spec: CCGS Skill Testing Framework/skills/pipeline/vertical-slice.md
