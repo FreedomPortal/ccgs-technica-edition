@@ -247,8 +247,12 @@ If conflicts remain unresolved: Verdict: **BLOCKED** — [N] conflicts need manu
 
 ### 6b: Append to Reflexion Log
 
-If any 🔴 CONFLICT entries were found (regardless of whether they were resolved),
-append an entry to `docs/consistency-failures.md` for each conflict:
+If any 🔴 CONFLICT entries were found (regardless of whether they were resolved):
+
+Read `production/session-state/review-mode.txt` (if it exists). If mode is `lean` or `solo`, skip the ask and append directly. Otherwise ask:
+> "May I append [N] conflict(s) to `docs/consistency-failures.md`?"
+
+If user says no, skip logging for this run. Otherwise, append to `docs/consistency-failures.md` for each conflict:
 
 ```markdown
 ### [YYYY-MM-DD] — /consistency-check — 🔴 CONFLICT
@@ -272,13 +276,16 @@ If `docs/consistency-failures.md` does not exist, create it with this header bef
 |------|-------|-------|---------------|--------|
 ```
 
-Then append the new conflict entries. Never skip logging — a missing file is not a reason to lose conflict history.
+Then append the approved conflict entries.
 
 ---
 
 ## Phase 7: Session State and Closing
 
-Silently append to `production/session-state/active.md` (create the file if it does not exist):
+Read `production/session-state/review-mode.txt` (if it exists). If mode is `lean` or `solo`, append directly. Otherwise ask:
+> "May I append a status entry to `production/session-state/active.md`?"
+
+If approved (or auto-approved by review mode), append to `production/session-state/active.md` (create if it does not exist):
 
 ```
 <!-- CONSISTENCY-CHECK: [date] | GDDs checked: [N] | Conflicts found: [N] | Report: docs/consistency-report-[date].md -->
@@ -306,3 +313,7 @@ Never end the skill with plain text. Always close with this widget.
 - **If STALE REGISTRY**: Update the registry (Phase 6), then re-run to verify.
 - Run `/consistency-check` after writing each new GDD to catch issues early,
   not at architecture time.
+- For dependency gaps (GDD references a system with no GDD yet) or competing
+  ownership and design-theory conflicts across documents, use `/review-all-gdds`
+  — that skill reads full GDD content; this skill only verifies registered
+  entity values.
