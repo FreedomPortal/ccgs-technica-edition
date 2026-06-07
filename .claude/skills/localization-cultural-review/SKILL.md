@@ -138,7 +138,7 @@ CLEAN CATEGORIES (no issues found)
 [List categories with no findings]
 ```
 
-If zero findings across all categories: output "No cultural issues found for target locales. Ready to proceed to /localization-integrate export."
+If zero findings across all categories: output "No cultural issues found for target locales. PASS — Ready to proceed to /localization-integrate export."
 
 ---
 
@@ -179,6 +179,15 @@ Cultural review complete. Before running /localization-integrate export:
 
 Run /localization-integrate export when ready to send strings to translators.
 ```
+
+---
+
+## Follow-Up Actions
+
+Recommended next:
+- Run `/localization-integrate export` to prepare strings for translation
+- Run `/localization-prepare` if locale setup is needed first
+- Run `/sprint-plan` if cultural review uncovered blocking issues requiring design changes
 
 ---
 
