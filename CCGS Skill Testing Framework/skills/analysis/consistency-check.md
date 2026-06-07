@@ -2,15 +2,22 @@
 
 ## Skill Summary
 
-`/consistency-check` scans all GDDs in `design/gdd/` and checks for internal
-conflicts across documents. It produces a structured findings table with columns:
-System A vs System B, Conflict Type, Severity (HIGH / MEDIUM / LOW). Conflict
-types include: formula mismatch, competing ownership, stale reference, and
-dependency gap.
+`/consistency-check` verifies that all GDDs in `design/gdd/` agree with the
+values declared in `design/registry/entities.yaml` — the single source of truth
+for all named game-world facts that appear in more than one document.
 
-The skill is read-only during analysis. It has no director gates. An optional
-consistency report can be written to `design/consistency-report-[date].md` if the
-user requests it, but the skill asks "May I write" before doing so.
+The skill is **registry-driven and grep-first**: it loads the registry once, then
+targets only the GDD sections that mention registered names. It does not do
+full GDD reads during the scan phase — only during Phase 4 conflict investigation.
+
+This skill checks **registered entity value consistency only**. It does NOT:
+- Detect dependency gaps (GDD references a system with no GDD) → use `/review-all-gdds`
+- Detect design-theory conflicts or dominant-strategy issues → use `/review-all-gdds`
+
+Verdicts: `PASS`, `CONFLICTS FOUND`, `COMPLETE`, `BLOCKED`
+
+Write gates: All file writes (conflict log, session state) require "May I write"
+approval, except when `review-mode.txt` is `lean` or `solo` (auto-approved).
 
 ---
 
@@ -20,157 +27,163 @@ Verified automatically by `/skill-test static` — no fixture needed.
 
 - [ ] Has required frontmatter fields: `name`, `description`, `argument-hint`, `user-invocable`, `allowed-tools`
 - [ ] Has ≥2 phase headings
-- [ ] Contains verdict keywords: CONSISTENT, CONFLICTS FOUND, DEPENDENCY GAP
-- [ ] Does NOT require "May I write" language during analysis (read-only scan)
+- [ ] Contains verdict keywords: PASS, CONFLICTS FOUND, COMPLETE, BLOCKED
+- [ ] Uses "May I" ask-before-write language for registry updates, conflict log, and session state
 - [ ] Has a next-step handoff at the end
-- [ ] Documents that report writing is optional and requires approval
+- [ ] Documents cross-reference to `/review-all-gdds` for dependency gaps
 
 ---
 
 ## Director Gate Checks
 
-No director gates — this skill spawns no director gate agents. Consistency
-checking is a mechanical scan; no creative or technical director review is
-required as part of the scan itself.
+No director gates. Consistency checking is a mechanical registry scan — no
+creative or technical director review is part of this skill.
 
 ---
 
 ## Test Cases
 
-### Case 1: Happy Path — 4 GDDs with no conflicts
+### Case 1: Happy Path — Registry with 3 entities, all GDDs agree
 
 **Fixture:**
-- `design/gdd/` contains exactly 4 system GDDs
-- All GDDs have consistent formulas (no overlapping variables with different values)
-- No two GDDs claim ownership of the same game entity or mechanic
-- All dependency references point to GDDs that exist
+- `design/registry/entities.yaml` has 3 entries: `SwordDamage`, `GoldCost`, `SpeedMultiplier`
+- `design/gdd/combat.md` mentions `SwordDamage = 25` — matches registry
+- `design/gdd/economy.md` mentions `GoldCost = 100` — matches registry
+- No GDD mentions a different value for any registered entry
 
 **Input:** `/consistency-check`
 
 **Expected behavior:**
-1. Skill reads all 4 GDDs in `design/gdd/`
-2. Runs cross-GDD consistency checks (formulas, ownership, references)
-3. No conflicts found
-4. Outputs structured findings table showing 0 issues
-5. Verdict: CONSISTENT
+1. Phase 1 loads registry: reports "3 entities, 0 items, 0 formulas, 0 constants"
+2. Phase 2 globs GDDs, reports in-scope list
+3. Phase 3 greps each registered name across GDDs — no conflicts found
+4. Phase 5 outputs report: Clean Entries section shows 3 verified, Conflicts section empty
+5. Verdict: PASS
 
 **Assertions:**
-- [ ] All 4 GDDs are read before producing output
-- [ ] Findings table is present (even if empty — shows "No conflicts found")
-- [ ] Verdict is CONSISTENT when no conflicts exist
-- [ ] Skill does NOT write any files without user approval
-- [ ] Next-step handoff is present
+- [ ] Registry is loaded before any GDD scanning begins
+- [ ] Skill does NOT do full GDD reads in Phase 3 (grep-only until Phase 4)
+- [ ] Findings report is present with a clean entries count
+- [ ] Verdict is PASS when no conflicts exist
+- [ ] No files are written without a "May I" ask (or review-mode override)
 
 ---
 
-### Case 2: Failure Path — Two GDDs with conflicting damage formulas
+### Case 2: Conflict — Registry entity contradicted in a GDD
 
 **Fixture:**
-- GDD-A defines damage formula: `damage = attack * 1.5`
-- GDD-B defines damage formula: `damage = attack * 2.0` for the same entity type
-- Both GDDs refer to the same "attack" variable
+- Registry: `SwordDamage` source=`combat.md`, value=25
+- `design/gdd/combat.md`: `SwordDamage = 25` (matches)
+- `design/gdd/tutorial.md`: mentions `SwordDamage = 15` (contradicts registry)
 
 **Input:** `/consistency-check`
 
 **Expected behavior:**
-1. Skill reads all GDDs and detects the formula mismatch
-2. Findings table includes an entry: GDD-A vs GDD-B | Formula Mismatch | HIGH
-3. Specific conflicting formulas are shown (not just "formula conflict exists")
+1. Phase 3 grep finds `SwordDamage` in both GDDs
+2. Phase 4 targeted read of `tutorial.md` confirms value=15 vs registry value=25
+3. Phase 5 report: 🔴 CONFLICT entry for SwordDamage — registry source vs tutorial.md
 4. Verdict: CONFLICTS FOUND
 
 **Assertions:**
-- [ ] Verdict is CONFLICTS FOUND (not CONSISTENT)
-- [ ] Conflict entry names both GDD filenames
-- [ ] Conflict type is "Formula Mismatch"
-- [ ] Severity is HIGH for a direct formula contradiction
-- [ ] Both conflicting formulas are shown in the findings table
-- [ ] Skill does NOT auto-resolve the conflict
+- [ ] Verdict is CONFLICTS FOUND
+- [ ] 🔴 CONFLICT entry names both the registry source GDD and the conflicting GDD
+- [ ] Both values are shown (registry: 25, conflict: 15)
+- [ ] Skill does NOT auto-resolve — no registry or GDD edits without asking
+- [ ] Phase 6b ask: "May I append [N] conflict(s) to docs/consistency-failures.md?" before writing
 
 ---
 
-### Case 3: Partial Path — GDD references a system with no GDD
+### Case 3: Stale Registry — Source GDD updated, registry behind
 
 **Fixture:**
-- GDD-A's Dependencies section lists "system-B" as a dependency
-- No GDD for system-B exists in `design/gdd/`
-- All other GDDs are consistent
+- Registry: `GoldCost` source=`economy.md`, value=100, written 2026-01-01
+- `design/gdd/economy.md` (the source GDD) now says `GoldCost = 150`
+- No other GDD mentions GoldCost
 
 **Input:** `/consistency-check`
 
 **Expected behavior:**
-1. Skill reads all GDDs and checks dependency references
-2. GDD-A's reference to "system-B" cannot be resolved — no GDD exists for it
-3. Findings table includes: GDD-A vs (missing) | Dependency Gap | MEDIUM
-4. Verdict: DEPENDENCY GAP (not CONSISTENT, not CONFLICTS FOUND)
+1. Phase 3 grep finds `GoldCost` in economy.md
+2. Extracted value (150) contradicts registry (100)
+3. Since the conflict is in the source GDD itself, classified as ⚠️ STALE REGISTRY
+4. Phase 5 report: Stale Registry section shows GoldCost — registry says 100, source GDD says 150
+5. Phase 6 asks: "May I update design/registry/entities.yaml to fix the 1 stale entry?"
+6. After write: Verdict: COMPLETE
 
 **Assertions:**
-- [ ] Verdict is DEPENDENCY GAP (distinct from CONSISTENT and CONFLICTS FOUND)
-- [ ] Findings entry names GDD-A and the missing system-B
-- [ ] Severity is MEDIUM for an unresolved dependency reference
-- [ ] Skill suggests running `/design-system system-B` to create the missing GDD
+- [ ] Stale registry entry classified as ⚠️ STALE REGISTRY (not 🔴 CONFLICT)
+- [ ] Report shows both registry value and current source GDD value
+- [ ] Phase 6 asks before updating the registry (not auto-updates)
+- [ ] After approved write, verdict is COMPLETE
+- [ ] Registry entry gets `revised:` date and `# was:` comment
 
 ---
 
-### Case 4: Edge Case — No GDDs found
+### Case 4: Empty Registry — Hard stop
 
 **Fixture:**
-- `design/gdd/` directory is empty or does not exist
+- `design/registry/entities.yaml` does not exist OR exists but has no entries
 
 **Input:** `/consistency-check`
 
 **Expected behavior:**
-1. Skill attempts to read files in `design/gdd/`
-2. No GDD files found
-3. Skill outputs an error: "No GDDs found in `design/gdd/`. Run `/design-system` to create GDDs first."
-4. No findings table is produced
-5. No verdict is issued
+1. Phase 1 attempts to load registry
+2. Registry is empty or absent
+3. Skill outputs: "Entity registry is empty. Run `/design-system` to write GDDs — the registry
+   is populated automatically after each GDD is completed. Nothing to check yet."
+4. Skill stops — no GDD scanning, no report, no verdict
 
 **Assertions:**
-- [ ] Skill outputs a clear error message when no GDDs are found
-- [ ] No verdict is produced (CONSISTENT / CONFLICTS FOUND / DEPENDENCY GAP)
-- [ ] Skill recommends the correct next action (`/design-system`)
-- [ ] Skill does NOT crash or produce a partial report
+- [ ] Skill stops at Phase 1 with a clear message
+- [ ] No GDD scanning occurs
+- [ ] No verdict is issued (PASS / CONFLICTS FOUND / etc.)
+- [ ] Message recommends `/design-system` as the correct next step
+- [ ] No files are written
 
 ---
 
-### Case 5: Director Gate — No gate spawned; no review-mode.txt read
+### Case 5: No Director Gate Spawned
 
 **Fixture:**
-- `design/gdd/` contains ≥2 GDDs
-- `production/session-state/review-mode.txt` exists with `full`
+- Registry has ≥1 entry
+- `production/session-state/review-mode.txt` exists with value `full`
 
 **Input:** `/consistency-check`
 
 **Expected behavior:**
-1. Skill reads all GDDs and runs the consistency scan
-2. Skill does NOT read `production/session-state/review-mode.txt`
+1. Skill loads registry, scans GDDs, produces report normally
+2. Skill does NOT read `review-mode.txt` for gate-spawning purposes
 3. No director gate agents are spawned at any point
-4. Findings table and verdict are produced normally
+4. Review mode is only read in Phase 6b and Phase 7 to decide whether to skip the "May I write" ask
 
 **Assertions:**
-- [ ] No director gate agents are spawned (no CD-, TD-, PR-, AD- prefixed gates)
-- [ ] Skill does NOT read `production/session-state/review-mode.txt`
-- [ ] Output contains no "Gate: [GATE-ID]" or gate-skipped entries
-- [ ] Review mode has no effect on this skill's behavior
+- [ ] No director gate agents spawned (no CD-, TD-, PR-, AD- prefixed gates)
+- [ ] Output contains no "Gate:" entries
+- [ ] `review-mode.txt` is only accessed for write-gate override, not gate spawning
+- [ ] Verdict and report are produced regardless of review mode value
 
 ---
 
 ## Protocol Compliance
 
-- [ ] Reads all GDDs before producing the findings table
-- [ ] Findings table shown in full before any write ask (if report is requested)
-- [ ] Verdict is one of exactly: CONSISTENT, CONFLICTS FOUND, DEPENDENCY GAP
-- [ ] No director gates — no review-mode.txt read
-- [ ] Report writing (if requested) gated by "May I write" approval
-- [ ] Ends with next-step handoff appropriate to verdict
+- [ ] Registry loaded in Phase 1 before any GDD interaction
+- [ ] Phase 3 uses grep (not full reads); Phase 4 targeted reads only for confirmed conflicts
+- [ ] Findings report shown in full before any write ask
+- [ ] Verdict is one of: PASS, CONFLICTS FOUND, COMPLETE, BLOCKED
+- [ ] No director gates — no gate-mode logic
+- [ ] Phase 6b conflict log write: gated by "May I write" ask (auto-approved if lean/solo)
+- [ ] Phase 7 session state write: gated by "May I" ask (auto-approved if lean/solo)
+- [ ] Registry updates (Phase 6) gated by "May I update" ask
+- [ ] Ends with AskUserQuestion closing widget (not plain text)
+- [ ] Recovery section cross-references `/review-all-gdds` for dependency gaps
 
 ---
 
 ## Coverage Notes
 
-- This skill checks for structural consistency between GDDs. Deep design theory
-  analysis (pillar drift, dominant strategies) is handled by `/review-all-gdds`.
-- Formula conflict detection relies on consistent formula notation across GDDs —
-  informal descriptions of the same mechanic may not be detected.
-- The conflict severity rubric (HIGH / MEDIUM / LOW) is defined in the skill body
-  and not re-enumerated here.
+- Dependency gap detection (GDD references nonexistent system) is out of scope for
+  this skill — handled by `/review-all-gdds`.
+- Design-theory conflicts (dominant strategies, pillar drift) are out of scope —
+  handled by `/review-all-gdds`.
+- This skill's correctness depends on the registry being up to date. If `/design-system`
+  was not used to author GDDs, the registry may be incomplete and results unreliable.

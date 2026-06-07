@@ -616,6 +616,7 @@ Build the option list dynamically — only include options that apply:
 - `[_] Run /design-system [next-system] — next in design order` (always include, name the actual system)
 - `[_] Run /create-architecture — begin architecture (verdict is PASS/CONCERNS)` (include if verdict is not FAIL)
 - `[_] Run /gate-check — validate Systems Design phase gate` (include if verdict is PASS)
+- `[_] Run /consistency-check — verify registered entity values match across GDDs` (include if entity registry exists and was not already run this session)
 - `[_] Stop here`
 
 Assign letters A, B, C… only to included options. Mark the most pipeline-advancing option as `(recommended)`.
