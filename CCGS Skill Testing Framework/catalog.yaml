@@ -1232,8 +1232,8 @@ skills:
     last_static_result: ""
     last_spec: ""
     last_spec_result: ""
-    last_category: ""
-    last_category_result: ""
+    last_category: "2026-06-07"
+    last_category_result: "PASS"
     priority: low
     category: demo
 
@@ -1243,8 +1243,8 @@ skills:
     last_static_result: ""
     last_spec: ""
     last_spec_result: ""
-    last_category: ""
-    last_category_result: ""
+    last_category: "2026-06-07"
+    last_category_result: "PASS"
     priority: low
     category: demo
 
