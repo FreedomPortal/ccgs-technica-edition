@@ -53,10 +53,10 @@ phases:
       - id: art-bible
         name: "Art Bible"
         command: /art-bible
-        required: true
+        required: false
         artifact:
           glob: "design/art/art-bible.md"
-        description: "Author the visual identity specification (9 sections). Uses the Visual Identity Anchor produced by /brainstorm. Run after game concept is formed, before systems design."
+        description: "Author the visual identity specification (9 sections). Optional now — can be done any time before Pre-Production. REQUIRED before /gate-check pre-production. If deferred, /next will resurface it at Phase 5."
 
       - id: map-systems
         name: "Systems Map"
@@ -173,6 +173,14 @@ phases:
     description: "Visual entity inventory, UX specs, asset specs, define stories"
     next_phase: vertical-slice
     steps:
+      - id: art-bible
+        name: "Art Bible"
+        command: /art-bible
+        required: true
+        artifact:
+          glob: "design/art/art-bible.md"
+        description: "REQUIRED before Pre-Production gate. If not done in Concept or Prototype phase, complete it now. Blocks /gate-check pre-production if missing."
+
       - id: entity-inventory
         name: "Visual Entity & Screen Inventory"
         command: /asset-spec

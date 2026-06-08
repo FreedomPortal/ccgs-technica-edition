@@ -5,13 +5,13 @@
   - New/removed agent        → Appendix A: lookup table + hierarchy diagram
   - New/removed hook         → Cross-Cutting hook table + header count
   - Pipeline stage change    → Table of Contents, phase section, gate-check list
-  - Count changes            → Header line: "52-agent system, 120 slash commands, 15 automated hooks"
+  - Count changes            → Header line: "52-agent system, 121 slash commands, 15 automated hooks"
 -->
 
 > **How to go from zero to a shipped game using the Agent Architecture.**
 >
 > This guide walks you through every phase of game development using the
-> 52-agent system, 120 slash commands, and 15 automated hooks. It assumes you
+> 52-agent system, 121 slash commands, and 15 automated hooks. It assumes you
 > have Claude Code installed and are working from the project root.
 >
 > The pipeline has 9 stages. Each stage has a formal gate (`/gate-check`)
@@ -251,7 +251,24 @@ engine-specialist agents to use. If you pick Godot, agents like
 `godot-specialist`, `godot-gdscript-specialist`, and `godot-shader-specialist`
 become your go-to experts.
 
-### Step 1.4: Decompose Your Concept Into Systems
+### Step 1.4: Art Bible (Optional — Now or Later)
+
+```
+/art-bible
+```
+
+Captures the visual identity of the game: color palettes, shape language, lighting mood,
+reference art, and style guardrails. The `/art-bible` skill uses the Visual Identity Anchor
+from `/brainstorm` as a seed if you just ran brainstorm.
+
+**You do not need to do this now.** It can be deferred to Phase 2 (Prototype) or any time
+before Pre-Production. However, it is **required before `/gate-check pre-production`** —
+if it does not exist at that point, the gate will block.
+
+> **Tip:** If you have a strong visual reference in mind right now, do it here while the
+> concept is fresh. If you are still exploring, defer it.
+
+### Step 1.5: Decompose Your Concept Into Systems
 
 Before writing individual GDDs, enumerate all the systems your game needs:
 
@@ -324,6 +341,14 @@ Or with a specific mechanic to validate:
 - **KILL** → the idea does not work. Return to `/brainstorm` with what you learned.
 
 **Note:** The concept prototype validates fun. The Vertical Slice (Phase 6) validates that you can build the full loop properly. They answer different questions.
+
+### Step 2.3: Art Bible (If Not Done in Phase 1)
+
+If you deferred `/art-bible` in Phase 1, the Prototype phase is a natural second
+opportunity. You now have a clearer sense of the game's feel from playtesting — that
+context makes the art direction decisions easier.
+
+Still optional here. **Hard requirement starts at Phase 5 (`/gate-check pre-production`).**
 
 ### Phase 2 Gate
 
@@ -744,6 +769,7 @@ Provides effort estimates with risk assessment.
 
 **Requirements to pass:**
 
+- `design/art/art-bible.md` exists — **hard gate**. If missing, run `/art-bible` before proceeding.
 - At least 1 UX spec reviewed in `design/ux/`
 - UX review completed (APPROVED or NEEDS REVISION with documented risks)
 - Story files exist in `production/epics/[epic-slug]/`
@@ -1534,7 +1560,7 @@ conflicts go to `producer`.
 
 ## Appendix B: Slash Command Quick-Reference
 
-### All 120 Commands by Category
+### All 121 Commands by Category
 
 #### Onboarding and Navigation (13)
 
@@ -1594,7 +1620,7 @@ conflicts go to `producer`.
 | `/story-done` | 8-phase story completion review | 5 |
 | `/estimate` | Effort estimation with risk assessment | 4-5 |
 
-#### Reviews and Analysis (15)
+#### Reviews and Analysis (16)
 
 | Command | Purpose | Phase |
 |---------|---------|-------|
@@ -1613,6 +1639,7 @@ conflicts go to `producer`.
 | `/security-audit` | Security vulnerability audit (save, network, input) | 6-7 |
 | `/diagnose` | Structured 6-phase debug workflow — feedback loop, ranked hypotheses, specialist delegation | 5+ |
 | `/code-recon` | Read-only dependency map for a file or system — callers, signals, exports, risk zones | Any |
+| `/entropy-scan` | Proactive entropy scan — friction points, deepening diagrams (Godot/Unity/Unreal), report to `docs/architecture/`. Read-only on game code. | Any |
 
 #### QA and Testing (9)
 

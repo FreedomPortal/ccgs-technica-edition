@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
   <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-52-blueviolet" alt="52 Agents"></a>
-  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-121-green" alt="121 Skills"></a>
+  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-122-green" alt="122 Skills"></a>
   <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-15-orange" alt="15 Hooks"></a>
   <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-15-red" alt="15 Rules"></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
@@ -191,6 +191,7 @@ Skills that improve how coding agents understand and debug code. Engine-aware: d
 |-------|---------|
 | `/code-recon` | Map the full dependency footprint of a file or system before touching it — callers, callees, signals/events/delegates, scene/prefab refs, global singletons. Read-only. Produces a map, makes no changes. |
 | `/diagnose` | Structured 6-phase debugging workflow: establish a fast feedback loop (hard gate) → reproduce → hypothesize → instrument → fix + regression test → cleanup + post-mortem. Prevents thrashing on non-obvious bugs. |
+| `/entropy-scan` | Proactive entropy scan — walks `src/` for friction points (God Scripts, scene coupling, autoload sprawl, etc.) and generates a report with before/after Mermaid deepening diagrams. Engine-aware (Godot/Unity/Unreal). Read-only on game code. Run every few sprints. |
 
 ---
 
@@ -477,5 +478,5 @@ Original repository: https://github.com/jpeggdev/humanize-writing
 - The `coding-agent-behavior` rules is adapted from **andrej-karpathy-skills** by **multica-ai**, licensed under MIT.<br />
 Original repository: https://github.com/multica-ai/andrej-karpathy-skills
 
-- The `/diagnose` and `/code-recon` skills are adapted from **skills** by **mattpocock**, licensed under MIT.<br />
+- The `/diagnose`, `/code-recon`, and `/entropy-scan` skills are adapted from **skills** by **mattpocock**, licensed under MIT.<br />
 Original repository: https://github.com/mattpocock/skills
