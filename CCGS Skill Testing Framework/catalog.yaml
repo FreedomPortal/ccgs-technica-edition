@@ -1368,6 +1368,17 @@ skills:
     priority: high
     category: analysis
 
+  - name: entropy-scan
+    spec: CCGS Skill Testing Framework/skills/analysis/entropy-scan.md
+    last_static: "2026-06-08"
+    last_static_result: "WARNINGS"
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: medium
+    category: analysis
+
   - name: memory-shard
     spec: CCGS Skill Testing Framework/skills/workflow/memory-shard.md
     category: workflow

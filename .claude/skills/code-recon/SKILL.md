@@ -180,7 +180,7 @@ Verdict: **COMPLETE** — recon done. No changes made. Engine: [detected].
 If engine was unconfigured: "Run `/setup-engine` to enable engine-specific pattern detection."
 
 If invoked standalone, flag the top risks and suggest next steps:
-- Many callers or large file: "Consider `/improve-codebase-architecture --focus [path]`."
+- Many callers or large file: "Consider `/entropy-scan --focus [path]`."
 - Event/signal chain 3+ deep: "Interface changes will cascade — map the full chain before proceeding."
 - Registered global: "Any API change here affects the whole project."
 - No tests: "Write a regression test before modifying this system."
