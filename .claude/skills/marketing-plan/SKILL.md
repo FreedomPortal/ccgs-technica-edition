@@ -1,6 +1,6 @@
 ---
 name: marketing-plan
-description: "Creates or updates the publishing roadmap for the project. Maps development milestones to publishing tasks with timing, priority, and status tracking. Run this once in pre-production, then update at each milestone. This is the foundation skill — run it before any other publishing skill."
+description: "Creates or updates the publishing roadmap for the project. Maps development milestones to publishing tasks with timing, priority, and status tracking. Run once before Pre-Production gate to start publishing track, then update at each milestone. This is the foundation skill — run it before any other publishing skill."
 argument-hint: "(no argument needed — reads current dev stage automatically)"
 user-invocable: true
 allowed-tools: Read, Glob, Grep, Write, Edit, AskUserQuestion, TodoWrite
@@ -83,6 +83,19 @@ Structure:
 - 🟡 Unlocked — current dev stage makes this actionable now
 - 🟢 Upcoming — prepare now, execute when milestone is reached
 - ✅ Complete
+
+---
+
+## Phase 0 — Foundation
+
+Run any time during Prototype to Technical Setup stage (before Pre-Production gate). These tasks prepare the publishing foundation:
+
+| Task | Status | Notes |
+|------|--------|-------|
+| Run `/market-research` | [status] | Comp titles, pricing, audience profile |
+| Draft initial positioning (genre, hook, platforms) | [status] | Feeds art-bible tone |
+| Identify target platforms (Steam, Epic, etc.) | [status] | |
+| Register studio name + domains | [status] | |
 
 ---
 

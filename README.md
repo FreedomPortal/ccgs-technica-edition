@@ -384,6 +384,16 @@ CCGS:TE skills map onto the 9-stage pipeline as a **parallel publishing track**.
 
 ### Pending Implementation
 
+**Module Reuse System** — export game systems as reusable packages:
+- `/export-module` — extract a system (code + dependencies + docs) into a portable package structure for use in other projects on the same engine
+- Includes adapter layer scaffolding for project-specific integrations
+- Maps to architecture module boundaries from `/create-architecture`
+
+**Engine Porting Workflow** — migrate code between game engines:
+- `/port-engine` — inventory all engine-specific code via ADRs, map source → target API equivalents, generate prioritized migration guide
+- Reads Engine Compatibility sections from all ADRs to build the crosswalk
+- Produces `docs/porting/[source]-to-[target]-guide.md`
+
 **Player Insight Loop** — analytics and live ops exist but no feedback loop connecting them:
 - `/telemetry-design` — instrument player events at the design level
 - `/player-segmentation` — define player cohorts for targeted analysis

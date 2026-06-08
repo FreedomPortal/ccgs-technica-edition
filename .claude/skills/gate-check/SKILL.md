@@ -91,6 +91,12 @@ Note: in `solo` mode, director spawns (CD-PHASE-GATE, TD-PHASE-GATE, PR-PHASE-GA
 **Recommended (not blocking):**
 - [ ] Multiple prototype variants attempted if first returned PIVOT — natural selection between concepts produces better results than iterating one concept
 
+**Publishing Readiness Checks:**
+- [ ] Market research done (`production/publishing/market-research.md` exists) — run `/market-research`
+- [ ] Initial positioning drafted (genre, hook, target platforms documented)
+- [ ] Studio name + domains registered or planned
+- [ ] `/marketing-plan` has been run (publishing roadmap exists at `production/publishing/publishing-roadmap.md`)
+
 **Quality Checks:**
 - [ ] Game concept has been reviewed (`/design-review` verdict not MAJOR REVISION NEEDED)
 - [ ] Core loop is described and understood, informed by prototype learnings

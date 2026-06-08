@@ -5,8 +5,10 @@
 The sprint close-out sequence is non-negotiable and must run in this order:
 
 ```
-/smoke-check sprint → /team-qa sprint → /retrospective → /gate-check → /sprint-plan new
+/milestone-review → /smoke-check sprint → /team-qa sprint → /retrospective → /gate-check → /sprint-plan new
 ```
+
+**Milestone review must run first** — captures product health before sprint closes. Without it, the release-level summary loses the last sprint's contribution to milestone progress.
 
 **Retrospective MUST exist before `/sprint-plan new` runs.**
 

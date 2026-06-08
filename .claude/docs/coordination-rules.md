@@ -67,10 +67,15 @@ Requires `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` environment variable.
 
 See `.claude/rules/workflow.md` for the full rule. Short form:
 
+**`/milestone-review` runs first** — captures product health before sprint closes.
+
 **`/retrospective` must exist before `/sprint-plan new` runs — no exceptions.**
 
-Before generating a new sprint plan, confirm `production/retrospectives/retro-sprint-[N]-*.md`
-exists for the sprint being closed. If not found: BLOCKED — run `/retrospective` first.
+Before generating a new sprint plan, confirm:
+1. `/milestone-review` has been run for the current milestone
+2. `production/retrospectives/retro-sprint-[N]-*.md` exists for the sprint being closed
+
+If either is missing: BLOCKED — run the missing step first.
 
 ## Parallel Task Protocol
 
