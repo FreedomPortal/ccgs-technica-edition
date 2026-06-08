@@ -25,6 +25,22 @@ existing skill/hook/template architecture.
 
 ---
 
+## Path Reference
+
+All framework paths in this skill are relative to the **project root** (the directory containing `CLAUDE.md`), NOT relative to `.claude/skills/skill-test/`. The `Base directory` shown in the skill header is where `SKILL.md` lives — it is not the base for framework file lookups.
+
+| Resource | Path (from project root) |
+|----------|--------------------------|
+| Catalog | `CCGS Skill Testing Framework/catalog.yaml` |
+| Rubric | `CCGS Skill Testing Framework/quality-rubric.md` |
+| Skill specs | `CCGS Skill Testing Framework/skills/[category]/[name].md` |
+| Agent specs | `CCGS Skill Testing Framework/agents/[tier]/[name].md` |
+| Results | `CCGS Skill Testing Framework/results/` |
+
+Read `CCGS Skill Testing Framework/catalog.yaml` as the **first action** in every mode except `static all`.
+
+---
+
 ## Phase 1: Parse Arguments
 
 Determine mode from the first argument:
