@@ -56,12 +56,17 @@ found — burndown assessment skipped."
 
 **First: check for `production/sprint-status.yaml`.**
 
-If it exists, read it directly — it is the authoritative source of truth.
+If it exists, read it directly — it is the authoritative source for **current sprint status**.
 Extract status for each story from the `status` field. No markdown scanning needed.
 Use its `sprint`, `goal`, `start`, `end` fields instead of re-parsing the sprint plan.
 
-**If `sprint-status.yaml` does not exist** (legacy sprint or first-time setup),
-fall back to markdown scanning:
+Note: `sprint-status.yaml` is a view of the current sprint only. `production/backlog.yaml` is
+the canonical cross-sprint registry. This skill reads the sprint view; use `/backlog view` for
+full project scope.
+
+**If `sprint-status.yaml` does not exist**:
+- Check `production/backlog.yaml`. If found: filter stories where `sprint == [N]` and `status == in-sprint` to derive current sprint entries. Note: "sprint-status.yaml missing — derived from backlog.yaml."
+- If backlog.yaml also missing (legacy sprint or first-time setup): fall back to markdown scanning.
 
 1. If the entry references a story file path, check if the file exists.
    Read the file and scan for status markers: DONE, COMPLETE, IN PROGRESS,
