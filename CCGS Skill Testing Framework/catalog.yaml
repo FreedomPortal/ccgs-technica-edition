@@ -516,6 +516,17 @@ skills:
     priority: low
     category: analysis
 
+  - name: balance-sim
+    spec: ""
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: analysis
+
   - name: asset-audit
     spec: CCGS Skill Testing Framework/skills/analysis/asset-audit.md
     last_static: ""

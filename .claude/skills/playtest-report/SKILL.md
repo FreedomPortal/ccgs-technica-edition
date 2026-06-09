@@ -48,28 +48,39 @@ Generate this template and output it to the user:
 - **Emotional response**: [Engaged/Confused/Bored/Frustrated/Excited]
 - **Notes**: [Observations]
 
-## Gameplay Flow
-### What worked well
-- [Observation 1]
+## Game Flow Reconstruction
+[Chronological summary: what happened, in what order, at what moments did gameplay diverge from expected patterns. Describe the arc of the session — not just what was observed, but *when* and *in what sequence*.]
 
-### Pain points
-- [Issue 1 -- Severity: High/Medium/Low]
+- [T+0:00] [event / observation]
+- [T+X:XX] [moment of divergence from expected path]
 
-### Confusion points
-- [Where the player was confused and why]
+## Strategic Observations
+[What strategies worked, what was ignored, what felt dominant, what felt useless. Include what the player *tried* vs what the design *intended*.]
 
-### Moments of delight
-- [What surprised or pleased the player]
+- **Dominant strategies**: [what the player gravitated toward and why]
+- **Ignored systems**: [what was skipped or overlooked]
+- **Surprising behavior**: [emergent strategies the design did not anticipate]
+
+## Balance Assessment
+[Per-system: for each major system (combat, economy, progression, etc.) — what felt over/under-tuned and why. Ground in specific observations, not general impressions.]
+
+### [System 1 — e.g. Combat]
+- **Feels**: [Over-powered / Balanced / Under-powered]
+- **Evidence**: [specific moment that supports this]
+- **Suspected cause**: [formula, value, or rule that drove this]
+
+### [System 2 — e.g. Economy]
+...
+
+## Design Recommendations
+[Specific, actionable: change X because observed Y. One recommendation per observed problem. No vague suggestions — every entry must name the thing to change and the evidence for changing it.]
+
+1. **[Change X]** — because [observed Y]. Priority: [High/Medium/Low]
+2. **[Change X]** — because [observed Y]. Priority: [High/Medium/Low]
 
 ## Bugs Encountered
 | # | Description | Severity | Reproducible |
 |---|-------------|----------|-------------|
-
-## Feature-Specific Feedback
-### [Feature 1]
-- **Understood purpose?** [Yes/No]
-- **Found engaging?** [Yes/No]
-- **Suggestions**: [Tester suggestions]
 
 ## Quantitative Data (if available)
 - **Deaths**: [Count and locations]
@@ -81,12 +92,6 @@ Generate this template and output it to the user:
 - **Would play again?** [Yes/No/Maybe]
 - **Difficulty**: [Too Easy / Just Right / Too Hard]
 - **Pacing**: [Too Slow / Good / Too Fast]
-- **Session length preference**: [Shorter / Good / Longer]
-
-## Top 3 Priorities from this session
-1. [Most important finding]
-2. [Second priority]
-3. [Third priority]
 ```
 
 ---
@@ -94,6 +99,13 @@ Generate this template and output it to the user:
 ## Phase 2B: Analyze Mode
 
 Read the raw notes at the provided path. Cross-reference with existing design documents. Fill in the template above with structured findings. Flag any playtest observations that conflict with design intent.
+
+**Required output for all four analysis sections:**
+
+1. **Game Flow Reconstruction** — reconstruct the session timeline chronologically. Do not describe what the tester *said*, describe what *happened* and *when*.
+2. **Strategic Observations** — identify strategies used vs strategies intended. Cross-reference the game's core loop (from `design/gdd/game-concept.md` if available) to identify divergences.
+3. **Balance Assessment** — for each system mentioned in the notes, classify as over/balanced/under-tuned. Cite the specific observation. If balance data can be cross-referenced against formulas in the GDD, do so.
+4. **Design Recommendations** — one recommendation per observed problem. Each must name: the thing to change, the evidence, the priority. Vague entries ("improve pacing") are not acceptable — rewrite until specific.
 
 ---
 
