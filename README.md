@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
   <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-52-blueviolet" alt="52 Agents"></a>
-  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-122-green" alt="122 Skills"></a>
+  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-125-green" alt="125 Skills"></a>
   <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-15-orange" alt="15 Hooks"></a>
   <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-15-red" alt="15 Rules"></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
@@ -325,6 +325,38 @@ Applied by `/dev-story` in the programmer agent brief.
 Run the full sequence with one command: **`/sprint-close`** (`.claude/skills/sprint-close/SKILL.md`). It runs all five steps in order with gate-and-record confirmation at each step, then prints the Sprint #N: CLOSED declaration. `/sprint-plan new` is run separately in a fresh session.
 
 `/sprint-plan new` checks for `production/retrospectives/retro-sprint-[N]-*.md` before generating a plan. If the file is missing: **BLOCKED** — must run `/retrospective` first. Prevents velocity data loss and repeated process failures across sprint boundaries.
+
+---
+
+### Backlog System & Scope Visibility
+
+`/backlog`, `/roadmap`, and `/milestone-define` close the last structural gap in the framework: no persistent cross-sprint story registry.
+
+**Problem**: Sprint planning re-derived scope from raw GDDs every sprint. No answer existed for "how much work remains?" or "which milestone owns this epic?"
+
+**Solution — three-file architecture:**
+
+| File | Role |
+|------|------|
+| `production/backlog.yaml` | **Canonical** — all stories, all epics, all time. Single source of truth. |
+| `production/sprint-status.yaml` | **View** — current sprint slice only. Regeneratable from backlog if lost. |
+| `production/roadmap.md` | **Human view** — epic-to-milestone mapping + velocity-based completion horizon. |
+| `production/milestones/definitions/[name].md` | **Scope contract** — what a milestone includes, excludes, quality bar, and exit criteria. |
+
+**Staleness prevention** — three skills write to `backlog.yaml` automatically:
+- `/story-done` — marks story done, sets `completed_date`
+- `/sprint-close` — syncs sprint outcomes (done or carried-over)
+- `/sprint-plan new` — adds new sprint stories with status `in-sprint`
+
+**Scope awareness** — `production/milestones/active.txt` holds the current target milestone name. Scope-aware skills (`/gate-check`, `/sprint-plan` Phase 0.5, `/architecture-review`, `/backlog view`) read this to filter and prioritize.
+
+**Setup commands:**
+```
+/backlog init              # Build backlog.yaml from existing epics (one-time)
+/milestone-define init [name]  # Write a scope contract for a milestone
+/roadmap init              # Map epics to milestones + generate completion horizon
+/roadmap view              # Re-render roadmap after story completions
+```
 
 ---
 
