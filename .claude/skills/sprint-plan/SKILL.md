@@ -44,6 +44,8 @@ Check for `production/backlog.yaml`.
 2. `status: ready` — dependencies met, awaiting sprint planning
 3. `status: backlog` — not yet sprinted; surface grouped by `milestone_target`
 
+**Active milestone prioritization**: If `production/milestones/active.txt` exists, read the active milestone name. Within the backlog candidate list, stories where `milestone_target` matches the active milestone appear first, marked `[active milestone]`. Stories targeting other milestones appear after, marked with their `milestone_target` value.
+
 Present to the user before Phase 1 (skip if backlog has no candidates in the above statuses):
 > "Backlog candidates for Sprint N: [N carried-over, N ready, N backlog]. Use these as primary story list? [Y/N]"
 

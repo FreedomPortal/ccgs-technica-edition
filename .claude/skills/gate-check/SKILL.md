@@ -1,7 +1,7 @@
 ---
 name: gate-check
 description: "Validate readiness to advance between development phases. Produces a PASS/CONCERNS/FAIL verdict with specific blockers and required artifacts. Use when user says 'are we ready to move to X', 'can we advance to production', 'check if we can start the next phase', 'pass the gate'."
-argument-hint: "[target-phase: prototype | systems-design | technical-setup | pre-production | vertical-slice | production | polish | release] [--review full|lean|solo]"
+argument-hint: "[target-phase: prototype | systems-design | technical-setup | pre-production | vertical-slice | production | polish | release] [--review full|lean|solo] [--scope milestone-name]"
 user-invocable: true
 allowed-tools: Read, Glob, Grep, Bash, Write, Task, AskUserQuestion
 model: opus
@@ -47,6 +47,13 @@ Also resolve the review mode (once, store for all gate spawns this run):
 3. Else → default to `lean`
 
 Note: in `solo` mode, director spawns (CD-PHASE-GATE, TD-PHASE-GATE, PR-PHASE-GATE, AD-PHASE-GATE) are skipped — gate-check becomes artifact-existence checks only. In `lean` mode, all four directors still run (phase gates are the purpose of lean mode).
+
+**Active milestone scope** (scope-awareness, optional):
+1. If `--scope [name]` was passed → use that milestone name
+2. Else read `production/milestones/active.txt` → use that value
+3. Else → no milestone scope context (deferred section omitted from output)
+
+If a milestone name is resolved: read `production/milestones/definitions/[name].md` for its In Scope and Out of Scope sections. Store for use in Section 5 output.
 
 - **With argument**: `/gate-check production` — validate readiness for that specific phase
 - **No argument**: Auto-detect current stage using the same heuristics as
@@ -465,6 +472,10 @@ Do not advance the gate until the user explicitly selects [A] or [B]. A READY pr
 ### Recommendations
 - [Priority actions to resolve blockers]
 - [Optional improvements that aren't blocking]
+
+### Deferred — Out of Active Milestone Scope
+[If active milestone resolved: list systems/epics from the milestone definition's Out of Scope section, with deferral reasons]
+[If no active milestone: "(No active milestone set — run `/milestone-define activate [name]` to enable scope context)"]
 
 ### Verdict: [PASS / CONCERNS / FAIL]
 - **PASS**: All required artifacts present, all quality checks passing

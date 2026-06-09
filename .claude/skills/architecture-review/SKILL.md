@@ -238,11 +238,17 @@ exists when:
 - **State management conflict**: Two ADRs define authority over the same game state
   (e.g. both Combat ADR and Character ADR claim to own the health value)
 
+**Scope expansion — not a conflict**: If ADR-A has `Scope: MVP` and ADR-B has
+`Scope: Career` (or similar different scope fields), and their claims appear to
+contradict each other, this is an intentional phased scope expansion — not a
+genuine conflict. Tag with `[SCOPE-EXPANSION]` and do NOT count as a blocker.
+These are expected when the architecture evolves across milestones.
+
 For each conflict found:
 
 ```
 ## Conflict: [ADR-NNNN] vs [ADR-MMMM]
-Type: [Data ownership / Integration / Performance / Dependency / Pattern / State]
+Type: [Data ownership / Integration / Performance / Dependency / Pattern / State / SCOPE-EXPANSION]
 ADR-NNNN claims: [...]
 ADR-MMMM claims: [...]
 Impact: [What breaks if both are implemented as written]
@@ -250,6 +256,9 @@ Resolution options:
   1. [Option A]
   2. [Option B]
 ```
+
+`[SCOPE-EXPANSION]` entries: list separately under "Scope Expansions (Expected)" —
+do not include in the blocker count or FAIL verdict calculation.
 
 ### ADR Dependency Ordering
 
@@ -437,7 +446,11 @@ For each gap:
      Engine Risk: [LOW/MEDIUM/HIGH]
 
 ### Cross-ADR Conflicts
-[List all conflicts from Phase 4]
+[List all true conflicts from Phase 4 — exclude SCOPE-EXPANSION entries]
+
+### Scope Expansions (Expected)
+[List all [SCOPE-EXPANSION] entries from Phase 4 — informational only, not blockers]
+[Or: "None"]
 
 ### ADR Dependency Order
 [Topologically sorted implementation order from Phase 4 — dependency ordering section]
