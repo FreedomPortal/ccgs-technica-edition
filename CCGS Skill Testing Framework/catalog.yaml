@@ -674,7 +674,6 @@ skills:
 
   - name: playtest-report
     spec: CCGS Skill Testing Framework/skills/qa/playtest-report.md
-    category: qa
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -682,7 +681,29 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: qa
+
+  - name: tutorial-design
+    spec: ""
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: authoring
+
+  - name: player-docs
+    spec: ""
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: publish
 
   - name: milestone-review
     spec: CCGS Skill Testing Framework/skills/sprint/milestone-review.md

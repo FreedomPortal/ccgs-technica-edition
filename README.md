@@ -402,11 +402,11 @@ CCGS:TE skills map onto the 9-stage pipeline as a **parallel publishing track**.
 | 2 — Prototype | *(no new skills — `/prototype` is a base skill)* |
 | 3 — Systems Design | `/analytics-setup` |
 | 4 — Technical Setup | `/setup-tool` (if pipeline tool work in scope) |
-| 5 — Pre-Production | `/taste-gate`, `/community-plan` |
-| 6 — Vertical Slice | *(no new skills — `/vertical-slice` is a base skill)* |
-| 7 — Production | `/export-devlog`, `/export-social`, `/live-ops-plan` |
-| 8 — Polish | `/export-steam-page`, `/press-outreach`, `/export-pitch`, `/localization-*` |
-| 9 — Release | `/export-build`, `/team-publish`, `/post-mortem` |
+| 5 — Pre-Production | `/taste-gate`, `/community-plan`, `/tutorial-design` |
+| 6 — Vertical Slice | `/tutorial-design` (if tutorial is part of VS loop) |
+| 7 — Production | `/export-devlog`, `/export-social`, `/live-ops-plan`, `/export-status`, `/balance-sim` |
+| 8 — Polish | `/export-steam-page`, `/press-outreach`, `/export-pitch`, `/localization-*`, `/player-docs manual`, `/player-docs help-text` |
+| 9 — Release | `/export-build`, `/team-publish`, `/post-mortem`, `/player-docs guide` |
 | Post-Launch | `/dlc-design`, `/mod-support`, `/live-ops-plan` (operational) |
 | **Demo track** (parallel — branches from Production or Polish) | `/demo-plan`, `/demo-scope`, `/demo-build`, `/demo-playtest`, `/demo-feedback`, `/demo-iterate`, `/demo-polish`, `/demo-status`, `/demo-gate`, `/demo-integrate` |
 

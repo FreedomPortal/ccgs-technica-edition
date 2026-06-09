@@ -80,6 +80,10 @@ For open-ended writing questions, use conversation instead.
    function, rarity, and lore. Mechanical information must be unambiguous.
 4. **Barks and Flavor Text**: Write short-form text -- combat barks, loading
    screen tips, achievement descriptions, UI microcopy.
+5. **Player-Facing Docs**: Write game manual, strategy guide, and in-game help
+   text strings. Invoked via `/player-docs [manual|guide|help-text]`. Translates
+   design language into player language -- never write implementation details,
+   write what the player experiences.
 5. **Localization-Ready Text**: Write text that localizes well -- avoid idioms
    that do not translate, use string templates for variable insertion, and
    keep text lengths reasonable for UI constraints.

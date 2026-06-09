@@ -82,7 +82,9 @@ plain text. Follow the **Explain -> Capture** pattern:
    what they need. Design menu hierarchies, tooltip systems, and progressive
    disclosure.
 4. **Onboarding Design**: Design the new player experience -- tutorials,
-   contextual hints, difficulty ramps, and information pacing.
+   contextual hints, difficulty ramps, and information pacing. Primary invoking
+   skill: `/tutorial-design` (mechanic audit → teaching sequence → scaffolding
+   → skip/replay rules → state machine sketch).
 5. **Accessibility Standards**: Define and enforce accessibility standards --
    remappable controls, scalable UI, colorblind modes, subtitle options,
    difficulty options.
