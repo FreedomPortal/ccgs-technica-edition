@@ -316,11 +316,13 @@ Applied by `/dev-story` in the programmer agent brief.
 
 ### Sprint Close-Out Sequence Enforcement
 
-`.claude/rules/workflow.md` now hard-enforces the close-out order:
+`.claude/rules/workflow.md` hard-enforces the close-out order:
 
 ```
-/smoke-check sprint → /team-qa sprint → /retrospective → /gate-check → /sprint-plan new
+/milestone-review → /smoke-check sprint → /team-qa sprint → /retrospective → /gate-check → /sprint-plan new
 ```
+
+Run the full sequence with one command: **`/sprint-close`** (`.claude/skills/sprint-close/SKILL.md`). It runs all five steps in order with gate-and-record confirmation at each step, then prints the Sprint #N: CLOSED declaration. `/sprint-plan new` is run separately in a fresh session.
 
 `/sprint-plan new` checks for `production/retrospectives/retro-sprint-[N]-*.md` before generating a plan. If the file is missing: **BLOCKED** — must run `/retrospective` first. Prevents velocity data loss and repeated process failures across sprint boundaries.
 

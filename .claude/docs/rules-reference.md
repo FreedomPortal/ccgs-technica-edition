@@ -4,7 +4,7 @@
 
 | Rule File | Enforces |
 | ---- | ---- |
-| `workflow.md` | Sprint close-out sequence, retro-before-plan enforcement |
+| `workflow.md` | Sprint close-out sequence, retro-before-plan enforcement — run via `/sprint-close` |
 | `coding-agent-behavior.md` | Think before execute, simplicity, surgical changes, goal-driven execution — passed to all coding agent Task prompts via `dev-story` |
 
 ## Path-Specific Rules

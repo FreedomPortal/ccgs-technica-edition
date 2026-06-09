@@ -425,13 +425,18 @@ If no more Must Have stories remain in this sprint (all are Complete or Blocked)
 ### Sprint Close-Out Sequence
 
 All Must Have stories are complete. QA sign-off is required before advancing.
-Run these in order:
+Run the full sequence with one command:
 
-1. `/smoke-check sprint` — verify the critical path still works end-to-end
-2. `/team-qa sprint` — full QA cycle: test case execution, bug triage, sign-off report
-3. `/retrospective` — capture what went well, what didn't, and action items for the next sprint
-4. `/gate-check` — advance to the next phase once QA approves (only if advancing a phase)
-5. `/sprint-plan new` — plan the next sprint, incorporating velocity data and retrospective action items
+`/sprint-close` — orchestrates all five steps in order with gate-and-record confirmation at each.
+
+Or run manually in this order:
+1. `/milestone-review` — capture product health before closing
+2. `/smoke-check sprint` — verify the critical path still works end-to-end
+3. `/team-qa sprint` — full QA cycle: test case execution, bug triage, sign-off report
+4. `/retrospective` — capture what went well, what didn't, and action items for the next sprint
+5. `/gate-check` — advance to the next phase once QA approves (only if advancing a phase)
+
+Then in a fresh session: `/sprint-plan new` — plan the next sprint with velocity data and retro action items pre-loaded.
 
 Do not run `/gate-check` until `/team-qa` returns APPROVED or APPROVED WITH CONDITIONS.
 ```

@@ -65,7 +65,7 @@ Requires `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` environment variable.
 
 ## Sprint Close-Out Sequence
 
-See `.claude/rules/workflow.md` for the full rule. Short form:
+See `.claude/rules/workflow.md` for the full rule. Run the entire sequence with **`/sprint-close`** (`.claude/skills/sprint-close/SKILL.md`) — it orchestrates all five steps with gate-and-record confirmation at each. Short form:
 
 **`/milestone-review` runs first** — captures product health before sprint closes.
 
@@ -75,7 +75,7 @@ Before generating a new sprint plan, confirm:
 1. `/milestone-review` has been run for the current milestone
 2. `production/retrospectives/retro-sprint-[N]-*.md` exists for the sprint being closed
 
-If either is missing: BLOCKED — run the missing step first.
+If either is missing: BLOCKED — run the missing step first. `/sprint-plan new` runs separately after `/sprint-close` completes.
 
 ## Parallel Task Protocol
 
