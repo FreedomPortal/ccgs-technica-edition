@@ -4,6 +4,11 @@
 
 [Proposed | Accepted | Deprecated | Superseded by ADR-XXXX]
 
+## Scope
+
+[MVP | Career | Post-Launch | All]
+[Brief description of what project phase this decision applies to. Omit if scope is obvious.]
+
 ## Date
 
 [YYYY-MM-DD — when this ADR was written]
@@ -155,6 +160,14 @@ creates. These become the contracts that implementers must respect.]
 - [ ] [Measurable criterion 1]
 - [ ] [Measurable criterion 2]
 - [ ] [Performance criterion]
+
+## Superseded Criteria
+
+<!-- Optional. If this ADR deliberately makes an earlier ADR's validation criteria
+     invalid, list them here so /architecture-review can flag them as obsolete rather
+     than reporting false failures. -->
+
+- [ADR-NNNN criterion X] — superseded because [reason]
 
 ## GDD Requirements Addressed
 
