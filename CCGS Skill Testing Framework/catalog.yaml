@@ -202,6 +202,17 @@ skills:
     priority: medium
     category: sprint
 
+  - name: export-status
+    spec: ""
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: medium
+    category: sprint
+
   - name: milestone-define
     spec: ""
     last_static: ""
