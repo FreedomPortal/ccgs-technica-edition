@@ -371,7 +371,12 @@ If "Fix first": stop here and list what the user flagged. Do not write any files
    - Update the top-level `updated` field
    - This is a silent update — no extra approval needed (already approved in step above)
 
-6. **Suggest a git commit**: Output a ready-to-use commit command covering the implementation files from the dev-story summary and the updated story file:
+6. **Update `production/backlog.yaml`** (if it exists):
+   - Find the entry matching this story's ID or `file` path
+   - Set `status: done` and `completed_date: [today's date]`
+   - This is a silent update — no extra approval needed
+
+7. **Suggest a git commit**: Output a ready-to-use commit command covering the implementation files from the dev-story summary and the updated story file:
 
 ```
 Suggested commit:

@@ -31,6 +31,26 @@ See `.claude/docs/director-gates.md` for the full check pattern.
 
 ---
 
+## Phase 0.5: Backlog Read
+
+Check for `production/backlog.yaml`.
+
+**If missing**: continue with GDD inference in Phase 1 (degraded mode). Note:
+> "No backlog.yaml found — falling back to GDD scan for story candidates. Run `/backlog init` to enable backlog-driven planning."
+
+**If found**: read `production/backlog.yaml`. Identify story candidates in this order:
+
+1. `status: carried-over` — not completed from a previous sprint; offer as first candidates
+2. `status: ready` — dependencies met, awaiting sprint planning
+3. `status: backlog` — not yet sprinted; surface grouped by `milestone_target`
+
+Present to the user before Phase 1 (skip if backlog has no candidates in the above statuses):
+> "Backlog candidates for Sprint N: [N carried-over, N ready, N backlog]. Use these as primary story list? [Y/N]"
+
+GDD scan in Phase 1 then runs as a **secondary check** — surfaces new stories not yet in the backlog.
+
+---
+
 ## Phase 1: Gather Context
 
 1. **Read the current milestone** from `production/milestones/`.
@@ -348,6 +368,10 @@ After handling the producer's verdict, ask: "May I write the sprint plan to `pro
 After writing, add:
 
 > **Scope check:** If this sprint includes stories added beyond the original epic scope, run `/scope-check [epic]` to detect scope creep before implementation begins.
+
+**Backlog sync**: If `production/backlog.yaml` exists, update it silently after write approval:
+- For each story in the new sprint: if already in backlog → set `status: in-sprint`; if not in backlog → add new entry with `status: in-sprint`, `sprint: N`, and metadata from the sprint-status.yaml entry.
+No separate confirmation needed — covered by the write approval above.
 
 ---
 

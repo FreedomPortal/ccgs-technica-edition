@@ -153,6 +153,12 @@ Sprint #N: CLOSED
 
 ## Phase 7: Close Declaration
 
+**Backlog sync**: If `production/backlog.yaml` exists, silently sync all sprint stories:
+- Re-read `production/sprint-status.yaml` final state
+- For each story with `status: done` → update backlog entry: `status: done`, `completed_date: [completed field value]`
+- For each story with `status: backlog` (not completed this sprint) → update backlog entry: `status: carried-over`
+No confirmation needed — this is automatic on sprint close.
+
 Display:
 
 ```
