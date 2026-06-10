@@ -15,6 +15,7 @@ Read:
 - `production/publishing/live-ops-strategy.md` — load if exists (update vs. create)
 - `production/publishing/publishing-roadmap.md` — launch window and current stage
 - `design/monetization/monetization-plan.md` — if it exists, read revenue model context
+- `docs/analytics/retention-*.md` — load any existing retention analyses (pre-fills Phase 3 with data-informed retention problem selection)
 
 If no game concept exists, stop:
 > "No game concept found. Run `/brainstorm` first — live ops design depends on
@@ -218,7 +219,9 @@ Output:        production/publishing/live-ops-strategy.md
 Next steps:
 1. Use /live-event [event name] to detail each event in the calendar
 2. Use /analytics-setup to wire up the engagement metrics listed above
-3. Run /balance-check after launch to validate economy health indicators
+3. Run /retention-analysis after 2+ weeks of live data to identify which
+   segments are churning and validate that retention mechanics are working
+4. Run /balance-check after launch to validate economy health indicators
 
 Verdict: COMPLETE — live ops strategy designed.
 ```

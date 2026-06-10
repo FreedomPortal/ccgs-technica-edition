@@ -400,14 +400,14 @@ CCGS:TE skills map onto the 9-stage pipeline as a **parallel publishing track**.
 |-------|--------------------------|
 | 1 — Concept | `/market-research`, `/marketing-plan`, `/monetization-design` |
 | 2 — Prototype | *(no new skills — `/prototype` is a base skill)* |
-| 3 — Systems Design | `/analytics-setup` |
+| 3 — Systems Design | `/analytics-setup`, `/telemetry-design` |
 | 4 — Technical Setup | `/setup-tool` (if pipeline tool work in scope) |
 | 5 — Pre-Production | `/taste-gate`, `/community-plan`, `/tutorial-design` |
 | 6 — Vertical Slice | `/tutorial-design` (if tutorial is part of VS loop) |
-| 7 — Production | `/export-devlog`, `/export-social`, `/live-ops-plan`, `/export-status`, `/balance-sim` |
-| 8 — Polish | `/export-steam-page`, `/press-outreach`, `/export-pitch`, `/localization-*`, `/player-docs manual`, `/player-docs help-text` |
+| 7 — Production | `/export-devlog`, `/export-social`, `/live-ops-plan`, `/export-status`, `/balance-sim`, `/player-segmentation` |
+| 8 — Polish | `/export-steam-page`, `/press-outreach`, `/export-pitch`, `/localization-*`, `/player-docs manual`, `/player-docs help-text`, `/economy-simulation` |
 | 9 — Release | `/export-build`, `/team-publish`, `/post-mortem`, `/player-docs guide` |
-| Post-Launch | `/dlc-design`, `/mod-support`, `/live-ops-plan` (operational) |
+| Post-Launch | `/dlc-design`, `/mod-support`, `/live-ops-plan` (operational), `/retention-analysis`, `/ab-test`, `/player-segmentation` (ongoing), `/economy-simulation` (live) |
 | **Demo track** (parallel — branches from Production or Polish) | `/demo-plan`, `/demo-scope`, `/demo-build`, `/demo-playtest`, `/demo-feedback`, `/demo-iterate`, `/demo-polish`, `/demo-status`, `/demo-gate`, `/demo-integrate` |
 
 `/publish-check` runs automatically at **every session start** via `session-start.sh` — surfaces overdue publishing tasks and unlocked actions without interrupting workflow.
@@ -428,14 +428,12 @@ CCGS:TE skills map onto the 9-stage pipeline as a **parallel publishing track**.
 - Reads Engine Compatibility sections from all ADRs to build the crosswalk
 - Produces `docs/porting/[source]-to-[target]-guide.md`
 
-**Player Insight Loop** — analytics and live ops exist but no feedback loop connecting them:
-- `/telemetry-design` — instrument player events at the design level
-- `/player-segmentation` — define player cohorts for targeted analysis
-- `/ab-test` — design and track A/B tests for feature decisions
-- `/retention-analysis` — structured retention curve analysis
-- `/economy-simulation` — simulate economy balance before shipping changes
-
-**New Agent: `growth-analyst`** — or expand `analytics-engineer` into a hybrid data + product thinking role. Owns the Player Insight Loop skills.
+**Player Insight Loop** ✓ *Implemented (Phase 10)* — `growth-analyst` agent + 5 skills closing the data → decision loop:
+- `/telemetry-design` — business question → minimum event set
+- `/player-segmentation` — cohort definitions with behavioral thresholds and live ops levers
+- `/ab-test` — design, review (statistical significance), and log A/B tests
+- `/retention-analysis` — curve classification, drop-off identification, genre benchmark comparison
+- `/economy-simulation` — resource flow projections, time-to-progression, inflation risk
 
 ---
 ## Getting Started

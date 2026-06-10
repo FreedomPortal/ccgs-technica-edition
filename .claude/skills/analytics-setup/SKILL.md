@@ -272,8 +272,11 @@ Next steps:
 1. Implement analytics_manager as an [ENGINE] singleton/autoload
 2. Start with MUST TRACK events — wire session.start and session.end first
 3. Run /architecture-decision to record the analytics platform choice as an ADR
-4. After 2+ weeks of data, use /balance-check with event log output to validate
-   formulas and identify balance outliers
+4. For targeted event design around a specific business question (e.g., "why is
+   D7 retention low?"), use /telemetry-design — it produces a focused event set
+   without redesigning the full taxonomy
+5. After 2+ weeks of live data, use /retention-analysis to classify your
+   retention curve and identify drop-off points against genre benchmarks
 
 Verdict: COMPLETE — analytics plan designed.
 ```

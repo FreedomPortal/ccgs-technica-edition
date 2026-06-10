@@ -122,6 +122,15 @@ phases:
         repeatable: true
         description: "Scan all GDDs for contradictions, undefined references, and mechanic conflicts. Run after /review-all-gdds, and again any time a GDD is added or revised mid-project."
 
+      - id: telemetry-design
+        name: "Telemetry Design"
+        command: /telemetry-design
+        required: false
+        repeatable: true
+        artifact:
+          glob: "docs/analytics/telemetry-*.md"
+        description: "Turn a specific business question into a minimum event taxonomy. Run when you want to instrument a specific question before or after /analytics-setup. Repeatable — one run per question or concern area."
+
   technical-setup:
     label: "Technical Setup"
     description: "Architecture decisions, visual identity specification, accessibility foundations, engine validation"
@@ -341,6 +350,14 @@ phases:
         repeatable: true
         description: "Coordinate multiple agents on a complex feature. Use: /team-combat, /team-narrative, /team-ui, /team-audio, /team-level, /team-live-ops, /team-qa. Run when a feature spans multiple agent domains."
 
+      - id: player-segmentation
+        name: "Player Segmentation"
+        command: /player-segmentation
+        required: false
+        artifact:
+          glob: "docs/analytics/player-segments.md"
+        description: "Define player cohorts with behavioral thresholds and live ops lever mappings. Run once initial analytics data is available, or pre-launch as a design exercise. Update post-launch as real data calibrates thresholds."
+
       - id: scope-check
         name: "Scope Check"
         command: /scope-check
@@ -389,6 +406,15 @@ phases:
           min_count: 3
         description: "Cover: new player experience, mid-game systems, difficulty curve"
 
+      - id: economy-simulation
+        name: "Economy Simulation"
+        command: /economy-simulation
+        required: false
+        repeatable: true
+        artifact:
+          glob: "docs/analytics/economy-sim-*.md"
+        description: "Project resource flows, time-to-progression, and inflation risk from the economy GDD math model. Run before shipping economy changes or as a pre-launch balance validation. Distinct from /balance-check (formula correctness) and /balance-sim (combat simulation)."
+
       - id: team-polish
         name: "Polish Team Pass"
         command: /team-polish
@@ -398,7 +424,7 @@ phases:
   release:
     label: "Release"
     description: "Launch preparation, certification, and ship"
-    next_phase: null
+    next_phase: post-launch
     steps:
       - id: release-checklist
         name: "Release Checklist"
@@ -423,3 +449,57 @@ phases:
         command: /launch-checklist
         required: true
         description: "Final launch readiness — last gate before shipping to players"
+
+  post-launch:
+    label: "Post-Launch"
+    description: "Player Insight Loop — instrument, observe, segment, test, simulate, iterate"
+    next_phase: null
+    steps:
+      - id: retention-analysis
+        name: "Retention Analysis"
+        command: /retention-analysis
+        required: false
+        repeatable: true
+        artifact:
+          glob: "docs/analytics/retention-*.md"
+        description: "Classify retention curve, identify drop-off points, compare to genre benchmarks. Run after 4+ weeks of live data, then monthly (or weekly if curve is a cliff or flat). Also available pre-launch to design the measurement framework."
+
+      - id: player-segmentation-live
+        name: "Player Segmentation (calibrate)"
+        command: /player-segmentation
+        required: false
+        artifact:
+          glob: "docs/analytics/player-segments.md"
+          pattern: "Status: Active"
+        description: "Calibrate segment thresholds with live data. If player-segments.md was created pre-launch with estimated thresholds, update it here with real behavioral data. Target: 4 weeks post-launch."
+
+      - id: ab-test
+        name: "A/B Test"
+        command: /ab-test
+        required: false
+        repeatable: true
+        artifact:
+          glob: "docs/analytics/ab-tests/*.md"
+        description: "Design, review (with statistical significance check), and log A/B tests. Run /ab-test design before any experiment, /ab-test review when results are available, /ab-test log when concluded."
+
+      - id: economy-simulation-live
+        name: "Economy Simulation (live)"
+        command: /economy-simulation
+        required: false
+        repeatable: true
+        artifact:
+          glob: "docs/analytics/economy-sim-*.md"
+        description: "Re-run economy projections with real earn/spend data as calibration input. Identify economy drift before it causes player-visible problems."
+
+      - id: telemetry-design-live
+        name: "Telemetry Design (targeted)"
+        command: /telemetry-design
+        required: false
+        repeatable: true
+        description: "Add targeted events in response to live findings. Use when retention-analysis or ab-test identifies a blind spot that existing events can't explain."
+
+      - id: live-ops-plan-operational
+        name: "Live Ops Plan (operational)"
+        command: /live-ops-plan
+        required: false
+        description: "Update the live ops strategy based on data from /retention-analysis and /ab-test. The original live-ops-plan is the initial design; this step keeps it current post-launch."
