@@ -10,8 +10,8 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
-  <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-52-blueviolet" alt="52 Agents"></a>
-  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-132-green" alt="132 Skills"></a>
+  <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-53-blueviolet" alt="53 Agents"></a>
+  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-140-green" alt="140 Skills"></a>
   <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-15-orange" alt="15 Hooks"></a>
   <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-15-red" alt="15 Rules"></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
@@ -77,6 +77,13 @@ Owns pipeline tools that operate outside the game engine: asset processors, data
 Handles localization execution under `localization-lead` direction. String wrapping, context validation, LQA (overflow, tone, placeholder, cultural checks), and translation sync when source text changes.
 
 **Domain:** String implementation and validation. The `localization-lead` handles strategy; this agent executes.
+
+---
+
+### `growth-analyst`
+Owns the player insight loop — telemetry design, player segmentation, A/B test design, retention curve analysis, and economy simulation. Bridges raw event data and actionable design decisions.
+
+**Domain:** Analytics strategy, behavioral cohort definitions, A/B test review, retention benchmarks, resource flow projections.
 
 ---
 
@@ -160,16 +167,21 @@ For Early Access: add `--early-access` to `/demo-plan` and `/demo-build`. Two ad
 
 ### Localization Suite
 
+The l10n track is an **opt-in side track** activated at `/start`. Intent (YES / NO / LATER) is captured at Concept and stored in `production/localization/intent.md`. Gate-check surfaces l10n requirements at key stages; session-start shows live status when intent = YES.
+
+Full pipeline: `/l10n-i18n` → `/l10n-prepare` → `/l10n-integrate` → `/l10n-sync` → `/l10n-qa` → `/l10n-cultural-review` → `/l10n-rtl` (RTL locales) → `/l10n-vo` (voiced games).
+
 | Skill | Purpose |
 |-------|---------|
-| `/localize` | Full pipeline — scan → wrap → translate → QA (use for first-time localization of a feature) |
-| `/localization-prepare` | Scan for unwrapped strings, wrap in `tr()`, scaffold string table |
-| `/localization-integrate` | Mid-pipeline integration — import translations, resolve merge conflicts |
-| `/localization-sync` | Detect stale translations when source text changes |
-| `/localization-qa` | Dedicated LQA pass — overflow, tone, placeholder, cultural checks |
-| `/localization-cultural-review` | Standalone cultural sensitivity review per locale |
-| `/localization-rtl` | RTL layout validation for Arabic/Hebrew locales |
-| `/localization-vo` | Voice-over pipeline — script export, casting brief, sync validation |
+| `/l10n-check` | Stage-aware status snapshot — shows what's done, missing, or overdue for the current pipeline stage |
+| `/l10n-i18n` | i18n readiness audit — number/date/currency formatting, plural gaps, string concatenation, locale-naive code patterns |
+| `/l10n-prepare` | Scan for unwrapped strings, wrap in `tr()`, scaffold string table with plural form support |
+| `/l10n-integrate` | Mid-pipeline — export with translator brief + screenshot checklist, import translations |
+| `/l10n-sync` | Detect stale translations after source text changes |
+| `/l10n-qa` | LQA pass — overflow, placeholders, plural form counts, tone, cultural checks |
+| `/l10n-cultural-review` | Standalone cultural sensitivity review of source content per locale |
+| `/l10n-rtl` | RTL layout validation for Arabic/Hebrew/Persian/Urdu locales |
+| `/l10n-vo` | Voice-over pipeline — recording manifest, scripts, audio validation, code integration |
 
 ---
 
@@ -405,10 +417,11 @@ CCGS:TE skills map onto the 9-stage pipeline as a **parallel publishing track**.
 | 5 — Pre-Production | `/taste-gate`, `/community-plan`, `/tutorial-design` |
 | 6 — Vertical Slice | `/tutorial-design` (if tutorial is part of VS loop) |
 | 7 — Production | `/export-devlog`, `/export-social`, `/live-ops-plan`, `/export-status`, `/balance-sim`, `/player-segmentation` |
-| 8 — Polish | `/export-steam-page`, `/press-outreach`, `/export-pitch`, `/localization-*`, `/player-docs manual`, `/player-docs help-text`, `/economy-simulation` |
+| 8 — Polish | `/export-steam-page`, `/press-outreach`, `/export-pitch`, `/player-docs manual`, `/player-docs help-text`, `/economy-simulation` |
 | 9 — Release | `/export-build`, `/team-publish`, `/post-mortem`, `/player-docs guide` |
 | Post-Launch | `/dlc-design`, `/mod-support`, `/live-ops-plan` (operational), `/retention-analysis`, `/ab-test`, `/player-segmentation` (ongoing), `/economy-simulation` (live) |
 | **Demo track** (parallel — branches from Production or Polish) | `/demo-plan`, `/demo-scope`, `/demo-build`, `/demo-playtest`, `/demo-feedback`, `/demo-iterate`, `/demo-polish`, `/demo-status`, `/demo-gate`, `/demo-integrate` |
+| **L10n track** (parallel opt-in — activated at Concept, gates at Technical Setup / VS / Production / Polish / Release) | `/l10n-check`, `/l10n-i18n`, `/l10n-prepare`, `/l10n-integrate`, `/l10n-sync`, `/l10n-qa`, `/l10n-cultural-review`, `/l10n-rtl`, `/l10n-vo` |
 
 `/publish-check` runs automatically at **every session start** via `session-start.sh` — surfaces overdue publishing tasks and unlocked actions without interrupting workflow.
 
