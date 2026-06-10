@@ -25,6 +25,7 @@ If no argument provided, use `AskUserQuestion`:
   - `Sprint [N]` — specific sprint retrospective (I'll type it below)
 
 Read the following to gather evidence before spawning any agents:
+- `.claude/docs/technical-preferences.md` — engine name, version, language, team size
 - `production/stage.txt` — current stage
 - `production/milestones/*.md` — milestone definitions and goals
 - `production/sprints/` — sprint files for the period covered (Glob `production/sprints/*.md`)
@@ -41,7 +42,7 @@ Summarize internally what was planned vs. what was delivered before spawning.
 Spawn the `producer` agent via Task with this prompt, substituting what was read:
 
 ```
-You are the producer for [GAME TITLE] ([ENGINE], solo developer).
+You are the producer for [GAME TITLE] ([ENGINE] [ENGINE_VERSION], [TEAM_SIZE]).
 Milestone under review: [MILESTONE]
 
 Evidence gathered from the project:

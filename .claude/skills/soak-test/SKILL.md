@@ -96,7 +96,7 @@ Engine-specific monitoring guidance:
 - Alert threshold: Memory growth > 20% from T+0 after the first 15 minutes
   (some growth on load is expected; sustained growth indicates a leak)
 - Note: `Performance.get_monitor(Performance.MEMORY_STATIC)` returns bytes
-  in Godot 4.6
+  in Godot 4.x (verify against `docs/engine-reference/godot/` for current version)
 
 **Unity:**
 - Open Memory Profiler (Window → Analysis → Memory Profiler)

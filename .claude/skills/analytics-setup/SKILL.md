@@ -52,7 +52,7 @@ Record the goal — it determines which events are high-priority vs. optional.
 
 ## Phase 4: Platform Choice
 
-Present options with honest tradeoffs for an indie game on Steam running [ENGINE]:
+Present options with honest tradeoffs for an indie game on Steam running [ENGINE] [ENGINE_VERSION] (read from `.claude/docs/technical-preferences.md`):
 
 > **Analytics platform options:**
 >
@@ -96,7 +96,7 @@ extracted from `game-concept.md`:
 
 ```
 You are the analytics-engineer for [GAME TITLE], a [GENRE] game targeting [PLATFORMS],
-built in [ENGINE].
+built in [ENGINE] [ENGINE_VERSION] ([PRIMARY_LANGUAGE]).
 
 Read design/gdd/game-concept.md for the full game context before designing the event taxonomy.
 
@@ -133,14 +133,12 @@ After the agent completes, present the taxonomy to the user for review before wr
 
 ---
 
-## Phase 6: [ENGINE] Integration Notes
+## Phase 6: Engine Integration Notes
 
 Before including any code in the output document:
-1. Check `docs/engine-reference/[ENGINE]/` for any breaking changes to networking, 
-   file access, or JSON APIs in recent versions of [ENGINE]
+1. Check `docs/engine-reference/` for any breaking changes to HTTP, file I/O, time, or JSON APIs in the current engine version
 2. If changes are found, adjust the snippet accordingly
-3. If uncertain about a specific API call, use WebSearch to verify against the
-   official [ENGINE] documentation before including it
+3. If uncertain about a specific API call, use WebSearch to verify against the official engine documentation before including it
 
 Include an [ENGINE]-specific integration section in the plan based on the platform chosen:
 

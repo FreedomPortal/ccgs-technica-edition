@@ -97,7 +97,7 @@ Output path: `builds/[VERSION]/[PLATFORM]/[GAME_NAME].[EXT]`
 Spawn the **[ENGINE]-specialist** agent via Task with this prompt:
 
 ```
-Review the [ENGINE] export configuration for a headless CLI build targeting [PRESET_NAME].
+Review the [ENGINE] [ENGINE_VERSION] export configuration for a headless CLI build targeting [PRESET_NAME].
 
 Read:
 - Export configuration files — verify the preset exists and has a valid path.

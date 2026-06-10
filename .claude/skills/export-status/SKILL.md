@@ -228,17 +228,12 @@ Never fail hard. Always produce a partial report.
 
 ---
 
-## Validation: Workshop Rivals Sprint 1–5
+## Validation Sanity Check
 
-After writing the skill, verify the formulas produce plausible output against known data:
+After computing velocity, verify the formulas produce plausible output:
 
-- S1: 8 stories done (est: 8.5d), 0 mid-sprint adds
-- S2: 23 stories done (est: 23.0d) — core foundation sprint, outlier
-- S3: 12 stories done (est: 13.0d)
-- S4: 9 stories done (est: 9.0d)
-- S5: 6 stories done (est: 6.5d)
+- 3-sprint avg should be lower than the all-time avg if early sprints were setup-heavy outliers
+- Confidence should be LOW when variance across sprints exceeds 40%
+- Predictability index should be < 1.0 when must-have % data is missing from sprint files
 
-Expected 3-sprint avg (S3–S5): ~9 stories/sprint
-Expected 5-sprint avg: ~11.6 stories/sprint
-Expected confidence: LOW (S2 outlier inflates variance)
-Expected predictability: requires must-have data from sprint files
+Never fail hard. Always produce a partial report with available data.

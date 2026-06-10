@@ -85,7 +85,7 @@ For each file in the candidate source set, classify every external dependency:
 - `Engine.get_singleton()`, autoload access by name
 
 Flag as Project coupling:
-- Hardcoded autoload names (e.g. `PartDatabase.get_part(...)` where `PartDatabase` is a project autoload)
+- Hardcoded autoload names (e.g. `GameManager.get_part(...)` where `GameManager` is a project autoload)
 - Scene paths that reference other systems' scenes (`res://src/other_system/...`)
 - Hardcoded constants defined in another system's file
 
@@ -161,7 +161,7 @@ Files to copy (no changes needed):
 
 Files requiring adaptation (project couplings to stub out):
   → src/[system-name]/[file].gd → exports/modules/[system-name]/src/
-     Adaptation: [what changes — e.g. "Replace PartDatabase autoload with injected IDependency parameter"]
+     Adaptation: [what changes — e.g. "Replace GameManager autoload with injected IDependency parameter"]
 
 Docs to include:
   → design/gdd/[section].md sections: [list headings] → exports/modules/[system-name]/docs/
