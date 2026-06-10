@@ -223,6 +223,14 @@ phases:
         required: true
         description: "Validate all key screen UX specs for GDD alignment and accessibility tier compliance. Run before creating epics."
 
+      - id: roadmap
+        name: "Roadmap"
+        command: /roadmap
+        required: true
+        artifact:
+          glob: "production/roadmap.yaml"
+        description: "Define project scope — assigns every system to a milestone. Writes production/roadmap.yaml (scope authority, read by /create-epics and /sprint-plan) and production/roadmap.md (narrative view). Run /roadmap init once before creating epics; /roadmap update after new GDDs are added."
+
       - id: create-epics
         name: "Create Epics"
         command: /create-epics
@@ -231,7 +239,7 @@ phases:
         artifact:
           glob: "production/epics/*/EPIC.md"
           min_count: 1
-        description: "Translate GDDs + ADRs into epics — one per architectural module. Run per layer: /create-epics layer: foundation, then /create-epics layer: core"
+        description: "Translate GDDs + ADRs into epics — one per architectural module. Reads production/roadmap.yaml as scope authority. Run per layer: /create-epics layer: foundation, then /create-epics layer: core"
 
       - id: create-stories
         name: "Create Stories"

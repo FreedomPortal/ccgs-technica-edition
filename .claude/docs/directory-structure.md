@@ -19,6 +19,16 @@
 ├── tools/                       # Build and pipeline tools (ci, build, asset-pipeline)
 ├── prototypes/                  # Throwaway prototypes (isolated from src/)
 └── production/                  # Production management (sprints, milestones, releases)
+    ├── roadmap.yaml             # Scope authority — milestone-to-system assignments (written by /roadmap)
+    ├── roadmap.md               # Human-readable narrative view of roadmap.yaml
+    ├── backlog.yaml             # Canonical story registry — all epics/stories across all sprints
+    ├── sprint-status.yaml       # Current sprint view (generated from backlog; regeneratable)
+    ├── wishlist.yaml            # Uncommitted ideas holding area (written by /wishlist)
+    ├── milestones/              # Milestone definitions and active.txt (current milestone name)
+    ├── epics/                   # Epic files — one subdirectory per epic (EPIC.md + story files)
+    ├── sprints/                 # Sprint plan files (sprint-NN.md)
+    ├── retrospectives/          # Sprint retrospectives
+    ├── qa/                      # QA plans, sign-offs, smoke checks, evidence docs
     ├── session-state/           # Ephemeral session state (active.md — gitignored)
     └── session-logs/            # Session audit trail (gitignored)
 ```

@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
   <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-53-blueviolet" alt="53 Agents"></a>
-  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-140-green" alt="140 Skills"></a>
+  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-141-green" alt="141 Skills"></a>
   <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-15-orange" alt="15 Hooks"></a>
   <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-15-red" alt="15 Rules"></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
@@ -100,6 +100,7 @@ Owns the player insight loop — telemetry design, player segmentation, A/B test
 | `/memory-prune` | Remove stale forward-looking entries from agent memory and session state — run at sprint boundaries or before `/gate-check` and `/architecture-review` |
 | `/autosave-mode` | Configure crash-protection level for long tasks: `off` / `remind` / `enforce` — set once per project, survives sessions |
 | `/log-lesson` | Encode a lesson from external review, playtesting, or press feedback into `production/publishing/writing-lessons.md` |
+| `/wishlist` | Lightweight holding area for uncommitted ideas — distinct from the backlog (committed work). Modes: add, view, promote, defer, prune. Data: `production/wishlist.yaml`. |
 
 ---
 
@@ -342,17 +343,19 @@ Run the full sequence with one command: **`/sprint-close`** (`.claude/skills/spr
 
 ### Backlog System & Scope Visibility
 
-`/backlog`, `/roadmap`, and `/milestone-define` close the last structural gap in the framework: no persistent cross-sprint story registry.
+`/roadmap`, `/wishlist`, `/backlog`, and `/milestone-define` form the scope pipeline: a persistent, cross-sprint registry with a clear authority chain.
 
-**Problem**: Sprint planning re-derived scope from raw GDDs every sprint. No answer existed for "how much work remains?" or "which milestone owns this epic?"
+**Pipeline:** `/roadmap` defines scope → `/create-epics` uses it → `/create-stories` fills it → `/backlog` tracks it
 
-**Solution — three-file architecture:**
+**Solution — four-file architecture:**
 
 | File | Role |
 |------|------|
-| `production/backlog.yaml` | **Canonical** — all stories, all epics, all time. Single source of truth. |
-| `production/sprint-status.yaml` | **View** — current sprint slice only. Regeneratable from backlog if lost. |
-| `production/roadmap.md` | **Human view** — epic-to-milestone mapping + velocity-based completion horizon. |
+| `production/roadmap.yaml` | **Scope authority** — assigns every system to a milestone. Written by `/roadmap`, read by `/create-epics`, `/backlog`, `/sprint-plan`. Never edit manually. |
+| `production/backlog.yaml` | **Canonical story registry** — all stories, all epics, all time. |
+| `production/sprint-status.yaml` | **Sprint view** — current sprint slice only. Regeneratable from backlog if lost. |
+| `production/roadmap.md` | **Human view** — epic-to-milestone table + velocity horizon. Generated from roadmap.yaml. |
+| `production/wishlist.yaml` | **Ideas holding area** — uncommitted ideas (raw/refined/deferred/promoted). Never auto-promoted to backlog. |
 | `production/milestones/definitions/[name].md` | **Scope contract** — what a milestone includes, excludes, quality bar, and exit criteria. |
 
 **Staleness prevention** — three skills write to `backlog.yaml` automatically:
@@ -364,10 +367,12 @@ Run the full sequence with one command: **`/sprint-close`** (`.claude/skills/spr
 
 **Setup commands:**
 ```
-/backlog init              # Build backlog.yaml from existing epics (one-time)
+/roadmap init              # First-time scope definition — reads GDDs, assigns systems to milestones
+/roadmap update            # Re-sync after new GDDs or epic status changes
+/roadmap view              # Read-only render of current scope state
+/wishlist add              # Capture an idea without committing it to scope
+/backlog init              # Build backlog.yaml from existing epics (one-time, after /roadmap init)
 /milestone-define init [name]  # Write a scope contract for a milestone
-/roadmap init              # Map epics to milestones + generate completion horizon
-/roadmap view              # Re-render roadmap after story completions
 ```
 
 ---

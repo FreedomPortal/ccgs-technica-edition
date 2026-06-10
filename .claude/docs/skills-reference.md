@@ -1,6 +1,6 @@
 # Available Skills (Slash Commands)
 
-114 slash commands organized by phase. Type `/` in Claude Code to access any of them.
+115 slash commands organized by phase. Type `/` in Claude Code to access any of them.
 
 ## Onboarding & Navigation
 
@@ -53,18 +53,25 @@
 | `/architecture-review` | Validate all ADRs for completeness, dependency ordering, and GDD coverage |
 | `/create-control-manifest` | Generate flat programmer rules sheet from accepted ADRs |
 
+## Scope & Backlog
+
+| Command | Purpose |
+|---------|---------|
+| `/roadmap` | Scope-definition authority — reads GDDs + systems-index, writes `production/roadmap.yaml` (machine-readable) + `production/roadmap.md`. Modes: init, update, view. Read by `/create-epics`, `/backlog`, `/sprint-plan`. |
+| `/wishlist` | Lightweight holding area for uncommitted ideas — distinct from backlog (committed work). Modes: add, view, promote, defer, prune. Data: `production/wishlist.yaml`. |
+| `/create-epics` | Translate GDDs + ADRs into epics — one per architectural module. Reads `roadmap.yaml` as scope authority. |
+| `/create-stories` | Break a single epic into implementable story files |
+| `/estimate` | Structured effort estimate with complexity, dependencies, and risk breakdown |
+
 ## Stories & Sprints
 
 | Command | Purpose |
 |---------|---------|
-| `/create-epics` | Translate GDDs + ADRs into epics — one per architectural module |
-| `/create-stories` | Break a single epic into implementable story files |
 | `/dev-story` | Read a story and implement it — routes to the correct programmer agent |
 | `/sprint-plan` | Generate or update a sprint plan; initializes sprint-status.yaml |
 | `/sprint-status` | Fast 30-line sprint snapshot (reads sprint-status.yaml) |
 | `/story-readiness` | Validate a story is implementation-ready before pickup (READY/NEEDS WORK/BLOCKED) |
 | `/story-done` | 8-phase completion review after implementation; updates story file, surfaces next story |
-| `/estimate` | Structured effort estimate with complexity, dependencies, and risk breakdown |
 
 ## Reviews & Analysis
 
