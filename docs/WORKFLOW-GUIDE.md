@@ -5,13 +5,13 @@
   - New/removed agent        → Appendix A: lookup table + hierarchy diagram
   - New/removed hook         → Cross-Cutting hook table + header count
   - Pipeline stage change    → Table of Contents, phase section, gate-check list
-  - Count changes            → Header line: "52-agent system, 121 slash commands, 15 automated hooks"
+  - Count changes            → Header line: "52-agent system, 132 slash commands, 15 automated hooks"
 -->
 
 > **How to go from zero to a shipped game using the Agent Architecture.**
 >
 > This guide walks you through every phase of game development using the
-> 52-agent system, 121 slash commands, and 15 automated hooks. It assumes you
+> 52-agent system, 132 slash commands, and 15 automated hooks. It assumes you
 > have Claude Code installed and are working from the project root.
 >
 > The pipeline has 9 stages. Each stage has a formal gate (`/gate-check`)
@@ -1596,7 +1596,7 @@ conflicts go to `producer`.
 
 ## Appendix B: Slash Command Quick-Reference
 
-### All 121 Commands by Category
+### All 132 Commands by Category
 
 #### Onboarding and Navigation (13)
 
@@ -1676,6 +1676,13 @@ conflicts go to `producer`.
 | `/diagnose` | Structured 6-phase debug workflow — feedback loop, ranked hypotheses, specialist delegation | 5+ |
 | `/code-recon` | Read-only dependency map for a file or system — callers, signals, exports, risk zones | Any |
 | `/entropy-scan` | Proactive entropy scan — friction points, deepening diagrams (Godot/Unity/Unreal), report to `docs/architecture/`. Read-only on game code. | Any |
+
+#### Documentation (2)
+
+| Command | Purpose | Phase |
+|---------|---------|-------|
+| `/tutorial-design` | Design tutorial sequence — mechanic audit, teaching order, scaffolding strategy | 4 |
+| `/player-docs` | Generate player docs — manual/guide/help-text modes | 8-9 |
 
 #### QA and Testing (9)
 
