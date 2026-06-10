@@ -1,0 +1,31 @@
+# production/backlog.yaml
+# Canonical story registry. Source of truth for all stories across all sprints.
+# sprint-status.yaml is a GENERATED VIEW of the current sprint — regenerate with /sprint-plan if lost.
+# Update this file via: /story-done, /sprint-close, /sprint-plan new, /backlog update
+schema_version: "1.0"
+generated: "YYYY-MM-DD"
+
+stories:
+  - id: "S1-01"
+    epic: example-epic
+    name: "Example story name"
+    file: production/epics/example-epic/story-001-example.md
+    status: backlog         # backlog | ready | in-sprint | done | carried-over | blocked | cancelled | archived | orphan-sprint-entry
+    milestone_target: ""    # assigned by /roadmap init — e.g. vertical-slice, demo, alpha, release
+    priority: must-have     # must-have | should-have | nice-to-have | ""
+    estimate_days: 1.0
+    sprint: null            # integer sprint number, or null if not yet planned
+    completed_date: ""      # YYYY-MM-DD, set by /story-done
+    tags:
+      - logic               # logic | integration | visual | ui | config | narrative | audio
+
+# Status reference:
+#   backlog            — exists, not yet planned into a sprint
+#   ready              — dependencies met; prioritized for next sprint planning
+#   in-sprint          — currently in the active sprint
+#   done               — completed and accepted
+#   carried-over       — was in a closed sprint but not completed
+#   blocked            — blocked by unresolved dependency or external factor
+#   cancelled          — removed from scope
+#   archived           — story file deleted from disk
+#   orphan-sprint-entry — in sprint-status.yaml but story file missing

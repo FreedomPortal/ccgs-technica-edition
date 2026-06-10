@@ -147,6 +147,50 @@ if [ "$SRC_FILES" -gt 100 ]; then
   fi
 fi
 
+# --- Check 6: Engine reference staleness ---
+if [ -d "docs/engine-reference" ] && command -v python > /dev/null 2>&1; then
+  STALE_THRESHOLD=90
+
+  # Read custom threshold from README frontmatter
+  if [ -f "docs/engine-reference/README.md" ]; then
+    CUSTOM_THRESHOLD=$(grep -m1 "^staleness_threshold_days:" docs/engine-reference/README.md 2>/dev/null | grep -oE '[0-9]+')
+    if [ -n "$CUSTOM_THRESHOLD" ]; then
+      STALE_THRESHOLD="$CUSTOM_THRESHOLD"
+    fi
+  fi
+
+  STALE_COUNT=$(python -c "
+import os, datetime, re
+
+threshold_days = $STALE_THRESHOLD
+today = datetime.date.today()
+stale = 0
+
+for root, dirs, files in os.walk('docs/engine-reference'):
+    for f in files:
+        if not f.endswith('.md') or f in ('README.md', 'VERSION.md'):
+            continue
+        path = os.path.join(root, f)
+        try:
+            with open(path, encoding='utf-8', errors='ignore') as fh:
+                content = fh.read(500)
+            m = re.search(r'[Ll]ast verified: (\d{4}-\d{2}-\d{2})', content)
+            if not m:
+                continue  # stubs handled by /refresh-docs audit
+            d = datetime.date.fromisoformat(m.group(1))
+            if (today - d).days > threshold_days:
+                stale += 1
+        except Exception:
+            pass
+
+print(stale)
+" 2>/dev/null)
+
+  if [ -n "$STALE_COUNT" ] && [ "$STALE_COUNT" -gt 0 ] 2>/dev/null; then
+    echo "⚠️  Engine ref docs: $STALE_COUNT file(s) >$STALE_THRESHOLD days since last verification. Run /refresh-docs audit to review."
+  fi
+fi
+
 # --- Summary ---
 echo ""
 echo "💡 To get a comprehensive project analysis, run: /project-stage-detect"

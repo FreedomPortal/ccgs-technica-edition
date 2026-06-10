@@ -1,3 +1,8 @@
+---
+staleness_threshold_days: 90
+analytics_staleness_threshold_days: 365
+---
+
 # Engine Reference Documentation
 
 This directory contains curated, version-pinned documentation snapshots for the
@@ -54,10 +59,27 @@ Engine-specialist agents are instructed to:
 5. Update relevant `modules/*.md` with API changes
 6. Set "Last verified" dates on all modified files
 
+### Maintenance with `/refresh-docs`
+
+Use `/refresh-docs` to audit staleness and populate module files:
+
+```
+/refresh-docs audit                          # Scan all files: stale dates, empty stubs, missing modules
+/refresh-docs update godot scripting         # Manual checklist (no web fetch)
+/refresh-docs update godot scripting --web   # Fetch from official docs, write with approval
+```
+
+The `update` mode always asks which engine version to document. It works for any version — past or future. It never hardcodes "latest".
+
+Staleness threshold (days since last verification) is configured in this file's YAML frontmatter (`staleness_threshold_days`). Default: 90 days. The `session-start` hook warns when verified files exceed this threshold.
+
+Empty stub files (created but not yet populated) show `[stub — not verified]` in their `Last verified` field. They do not trigger the hook warning but appear in `/refresh-docs audit` output as EMPTY-STUB.
+
 ### Quality Rules
 
-- Every file must have a "Last verified: YYYY-MM-DD" date
+- Every populated file must have a "Last verified: YYYY-MM-DD" date
 - Keep module files under 150 lines (context budget)
 - Include code examples showing correct/incorrect patterns
 - Link to official documentation URLs for verification
 - Only document things that differ from the model's training data
+- Use `/refresh-docs update [engine] [module] --web` to populate stubs — do not fabricate API details
