@@ -1,17 +1,9 @@
 # Claude Code Game Studios: Technica Edition -- Complete Workflow Guide
 
-<!-- MAINTENANCE: Update this file when framework changes. Triggers:
-  - New/removed skill        → Appendix B: add/remove row, update section count + header total
-  - New/removed agent        → Appendix A: lookup table + hierarchy diagram
-  - New/removed hook         → Cross-Cutting hook table + header count
-  - Pipeline stage change    → Table of Contents, phase section, gate-check list
-  - Count changes            → Header line: "52-agent system, 132 slash commands, 15 automated hooks"
--->
-
 > **How to go from zero to a shipped game using the Agent Architecture.**
 >
 > This guide walks you through every phase of game development using the
-> 52-agent system, 132 slash commands, and 15 automated hooks. It assumes you
+> 52-agent system, 133 slash commands, and 15 automated hooks. It assumes you
 > have Claude Code installed and are working from the project root.
 >
 > The pipeline has 9 stages. Each stage has a formal gate (`/gate-check`)
@@ -1808,6 +1800,14 @@ Full chain: `/demo-plan` → `/demo-scope` → `/demo-build` → `/demo-playtest
 | `/localization-cultural-review` | Standalone cultural sensitivity review per locale | 6-7 |
 | `/localization-rtl` | RTL layout validation for Arabic/Hebrew locales | 6-7 |
 | `/localization-vo` | Voice-over pipeline — script export, casting brief, sync validation | 6-7 |
+
+#### Framework Maintenance — CCGS:TE (1)
+
+Skills for maintainers of the CCGS:TE framework. Not for game project work.
+
+| Command | Purpose | Phase |
+|---------|---------|-------|
+| `/framework-release` | Cut a framework release — detect changes, propose semver, draft release notes, write changelog on approval | — |
 
 ---
 

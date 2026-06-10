@@ -1,6 +1,6 @@
 # Available Skills (Slash Commands)
 
-108 slash commands organized by phase. Type `/` in Claude Code to access any of them.
+112 slash commands organized by phase. Type `/` in Claude Code to access any of them.
 
 ## Onboarding & Navigation
 
@@ -203,3 +203,11 @@ Coordinate multiple agents on a single feature area:
 | `/localization-cultural-review` | Standalone cultural sensitivity review per locale |
 | `/localization-rtl` | RTL layout validation for Arabic/Hebrew locales |
 | `/localization-vo` | Voice-over pipeline — script export, casting brief, sync validation |
+
+## Framework Maintenance — CCGS:TE
+
+Skills for maintainers of the CCGS:TE framework itself. Not for game project work.
+
+| Command | Purpose |
+|---------|---------|
+| `/framework-release` | Cut a framework version: detect changes since last release, auto-detect breaking changes, propose semver bump, draft release notes, write changelog on approval |
