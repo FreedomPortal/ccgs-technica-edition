@@ -1,5 +1,5 @@
 ---
-name: localization-sync
+name: l10n-sync
 description: "Detects stale translations after source text changes, generates re-translation requests for affected keys, and updates stale markers in translation files. Run whenever English source strings are edited post-freeze."
 argument-hint: "[status] [--locale [code]] [--review full|lean|solo]"
 user-invocable: true
@@ -31,7 +31,7 @@ Glob `assets/data/strings/strings-*.json` — collect all locale files, excludin
 If `--locale` was specified, filter to that file only.
 
 If no locale files exist:
-> "No translation files found. Run `/localization-integrate import [locale] [path]`
+> "No translation files found. Run `/l10n-integrate import [locale] [path]`
 > after receiving translations."
 Stop.
 
@@ -66,9 +66,9 @@ String freeze: ACTIVE (called [date]) / NOT ACTIVE
 | ja     | [N]   | [N]        | [N]   | [N]               | [N]     | [N]%     |
 | fr     | [N]   | [N]        | [N]   | [N]               | [N]     | [N]%     |
 
-To update stale translations: /localization-sync
-To run LQA on a locale:       /localization-qa [locale]
-To check RTL support:         /localization-rtl [locale]
+To update stale translations: /l10n-sync
+To run LQA on a locale:       /l10n-qa [locale]
+To check RTL support:         /l10n-rtl [locale]
 ```
 
 Stop — no further phases.
@@ -138,8 +138,8 @@ If Status is ACTIVE and stale/missing keys were found:
 
 Ask: "May I mark stale and missing keys in the locale translation files?"
 
-This sets `"status": "stale"` on affected entries so that `/localization-qa` can
-flag them as BLOCKING and `/localization-qa` can report them.
+This sets `"status": "stale"` on affected entries so that `/l10n-qa` can
+flag them as BLOCKING and `/l10n-qa` can report them.
 
 If yes, spawn `localization-specialist` via Task:
 
@@ -244,8 +244,8 @@ Re-translation request: [path / not generated]
 
 Next steps:
 - Send production/localization/retranslation-request-[date].md to translators
-- When updated translations arrive: /localization-integrate import [locale] [path]
-- After import: /localization-qa [locale] to re-validate the updated locale
+- When updated translations arrive: /l10n-integrate import [locale] [path]
+- After import: /l10n-qa [locale] to re-validate the updated locale
 ```
 
 ---

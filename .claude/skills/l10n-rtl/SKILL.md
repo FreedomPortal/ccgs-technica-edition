@@ -1,5 +1,5 @@
 ---
-name: localization-rtl
+name: l10n-rtl
 description: RTL layout validation for Arabic (ar), Hebrew (he), Persian (fa), and Urdu (ur). Runs 5 checks: RTL layout flag, hardcoded positional layout, string assembly, font support, directional assets. Outputs READY / CONCERNS / NOT READY verdict.
 argument-hint: "[ar|he|fa|ur]"
 user-invocable: true
@@ -7,7 +7,7 @@ allowed-tools: Read, Glob, Grep, Write, Task, AskUserQuestion
 model: sonnet
 ---
 
-# /localization-rtl [locale?]
+# /l10n-rtl [locale?]
 
 **Purpose**: Validate the game's UI and code for RTL (right-to-left) layout support. Catches
 common RTL implementation errors before a locale ships: missing layout flags, positional
@@ -30,10 +30,10 @@ If no argument: "Which RTL locale should this check target? (ar / he / fa / ur)"
 
 If the locale is not in the supported RTL list:
 ```
-[locale] is not an RTL locale. /localization-rtl supports: ar (Arabic), he (Hebrew),
+[locale] is not an RTL locale. /l10n-rtl supports: ar (Arabic), he (Hebrew),
 fa (Persian/Farsi), ur (Urdu).
 
-For LTR locale validation, use /localization-qa.
+For LTR locale validation, use /l10n-qa.
 ```
 
 ---
@@ -185,7 +185,7 @@ Fix all HIGH severity findings before shipping. Recommended order:
 4. String assembly
 5. Directional assets
 
-After fixes: re-run /localization-rtl [locale] to confirm.
+After fixes: re-run /l10n-rtl [locale] to confirm.
 Then: manual in-engine RTL walkthrough before final sign-off.
 ```
 

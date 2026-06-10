@@ -1,5 +1,5 @@
 ---
-name: localization-integrate
+name: l10n-integrate
 description: "Mid-pipeline localization skill. Export mode: extract strings, generate translator brief, and call string freeze. Import mode: validate and integrate returned translations into the project."
 argument-hint: "[export|import locale path-to-translation-file|freeze lift] [--review full|lean|solo]"
 user-invocable: true
@@ -30,12 +30,12 @@ allowed-tools: Read, Glob, Grep, Write, Edit, Task, AskUserQuestion
 ### Step 1 — Check Prerequisites
 
 Read `assets/data/strings/strings-en.json`. If it does not exist:
-> "No string table found. Run `/localization-prepare` first to extract strings from source code."
+> "No string table found. Run `/l10n-prepare` first to extract strings from source code."
 Stop.
 
 Run a quick coverage check — grep `src/` for hardcoded strings (non-`tr()` user-facing text).
 If found, warn:
-> "⚠️ Hardcoded strings detected in source code. Run `/localization-prepare wrap` before
+> "⚠️ Hardcoded strings detected in source code. Run `/l10n-prepare wrap` before
 > exporting — translators will not receive these strings."
 Continue regardless (user may know).
 
@@ -75,6 +75,38 @@ Return the brief as a Markdown document ready to send to translators.
 
 Present the brief to the user. Ask: "May I write this translator brief to `production/localization/translator-brief-[date].md`?"
 
+### Step 3b — Screenshot Checklist
+
+After writing the translator brief, generate a screenshot checklist to accompany it.
+Translators working without visual context frequently mistranslate strings — wrong
+register (button vs. paragraph), wrong length (modal title vs. tooltip), wrong
+subject (whose name appears in "{name} won!").
+
+Spawn `localization-specialist` via Task:
+
+```
+Generate a screenshot checklist for the translator brief.
+
+Read assets/data/strings/strings-en.json. Group all keys by the screen/element
+identified in their "context" field (using the pattern: "context" describes location).
+
+For each unique screen or UI area, produce a checklist item:
+
+SCREEN: [screen name derived from key prefixes or context field]
+Keys on this screen: [N] ([list of key names])
+Screenshot needed: [ ] [screen name].png
+Notes: [any keys with character limits — list the tightest limit on this screen]
+
+Group order: UI screens first (keys starting with "ui."), then dialogue, then system messages.
+```
+
+Ask: "May I write this screenshot checklist to `production/localization/screenshot-checklist-[date].md`?"
+
+If yes, write it. Include a header note:
+> Attach screenshots of each screen to the translator brief package. Screenshots give
+> translators critical context: field size, surrounding labels, tone of the screen.
+> Tools: engine screenshot, or grab from your QA build. Filename = screen name as listed.
+
 ### Step 4 — Call String Freeze
 
 Ask: "Call string freeze now to lock the source table before translation begins?"
@@ -90,7 +122,7 @@ If yes:
 **Total strings at freeze**: [N]
 
 ## Post-Freeze Changes
-[Populated automatically by /localization-prepare wrap and /localization-sync]
+[Populated automatically by /l10n-prepare wrap and /l10n-sync]
 ```
 
 ### Step 5 — Export Summary
@@ -105,11 +137,12 @@ String freeze: ACTIVE (called [date]) / Not called
 What to send to translators:
 1. assets/data/strings/strings-en.json — the source string table
 2. production/localization/translator-brief-[date].md — context and guidelines
-3. Expected delivery format: JSON, same schema as strings-en.json, filename: strings-[locale].json
+3. production/localization/screenshot-checklist-[date].md — visual context checklist (capture screenshots before sending)
+4. Expected delivery format: JSON, same schema as strings-en.json, filename: strings-[locale].json
 
 Next steps:
-- When translations arrive: /localization-integrate import [locale] [path]
-- To check freeze status or violations: /localization-sync
+- When translations arrive: /l10n-integrate import [locale] [path]
+- To check freeze status or violations: /l10n-sync
 ```
 
 ---
@@ -178,8 +211,8 @@ Warnings: [N] (list them)
 Output: assets/data/strings/strings-[locale].json
 
 Next steps:
-- /localization-qa — run LQA pass for [locale] before this locale ships
-- /localization-sync status — check overall coverage across all locales
+- /l10n-qa — run LQA pass for [locale] before this locale ships
+- /l10n-sync status — check overall coverage across all locales
 ```
 
 ---
@@ -234,9 +267,9 @@ Lift reason: [reason]
 
 Next steps:
 - Make source text changes in src/ as needed
-- Run /localization-prepare wrap if new strings are added
-- When changes are complete: run /localization-integrate export to re-freeze and send to translators
-- Run /localization-sync to flag any translations that are now stale
+- Run /l10n-prepare wrap if new strings are added
+- When changes are complete: run /l10n-integrate export to re-freeze and send to translators
+- Run /l10n-sync to flag any translations that are now stale
 ```
 
 ---

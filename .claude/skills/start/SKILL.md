@@ -254,6 +254,45 @@ Write the choice to `production/autosave-mode.txt` immediately — no separate "
 
 ---
 
+## Phase 3d: Capture Localization Intent
+
+*Skip for Path E (tooling projects). For all other paths:*
+
+Check if `production/localization/intent.md` already exists.
+
+**If it exists**: Read it and show the current intent — "Localization intent is already set to `[Status]`." — proceed to Phase 4. Do not ask again.
+
+**If it does not exist**: Use `AskUserQuestion`:
+
+- **Prompt**: "Do you plan to localize this game into other languages?"
+- **Options**:
+  - `Yes — I'll support multiple languages` — triggers a follow-up question for target locales
+  - `Not right now, but I want to plan for it (Later)` — records intent as LATER; gate-check will remind at Production
+  - `No — English only` — records NO; l10n pipeline stays silent
+
+If `Yes` is chosen, ask (plain text, not AskUserQuestion — open response):
+"Which locales are you targeting? (e.g. ja, fr, de, zh-CN — or 'undecided' if you haven't committed yet)"
+
+Write `production/localization/intent.md` immediately after the user responds.
+Create `production/localization/` directory if needed. No separate "May I write?" — direct consequence of the selection:
+
+```markdown
+# Localization Intent
+
+**Status**: [YES / NO / LATER]
+**Target locales**: [locale list, or "undecided"]
+**Declared**: [today's date]
+**Stage at declaration**: Concept
+```
+
+If `Yes`: say "Localization intent recorded. Run `/l10n-check` at any time to see what's due for your current stage. The pipeline is opt-in — nothing runs automatically."
+
+If `Later`: say "Got it — I'll remind you at the Production gate. Localization is always available before that."
+
+If `No`: say "No localization planned — the l10n pipeline won't surface unless you update `production/localization/intent.md`."
+
+---
+
 ## Phase 4: Confirm Before Proceeding
 
 After presenting the recommended path, use `AskUserQuestion` to ask the user which step they'd like to take first. Never auto-run the next skill.

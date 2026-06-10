@@ -161,6 +161,12 @@ If a milestone name is resolved: read `production/milestones/definitions/[name].
 - [ ] Architecture traceability matrix has **zero Foundation layer gaps**
       (all Foundation requirements must have ADR coverage before Pre-Production)
 
+**Localization Intent Check** *(read `production/localization/intent.md` if it exists)*:
+- If Status: YES and no ADR in `docs/architecture/` covers i18n (search for "i18n" or "localization" or "internationalization" in ADR files):
+  → ADVISORY: "l10n intent declared but no i18n ADR. Record number/date/plural form decisions before Pre-Production — retrofitting is expensive."
+- If intent.md does not exist:
+  → NOTE: "Localization intent not captured. Run `/l10n-check` to declare intent, or skip if English-only."
+
 **ADR Circular Dependency Check**: For all ADRs in `docs/architecture/`, read each ADR's
 "ADR Dependencies" / "Depends On" section. Build a dependency graph (ADR-A → ADR-B means
 A depends on B). If any cycle is detected (e.g. A→B→A, or A→B→C→A):
@@ -216,6 +222,10 @@ A depends on B). If any cycle is detected (e.g. A→B→A, or A→B→C→A):
 - [ ] Vertical Slice has been playtested with at least 1 documented session
 - [ ] Vertical Slice playtest report exists at `production/playtests/` or equivalent
 
+**Localization Readiness** *(if `production/localization/intent.md` exists with Status: YES)*:
+- [ ] String table scaffolded (`assets/data/strings/strings-en.json` exists) — ADVISORY if missing; entering Production without it means retrofitting all UI strings mid-sprint
+- [ ] `/l10n-i18n` audit run (`production/localization/i18n-audit-*.md` exists) — ADVISORY; i18n architectural issues found in Production cost far more to fix
+
 **Quality Checks:**
 - [ ] **Core loop fun is validated** — playtest data confirms the central mechanic is enjoyable, not just functional
 - [ ] **Developer has personally played the Vertical Slice** — not just built it; artifact evidence alone is insufficient
@@ -261,6 +271,11 @@ A depends on B). If any cycle is detected (e.g. A→B→A, or A→B→C→A):
 - [ ] Interaction pattern library is up-to-date with all patterns used in implementation
 - [ ] Accessibility compliance verified against committed tier in `design/accessibility-requirements.md`
 
+**Localization Readiness** *(if `production/localization/intent.md` exists with Status: YES or LATER)*:
+- If Status: LATER: → CONCERNS: "l10n intent set to LATER. Entering Production without string table means every UI string will need retrofitting. Commit to YES now or NO now — ambiguity is expensive."
+- If Status: YES and `assets/data/strings/strings-en.json` does not exist or has zero entries: → CONCERNS: "l10n planned but no strings extracted. Run `/l10n-prepare wrap` before Production sprint work."
+- If Status: YES and no `production/localization/i18n-audit-*.md` exists: → ADVISORY: "Run `/l10n-i18n` — catching format/plural issues now is cheaper than mid-sprint."
+
 **Publishing Readiness Advisory** *(CONCERNS if any missing — these become FAIL at Polish → Release)*:
 - [ ] `production/publishing/publishing-roadmap.md` exists (run `/marketing-plan`)
 - [ ] Store page draft exists (Glob `production/publishing/store-page*`) — must be live to build wishlists during Polish
@@ -278,6 +293,12 @@ If any are missing, surface:
 - [ ] All features from milestone plan are implemented
 - [ ] Content is complete (all levels, assets, dialogue referenced in design docs exist)
 - [ ] Localization strings are externalized (no hardcoded player-facing text in `src/`)
+- [ ] **If `production/localization/intent.md` Status: YES** — LQA pass exists for every declared locale:
+  - Read `**Target locales**:` from intent.md
+  - For each locale, Glob `production/localization/lqa-[locale]-*.md` and read the most recent file's **Verdict** line
+  - Any locale missing a report OR with verdict FAIL → BLOCKING
+  - List each locale's status explicitly: `[locale]: PASS / FAIL / MISSING`
+  - String freeze must be ACTIVE in `production/localization/freeze-status.md` — BLOCKING if never called
 - [ ] QA test plan exists (`/qa-plan` output in `production/qa/`)
 - [ ] QA sign-off report exists (`/team-qa` output — APPROVED or APPROVED WITH CONDITIONS)
 - [ ] All Must Have story test evidence is present (Logic/Integration: test files pass; Visual/Feel/UI: sign-off docs in `production/qa/evidence/`)

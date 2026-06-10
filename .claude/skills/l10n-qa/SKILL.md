@@ -1,5 +1,5 @@
 ---
-name: localization-qa
+name: l10n-qa
 description: "Dedicated LQA pass for a locale after translations are integrated. Checks completeness, placeholder accuracy, UI overflow, tone, cultural issues, and produces a per-locale verdict. Required before any locale ships."
 argument-hint: "[locale] [--review full|lean|solo]"
 user-invocable: true
@@ -31,7 +31,7 @@ Read:
 - `design/gdd/` — game screens and UI elements (for overflow context)
 
 If `strings-[locale].json` does not exist:
-> "No translation file found for locale `[locale]`. Run `/localization-integrate import [locale] [path]` first."
+> "No translation file found for locale `[locale]`. Run `/l10n-integrate import [locale] [path]` first."
 Stop.
 
 ---
@@ -68,6 +68,20 @@ Check each translated string for:
 
 5. STALE MARKERS
    - Flag any entries with status: "stale" — these need re-translation
+
+6. PLURAL FORM COUNT
+   For each key in the source table that has a "plural_forms" field:
+   - Look up the required plural form count for [locale]:
+     - Arabic (ar): 6 forms (zero/one/two/few/many/other)
+     - Russian (ru), Ukrainian (uk), Belarusian (be): 3 forms (one/few/many)
+     - Polish (pl): 4 forms (one/few/many/other)
+     - Czech (cs), Slovak (sk): 3 forms (one/few/other)
+     - Slovenian (sl): 4 forms (one/two/few/other)
+     - Most other locales (de/fr/ja/ko/zh/es/pt/etc.): 2 forms (one/other)
+     - Japanese (ja), Korean (ko), Chinese (zh): 1 form (other only)
+   - Check that the locale's "plural_forms" object contains exactly the required keys
+   - Flag any key where the count is wrong or required form keys are missing
+   - Flag any key where "plural_forms" exists in source but is absent in this locale
 
 Report format:
 | ID | Key | Check | Issue | Severity |
@@ -217,14 +231,14 @@ Report: production/localization/lqa-[locale]-[date].md
 This locale is cleared for release. Include the report path in /gate-check release.
 
 [If PASS WITH CONDITIONS:]
-Resolve conditions before release. Re-run /localization-qa [locale] after fixes.
+Resolve conditions before release. Re-run /l10n-qa [locale] after fixes.
 
 [If FAIL:]
 Fix all BLOCKING issues:
 - Placeholder mismatches: return to translator with error details
 - Character limit violations: request shorter translations or redesign UI element
-- Stale entries: run /localization-sync to identify re-translation scope
-Re-run /localization-qa [locale] after fixing.
+- Stale entries: run /l10n-sync to identify re-translation scope
+Re-run /l10n-qa [locale] after fixing.
 ```
 
 ---

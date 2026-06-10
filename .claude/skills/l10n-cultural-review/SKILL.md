@@ -1,5 +1,5 @@
 ---
-name: localization-cultural-review
+name: l10n-cultural-review
 description: Standalone cultural sensitivity audit of SOURCE content before translation begins. Checks symbols, numbers, humour, names, violence ratings, and text-in-images for cultural landmines across target locales.
 argument-hint: "[locale] [full|scoped]"
 user-invocable: true
@@ -7,13 +7,13 @@ allowed-tools: Read, Glob, Grep, Write, Task, AskUserQuestion
 model: sonnet
 ---
 
-# /localization-cultural-review
+# /l10n-cultural-review
 
 **Purpose**: Audit SOURCE content (English text, UI, asset names, imagery descriptions) for
 cultural issues BEFORE sending to translators. This is not a translation quality check — it
 finds content that may need adaptation, removal, or creative replacement in specific locales.
 
-**Distinct from `/localization-qa` Phase 4**: `/localization-qa` checks that TRANSLATIONS are
+**Distinct from `/l10n-qa` Phase 4**: `/l10n-qa` checks that TRANSLATIONS are
 culturally appropriate for a given locale. This skill checks that SOURCE CONTENT does not
 contain cultural landmines that will cause issues regardless of how they are translated.
 
@@ -21,8 +21,8 @@ contain cultural landmines that will cause issues regardless of how they are tra
 
 ## When to Run
 
-Run `/localization-cultural-review` before:
-- Preparing strings for translation (`/localization-integrate export`)
+Run `/l10n-cultural-review` before:
+- Preparing strings for translation (`/l10n-integrate export`)
 - Adding a new locale target to the project
 - Shipping a new content update to an existing locale
 
@@ -138,7 +138,7 @@ CLEAN CATEGORIES (no issues found)
 [List categories with no findings]
 ```
 
-If zero findings across all categories: output "No cultural issues found for target locales. PASS — Ready to proceed to /localization-integrate export."
+If zero findings across all categories: output "No cultural issues found for target locales. PASS — Ready to proceed to /l10n-integrate export."
 
 ---
 
@@ -163,7 +163,7 @@ Ask: "May I write the cultural review report to `production/localization/cultura
 If yes, write a report containing:
 - Review metadata (date, scope, target locales)
 - All findings with decisions recorded
-- Keys flagged for translator instruction (to be included in `/localization-integrate export` brief)
+- Keys flagged for translator instruction (to be included in `/l10n-integrate export` brief)
 - Keys excluded from specific locales
 
 ---
@@ -173,11 +173,11 @@ If yes, write a report containing:
 If any keys have translator instructions or locale exclusions, output:
 
 ```
-Cultural review complete. Before running /localization-integrate export:
+Cultural review complete. Before running /l10n-integrate export:
 - [N] keys have translator instructions — these will be included in the export brief automatically
-- [N] keys are excluded from [locale] — flag these during /localization-integrate import
+- [N] keys are excluded from [locale] — flag these during /l10n-integrate import
 
-Run /localization-integrate export when ready to send strings to translators.
+Run /l10n-integrate export when ready to send strings to translators.
 ```
 
 ---
@@ -185,8 +185,8 @@ Run /localization-integrate export when ready to send strings to translators.
 ## Follow-Up Actions
 
 Recommended next:
-- Run `/localization-integrate export` to prepare strings for translation
-- Run `/localization-prepare` if locale setup is needed first
+- Run `/l10n-integrate export` to prepare strings for translation
+- Run `/l10n-prepare` if locale setup is needed first
 - Run `/sprint-plan` if cultural review uncovered blocking issues requiring design changes
 
 ---

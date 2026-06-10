@@ -3,7 +3,7 @@
 > **How to go from zero to a shipped game using the Agent Architecture.**
 >
 > This guide walks you through every phase of game development using the
-> 52-agent system, 134 slash commands, and 15 automated hooks. It assumes you
+> 52-agent system, 135 slash commands, and 15 automated hooks. It assumes you
 > have Claude Code installed and are working from the project root.
 >
 > The pipeline has 9 stages. Each stage has a formal gate (`/gate-check`)

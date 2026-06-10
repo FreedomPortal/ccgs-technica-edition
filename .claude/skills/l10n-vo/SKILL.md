@@ -1,5 +1,5 @@
 ---
-name: localization-vo
+name: l10n-vo
 description: Voice-over pipeline for localization. Subcommands: scan (recording manifest by character), script [locale] (per-character recording scripts with direction notes), validate [locale] (audio file existence + naming check), integrate [locale] (verify VO file references in code).
 argument-hint: "[scan | script locale | validate locale | integrate locale]"
 user-invocable: true
@@ -7,11 +7,11 @@ allowed-tools: Read, Glob, Grep, Write, Task, AskUserQuestion
 model: sonnet
 ---
 
-# /localization-vo [subcommand] [locale?]
+# /l10n-vo [subcommand] [locale?]
 
 **Purpose**: Manage the voice-over pipeline for a localized game. Handles recording manifests,
 per-locale recording scripts with director notes, audio file validation, and VO integration
-verification. Works on top of the string table established by `/localization-prepare`.
+verification. Works on top of the string table established by `/l10n-prepare`.
 
 **Prerequisites**: String table must exist at `assets/data/strings/strings-en.json`. VO keys
 must follow the convention `vo.[character].[line_id]` in the string table to be detected.
@@ -34,7 +34,7 @@ must follow the convention `vo.[character].[line_id]` in the string table to be 
 Read the argument. If no subcommand or unrecognised argument:
 
 ```
-Usage: /localization-vo [subcommand] [locale?]
+Usage: /l10n-vo [subcommand] [locale?]
 
   scan              — recording manifest by character (all locales)
   script [locale]   — per-character recording scripts with director notes
@@ -42,10 +42,10 @@ Usage: /localization-vo [subcommand] [locale?]
   integrate [locale]— verify VO references in code; flag hardcoded paths
 
 Examples:
-  /localization-vo scan
-  /localization-vo script ja
-  /localization-vo validate fr
-  /localization-vo integrate de
+  /l10n-vo scan
+  /l10n-vo script ja
+  /l10n-vo validate fr
+  /l10n-vo integrate de
 ```
 
 ---

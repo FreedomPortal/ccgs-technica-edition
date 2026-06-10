@@ -1,6 +1,6 @@
 # Available Skills (Slash Commands)
 
-113 slash commands organized by phase. Type `/` in Claude Code to access any of them.
+114 slash commands organized by phase. Type `/` in Claude Code to access any of them.
 
 ## Onboarding & Navigation
 
@@ -196,6 +196,7 @@ Coordinate multiple agents on a single feature area:
 
 | Command | Purpose |
 |---------|---------|
+| `/l10n-check` | Localization status snapshot — reads intent + current stage; surfaces overdue artifacts and next steps |
 | `/l10n-i18n` | i18n readiness audit — number/date/currency formatting, plural gaps, locale-naive code patterns |
 | `/l10n-prepare` | Scan for unwrapped strings, wrap in tr(), scaffold string table with plural form support |
 | `/l10n-integrate` | Mid-pipeline — export with translator brief + screenshot checklist, import translations |

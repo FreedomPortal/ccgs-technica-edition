@@ -129,5 +129,55 @@ fi
 
 echo "=== END PUBLISHING CHECK ==="
 
+# --- Localization intent check ---
+L10N_INTENT="production/localization/intent.md"
+
+if [ -f "$L10N_INTENT" ]; then
+    L10N_STATUS=$(grep "^\*\*Status\*\*:" "$L10N_INTENT" 2>/dev/null | head -1 | sed 's/\*\*Status\*\*: //')
+    if [ "$L10N_STATUS" = "YES" ]; then
+        echo ""
+        echo "=== LOCALIZATION ==="
+        L10N_LOCALES=$(grep "^\*\*Target locales\*\*:" "$L10N_INTENT" 2>/dev/null | sed 's/\*\*Target locales\*\*: //')
+        STAGE=$(cat production/stage.txt 2>/dev/null || echo "unknown")
+        echo "🌐 l10n intent: YES — locales: $L10N_LOCALES (stage: $STAGE)"
+
+        # String table
+        if [ ! -f "assets/data/strings/strings-en.json" ]; then
+            echo "⚠️  String table missing — run /l10n-prepare scaffold"
+        else
+            KEY_COUNT=$(grep -c '"source":' assets/data/strings/strings-en.json 2>/dev/null || echo 0)
+            echo "   String table: $KEY_COUNT keys"
+        fi
+
+        # Freeze status
+        FREEZE_FILE="production/localization/freeze-status.md"
+        if [ -f "$FREEZE_FILE" ]; then
+            FREEZE=$(grep "^\*\*Status\*\*:" "$FREEZE_FILE" 2>/dev/null | head -1 | sed 's/\*\*Status\*\*: //')
+            echo "   String freeze: $FREEZE"
+        else
+            echo "   String freeze: not called"
+        fi
+
+        # LQA passes
+        LQA_COUNT=$(ls production/localization/lqa-*-*.md 2>/dev/null | wc -l)
+        if [ "$LQA_COUNT" -gt 0 ]; then
+            echo "   LQA reports: $LQA_COUNT — run /l10n-check for per-locale status"
+        fi
+
+        echo "   Run /l10n-check for full status and next steps."
+        echo "=== END LOCALIZATION ==="
+    elif [ "$L10N_STATUS" = "LATER" ]; then
+        STAGE=$(cat production/stage.txt 2>/dev/null || echo "unknown")
+        case "$STAGE" in
+            Production|Polish|Release)
+                echo ""
+                echo "=== LOCALIZATION ==="
+                echo "⚠️  l10n intent: LATER — now in $STAGE. Commit YES or NO in production/localization/intent.md."
+                echo "=== END LOCALIZATION ==="
+                ;;
+        esac
+    fi
+fi
+
 echo "==================================="
 exit 0

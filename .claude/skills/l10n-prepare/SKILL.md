@@ -1,5 +1,5 @@
 ---
-name: localization-prepare
+name: l10n-prepare
 description: "First stage of the localization pipeline: scan source for hardcoded strings, scaffold the string table structure if needed, and wrap strings in tr() calls. Run once before any translation work begins."
 argument-hint: "[scan|wrap|scaffold] [--review full|lean|solo]"
 user-invocable: true
@@ -56,6 +56,8 @@ Search for:
 2. String concatenations that should be parameterized (e.g., "You have " + str(count) + " parts")
 3. Positional placeholders (%s, %d) instead of named ones ({playerName})
 4. Date/time/number formatting without locale-aware calls
+5. Binary plural logic that will not generalise beyond English:
+   count == 1 ? "item" : "items" — flag these; they need plural_forms in the string table
 
 For each finding, report:
 - File path and line number
@@ -83,8 +85,8 @@ If mode is `wrap`: continue to Phase 4.
 Check whether `assets/data/strings/` exists and contains a source string table.
 
 If it already exists:
-> "`assets/data/strings/` already exists. Use `/localization-prepare wrap` to add
-> new strings to the existing table, or `/localization-sync` to check for stale entries."
+> "`assets/data/strings/` already exists. Use `/l10n-prepare wrap` to add
+> new strings to the existing table, or `/l10n-sync` to check for stale entries."
 Stop.
 
 If it does not exist, present the proposed structure:
@@ -102,9 +104,24 @@ String table schema:
     "source": "English text here",
     "context": "Where it appears, character limit, placeholder meanings",
     "status": "source"
+  },
+  "item.count": {
+    "source": "{count} item",
+    "context": "Item count in inventory HUD. {count} = integer.",
+    "plural_forms": {
+      "one": "{count} item",
+      "other": "{count} items"
+    },
+    "status": "source"
   }
 }
 ```
+
+`plural_forms` is optional. Add it for any key where the English text contains a
+count variable and the noun changes based on quantity. Keys without a count-dependent
+noun do NOT need `plural_forms`. When `plural_forms` is present, `/l10n-qa` will
+validate that each locale provides the correct number of plural form entries for
+that language (Russian = 3 forms, Arabic = 6, Polish = 4, most others = 2).
 
 Ask: "May I create `assets/data/strings/strings-en.json` with this structure?"
 
@@ -187,12 +204,12 @@ Strings wrapped: [N]  (wrap mode only)
 New string table entries: [N]  (wrap mode only)
 
 [If strings remain unwrapped — scan-only mode or user declined:]
-Remaining hardcoded strings: [N] — run /localization-prepare wrap to address
+Remaining hardcoded strings: [N] — run /l10n-prepare wrap to address
 
 Next steps:
-- /localization-integrate export — extract final strings and prepare for translators
-- /localization-integrate export — call string freeze before sending strings to translators
-- /localization-sync — if source text changes after this point
+- /l10n-integrate export — extract final strings and prepare for translators
+- /l10n-integrate export — call string freeze before sending strings to translators
+- /l10n-sync — if source text changes after this point
 ```
 
 ---
