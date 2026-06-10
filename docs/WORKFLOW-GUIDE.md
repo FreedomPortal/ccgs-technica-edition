@@ -3,7 +3,7 @@
 > **How to go from zero to a shipped game using the Agent Architecture.**
 >
 > This guide walks you through every phase of game development using the
-> 52-agent system, 133 slash commands, and 15 automated hooks. It assumes you
+> 52-agent system, 134 slash commands, and 15 automated hooks. It assumes you
 > have Claude Code installed and are working from the project root.
 >
 > The pipeline has 9 stages. Each stage has a formal gate (`/gate-check`)
@@ -1098,7 +1098,8 @@ You set priorities; the team executes with your approval at each step.
 ### Step 8.7: Localization and Accessibility
 
 ```
-/localize src/
+/l10n-i18n
+/l10n-prepare scan
 ```
 
 Scans for hardcoded strings, concatenation that breaks translation, text that
@@ -1792,14 +1793,14 @@ Full chain: `/demo-plan` → `/demo-scope` → `/demo-build` → `/demo-playtest
 
 | Command | Purpose | Phase |
 |---------|---------|-------|
-| `/localize` | Full pipeline — scan → wrap → translate → QA | 6 |
-| `/localization-prepare` | Scan for unwrapped strings, wrap in tr(), scaffold string table | 6 |
-| `/localization-integrate` | Mid-pipeline — import translations, resolve merge conflicts | 6 |
-| `/localization-sync` | Detect stale translations when source text changes | 6-7 |
-| `/localization-qa` | Dedicated LQA pass — overflow, tone, placeholder, cultural checks | 6-7 |
-| `/localization-cultural-review` | Standalone cultural sensitivity review per locale | 6-7 |
-| `/localization-rtl` | RTL layout validation for Arabic/Hebrew locales | 6-7 |
-| `/localization-vo` | Voice-over pipeline — script export, casting brief, sync validation | 6-7 |
+| `/l10n-i18n` | i18n readiness audit — number/date/currency formatting, plural gaps, locale-naive code | 4-6 |
+| `/l10n-prepare` | Scan for unwrapped strings, wrap in tr(), scaffold string table with plural form support | 6 |
+| `/l10n-integrate` | Export with translator brief + screenshot checklist; import validated translations | 6 |
+| `/l10n-sync` | Detect stale translations after source text changes | 6-7 |
+| `/l10n-qa` | LQA pass — completeness, placeholders, plural form counts, overflow, cultural checks | 6-7 |
+| `/l10n-cultural-review` | Standalone cultural sensitivity review of source content per locale | 6-7 |
+| `/l10n-rtl` | RTL layout validation for Arabic/Hebrew/Persian/Urdu locales | 6-7 |
+| `/l10n-vo` | Voice-over pipeline — recording manifest, scripts, audio validation, code integration | 6-7 |
 
 #### Framework Maintenance — CCGS:TE (1)
 
@@ -1891,7 +1892,7 @@ Skills for maintainers of the CCGS:TE framework. Not for game project work.
 ```
 1. /gate-check polish (verify Polish phase is complete)
 2. /tech-debt (decide what's acceptable at launch)
-3. /localize (final localization pass)
+3. /l10n-sync (detect stale translations) then /l10n-qa for each locale
 4. /release-checklist v1.0.0
 5. /launch-checklist (full cross-department validation)
 6. /team-release (coordinate the release)

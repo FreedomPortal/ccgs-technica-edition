@@ -1,6 +1,6 @@
 # Available Skills (Slash Commands)
 
-112 slash commands organized by phase. Type `/` in Claude Code to access any of them.
+113 slash commands organized by phase. Type `/` in Claude Code to access any of them.
 
 ## Onboarding & Navigation
 
@@ -196,13 +196,14 @@ Coordinate multiple agents on a single feature area:
 
 | Command | Purpose |
 |---------|---------|
-| `/localization-prepare` | Scan for unwrapped strings, wrap in tr(), scaffold string table |
-| `/localization-integrate` | Mid-pipeline — import translations, resolve merge conflicts |
-| `/localization-sync` | Detect stale translations when source text changes |
-| `/localization-qa` | Dedicated LQA pass — overflow, tone, placeholder, cultural checks |
-| `/localization-cultural-review` | Standalone cultural sensitivity review per locale |
-| `/localization-rtl` | RTL layout validation for Arabic/Hebrew locales |
-| `/localization-vo` | Voice-over pipeline — script export, casting brief, sync validation |
+| `/l10n-i18n` | i18n readiness audit — number/date/currency formatting, plural gaps, locale-naive code patterns |
+| `/l10n-prepare` | Scan for unwrapped strings, wrap in tr(), scaffold string table with plural form support |
+| `/l10n-integrate` | Mid-pipeline — export with translator brief + screenshot checklist, import translations |
+| `/l10n-sync` | Detect stale translations after source text changes |
+| `/l10n-qa` | LQA pass — overflow, placeholders, plural form counts, tone, cultural checks |
+| `/l10n-cultural-review` | Standalone cultural sensitivity review of source content per locale |
+| `/l10n-rtl` | RTL layout validation for Arabic/Hebrew/Persian/Urdu locales |
+| `/l10n-vo` | Voice-over pipeline — recording manifest, scripts, audio validation, code integration |
 
 ## Framework Maintenance — CCGS:TE
 

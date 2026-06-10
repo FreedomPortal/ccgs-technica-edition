@@ -128,7 +128,7 @@ Ask yourself: "What department would handle this in a real studio?"
 | `/day-one-patch` | Prepare a focused day-one patch for known issues discovered after gold master |
 | `/prototype` | Concept prototype — Stage 2 (Prototype), validate core idea before Systems Design |
 | `/vertical-slice` | Stage 6 (Vertical Slice) — production-quality end-to-end build to prove the game loop before Production |
-| `/localization-prepare` | Localization — scan, wrap strings, scaffold string table |
+| `/l10n-prepare` | Localization — scan, wrap strings, scaffold string table |
 | `/team-combat` | Orchestrate full combat team pipeline |
 | `/team-narrative` | Orchestrate full narrative team pipeline |
 | `/team-ui` | Orchestrate full UI team pipeline |

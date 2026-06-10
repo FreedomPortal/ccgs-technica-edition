@@ -122,5 +122,5 @@ Verdict: **BLOCKED** — [reason]
 ## Next Steps
 
 - Run `/design-review` on the narrative documents for consistency validation.
-- Run `/localization-prepare wrap` to extract new strings for translation after dialogue is finalized.
+- Run `/l10n-prepare wrap` to extract new strings for translation after dialogue is finalized.
 - Run `/dev-story` to implement dialogue triggers and narrative events in-engine.

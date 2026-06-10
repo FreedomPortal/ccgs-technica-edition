@@ -652,7 +652,7 @@ Based on the verdict, suggest specific next steps:
 - **No player journey map?** → Create `design/player-journey.md` from the template at `.claude/docs/templates/player-journey.md` — or author it collaboratively using `/ux-design` Phase 2b.
 - **Need a quick sprint check?** → `/sprint-status` for current sprint progress snapshot
 - **Performance unknown?** → `/perf-profile`
-- **Not localized?** → `/localization-prepare scan` to start (then `wrap` → `integrate export` → `qa`)
+- **Not localized?** → `/l10n-prepare scan` to start (then `wrap` → `integrate export` → `qa`)
 - **Ready for release?** → `/launch-checklist`
 
 ---
