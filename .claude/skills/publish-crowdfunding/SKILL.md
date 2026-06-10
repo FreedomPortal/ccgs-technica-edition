@@ -1,5 +1,5 @@
 ---
-name: export-crowdfunding
+name: publish-crowdfunding
 description: "Compiles project materials into a crowdfunding campaign document for Kickstarter or similar platforms. Produces campaign page copy, reward tier suggestions, and risk disclosures."
 argument-hint: "<platform> (e.g., 'kickstarter', 'indiegogo')"
 user-invocable: true

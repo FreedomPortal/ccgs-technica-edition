@@ -120,12 +120,12 @@ Owns the player insight loop — telemetry design, player segmentation, A/B test
 | Skill | Purpose |
 |-------|---------|
 | `/publish-check` | Audit publishing roadmap vs. dev stage — surfaces overdue tasks and unlocked actions (also runs automatically at session start) |
-| `/export-steam-page` | Compile store page copy — short/long descriptions, feature list, tags — from GDDs and writing-lessons.md |
-| `/export-devlog` | Draft devlog post — reads session state, sprint history, GDDs; enforces writing-lessons rules |
-| `/export-social` | Batch social content for scheduled platforms |
-| `/export-pitch` | Investor/publisher pitch deck content |
-| `/export-review` | Structured press/review copy |
-| `/export-crowdfunding` | Crowdfunding campaign content |
+| `/publish-steam-page` | Compile store page copy — short/long descriptions, feature list, tags — from GDDs and writing-lessons.md |
+| `/publish-devlog` | Draft devlog post — reads session state, sprint history, GDDs; enforces writing-lessons rules |
+| `/publish-social` | Batch social content for scheduled platforms |
+| `/publish-pitch` | Investor/publisher pitch deck content |
+| `/publish-review` | Structured press/review copy |
+| `/publish-crowdfunding` | Crowdfunding campaign content |
 | `/team-publish` | Parallel team run: publishing-manager + community-manager + writer — unified publishing status output |
 
 ---
@@ -416,8 +416,8 @@ CCGS:TE skills map onto the 9-stage pipeline as a **parallel publishing track**.
 | 4 — Technical Setup | `/setup-tool` (if pipeline tool work in scope) |
 | 5 — Pre-Production | `/taste-gate`, `/community-plan`, `/tutorial-design` |
 | 6 — Vertical Slice | `/tutorial-design` (if tutorial is part of VS loop) |
-| 7 — Production | `/export-devlog`, `/export-social`, `/live-ops-plan`, `/export-status`, `/balance-sim`, `/player-segmentation` |
-| 8 — Polish | `/export-steam-page`, `/press-outreach`, `/export-pitch`, `/player-docs manual`, `/player-docs help-text`, `/economy-simulation` |
+| 7 — Production | `/publish-devlog`, `/publish-social`, `/live-ops-plan`, `/export-status`, `/balance-sim`, `/player-segmentation` |
+| 8 — Polish | `/publish-steam-page`, `/press-outreach`, `/publish-pitch`, `/player-docs manual`, `/player-docs help-text`, `/economy-simulation` |
 | 9 — Release | `/export-build`, `/team-publish`, `/post-mortem`, `/player-docs guide` |
 | Post-Launch | `/dlc-design`, `/mod-support`, `/live-ops-plan` (operational), `/retention-analysis`, `/ab-test`, `/player-segmentation` (ongoing), `/economy-simulation` (live) |
 | **Demo track** (parallel — branches from Production or Polish) | `/demo-plan`, `/demo-scope`, `/demo-build`, `/demo-playtest`, `/demo-feedback`, `/demo-iterate`, `/demo-polish`, `/demo-status`, `/demo-gate`, `/demo-integrate` |

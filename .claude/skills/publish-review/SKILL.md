@@ -1,5 +1,5 @@
 ---
-name: export-review
+name: publish-review
 description: "Compiles current project state into a clean external review document for outside consultants, advisors, or collaborators. Synthesizes GDD, systems index, and sprint status into a single briefing file."
 argument-hint: "(no argument needed)"
 user-invocable: true
@@ -112,4 +112,4 @@ After writing, confirm:
 
 Verdict: COMPLETE
 
-Recommended next: `/export-pitch` if this review is for a publisher meeting, or `/design-review` to run an internal review before sharing.
+Recommended next: `/publish-pitch` if this review is for a publisher meeting, or `/design-review` to run an internal review before sharing.

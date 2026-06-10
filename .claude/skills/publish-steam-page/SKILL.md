@@ -1,5 +1,5 @@
 ---
-name: export-steam-page
+name: publish-steam-page
 description: "Compiles project materials into a Steam store page document — short description, long description, key features, and tags. Use when preparing the Steam Coming Soon page or full launch page."
 argument-hint: "(no argument needed)"
 user-invocable: true
@@ -135,4 +135,4 @@ After writing:
 
 Verdict: COMPLETE
 
-Recommended next: `/press-outreach` to build your media contact list, or `/export-social` to announce the Steam page.
+Recommended next: `/press-outreach` to build your media contact list, or `/publish-social` to announce the Steam page.

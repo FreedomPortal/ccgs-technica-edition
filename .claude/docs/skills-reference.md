@@ -160,12 +160,12 @@ Coordinate multiple agents on a single feature area:
 | Command | Purpose |
 |---------|---------|
 | `/publish-check` | Audit publishing roadmap vs. dev stage — surfaces overdue tasks and unlocked actions (also runs at session start) |
-| `/export-steam-page` | Compile store page copy from GDDs and writing-lessons.md |
-| `/export-devlog` | Draft devlog post from session state, sprint history, and GDDs; enforces writing-lessons rules |
-| `/export-social` | Batch social content for scheduled platforms |
-| `/export-pitch` | Investor/publisher pitch deck content |
-| `/export-review` | Structured press/review copy |
-| `/export-crowdfunding` | Crowdfunding campaign content |
+| `/publish-steam-page` | Compile store page copy from GDDs and writing-lessons.md |
+| `/publish-devlog` | Draft devlog post from session state, sprint history, and GDDs; enforces writing-lessons rules |
+| `/publish-social` | Batch social content for scheduled platforms |
+| `/publish-pitch` | Investor/publisher pitch deck content |
+| `/publish-review` | Structured press/review copy |
+| `/publish-crowdfunding` | Crowdfunding campaign content |
 
 ## Post-Launch Lifecycle — CCGS:TE
 

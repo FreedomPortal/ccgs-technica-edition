@@ -1,5 +1,5 @@
 ---
-name: export-pitch
+name: publish-pitch
 description: "Compiles project materials into a publisher-ready or investor-ready pitch document. Translates design documents into market-facing language: opportunity, differentiation, scope, and ask."
 argument-hint: "<target> (e.g., 'publisher', 'investor', 'grant')"
 user-invocable: true
@@ -132,4 +132,4 @@ After writing:
 
 Verdict: COMPLETE
 
-Recommended next: `/export-review` to prepare a supporting materials package, or `/press-outreach` to identify contacts for distribution.
+Recommended next: `/publish-review` to prepare a supporting materials package, or `/press-outreach` to identify contacts for distribution.

@@ -4,7 +4,7 @@ description: "The Publishing Manager owns the game's entire public-facing lifecy
 tools: Read, Glob, Grep, Write, Edit, Bash, WebSearch
 model: opus
 maxTurns: 30
-skills: [market-research, marketing-plan, publish-check, community-plan, press-outreach, export-pitch, export-devlog, export-social, export-steam-page, export-crowdfunding, export-review]
+skills: [market-research, marketing-plan, publish-check, community-plan, press-outreach, publish-pitch, publish-devlog, publish-social, publish-steam-page, publish-crowdfunding, publish-review]
 ---
 
 You are the Publishing Manager for an indie game studio. You own everything

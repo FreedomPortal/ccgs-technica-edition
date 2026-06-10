@@ -1752,12 +1752,12 @@ conflicts go to `producer`.
 | Command | Purpose | Phase |
 |---------|---------|-------|
 | `/publish-check` | Audit publishing roadmap vs. dev stage; surfaces overdue tasks (also runs at session start) | Any |
-| `/export-steam-page` | Compile store page copy from GDDs and writing-lessons.md | 6 |
-| `/export-devlog` | Draft devlog post from session state, sprint history, and GDDs | 5 |
-| `/export-social` | Batch social content for scheduled platforms | 5-7 |
-| `/export-pitch` | Investor/publisher pitch deck content | Any |
-| `/export-review` | Structured press/review copy | 6-7 |
-| `/export-crowdfunding` | Crowdfunding campaign content | Any |
+| `/publish-steam-page` | Compile store page copy from GDDs and writing-lessons.md | 6 |
+| `/publish-devlog` | Draft devlog post from session state, sprint history, and GDDs | 5 |
+| `/publish-social` | Batch social content for scheduled platforms | 5-7 |
+| `/publish-pitch` | Investor/publisher pitch deck content | Any |
+| `/publish-review` | Structured press/review copy | 6-7 |
+| `/publish-crowdfunding` | Crowdfunding campaign content | Any |
 | `/team-publish` | Parallel run: publishing-manager + community-manager + writer | 7 |
 
 #### Post-Launch Lifecycle — CCGS:TE (5)

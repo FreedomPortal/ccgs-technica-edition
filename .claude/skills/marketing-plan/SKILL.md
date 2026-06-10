@@ -114,7 +114,7 @@ Run any time during Prototype to Technical Setup stage (before Pre-Production ga
 | Task | Status | Notes |
 |------|--------|-------|
 | Steam Coming Soon page live | [status] | Needs: capsule art, short description |
-| Devlog #1 published | [status] | Run /export-devlog |
+| Devlog #1 published | [status] | Run /publish-devlog |
 | Social accounts posting | [status] | |
 | Wishlist baseline established | [status] | |
 
@@ -135,14 +135,14 @@ Run any time during Prototype to Technical Setup stage (before Pre-Production ga
 | Press outreach begins | [status] | |
 | Demo or playtest build available | [status] | Run /demo-scope → /demo-build → /demo-playtest |
 | Wishlist push campaign | [status] | |
-| Steam page fully polished | [status] | Run /export-steam-page |
+| Steam page fully polished | [status] | Run /publish-steam-page |
 
 ## Phase 5 — Pre-Launch (3–6 months out)
 
 | Task | Status | Notes |
 |------|--------|-------|
 | Launch trailer produced | [status] | |
-| Personalized press pitches sent | [status] | Run /export-pitch publisher |
+| Personalized press pitches sent | [status] | Run /publish-pitch publisher |
 | Review key plan finalized | [status] | |
 | Launch day coordination doc written | [status] | |
 

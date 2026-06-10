@@ -22,7 +22,7 @@ If no game concept exists, stop:
 
 Note if no press kit exists:
 > "No press kit found. Journalists expect a press kit before outreach begins.
-> Consider running `/export-review` first to generate a press kit package, or
+> Consider running `/publish-review` first to generate a press kit package, or
 > prepare key materials manually (capsule art, fact sheet, screenshots, trailer link)."
 
 This is advisory — do not stop if the press kit is missing; the user may be building
@@ -226,7 +226,7 @@ Output:        production/publishing/press-contacts.md
 
 Next steps:
 1. Verify contact details independently — do not rely on agent-suggested names alone
-2. Prepare press kit assets before sending outreach (/export-review)
+2. Prepare press kit assets before sending outreach (/publish-review)
 3. Send Tier 1 outreach [N] weeks before launch per the timing guide above
 4. Update the Status column in press-contacts.md as you send and receive responses
 

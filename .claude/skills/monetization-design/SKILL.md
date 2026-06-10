@@ -194,7 +194,7 @@ Risks flagged:   [N] (HIGH: X, MEDIUM: Y)
 Output:          design/monetization/monetization-plan.md
 
 Next steps:
-1. Add the monetization model to the Steam store page draft (/export-steam-page)
+1. Add the monetization model to the Steam store page draft (/publish-steam-page)
 2. Run /live-ops-plan to align post-launch content cadence with revenue streams
 3. Run /balance-check to verify the in-game economy aligns with the monetization model
 

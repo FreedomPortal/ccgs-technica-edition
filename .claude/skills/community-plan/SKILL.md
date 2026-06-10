@@ -1,6 +1,6 @@
 ---
 name: community-plan
-description: "Creates or updates the community strategy for the game. Defines platform choices, posting cadence, content types, and growth tactics tailored to the game's genre and audience. Coordinates with export-social and export-devlog for content execution."
+description: "Creates or updates the community strategy for the game. Defines platform choices, posting cadence, content types, and growth tactics tailored to the game's genre and audience. Coordinates with publish-social and publish-devlog for content execution."
 argument-hint: "(no argument needed)"
 user-invocable: true
 allowed-tools: Read, Glob, Grep, Write, Edit, AskUserQuestion, TodoWrite
@@ -91,11 +91,11 @@ For each selected platform, define:
 - Cadence: 2–3 posts per week during active dev, 1/week minimum
 - Key accounts to follow/engage: other indie devs in similar genres,
   game journalists who cover [GAME GENRE]
-- Use `/export-social` to generate post batches
+- Use `/publish-social` to generate post batches
 
 **itch.io**
 - Set up devlog page alongside or before Steam Coming Soon
-- Cross-post devlogs from `/export-devlog`
+- Cross-post devlogs from `/publish-devlog`
 - Lower audience than Steam but better long-term SEO
 - Good for players who find games before they're on Steam
 
@@ -113,9 +113,9 @@ Last updated: [date]
 
 | Date | Platform | Content Type | Status | Export Skill |
 |------|----------|-------------|--------|--------------|
-| [date] | Twitter/X | Progress update | planned | /export-social |
-| [date] | Reddit | Devlog crosspost | planned | /export-devlog |
-| [date] | itch.io | Devlog | planned | /export-devlog |
+| [date] | Twitter/X | Progress update | planned | /publish-social |
+| [date] | Reddit | Devlog crosspost | planned | /publish-devlog |
+| [date] | itch.io | Devlog | planned | /publish-devlog |
 
 ## Content Ideas Backlog
 (Things worth posting when the moment is right)
@@ -156,7 +156,7 @@ Twitter/X
 itch.io
   [ ] Create developer page: [STUDIO NAME] (check availability)
   [ ] Set up devlog for [GAME TITLE]
-  [ ] First devlog: "What is [GAME TITLE]?" — run /export-devlog 1
+  [ ] First devlog: "What is [GAME TITLE]?" — run /publish-devlog 1
 ```  
 
 ---
@@ -175,6 +175,6 @@ After writing files:
 > Content calendar: `production/publishing/content-calendar.md`
 >
 > Next content action: [most urgent item from calendar]
-> Run `/export-social` or `/export-devlog` to produce content now.
+> Run `/publish-social` or `/publish-devlog` to produce content now.
 
 Verdict: COMPLETE

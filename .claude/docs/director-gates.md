@@ -742,7 +742,7 @@ standard PHASE-GATEs
 > exist and have meaningful content: (1) publishing-roadmap.md, (2)
 > community-status.md, (3) a store page draft, (4) a press kit. For each missing
 > artifact, name the specific skill to create it: `/marketing-plan` for the
-> roadmap, `/community-plan` for community status, `/export-steam-page` for the
+> roadmap, `/community-plan` for community status, `/publish-steam-page` for the
 > store page, `/press-outreach` for the press kit. Beyond existence, assess: Is
 > the publishing roadmap realistic for the release date? Is the community strategy
 > appropriate for the game's genre and audience? Does the store page draft have

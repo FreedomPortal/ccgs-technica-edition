@@ -1,5 +1,5 @@
 ---
-name: export-social
+name: publish-social
 description: "Generates a batch of social media posts from recent development activity. Produces platform-native drafts for Twitter/X, Reddit, and TikTok/Instagram. Use after a sprint, prototype milestone, or design decision worth sharing."
 argument-hint: "(no argument needed)"
 user-invocable: true
@@ -111,4 +111,4 @@ After writing:
 
 Verdict: COMPLETE
 
-Recommended next: `/community-plan` to schedule these posts, or `/export-devlog` to write an accompanying devlog.
+Recommended next: `/community-plan` to schedule these posts, or `/publish-devlog` to write an accompanying devlog.

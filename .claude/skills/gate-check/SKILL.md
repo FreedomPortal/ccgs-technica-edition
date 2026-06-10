@@ -320,7 +320,7 @@ If any publishing artifact is missing:
 2. Suggest the skill to create it:
    - `publishing-roadmap.md` → `/marketing-plan`
    - `community-status.md` → `/community-plan`
-   - Store page → `/export-steam-page`
+   - Store page → `/publish-steam-page`
    - Press kit → `/press-outreach`
 3. Mark verdict FAIL — do not advance until all four are present.
 

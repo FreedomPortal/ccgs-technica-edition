@@ -1,5 +1,5 @@
 ---
-name: export-devlog
+name: publish-devlog
 description: "Generates a developer blog post (devlog) from recent sprint activity. Use at the end of a sprint or milestone to document progress for a public dev blog, itch.io devlog, or Steam developer update."
 argument-hint: "<devlog-number> (e.g., '3')"
 user-invocable: true
@@ -106,4 +106,4 @@ After writing:
 
 Verdict: COMPLETE
 
-Recommended next: `/export-social` to generate announcement posts for this devlog, or `/community-plan` to schedule distribution.
+Recommended next: `/publish-social` to generate announcement posts for this devlog, or `/community-plan` to schedule distribution.

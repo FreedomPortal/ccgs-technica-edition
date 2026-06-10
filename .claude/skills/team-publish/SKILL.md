@@ -149,7 +149,7 @@ Then use `AskUserQuestion`:
 question: "Publishing cycle complete. What would you like to do next?"
 options:
   - "Approve writer output — save drafts to production/publishing/"
-  - "Run /export-devlog to develop the devlog further"
+  - "Run /publish-devlog to develop the devlog further"
   - "Run /marketing-plan to update the roadmap"
   - "Run /community-plan to update platform strategy"
   - "Nothing — review only"
