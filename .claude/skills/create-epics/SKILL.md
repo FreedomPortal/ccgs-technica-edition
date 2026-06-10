@@ -48,7 +48,21 @@ See `.claude/docs/director-gates.md` for the full check pattern.
 
 ## 2. Load Inputs
 
-### Step 2a — Summary scan (fast)
+### Step 2a — Roadmap scope check (first)
+
+Check for `production/roadmap.yaml`.
+
+**If found**: read it. Extract:
+- `active_milestone` — which milestone is currently active
+- `in_scope` entries for each milestone — these are the systems the roadmap has committed to
+- `unassigned` list — systems known but not yet milestone-targeted
+- Per-epic `milestone_target` and `layer` values
+
+Use roadmap.yaml as the **scope authority**: if a system is in roadmap `in_scope`, treat it as confirmed scope for its milestone. If a system is `unassigned`, note it as "unassigned in roadmap — milestone will not be pre-filled."
+
+**If missing**: warn once: "No `production/roadmap.yaml` found — milestone targets and scope boundaries cannot be pre-filled. Run `/roadmap init` first for better results. Proceeding with GDD-only exploration." Then continue.
+
+### Step 2b — Summary scan (fast)
 
 Grep all GDDs for their `## Summary` sections before reading anything fully:
 
@@ -59,21 +73,23 @@ Grep pattern="## Summary" glob="design/gdd/*.md" output_mode="content" -A 5
 For `layer:` or `[system-name]` modes: filter to only in-scope GDDs based on
 the Summary quick-reference. Skip full-reading anything out of scope.
 
-### Step 2b — Full document load (in-scope systems only)
+If roadmap.yaml was found: cross-reference the `in_scope` list against GDD summaries — flag any roadmap entry whose GDD does not exist or is not Approved/Designed status.
 
-Using the Step 2a grep results, identify which systems are in scope. Read full documents **only for in-scope systems** — do not read GDDs or ADRs for out-of-scope systems or layers.
+### Step 2c — Full document load (in-scope systems only)
+
+Using the Step 2b grep results, identify which systems are in scope. Read full documents **only for in-scope systems** — do not read GDDs or ADRs for out-of-scope systems or layers.
 
 Read for in-scope systems:
 
 - `design/gdd/systems-index.md` — authoritative system list, layers, priority
-- In-scope GDDs only (Approved or Designed status, filtered by Step 2a results)
+- In-scope GDDs only (Approved or Designed status, filtered by Step 2b results)
 - `docs/architecture/architecture.md` — module ownership and API boundaries
 - Accepted ADRs **whose domains cover in-scope systems only** — read the "GDD Requirements Addressed", "Decision", and "Engine Compatibility" sections; skip ADRs for unrelated domains
 - `docs/architecture/control-manifest.md` — manifest version date from header
 - `docs/architecture/tr-registry.yaml` — for tracing requirements to ADR coverage
 - `docs/engine-reference/[engine]/VERSION.md` — engine name, version, risk levels
 
-Report: "Loaded [N] GDDs, [M] ADRs, engine: [name + version]."
+Report: "Loaded [N] GDDs, [M] ADRs, engine: [name + version]. Roadmap: [found — [N] systems in scope] / [not found — GDD-only mode]."
 
 ---
 
