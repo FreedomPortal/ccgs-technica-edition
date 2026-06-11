@@ -100,7 +100,7 @@
 ### Case 4: Edge Case — Called by export skill (auto mode)
 
 **Fixture**:
-- `/export-steam-page` calls `/refine-copy` automatically on the generated copy
+- `/publish-steam-page` calls `/refine-copy` automatically on the generated copy
 - File path is pre-set by the calling skill
 
 **Expected behavior**:

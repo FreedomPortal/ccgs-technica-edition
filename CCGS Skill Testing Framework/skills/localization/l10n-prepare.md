@@ -1,4 +1,4 @@
-# Skill Spec: /localization-prepare
+# Skill Spec: /l10n-prepare
 
 > **Category**: utility
 > **Priority**: low
@@ -6,7 +6,7 @@
 
 ## Skill Summary
 
-`/localization-prepare` is the first stage of the localization pipeline. It accepts an optional mode argument (`scan`, `wrap`, or `scaffold`) and an optional `--review` flag. In `scan` mode it reads source code under `src/` and reports hardcoded user-facing strings that are not yet wrapped in the engine's localization function (`tr()`, `LOCTEXT()`, etc.). In `scaffold` mode it creates the initial `assets/data/strings/strings-en.json` string table structure if none exists. In `wrap` mode it combines the scan with proposed edits — showing per-file diffs and asking approval before writing — then adds new entries to the source string table. Output is a summary report with counts and next-step pointers.
+`/l10n-prepare` is the first stage of the localization pipeline. It accepts an optional mode argument (`scan`, `wrap`, or `scaffold`) and an optional `--review` flag. In `scan` mode it reads source code under `src/` and reports hardcoded user-facing strings that are not yet wrapped in the engine's localization function (`tr()`, `LOCTEXT()`, etc.). In `scaffold` mode it creates the initial `assets/data/strings/strings-en.json` string table structure if none exists. In `wrap` mode it combines the scan with proposed edits — showing per-file diffs and asking approval before writing — then adds new entries to the source string table. Output is a summary report with counts and next-step pointers.
 
 ---
 
@@ -48,7 +48,7 @@
 - [ ] Correct localization function (`tr()`) identified for Godot
 - [ ] Scan report groups findings by category
 - [ ] No files modified (confirmed by no Write/Edit calls)
-- [ ] Summary includes `Next steps: /localization-integrate export` pointer
+- [ ] Summary includes `Next steps: /l10n-integrate export` pointer
 - [ ] Verdict keyword `COMPLETE` present in summary
 
 **Case Verdict**: PASS
@@ -106,12 +106,12 @@
 
 **Expected behavior**:
 1. Detects existing string table
-2. Outputs: "`assets/data/strings/` already exists. Use `/localization-prepare wrap` to add new strings..."
+2. Outputs: "`assets/data/strings/` already exists. Use `/l10n-prepare wrap` to add new strings..."
 3. Stops — does not overwrite or re-scaffold
 
 **Assertions**:
 - [ ] Existing file is not overwritten
-- [ ] Correct advisory message pointing to `wrap` and `/localization-sync`
+- [ ] Correct advisory message pointing to `wrap` and `/l10n-sync`
 - [ ] Skill stops cleanly without further prompts
 
 **Case Verdict**: PASS
@@ -155,4 +155,4 @@
 
 - Engine detection relies on `technical-preferences.md` being configured. If the engine field is still `[TO BE CONFIGURED]`, the localization function mapping cannot be determined — this path is not explicitly handled in the SKILL.md and would be a runtime gap.
 - Whether the `localization-specialist` subagent correctly excludes debug prints, file paths, and enum names from scan results is a runtime-only behavior — cannot be verified statically.
-- The `--review full` path would trigger additional review gates downstream in `/localization-qa` but has no visible effect within `localization-prepare` itself.
+- The `--review full` path would trigger additional review gates downstream in `/l10n-qa` but has no visible effect within `l10n-prepare` itself.

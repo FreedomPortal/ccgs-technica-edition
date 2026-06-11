@@ -207,7 +207,7 @@ QA skills produce test artifacts, coverage reports, and defect documentation. Th
 
 ### `publish`
 
-**Skills**: export-build, export-crowdfunding, export-devlog, export-pitch, export-review, export-social, export-steam-page, community-plan, day-one-patch, dlc-design, launch-checklist, live-ops-plan, marketing-plan, press-outreach, publish-check, refine-copy, release-checklist
+**Skills**: export-build, publish-crowdfunding, publish-devlog, publish-pitch, publish-review, publish-social, publish-steam-page, community-plan, day-one-patch, dlc-design, launch-checklist, live-ops-plan, marketing-plan, press-outreach, publish-check, refine-copy, release-checklist
 
 Publish skills compile project materials into external-facing artifacts or manage the publishing roadmap. Read project state before generating output; never auto-push to external platforms.
 
@@ -238,7 +238,7 @@ Workflow skills manage session state, project setup, and meta-operations. Surfac
 
 ### `localization`
 
-**Skills**: localization-cultural-review, localization-integrate, localization-prepare, localization-qa, localization-rtl, localization-sync, localization-vo, localize
+**Skills**: l10n-cultural-review, l10n-integrate, l10n-prepare, l10n-qa, l10n-rtl, l10n-sync, l10n-vo, l10n-i18n, l10n-check
 
 Localization skills manage the string pipeline from source to translated delivery. Each skill must scope its pipeline stage clearly, gate all string table writes, and hand off to the next step.
 

@@ -1,4 +1,4 @@
-# Skill Spec: /export-steam-page
+# Skill Spec: /publish-steam-page
 
 > **Category**: utility
 > **Priority**: low
@@ -6,7 +6,7 @@
 
 ## Skill Summary
 
-`/export-steam-page` compiles project materials into a dated Steam store page document. It reads `design/gdd/game-concept.md` (required), `design/gdd/systems-index.md`, and any art/aesthetic design docs, then asks the user two scoping questions (page stage and price point). It writes a structured Markdown file with game title, tagline, short description (max 160 chars), long description in Steam BB-code format, 15 prioritized tags, content flags, and a visual asset checklist with `[NEEDS]` flags. After writing, it automatically runs `/refine-copy` on the file in-place before presenting a COMPLETE verdict with next-step recommendations.
+`/publish-steam-page` compiles project materials into a dated Steam store page document. It reads `design/gdd/game-concept.md` (required), `design/gdd/systems-index.md`, and any art/aesthetic design docs, then asks the user two scoping questions (page stage and price point). It writes a structured Markdown file with game title, tagline, short description (max 160 chars), long description in Steam BB-code format, 15 prioritized tags, content flags, and a visual asset checklist with `[NEEDS]` flags. After writing, it automatically runs `/refine-copy` on the file in-place before presenting a COMPLETE verdict with next-step recommendations.
 
 ---
 
@@ -51,7 +51,7 @@
 - [ ] Exactly 15 Steam tags generated
 - [ ] Every visual asset is flagged `[NEEDS]`
 - [ ] Verdict is `COMPLETE`
-- [ ] Recommended next is `/press-outreach` or `/export-social`
+- [ ] Recommended next is `/press-outreach` or `/publish-social`
 
 **Case Verdict**: PASS
 

@@ -1,4 +1,4 @@
-# Skill Spec: /export-social
+# Skill Spec: /publish-social
 
 > **Category**: utility
 > **Priority**: low
@@ -6,7 +6,7 @@
 
 ## Skill Summary
 
-`/export-social` generates a batch of social media posts from recent development activity. It reads `production/session-state/active.md`, `design/gdd/game-concept.md`, and any latest devlog, then identifies three shareable angles: a progress moment, a design insight, and a player hook. After asking what the user wants to communicate, it writes a dated Markdown file at `review/social-posts-[YYYY-MM-DD].md` containing three Twitter/X drafts (max 280 chars each), one Reddit post (150–300 words), and one TikTok/Instagram caption with five hashtags. Visual requirements are flagged with `[NEEDS]`. The file is refined in-place via `/refine-copy` before a COMPLETE verdict is issued.
+`/publish-social` generates a batch of social media posts from recent development activity. It reads `production/session-state/active.md`, `design/gdd/game-concept.md`, and any latest devlog, then identifies three shareable angles: a progress moment, a design insight, and a player hook. After asking what the user wants to communicate, it writes a dated Markdown file at `review/social-posts-[YYYY-MM-DD].md` containing three Twitter/X drafts (max 280 chars each), one Reddit post (150–300 words), and one TikTok/Instagram caption with five hashtags. Visual requirements are flagged with `[NEEDS]`. The file is refined in-place via `/refine-copy` before a COMPLETE verdict is issued.
 
 ---
 
@@ -156,4 +156,4 @@
 - Character count enforcement for Twitter posts (max 280) is a runtime check — static spec cannot verify generated text length.
 - Reddit word count (150–300) is similarly runtime-only.
 - Hashtag relevance ("specific and relevant — no #gaming #indiedev spam") is a judgment call testable only at runtime.
-- The skill reads `review/devlog-*.md` for devlog context but `/export-devlog` saves to `production/publishing/devlog-*.md` — this path mismatch in the SKILL.md is a known gap worth flagging during runtime testing.
+- The skill reads `review/devlog-*.md` for devlog context but `/publish-devlog` saves to `production/publishing/devlog-*.md` — this path mismatch in the SKILL.md is a known gap worth flagging during runtime testing.

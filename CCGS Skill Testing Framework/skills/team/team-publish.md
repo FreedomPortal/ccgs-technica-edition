@@ -114,7 +114,7 @@
 
 **Expected behavior**:
 1. `publishing-manager` reports: `Store Page: MISSING`, `Press Kit: MISSING`
-2. Action items include: create press kit → `/export-pitch` or equivalent; create store page → `/export-steam-page`
+2. Action items include: create press kit → `/publish-pitch` or equivalent; create store page → `/publish-steam-page`
 3. Launch top-3 actions surfaced prominently
 4. `Verdict: COMPLETE` — cycle runs; missing assets are reported as action items, not blockers
 

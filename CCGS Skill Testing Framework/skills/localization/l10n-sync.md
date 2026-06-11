@@ -1,4 +1,4 @@
-# Skill Spec: /localization-sync
+# Skill Spec: /l10n-sync
 
 > **Category**: utility
 > **Priority**: low
@@ -6,7 +6,7 @@
 
 ## Skill Summary
 
-`/localization-sync` detects translation drift after English source strings change post-freeze. It has three entry points: a `status` argument (read-only coverage matrix showing translated/stale/missing/orphaned counts per locale); a `--locale [code]` flag to limit sync to a single locale; and no argument (sync all locales). In full sync mode it spawns a `localization-specialist` to compare source `"source"` fields against those stored in locale files, then surfaces STALE, MISSING, and ORPHANED keys. It asks approval before marking stale keys in locale files, optionally generates a re-translation request document, and appends a sync record to the freeze-status file if a freeze is active. All file writes require explicit per-file approval.
+`/l10n-sync` detects translation drift after English source strings change post-freeze. It has three entry points: a `status` argument (read-only coverage matrix showing translated/stale/missing/orphaned counts per locale); a `--locale [code]` flag to limit sync to a single locale; and no argument (sync all locales). In full sync mode it spawns a `localization-specialist` to compare source `"source"` fields against those stored in locale files, then surfaces STALE, MISSING, and ORPHANED keys. It asks approval before marking stale keys in locale files, optionally generates a re-translation request document, and appends a sync record to the freeze-status file if a freeze is active. All file writes require explicit per-file approval.
 
 ---
 
@@ -22,7 +22,7 @@
 
 ## Director Gate Checks
 
-- **N/A**: `localization-sync` is a pipeline maintenance skill that keeps translation files aligned with source text changes. It does not invoke creative-director, technical-director, or producer gate phases. Freeze violation warnings are surfaced to the user for manual resolution rather than routed to a gate agent.
+- **N/A**: `l10n-sync` is a pipeline maintenance skill that keeps translation files aligned with source text changes. It does not invoke creative-director, technical-director, or producer gate phases. Freeze violation warnings are surfaced to the user for manual resolution rather than routed to a gate agent.
 
 ---
 
@@ -53,7 +53,7 @@
 - [ ] "May I mark stale" prompt fires before writes
 - [ ] Per-file diff presented before per-file write approval
 - [ ] "May I write" fires for locale file
-- [ ] Summary includes `/localization-integrate import [locale] [path]` pointer
+- [ ] Summary includes `/l10n-integrate import [locale] [path]` pointer
 
 **Case Verdict**: PASS
 
@@ -68,7 +68,7 @@
 **Expected behavior**:
 1. Reads source table
 2. Globs locale files — none found
-3. Outputs: "No translation files found. Run `/localization-integrate import [locale] [path]` after receiving translations."
+3. Outputs: "No translation files found. Run `/l10n-integrate import [locale] [path]` after receiving translations."
 4. Stops cleanly
 
 **Assertions**:

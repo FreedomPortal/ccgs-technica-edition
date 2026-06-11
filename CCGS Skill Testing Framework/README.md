@@ -99,7 +99,8 @@ All testing is driven by two skills already in the framework:
 | `analysis` | consistency-check, balance-check, code-review, tech-debt, … | Read-only report, verdict keyword, no writes |
 | `team` | team-combat, team-narrative, team-audio, … | All required agents spawned, blocked surfaced |
 | `sprint` | sprint-plan, sprint-status, milestone-review, … | Reads sprint data, status keywords present |
-| `utility` | start, adopt, hotfix, localize, setup-engine, … | Passes static checks |
+| `localization` | l10n-i18n, l10n-prepare, l10n-integrate, l10n-qa, l10n-sync, l10n-cultural-review, l10n-rtl, l10n-vo, l10n-check | Scope declaration, string table gates, pipeline handoff |
+| `utility` | start, adopt, hotfix, setup-engine, … | Passes static checks |
 
 ---
 

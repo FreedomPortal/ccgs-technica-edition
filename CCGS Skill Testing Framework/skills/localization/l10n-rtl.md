@@ -1,4 +1,4 @@
-# Skill Spec: /localization-rtl
+# Skill Spec: /l10n-rtl
 
 > **Category**: utility
 > **Priority**: low
@@ -6,7 +6,7 @@
 
 ## Skill Summary
 
-`/localization-rtl` validates game source code and assets for RTL (right-to-left) layout support before shipping Arabic (`ar`), Hebrew (`he`), Persian (`fa`), or Urdu (`ur`) locales. It runs five static checks via a `localization-specialist` subagent: (1) RTL layout flag presence on UI containers, (2) hardcoded positional layout assumptions (LTR anchors, absolute x-positions), (3) string assembly patterns that break in RTL grammar, (4) font support for Arabic/Hebrew Unicode ranges, and (5) directional asset coverage (arrows, chevrons, fill-direction logic). It produces a READY / CONCERNS / NOT READY verdict based on HIGH severity finding count and asks approval to write a report to `production/localization/rtl-check-[locale]-[date].md`. The skill is entirely read-only and never modifies source files.
+`/l10n-rtl` validates game source code and assets for RTL (right-to-left) layout support before shipping Arabic (`ar`), Hebrew (`he`), Persian (`fa`), or Urdu (`ur`) locales. It runs five static checks via a `localization-specialist` subagent: (1) RTL layout flag presence on UI containers, (2) hardcoded positional layout assumptions (LTR anchors, absolute x-positions), (3) string assembly patterns that break in RTL grammar, (4) font support for Arabic/Hebrew Unicode ranges, and (5) directional asset coverage (arrows, chevrons, fill-direction logic). It produces a READY / CONCERNS / NOT READY verdict based on HIGH severity finding count and asks approval to write a report to `production/localization/rtl-check-[locale]-[date].md`. The skill is entirely read-only and never modifies source files.
 
 ---
 
@@ -22,7 +22,7 @@
 
 ## Director Gate Checks
 
-- **N/A**: `localization-rtl` is a static analysis and reporting skill. It does not invoke creative-director, technical-director, or producer gate agents. Its READY/CONCERNS/NOT READY verdict is advisory output for the programmer responsible for RTL implementation; it is not a phase gate that blocks project progression in the CCGS pipeline directly.
+- **N/A**: `l10n-rtl` is a static analysis and reporting skill. It does not invoke creative-director, technical-director, or producer gate agents. Its READY/CONCERNS/NOT READY verdict is advisory output for the programmer responsible for RTL implementation; it is not a phase gate that blocks project progression in the CCGS pipeline directly.
 
 ---
 
@@ -77,7 +77,7 @@
 - [ ] `NOT READY` verdict in output
 - [ ] All HIGH findings listed with FILE, LINE, FINDING, SEVERITY, FIX
 - [ ] Recommended fix order shown in next steps
-- [ ] Re-run instruction (`/localization-rtl he`) included
+- [ ] Re-run instruction (`/l10n-rtl he`) included
 
 **Case Verdict**: PASS
 
@@ -114,12 +114,12 @@
 
 **Expected behavior**:
 1. Validates locale — `zh` not in supported list (`ar`, `he`, `fa`, `ur`)
-2. Outputs: "`zh` is not an RTL locale. /localization-rtl supports: ar (Arabic), he (Hebrew), fa (Persian/Farsi), ur (Urdu). For LTR locale validation, use /localization-qa."
+2. Outputs: "`zh` is not an RTL locale. /l10n-rtl supports: ar (Arabic), he (Hebrew), fa (Persian/Farsi), ur (Urdu). For LTR locale validation, use /l10n-qa."
 3. Stops cleanly without spawning any subagents
 
 **Assertions**:
 - [ ] Correct unsupported-locale message with all 4 supported codes listed
-- [ ] Redirect to `/localization-qa` mentioned
+- [ ] Redirect to `/l10n-qa` mentioned
 - [ ] No subagents spawned
 - [ ] No files written
 

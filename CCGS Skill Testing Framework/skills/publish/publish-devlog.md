@@ -1,4 +1,4 @@
-# Skill Spec: /export-devlog
+# Skill Spec: /publish-devlog
 
 > **Category**: utility
 > **Priority**: low
@@ -6,7 +6,7 @@
 
 ## Skill Summary
 
-`/export-devlog` generates a developer blog post from recent sprint activity. It accepts an optional devlog number argument; if omitted, it globs existing devlogs and auto-increments the number. It reads `production/session-state/active.md`, milestone files, any completed GDDs, and the previous devlog for tone continuity, then asks the user for target platform and tone preference. The output is saved to `production/publishing/devlog-[N]-[YYYY-MM-DD].md` with a structured four-section format (What I Built, A Problem I Solved, A Decision I Made, What's Next), automatically refined in-place via `/refine-copy`. Visual asset gaps are flagged with `[NEEDS: screenshot / GIF / video]`. Ends with a COMPLETE verdict.
+`/publish-devlog` generates a developer blog post from recent sprint activity. It accepts an optional devlog number argument; if omitted, it globs existing devlogs and auto-increments the number. It reads `production/session-state/active.md`, milestone files, any completed GDDs, and the previous devlog for tone continuity, then asks the user for target platform and tone preference. The output is saved to `production/publishing/devlog-[N]-[YYYY-MM-DD].md` with a structured four-section format (What I Built, A Problem I Solved, A Decision I Made, What's Next), automatically refined in-place via `/refine-copy`. Visual asset gaps are flagged with `[NEEDS: screenshot / GIF / video]`. Ends with a COMPLETE verdict.
 
 ---
 
@@ -30,7 +30,7 @@
 
 ### Case 1: Happy Path — Numbered Devlog With Active Sprint
 **Fixture**:
-- Invoked as `/export-devlog 3`
+- Invoked as `/publish-devlog 3`
 - `production/session-state/active.md` exists with recent build activity
 - `production/milestones/sprint-2.md` exists with sprint goal
 - `production/publishing/devlog-2-2026-05-10.md` exists (previous devlog for tone)

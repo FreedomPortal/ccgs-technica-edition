@@ -1,7 +1,7 @@
 ---
 name: skill-improve
-description: "Improve a skill using a test-fix-retest loop. Runs static checks, proposes targeted fixes, rewrites the skill, re-tests, and keeps or reverts based on score change."
-argument-hint: "[skill-name]"
+description: "Improve a skill using a test-fix-retest loop. Single skill: test → fix → retest → keep or revert. Batch mode: from-report [path] reads a suite report and processes failing skills one-by-one with human gate between each."
+argument-hint: "[skill-name] | from-report [report-path]"
 user-invocable: true
 allowed-tools: Read, Glob, Grep, Write, Bash
 model: sonnet
@@ -9,22 +9,132 @@ model: sonnet
 
 # Skill Improve
 
-Runs an improvement loop on a single skill:
-test → fix → retest → keep or revert.
+Two modes:
+
+- **Single skill**: `test → fix → retest → keep or revert` on one named skill.
+- **From report**: reads a `/skill-test suite` report, processes all failing skills
+  one-by-one with a human gate between each.
 
 ---
 
 ## Phase 1: Parse Argument
 
-Read the skill name from the first argument. If missing, output usage and stop:
+Read the first argument.
+
+- `from-report [path]` → go to **Phase 0** (batch mode from suite report)
+- `[skill-name]` → continue to Phase 2 (single-skill mode)
+- Missing argument → output usage and stop:
 
 ```
 Usage: /skill-improve [skill-name]
+       /skill-improve from-report [report-path]
 Example: /skill-improve tech-debt
+Example: /skill-improve from-report "CCGS Skill Testing Framework/results/skill-test-suite-2026-06-11.md"
 ```
 
-Verify `.claude/skills/[name]/SKILL.md` exists. If not, stop with:
+For single-skill mode: verify `.claude/skills/[name]/SKILL.md` exists. If not, stop with:
 "Skill '[name]' not found."
+
+---
+
+## Phase 0: From-Report Mode — Batch Improvement
+
+### Step 1 — Read Report
+
+Read the suite report at the given path. If not found, stop:
+"Report not found at [path]. Run `/skill-test suite` first to generate one."
+
+### Step 2 — Build Queue
+
+Parse all `<!-- SKILL: [name] | verdict: FAIL ... -->` and
+`<!-- SKILL: [name] | verdict: WARN ... -->` blocks from the report.
+
+Read `CCGS Skill Testing Framework/catalog.yaml` to get `priority:` for each skill.
+
+Order the queue: FAIL before WARN within each tier; tiers ordered critical → high → medium → low.
+
+Check for a `<!-- QUEUE-POSITION: [N] -->` marker in the report (written on a previous
+stopped session). If found, resume from position N rather than starting at 1.
+
+Display the queue:
+
+```
+=== Skill Improve: From Report ===
+Report: [filename]
+Date:   [date from report header]
+
+Improvement queue:
+  FAIL: [N] skills  |  WARN: [N] skills  |  Total: [N]
+  [Resuming from position N]  ← only if resuming
+
+  1. /gate-check       FAIL  (critical)  — 2 category failures: G2, G4
+  2. /design-review    FAIL  (critical)  — 2 category failures: R2, R5
+  3. /story-readiness  WARN  (critical)  — 1 static warning: Check 5
+  ...
+
+Proceed with #1 (/gate-check)? [y] | Jump to specific skill? Type name. | Stop? [n]
+```
+
+If user types a skill name, jump to that position in the queue.
+
+### Step 3 — Process Queue (Human-Gated Loop)
+
+For each skill in queue (starting at current position):
+
+**3a. Announce skill:**
+```
+── Skill [N] of [total]: /[name] ──────────────────────────
+Verdict from report: [FAIL/WARN]
+Issues: [failures list from report block]
+```
+
+**3b. Run single-skill improvement loop** (Phases 2–7 of this skill):
+- Run baseline test (Phase 2)
+- Diagnose (Phase 3)
+- Propose fix (Phase 4)
+- Write and retest (Phase 5)
+- Verdict: kept / reverted (Phase 6)
+
+**3c. Update report entry:**
+Read the report file. Find the `<!-- SKILL: [name] ... -->` block.
+Replace its verdict tag with the outcome:
+- Improved and kept → `verdict: FIXED`
+- No improvement, reverted → `verdict: UNCHANGED`
+- User declined fix at Phase 4 → `verdict: SKIPPED-BY-USER`
+
+Write the updated report back.
+
+**3d. Ask to continue:**
+```
+Result: [FIXED / UNCHANGED / SKIPPED-BY-USER]
+
+Next: /[next-name] ([verdict] — [issues summary])
+Continue? [continue] | Skip next | Stop
+```
+
+- `continue` (or Enter) → move to next skill
+- `skip` → mark next skill `SKIPPED-BY-USER`, advance one more
+- `stop` → write `<!-- QUEUE-POSITION: [N+1] -->` to report, exit
+
+### Step 4 — Session Summary
+
+After all skills processed or user stops:
+
+```
+=== Improvement Session Complete ===
+
+  Fixed:           N  (score improved, changes kept)
+  Unchanged:       N  (no improvement found, reverted)
+  Skipped by user: N
+  Remaining:       N  (use /skill-improve from-report [path] to resume)
+
+Report updated: [path]
+
+Recommended next:
+  /skill-test suite  — regenerate a clean baseline after fixes
+```
+
+---
 
 ---
 
@@ -143,3 +253,5 @@ If yes: run `git checkout -- .claude/skills/[name]/SKILL.md`
 - Run `/skill-test static all` to find the next skill with failures.
 - Run `/skill-improve [next-name]` to continue the loop on another skill.
 - Run `/skill-test audit` to see overall coverage progress.
+- Run `/skill-test suite` to generate a fresh suite report after multiple fixes.
+- Run `/skill-improve from-report [path]` to work through all failures in a suite report.

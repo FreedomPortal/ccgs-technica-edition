@@ -12,7 +12,7 @@ Does NOT own: game design decisions (`game-designer`), production code (any prog
 
 **Domain**: `production/publishing/` — roadmap, community status, content calendar  
 **Escalates to**: `producer` (direct report)  
-**Delegates content execution to**: export skills (`export-devlog`, `export-social`, `export-steam-page`, etc.)  
+**Delegates content execution to**: export skills (`publish-devlog`, `publish-social`, `publish-steam-page`, etc.)  
 **Coordinates with**: `community-manager`, `game-designer`, `release-manager`
 
 ---
@@ -82,7 +82,7 @@ Does NOT own: game design decisions (`game-designer`), production code (any prog
 - References all context: Twitter/X + Steam platforms, alpha stage, 180 wishlists
 - Produces a concrete content calendar with platform-specific post types for the month
 - Flags 180 wishlists as likely below Steam Next Fest thresholds — prioritizes wishlist-push content
-- Delegates specific content drafting to export skills (`export-devlog`, `export-social`)
+- Delegates specific content drafting to export skills (`publish-devlog`, `publish-social`)
 - Asks "May I write this to production/publishing/content-calendar.md?" before writing
 
 ---

@@ -6,7 +6,7 @@
 
 ## Skill Summary
 
-`/community-plan` creates or updates the community strategy for the game. It reads the game concept, existing community status, and publishing roadmap, then presents a recommended platform stack (Reddit, Twitter/X, itch.io, TikTok/YouTube Shorts) with per-platform content strategies and posting cadences. It supports four modes: strategy review, metrics update, content planning for the current week, and new platform setup. Output files are `production/publishing/community-status.md` (updated) and `production/publishing/content-calendar.md` (created or updated). The skill applies a humanize writing pass before concluding with a COMPLETE verdict and handoff to `/export-social` or `/export-devlog`.
+`/community-plan` creates or updates the community strategy for the game. It reads the game concept, existing community status, and publishing roadmap, then presents a recommended platform stack (Reddit, Twitter/X, itch.io, TikTok/YouTube Shorts) with per-platform content strategies and posting cadences. It supports four modes: strategy review, metrics update, content planning for the current week, and new platform setup. Output files are `production/publishing/community-status.md` (updated) and `production/publishing/content-calendar.md` (created or updated). The skill applies a humanize writing pass before concluding with a COMPLETE verdict and handoff to `/publish-social` or `/publish-devlog`.
 
 ---
 
@@ -22,7 +22,7 @@
 
 ## Director Gate Checks
 
-- **N/A**: `/community-plan` is a publishing utility with no director-tier gate. It is a downstream consumer of `/marketing-plan` and an upstream producer for `/export-social` and `/export-devlog`. No gate verdict is issued or required.
+- **N/A**: `/community-plan` is a publishing utility with no director-tier gate. It is a downstream consumer of `/marketing-plan` and an upstream producer for `/publish-social` and `/publish-devlog`. No gate verdict is issued or required.
 
 ---
 
@@ -52,7 +52,7 @@
 - [ ] `"May I write"` approval gate for content-calendar write
 - [ ] `content-calendar.md` contains "This Sprint" table and Content Ideas Backlog
 - [ ] COMPLETE verdict present
-- [ ] Handoff mentions `/export-social` or `/export-devlog`
+- [ ] Handoff mentions `/publish-social` or `/publish-devlog`
 
 **Case Verdict**: PASS
 

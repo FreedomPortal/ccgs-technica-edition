@@ -1,4 +1,4 @@
-# Skill Spec: /export-review
+# Skill Spec: /publish-review
 
 > **Category**: utility
 > **Priority**: low
@@ -6,7 +6,7 @@
 
 ## Skill Summary
 
-`/export-review` compiles the current project state into a clean external review document for outside consultants, advisors, or collaborators. It requires both `design/gdd/game-concept.md` and `design/gdd/systems-index.md` (failing with prescribed messages if either is missing), then optionally reads `active.md` and milestone files. It presents a pre-write summary of what was found and asks the reviewer's focus area. The output is saved to `review/review-export-[YYYY-MM-DD].md` with five sections: Project Snapshot, Core Concept & Loop, Systems Status (table), Current Focus, and Open Questions (flagged with ❓). `/refine-copy` runs automatically in-place before a COMPLETE verdict. Notably, this skill does not include `AskUserQuestion` in its `allowed-tools` — Phase 2 interaction uses a different mechanism or is a static prompt.
+`/publish-review` compiles the current project state into a clean external review document for outside consultants, advisors, or collaborators. It requires both `design/gdd/game-concept.md` and `design/gdd/systems-index.md` (failing with prescribed messages if either is missing), then optionally reads `active.md` and milestone files. It presents a pre-write summary of what was found and asks the reviewer's focus area. The output is saved to `review/review-export-[YYYY-MM-DD].md` with five sections: Project Snapshot, Core Concept & Loop, Systems Status (table), Current Focus, and Open Questions (flagged with ❓). `/refine-copy` runs automatically in-place before a COMPLETE verdict. Notably, this skill does not include `AskUserQuestion` in its `allowed-tools` — Phase 2 interaction uses a different mechanism or is a static prompt.
 
 ---
 

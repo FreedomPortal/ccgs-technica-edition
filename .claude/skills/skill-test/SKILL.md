@@ -1,9 +1,9 @@
 ---
 name: skill-test
-description: "Validate skill files for structural compliance and behavioral correctness. Modes: full (all checks), static (linter), spec (behavioral), category (rubric), audit (coverage report)."
-argument-hint: "full [skill-name] | static [skill-name | all] | spec [skill-name] | category [skill-name | all] | audit"
+description: "Validate skill files for structural compliance and behavioral correctness. Modes: full (all checks), static (linter), spec (behavioral), category (rubric), audit (coverage report), suite (git-aware batch run + report)."
+argument-hint: "full [skill-name] | static [skill-name | all] | spec [skill-name] | category [skill-name | all] | audit | suite"
 user-invocable: true
-allowed-tools: Read, Glob, Grep, Write
+allowed-tools: Read, Glob, Grep, Write, Bash
 model: sonnet
 ---
 
@@ -13,7 +13,7 @@ Validates `.claude/skills/*/SKILL.md` files for structural compliance and
 behavioral correctness. No external dependencies — runs entirely within the
 existing skill/hook/template architecture.
 
-**Five modes:**
+**Six modes:**
 
 | Mode | Command | Purpose | Token Cost |
 |------|---------|---------|------------|
@@ -22,6 +22,7 @@ existing skill/hook/template architecture.
 | `spec` | `/skill-test spec [name]` | Behavioral verifier — evaluates assertions in test spec | Medium (~5k/skill) |
 | `category` | `/skill-test category [name\|all]` | Category rubric — checks skill against its category-specific metrics | Low (~2k/skill) |
 | `audit` | `/skill-test audit` | Coverage report — skills, agent specs, last test dates | Low (~3k total) |
+| `suite` | `/skill-test suite` | Git-aware batch run: tests only changed/untested skills, writes report | High (~8k × stale count) |
 
 ---
 
@@ -52,6 +53,7 @@ Determine mode from the first argument:
 - `category [name]` → run category-specific rubric from `CCGS Skill Testing Framework/quality-rubric.md`
 - `category all` → run category rubric for every skill that has a `category:` in catalog
 - `audit` (or no argument) → read catalog, list all skills and agents, show coverage
+- `suite` → git-aware batch run: staleness check → full tests on changed/untested → write report
 - bare `[name]` (no mode prefix, skill exists) → treat as `full [name]`
 
 If argument is missing, unrecognized, or no matching skill found, output usage and stop.
@@ -363,6 +365,163 @@ If a check was skipped, show `SKIPPED — [reason]` in place of its section.
 
 ---
 
+## Phase 2F: Suite Mode — Git-Aware Batch Run
+
+Tests only skills that have changed or have never been tested. Writes a machine-readable
+report that `/skill-improve from-report` can consume.
+
+### Step 1 — Read Catalog and Enumerate Skills
+
+Read `CCGS Skill Testing Framework/catalog.yaml`.
+Glob `.claude/skills/*/SKILL.md` to get all skills on disk.
+
+Skills on disk but absent from catalog: mark as `UNCATALOGUED` — include in run, treat as UNTESTED.
+
+### Step 2 — Staleness Check per Skill
+
+For each skill, compute `last_tested` = latest non-empty date among `last_static`,
+`last_category`, `last_spec` in catalog.
+
+- If `last_tested` is empty → **UNTESTED**
+- If `last_tested` is set:
+  ```bash
+  git log --oneline --after="[last_tested]" -- .claude/skills/[name]/SKILL.md
+  ```
+  - Output non-empty → **STALE** (skill changed since last test)
+  - Output empty → **CURRENT** (skip — do not retest)
+
+For agents: no git check. Mark as STALE if `last_spec` is empty or absent from catalog.
+Agent staleness is advisory — does not block or inflate the skill run cost estimate.
+
+### Step 3 — Pre-Run Summary and Confirmation
+
+Display before running any tests:
+
+```
+=== Skill Test Suite — Pre-Run ===
+Date: [date]
+
+Skills:  [N] total on disk
+  UNTESTED:  [N]
+  STALE:     [N]  (modified since last test)
+  CURRENT:   [N]  (unchanged — will be skipped)
+  UNCATALOGUED: [N]  (on disk, not in catalog)
+
+Agents:  [N] total in catalog
+  STALE / never tested: [N]  (advisory only)
+
+Estimated token cost: ~[N × 8]k tokens for skill tests
+Proceed? [y/N]
+```
+
+If user declines, stop. Do not run any tests.
+
+### Step 4 — Run Full Tests (UNTESTED + STALE Only)
+
+Process skills ordered by priority: critical → high → medium → low.
+For each UNTESTED, STALE, or UNCATALOGUED skill, apply Phase 2E (full mode) logic:
+- Run static (7 checks)
+- Run category (if `category:` assigned in catalog)
+- Run spec (if `spec:` path set and file exists)
+
+Record per skill:
+- `static_verdict`: COMPLIANT | WARNINGS | NON-COMPLIANT
+- `category_verdict`: PASS | FAIL | WARN | SKIPPED
+- `spec_verdict`: PASS | PARTIAL | FAIL | SKIPPED
+- `combined_verdict`: PASS | WARN | FAIL | SKIPPED
+- `failures`: list of specific gaps (metric IDs + descriptions)
+
+`combined_verdict` rules:
+- Any FAIL in static or category → combined FAIL
+- Any WARN with no FAILs → combined WARN
+- All checks pass or skipped with at least one pass → combined PASS
+- No checks ran (no category, no spec, no static possible) → combined SKIPPED
+
+### Step 5 — Build Suite Report
+
+Compile all results. Report uses HTML comment tags so `/skill-improve from-report` can
+parse skill blocks without fragile text matching.
+
+```markdown
+# Skill Test Suite Report
+Date: [YYYY-MM-DD]
+Run scope: [N] tested, [N] skipped (CURRENT), [N] uncatalogued
+
+## Summary
+
+| Result   | Count |
+|----------|-------|
+| PASS     | N     |
+| WARN     | N     |
+| FAIL     | N     |
+| SKIPPED  | N     |
+| CURRENT (not retested) | N |
+
+## Skills Tested
+
+<!-- SKILL: gate-check | verdict: PASS | priority: critical -->
+### /gate-check
+Combined: PASS
+Static: COMPLIANT | Category: PASS | Spec: PASS
+<!-- /SKILL -->
+
+<!-- SKILL: design-review | verdict: FAIL | priority: critical -->
+### /design-review
+Combined: FAIL
+Static: COMPLIANT | Category: FAIL | Spec: SKIPPED
+Failures:
+  - R2: 8-section check — skill evaluates only 6 sections explicitly
+  - R5: no structured findings table before verdict
+<!-- /SKILL -->
+
+<!-- SKILL: story-readiness | verdict: WARN | priority: critical -->
+### /story-readiness
+Combined: WARN
+Static: WARNINGS | Category: PASS | Spec: SKIPPED
+Warnings:
+  - Check 5: no next-step handoff section found
+<!-- /SKILL -->
+
+...
+
+## Failures Index
+
+Priority-ordered list of all FAIL skills — input queue for `/skill-improve from-report`:
+
+1. [critical] design-review — 2 category failures (R2, R5)
+2. [high] create-epics — 1 static failure (Check 4)
+...
+
+## Agent Specs (Advisory)
+
+| Agent              | Category  | Last Spec   | Status  |
+|--------------------|-----------|-------------|---------|
+| creative-director  | director  | never       | STALE   |
+| technical-director | director  | never       | STALE   |
+...
+
+## Uncatalogued Skills
+
+Skills found on disk but absent from catalog.yaml — add before next suite run:
+- [skill-name]
+...
+```
+
+### Step 6 — Write Report and Update Catalog
+
+"May I write this suite report to
+`CCGS Skill Testing Framework/results/skill-test-suite-[YYYY-MM-DD].md`?"
+
+If yes: write report file.
+
+"May I update `CCGS Skill Testing Framework/catalog.yaml` with all new test dates
+and results for the [N] skills just tested?"
+
+If yes: update `last_static`, `last_static_result`, `last_category`,
+`last_category_result`, `last_spec`, `last_spec_result` for every tested skill.
+
+---
+
 ## Phase 2C: Audit Mode — Coverage Report
 
 ### Step 1 — Read Catalog
@@ -443,3 +602,5 @@ After any mode completes, offer contextual follow-up:
 - After `spec [name]` PASS: "Update `CCGS Skill Testing Framework/catalog.yaml` to record this pass date. Consider running `/skill-test audit` to find the next spec gap."
 - After `spec [name]` FAIL: "Review the failing assertions and update the skill or the test spec to resolve the mismatch."
 - After `audit`: "Start with the critical-priority gaps. Use the spec template at `CCGS Skill Testing Framework/templates/skill-test-spec.md` to create new specs."
+- After `suite` PASS (no failures): "All tested skills pass. Run `/skill-test suite` again after your next round of skill edits."
+- After `suite` with failures: "Run `/skill-improve from-report CCGS Skill Testing Framework/results/skill-test-suite-[date].md` to fix failures one-by-one with human oversight."

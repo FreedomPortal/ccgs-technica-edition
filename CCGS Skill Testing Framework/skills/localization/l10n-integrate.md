@@ -1,4 +1,4 @@
-# Skill Spec: /localization-integrate
+# Skill Spec: /l10n-integrate
 
 > **Category**: utility
 > **Priority**: low
@@ -6,7 +6,7 @@
 
 ## Skill Summary
 
-`/localization-integrate` handles the mid-pipeline exchange with translators. It has three modes: `export` (reads `strings-en.json`, generates a translator brief via `localization-lead`, calls string freeze, and summarizes what to send to translators); `import [locale] [path]` (validates a received translation file for missing keys, placeholder mismatches, and schema errors, then writes it to `assets/data/strings/strings-[locale].json` after approval); and `freeze lift` (records a freeze removal in `production/localization/freeze-status.md` after warning the user of consequences). All three modes write files only after explicit "May I write" approval gates.
+`/l10n-integrate` handles the mid-pipeline exchange with translators. It has three modes: `export` (reads `strings-en.json`, generates a translator brief via `localization-lead`, calls string freeze, and summarizes what to send to translators); `import [locale] [path]` (validates a received translation file for missing keys, placeholder mismatches, and schema errors, then writes it to `assets/data/strings/strings-[locale].json` after approval); and `freeze lift` (records a freeze removal in `production/localization/freeze-status.md` after warning the user of consequences). All three modes write files only after explicit "May I write" approval gates.
 
 ---
 
@@ -22,7 +22,7 @@
 
 ## Director Gate Checks
 
-- **N/A**: `localization-integrate` is a pipeline coordination skill that manages string exchange with external translators. It does not invoke creative-director, technical-director, or producer gate phases. Its freeze mechanism is an internal pipeline control, not a design-phase gate.
+- **N/A**: `l10n-integrate` is a pipeline coordination skill that manages string exchange with external translators. It does not invoke creative-director, technical-director, or producer gate phases. Its freeze mechanism is an internal pipeline control, not a design-phase gate.
 
 ---
 
@@ -51,7 +51,7 @@
 - [ ] "May I write" prompt for translator brief file
 - [ ] "May I write" prompt (or equivalent ask) for freeze-status file
 - [ ] Export summary lists string table path, brief path, freeze status
-- [ ] Next steps include `/localization-integrate import [locale] [path]` pointer
+- [ ] Next steps include `/l10n-integrate import [locale] [path]` pointer
 - [ ] `COMPLETE` or equivalent verdict in summary
 
 **Case Verdict**: PASS
@@ -123,7 +123,7 @@
 - [ ] Reason prompt fires before file write
 - [ ] "May I update" approval gate fires before writing
 - [ ] Status field changed to LIFTED in output
-- [ ] Next steps include `/localization-integrate export` to re-freeze
+- [ ] Next steps include `/l10n-integrate export` to re-freeze
 
 **Case Verdict**: PASS
 

@@ -1,4 +1,4 @@
-# Skill Spec: /localization-vo
+# Skill Spec: /l10n-vo
 
 > **Category**: utility
 > **Priority**: low
@@ -6,7 +6,7 @@
 
 ## Skill Summary
 
-`/localization-vo` manages the voice-over pipeline for localized games across four subcommands: `scan` (generates a per-character recording manifest by reading `vo.*` keys from the string table and checking audio file existence); `script [locale]` (generates per-character recording scripts with source text, translated text, expected filename, emotion tag, director notes, and pronunciation flags); `validate [locale]` (checks audio file existence, naming convention, and format for all VO keys); and `integrate [locale]` (searches `src/` for VO audio references, flagging hardcoded locale paths as HIGH severity and verifying key-to-file mappings). VO keys must follow the `vo.[character].[line_id]` pattern. The skill is largely read-only; only the `script` subcommand writes a file (after approval).
+`/l10n-vo` manages the voice-over pipeline for localized games across four subcommands: `scan` (generates a per-character recording manifest by reading `vo.*` keys from the string table and checking audio file existence); `script [locale]` (generates per-character recording scripts with source text, translated text, expected filename, emotion tag, director notes, and pronunciation flags); `validate [locale]` (checks audio file existence, naming convention, and format for all VO keys); and `integrate [locale]` (searches `src/` for VO audio references, flagging hardcoded locale paths as HIGH severity and verifying key-to-file mappings). VO keys must follow the `vo.[character].[line_id]` pattern. The skill is largely read-only; only the `script` subcommand writes a file (after approval).
 
 ---
 
@@ -22,7 +22,7 @@
 
 ## Director Gate Checks
 
-- **N/A**: `localization-vo` is a pipeline management skill for audio assets. It does not invoke creative-director, technical-director, or producer gate phases. Its READY/CONCERNS/NOT READY verdicts are operational status indicators for the audio and localization leads, not project phase gates.
+- **N/A**: `l10n-vo` is a pipeline management skill for audio assets. It does not invoke creative-director, technical-director, or producer gate phases. Its READY/CONCERNS/NOT READY verdicts are operational status indicators for the audio and localization leads, not project phase gates.
 
 ---
 

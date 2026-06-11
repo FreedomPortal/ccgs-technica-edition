@@ -1,4 +1,4 @@
-# Skill Spec: /export-pitch
+# Skill Spec: /publish-pitch
 
 > **Category**: utility
 > **Priority**: low
@@ -6,7 +6,7 @@
 
 ## Skill Summary
 
-`/export-pitch` compiles project materials into a publisher-ready, investor-ready, grant, or general pitch document. It accepts an optional `<target>` argument (publisher, investor, grant, general); if absent, it asks via `AskUserQuestion`. Tone and emphasis shift based on target. It reads `design/gdd/game-concept.md` (required), `design/gdd/systems-index.md`, milestone files, and any completed GDDs, then presents a pre-write summary and asks if anything should be added. The output is saved to `review/pitch-[target]-[YYYY-MM-DD].md` with nine structured sections. `/refine-copy` runs automatically in-place before a COMPLETE verdict is issued with comparables and ask summary.
+`/publish-pitch` compiles project materials into a publisher-ready, investor-ready, grant, or general pitch document. It accepts an optional `<target>` argument (publisher, investor, grant, general); if absent, it asks via `AskUserQuestion`. Tone and emphasis shift based on target. It reads `design/gdd/game-concept.md` (required), `design/gdd/systems-index.md`, milestone files, and any completed GDDs, then presents a pre-write summary and asks if anything should be added. The output is saved to `review/pitch-[target]-[YYYY-MM-DD].md` with nine structured sections. `/refine-copy` runs automatically in-place before a COMPLETE verdict is issued with comparables and ask summary.
 
 ---
 
@@ -30,7 +30,7 @@
 
 ### Case 1: Happy Path — Publisher Pitch With Full Context
 **Fixture**:
-- Invoked as `/export-pitch publisher`
+- Invoked as `/publish-pitch publisher`
 - `design/gdd/game-concept.md` exists with title, comparables, and elevator pitch
 - `design/gdd/systems-index.md` exists with scope tier
 - `production/milestones/sprint-3.md` exists with current stage
@@ -54,7 +54,7 @@
 - [ ] No superlatives ("revolutionary", "unique", "unlike anything")
 - [ ] Market claims reference comparable titles
 - [ ] Verdict is `COMPLETE`
-- [ ] Recommended next includes `/export-review` or `/press-outreach`
+- [ ] Recommended next includes `/publish-review` or `/press-outreach`
 
 **Case Verdict**: PASS
 

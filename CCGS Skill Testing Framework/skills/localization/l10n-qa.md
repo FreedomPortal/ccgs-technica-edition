@@ -1,4 +1,4 @@
-# Skill Spec: /localization-qa
+# Skill Spec: /l10n-qa
 
 > **Category**: utility
 > **Priority**: low
@@ -6,7 +6,7 @@
 
 ## Skill Summary
 
-`/localization-qa` runs a dedicated Language Quality Assurance (LQA) pass for a specified locale after translations have been integrated. It takes an optional locale argument (defaults to prompting the user), reads the source and translated string tables, then executes three analysis phases via subagents: (1) automated checks for completeness, placeholder accuracy, character limits, encoding errors, and stale markers; (2) a cultural review in `full` mode only; (3) a UI overflow risk assessment flagging translated strings over 130% of English length. It compiles a PASS / PASS WITH CONDITIONS / FAIL verdict and asks approval to write an LQA report to `production/localization/lqa-[locale]-[date].md`. The report is a required artifact for the Polish → Release gate.
+`/l10n-qa` runs a dedicated Language Quality Assurance (LQA) pass for a specified locale after translations have been integrated. It takes an optional locale argument (defaults to prompting the user), reads the source and translated string tables, then executes three analysis phases via subagents: (1) automated checks for completeness, placeholder accuracy, character limits, encoding errors, and stale markers; (2) a cultural review in `full` mode only; (3) a UI overflow risk assessment flagging translated strings over 130% of English length. It compiles a PASS / PASS WITH CONDITIONS / FAIL verdict and asks approval to write an LQA report to `production/localization/lqa-[locale]-[date].md`. The report is a required artifact for the Polish → Release gate.
 
 ---
 
@@ -22,7 +22,7 @@
 
 ## Director Gate Checks
 
-- **N/A**: `localization-qa` produces a per-locale verdict report that feeds into the Polish → Release gate (`/gate-check`), but the skill itself does not invoke director-level gate agents. The gate integration is described in the report template ("This report is required by the Polish → Release gate") rather than implemented as a director phase within this skill.
+- **N/A**: `l10n-qa` produces a per-locale verdict report that feeds into the Polish → Release gate (`/gate-check`), but the skill itself does not invoke director-level gate agents. The gate integration is described in the report template ("This report is required by the Polish → Release gate") rather than implemented as a director phase within this skill.
 
 ---
 
@@ -69,14 +69,14 @@
 1. Automated check spawned — returns two BLOCKING findings: LQA-001 (missing placeholder), LQA-002 (stale marker)
 2. Verdict: **FAIL** — 2 BLOCKING issues
 3. Asks to write LQA report (FAIL verdict recorded in report)
-4. Phase 8 summary instructs: return to translator with error details / run `/localization-sync`
+4. Phase 8 summary instructs: return to translator with error details / run `/l10n-sync`
 5. Instructs re-run after fixing
 
 **Assertions**:
 - [ ] `FAIL` verdict in output
 - [ ] Both BLOCKING findings listed with IDs and severity
 - [ ] Report write prompt fires even for FAIL verdict
-- [ ] Next step includes `/localization-sync` pointer for stale entries
+- [ ] Next step includes `/l10n-sync` pointer for stale entries
 - [ ] Re-run instruction present
 
 **Case Verdict**: PASS
@@ -116,7 +116,7 @@
 **Expected behavior**:
 1. Reads source table successfully
 2. Attempts to read `strings-pt.json` — not found
-3. Outputs: "No translation file found for locale `pt`. Run `/localization-integrate import pt [path]` first."
+3. Outputs: "No translation file found for locale `pt`. Run `/l10n-integrate import pt [path]` first."
 4. Stops cleanly
 
 **Assertions**:

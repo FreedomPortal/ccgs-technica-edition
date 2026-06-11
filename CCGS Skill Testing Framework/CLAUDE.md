@@ -48,14 +48,13 @@ sprint      → sprint-plan, sprint-status, milestone-review, retrospective,
               changelog, patch-notes
 demo        → demo-build, demo-feedback, demo-gate, demo-integrate, demo-iterate,
               demo-plan, demo-playtest, demo-polish, demo-scope, demo-status
-publish     → export-build, export-crowdfunding, export-devlog, export-pitch,
-              export-review, export-social, export-steam-page,
+publish     → export-build, publish-crowdfunding, publish-devlog, publish-pitch,
+              publish-review, publish-social, publish-steam-page,
               community-plan, day-one-patch, dlc-design, launch-checklist,
               live-ops-plan, marketing-plan, press-outreach, publish-check,
               refine-copy, release-checklist
-localization → localization-audit, localization-export, localization-import,
-              localization-review, localization-setup, localization-sync,
-              localization-test
+localization → l10n-i18n, l10n-prepare, l10n-integrate, l10n-qa, l10n-sync,
+              l10n-cultural-review, l10n-rtl, l10n-vo, l10n-check
 workflow    → start, onboard, setup-engine, adopt, continue, next, checkpoint,
               autosave-mode, project-stage-detect, log-lesson, memory-prune,
               memory-shard

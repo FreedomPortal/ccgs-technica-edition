@@ -761,9 +761,8 @@ skills:
     priority: low
     category: utility
 
-  - name: localize
-    spec: CCGS Skill Testing Framework/skills/localization/localize.md
-    category: localization
+  - name: l10n-i18n
+    spec: CCGS Skill Testing Framework/skills/localization/l10n-i18n.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -771,7 +770,7 @@ skills:
     last_category: ""
     last_category_result: ""
     priority: low
-    category: utility
+    category: localization
 
   - name: launch-checklist
     spec: CCGS Skill Testing Framework/skills/publish/launch-checklist.md
@@ -1037,8 +1036,8 @@ skills:
     priority: low
     category: utility
 
-  - name: export-steam-page
-    spec: CCGS Skill Testing Framework/skills/publish/export-steam-page.md
+  - name: publish-steam-page
+    spec: CCGS Skill Testing Framework/skills/publish/publish-steam-page.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1048,8 +1047,8 @@ skills:
     priority: low
     category: publish
 
-  - name: export-devlog
-    spec: CCGS Skill Testing Framework/skills/publish/export-devlog.md
+  - name: publish-devlog
+    spec: CCGS Skill Testing Framework/skills/publish/publish-devlog.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1059,8 +1058,8 @@ skills:
     priority: low
     category: publish
 
-  - name: export-social
-    spec: CCGS Skill Testing Framework/skills/publish/export-social.md
+  - name: publish-social
+    spec: CCGS Skill Testing Framework/skills/publish/publish-social.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1070,8 +1069,8 @@ skills:
     priority: low
     category: publish
 
-  - name: export-pitch
-    spec: CCGS Skill Testing Framework/skills/publish/export-pitch.md
+  - name: publish-pitch
+    spec: CCGS Skill Testing Framework/skills/publish/publish-pitch.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1081,8 +1080,8 @@ skills:
     priority: low
     category: publish
 
-  - name: export-review
-    spec: CCGS Skill Testing Framework/skills/publish/export-review.md
+  - name: publish-review
+    spec: CCGS Skill Testing Framework/skills/publish/publish-review.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1092,8 +1091,8 @@ skills:
     priority: low
     category: publish
 
-  - name: export-crowdfunding
-    spec: CCGS Skill Testing Framework/skills/publish/export-crowdfunding.md
+  - name: publish-crowdfunding
+    spec: CCGS Skill Testing Framework/skills/publish/publish-crowdfunding.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1355,8 +1354,8 @@ skills:
     category: demo
 
   # CCGS:TE additions — Localization Suite
-  - name: localization-prepare
-    spec: CCGS Skill Testing Framework/skills/localization/localization-prepare.md
+  - name: l10n-prepare
+    spec: CCGS Skill Testing Framework/skills/localization/l10n-prepare.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1366,8 +1365,8 @@ skills:
     priority: low
     category: localization
 
-  - name: localization-integrate
-    spec: CCGS Skill Testing Framework/skills/localization/localization-integrate.md
+  - name: l10n-integrate
+    spec: CCGS Skill Testing Framework/skills/localization/l10n-integrate.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1377,8 +1376,8 @@ skills:
     priority: low
     category: localization
 
-  - name: localization-qa
-    spec: CCGS Skill Testing Framework/skills/localization/localization-qa.md
+  - name: l10n-qa
+    spec: CCGS Skill Testing Framework/skills/localization/l10n-qa.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1388,8 +1387,8 @@ skills:
     priority: low
     category: localization
 
-  - name: localization-sync
-    spec: CCGS Skill Testing Framework/skills/localization/localization-sync.md
+  - name: l10n-sync
+    spec: CCGS Skill Testing Framework/skills/localization/l10n-sync.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1399,8 +1398,8 @@ skills:
     priority: low
     category: localization
 
-  - name: localization-cultural-review
-    spec: CCGS Skill Testing Framework/skills/localization/localization-cultural-review.md
+  - name: l10n-cultural-review
+    spec: CCGS Skill Testing Framework/skills/localization/l10n-cultural-review.md
     last_static: "2026-06-08"
     last_static_result: "COMPLIANT"
     last_spec: ""
@@ -1410,8 +1409,8 @@ skills:
     priority: low
     category: localization
 
-  - name: localization-rtl
-    spec: CCGS Skill Testing Framework/skills/localization/localization-rtl.md
+  - name: l10n-rtl
+    spec: CCGS Skill Testing Framework/skills/localization/l10n-rtl.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1421,8 +1420,19 @@ skills:
     priority: low
     category: localization
 
-  - name: localization-vo
-    spec: CCGS Skill Testing Framework/skills/localization/localization-vo.md
+  - name: l10n-vo
+    spec: CCGS Skill Testing Framework/skills/localization/l10n-vo.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: localization
+
+  - name: l10n-check
+    spec: ""
     last_static: ""
     last_static_result: ""
     last_spec: ""

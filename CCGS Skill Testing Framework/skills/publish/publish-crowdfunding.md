@@ -1,4 +1,4 @@
-# Skill Spec: /export-crowdfunding
+# Skill Spec: /publish-crowdfunding
 
 > **Category**: utility
 > **Priority**: low
@@ -6,7 +6,7 @@
 
 ## Skill Summary
 
-`/export-crowdfunding` compiles project materials into a crowdfunding campaign document for Kickstarter or Indiegogo. It accepts an optional `<platform>` argument (defaults to Kickstarter). It reads `design/gdd/game-concept.md` (required), `design/gdd/systems-index.md`, and milestone files. It warns — but does not hard-stop — when no prototype or vertical slice is detected, then asks whether a playable build exists and what the funding target is. The output is saved to `review/crowdfunding-[platform]-[YYYY-MM-DD].md` with twelve sections including a reward tier table and a required Risks & Challenges section. `/refine-copy` runs in-place automatically before a COMPLETE verdict. Stretch goals section is conditional on scope expandability.
+`/publish-crowdfunding` compiles project materials into a crowdfunding campaign document for Kickstarter or Indiegogo. It accepts an optional `<platform>` argument (defaults to Kickstarter). It reads `design/gdd/game-concept.md` (required), `design/gdd/systems-index.md`, and milestone files. It warns — but does not hard-stop — when no prototype or vertical slice is detected, then asks whether a playable build exists and what the funding target is. The output is saved to `review/crowdfunding-[platform]-[YYYY-MM-DD].md` with twelve sections including a reward tier table and a required Risks & Challenges section. `/refine-copy` runs in-place automatically before a COMPLETE verdict. Stretch goals section is conditional on scope expandability.
 
 ---
 
@@ -30,7 +30,7 @@
 
 ### Case 1: Happy Path — Kickstarter With Vertical Slice
 **Fixture**:
-- Invoked as `/export-crowdfunding kickstarter`
+- Invoked as `/publish-crowdfunding kickstarter`
 - `design/gdd/game-concept.md` exists with core fantasy and comparables
 - `design/gdd/systems-index.md` exists with scope tiers
 - `production/milestones/vertical-slice.md` exists (prototype detected)
@@ -83,7 +83,7 @@
 
 ### Case 3: Mode Variant — No Prototype Warning + Indiegogo
 **Fixture**:
-- Invoked as `/export-crowdfunding indiegogo`
+- Invoked as `/publish-crowdfunding indiegogo`
 - `design/gdd/game-concept.md` exists
 - No prototype or vertical slice milestone detected
 - User selects "No build yet — planning ahead" and "Under $5,000"
