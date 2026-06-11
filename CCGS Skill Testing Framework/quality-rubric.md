@@ -174,7 +174,7 @@ Demo skills manage the isolated vertical slice pipeline. They must ensure that d
 
 ### `framework`
 
-**Skills**: skill-test, skill-improve, framework-release, ccgs-merge
+**Skills**: skill-test, skill-improve, skill-specs, framework-release, ccgs-merge
 
 Framework skills maintain the skill/agent testing infrastructure itself. They operate
 exclusively on framework artifacts and must never touch game source. They must be

@@ -58,7 +58,7 @@ localization → l10n-i18n, l10n-prepare, l10n-integrate, l10n-qa, l10n-sync,
 workflow    → start, onboard, setup-engine, adopt, continue, next, checkpoint,
               autosave-mode, project-stage-detect, log-lesson, memory-prune,
               memory-shard
-framework   → skill-test, skill-improve, framework-release, ccgs-merge
+framework   → skill-test, skill-improve, skill-specs, framework-release, ccgs-merge
 analytics   → ab-test, economy-simulation, player-segmentation, retention-analysis,
               telemetry-design
 utility     → export-build, hotfix, day-one-patch
