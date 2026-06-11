@@ -181,7 +181,7 @@ skills:
     category: sprint
 
   - name: backlog
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/sprint/backlog.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -192,7 +192,7 @@ skills:
     category: sprint
 
   - name: roadmap
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/sprint/roadmap.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -203,7 +203,7 @@ skills:
     category: sprint
 
   - name: export-status
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/sprint/export-status.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -214,7 +214,7 @@ skills:
     category: sprint
 
   - name: milestone-define
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/sprint/milestone-define.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -347,7 +347,7 @@ skills:
     category: framework
 
   - name: export-module
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/utility/export-module.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -358,7 +358,7 @@ skills:
     category: utility
 
   - name: port-engine
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/utility/port-engine.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -380,7 +380,7 @@ skills:
     category: framework
 
   - name: skill-specs
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/framework/skill-specs.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -523,7 +523,7 @@ skills:
     category: analysis
 
   - name: balance-sim
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/analysis/balance-sim.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -688,7 +688,7 @@ skills:
     category: qa
 
   - name: tutorial-design
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/authoring/tutorial-design.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -699,7 +699,7 @@ skills:
     category: authoring
 
   - name: player-docs
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/publish/player-docs.md
     last_static: "2026-06-11"
     last_static_result: "COMPLIANT"
     last_spec: ""
@@ -1408,7 +1408,7 @@ skills:
     category: localization
 
   - name: l10n-check
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/localization/l10n-check.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1476,7 +1476,7 @@ skills:
 
   # Newly catalogued — added 2026-06-11 (found on disk, uncatalogued)
   - name: sprint-close
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/sprint/sprint-close.md
     last_static: "2026-06-11"
     last_static_result: "COMPLIANT"
     last_spec: ""
@@ -1487,7 +1487,7 @@ skills:
     category: sprint
 
   - name: wishlist
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/pipeline/wishlist.md
     last_static: "2026-06-11"
     last_static_result: "COMPLIANT"
     last_spec: ""
@@ -1498,7 +1498,7 @@ skills:
     category: pipeline
 
   - name: refresh-docs
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/utility/refresh-docs.md
     last_static: "2026-06-11"
     last_static_result: "COMPLIANT"
     last_spec: ""
@@ -1509,7 +1509,7 @@ skills:
     category: utility
 
   - name: framework-release
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/framework/framework-release.md
     last_static: "2026-06-11"
     last_static_result: "COMPLIANT"
     last_spec: ""
@@ -1520,7 +1520,7 @@ skills:
     category: framework
 
   - name: ab-test
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/analytics/ab-test.md
     last_static: "2026-06-11"
     last_static_result: "COMPLIANT"
     last_spec: ""
@@ -1531,7 +1531,7 @@ skills:
     category: analytics
 
   - name: economy-simulation
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/analytics/economy-simulation.md
     last_static: "2026-06-11"
     last_static_result: "COMPLIANT"
     last_spec: ""
@@ -1542,7 +1542,7 @@ skills:
     category: analytics
 
   - name: player-segmentation
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/analytics/player-segmentation.md
     last_static: "2026-06-11"
     last_static_result: "COMPLIANT"
     last_spec: ""
@@ -1553,7 +1553,7 @@ skills:
     category: analytics
 
   - name: retention-analysis
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/analytics/retention-analysis.md
     last_static: "2026-06-11"
     last_static_result: "COMPLIANT"
     last_spec: ""
@@ -1564,7 +1564,7 @@ skills:
     category: analytics
 
   - name: telemetry-design
-    spec: ""
+    spec: CCGS Skill Testing Framework/skills/analytics/telemetry-design.md
     last_static: "2026-06-11"
     last_static_result: "COMPLIANT"
     last_spec: ""
