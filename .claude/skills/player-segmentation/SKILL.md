@@ -3,7 +3,7 @@ name: player-segmentation
 description: "Define player cohorts with behavioral thresholds and live ops lever mappings. Produces docs/analytics/player-segments.md. Use after initial analytics data is available to enable targeted live ops responses and personalized engagement."
 argument-hint: "(no argument needed)"
 user-invocable: true
-allowed-tools: Read, Glob, Grep, Write, Edit, Task
+allowed-tools: Read, Glob, Grep, Write, Edit, Task, AskUserQuestion
 ---
 
 When this skill is invoked:

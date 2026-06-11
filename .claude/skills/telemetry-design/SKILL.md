@@ -3,7 +3,7 @@ name: telemetry-design
 description: "Design a focused event taxonomy to answer a specific business question. Narrower than /analytics-setup — this skill starts with one question and produces the minimum events needed to answer it. Produces docs/analytics/telemetry-[slug].md."
 argument-hint: "[optional: business question or topic slug]"
 user-invocable: true
-allowed-tools: Read, Glob, Grep, Write, Edit, Task
+allowed-tools: Read, Glob, Grep, Write, Edit, Task, AskUserQuestion
 ---
 
 When this skill is invoked:

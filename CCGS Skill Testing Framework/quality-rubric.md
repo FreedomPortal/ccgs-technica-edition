@@ -172,12 +172,48 @@ Demo skills manage the isolated vertical slice pipeline. They must ensure that d
 
 ---
 
+### `framework`
+
+**Skills**: skill-test, skill-improve, framework-release
+
+Framework skills maintain the skill/agent testing infrastructure itself. They operate
+exclusively on framework artifacts and must never touch game source. They must be
+self-consistent: changes to skills must be retestable, reversible, and tracked.
+
+| Metric | PASS criteria |
+|---|---|
+| **FR1 — Framework scope** | Skill only reads/writes framework artifacts (`.claude/skills/`, `CCGS Skill Testing Framework/`); never modifies game source, `src/`, `design/`, or `production/` |
+| **FR2 — Catalog sync** | After any operation that changes a skill's test state, skill offers to update `catalog.yaml` with new test dates and results |
+| **FR3 — Revert available** | When overwriting a `SKILL.md`, skill records the original (e.g., via `git checkout` revert path) and offers to revert if the new version does not improve the score |
+| **FR4 — Machine-readable output** | Reports written to `CCGS Skill Testing Framework/results/` use `<!-- SKILL: [name] | verdict: [PASS/WARN/FAIL] -->` block format so `/skill-improve from-report` can parse them |
+| **FR5 — Static-before-structural** | Runs static compliance check (C1–C7) before deeper category or spec tests; never reports behavioral results for a structurally invalid skill |
+
+---
+
+### `analytics`
+
+**Skills**: ab-test, economy-simulation, player-segmentation, retention-analysis, telemetry-design
+
+Analytics skills collect data requirements, design measurement plans, and produce
+analysis reports. They must ask before writing reports and must hand off to follow-on
+skills (A/B test, segmentation, telemetry) rather than leaving analysis open-ended.
+
+| Metric | PASS criteria |
+|---|---|
+| **AL1 — Data-before-analysis** | Skill collects or reads the relevant data (retention figures, event list, segment definitions) before running analysis; never invents numbers |
+| **AL2 — Benchmark sourcing** | When benchmarks are used, skill explicitly states their source (stored file, WebSearch, user-provided); never uses undocumented figures |
+| **AL3 — Structured findings** | Output contains a table or structured list of findings (not prose only) with priority or severity per item |
+| **AL4 — May-I-write before report** | All generated analysis documents and framework files gated behind "May I write" |
+| **AL5 — Follow-on handoff** | Skill ends with explicit recommended next skill (e.g., `/ab-test`, `/telemetry-design`, `/player-segmentation`) relevant to the findings |
+
+---
+
 ### `utility`
 
 **Skills**: start, help, brainstorm, onboard, adopt, hotfix, prototype, localize,
 launch-checklist, release-checklist, smoke-check, soak-test, test-setup, test-helpers,
 regression-suite, qa-plan, bug-triage, bug-report, playtest-report, asset-spec,
-reverse-document, project-stage-detect, setup-engine, skill-test, skill-improve,
+reverse-document, project-stage-detect, setup-engine,
 day-one-patch, and any other skills not in categories above
 
 Utility skills pass the 7 standard static checks. If they happen to spawn director

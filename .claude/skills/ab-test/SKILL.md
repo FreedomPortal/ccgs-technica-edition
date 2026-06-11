@@ -3,7 +3,7 @@ name: ab-test
 description: "Design, review, or log A/B tests. Three modes: design (create a test spec), review (statistical significance analysis of results), log (record concluded test outcome). Produces docs/analytics/ab-tests/[slug]-spec.md, docs/analytics/ab-tests/[slug]-review.md, or appends to docs/analytics/ab-test-log.md."
 argument-hint: "[design|review|log] [test-slug]"
 user-invocable: true
-allowed-tools: Read, Glob, Grep, Write, Edit, Task
+allowed-tools: Read, Glob, Grep, Write, Edit, Task, AskUserQuestion
 ---
 
 When this skill is invoked:
@@ -332,3 +332,13 @@ Output: "Logged. `docs/analytics/ab-test-log.md` updated."
 - Both minimum sample AND minimum run time must be met before analysis — not either/or
 - Antigoal violations always override a positive primary metric result
 - Do not add secondary segments beyond what the spec defined — prevents p-hacking
+
+---
+
+## Recommended Next Steps
+
+Verdict: COMPLETE — A/B test updated.
+
+- Run `/ab-test review [slug]` after minimum run time to analyze results
+- Run `/ab-test log [slug]` when test is formally concluded to record the outcome
+- Run `/retention-analysis` after shipping variant B to validate retention impact

@@ -3,7 +3,7 @@ name: retention-analysis
 description: "Analyze player retention curves: classify curve shape, identify drop-off points, and compare against genre benchmarks. If no data is available yet, design the retention monitoring framework. Produces docs/analytics/retention-[slug].md."
 argument-hint: "[optional: analysis slug or topic]"
 user-invocable: true
-allowed-tools: Read, Glob, Grep, Write, Edit, Task
+allowed-tools: Read, Glob, Grep, Write, Edit, Task, AskUserQuestion
 ---
 
 When this skill is invoked:
@@ -274,7 +274,31 @@ Produce:
    (e.g., "after 500 players have reached D7" or "4 weeks post-launch, whichever comes first")
 ```
 
-Present framework to user, then ask to write to `docs/analytics/retention-framework.md`.
+Present framework to user.
+
+### Framework Phase 4: Write Framework
+
+Ask: "May I write the retention monitoring framework to `docs/analytics/retention-framework.md`?"
+
+Wait for confirmation. Create `docs/analytics/` if needed. Write the file.
+
+After write, output:
+
+```
+Retention Monitoring Framework — [Game Title]
+===============================================
+Windows:    [N] retention windows defined
+Events:     [N] events required
+Dashboard:  [description]
+Output:     docs/analytics/retention-framework.md
+
+Next steps:
+1. Implement required events — assign as programmer stories
+2. Run /retention-analysis once [N] players have reached D7 (or 4 weeks post-launch)
+3. Run /telemetry-design if additional event coverage is needed
+
+Verdict: COMPLETE — retention monitoring framework produced.
+```
 
 ---
 
@@ -285,3 +309,14 @@ Present framework to user, then ask to write to `docs/analytics/retention-framew
 - Benchmarks are reference points, not hard pass/fail targets — genre varies widely
 - Drop-off hypotheses must link to specific observable data — no unfounded assertions
 - If data coverage is thin (only D1 + D7), label the analysis as PARTIAL and avoid over-interpreting later windows
+
+---
+
+## Recommended Next Steps
+
+Verdict: COMPLETE — retention analysis or framework produced.
+
+- Run `/ab-test` to test changes proposed by the analysis
+- Run `/telemetry-design` if drop-off point needs better event coverage
+- Run `/player-segmentation` to map retention segments to live ops levers
+- Re-run `/retention-analysis` per recommended monitoring cadence

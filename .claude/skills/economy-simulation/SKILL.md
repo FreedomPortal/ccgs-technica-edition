@@ -3,7 +3,7 @@ name: economy-simulation
 description: "Model-based economy projection: resource flow analysis, time-to-progression estimates, inflation risk, and sink/faucet balance. Works from the economy GDD math model — does NOT run game code. Distinct from /balance-check (formula correctness) and /balance-sim (AI vs AI combat). Produces docs/analytics/economy-sim-[slug].md."
 argument-hint: "[optional: economy system slug or scenario name]"
 user-invocable: true
-allowed-tools: Read, Glob, Grep, Write, Edit, Task
+allowed-tools: Read, Glob, Grep, Write, Edit, Task, AskUserQuestion
 ---
 
 When this skill is invoked:

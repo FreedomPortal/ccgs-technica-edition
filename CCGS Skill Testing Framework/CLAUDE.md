@@ -58,7 +58,10 @@ localization → l10n-i18n, l10n-prepare, l10n-integrate, l10n-qa, l10n-sync,
 workflow    → start, onboard, setup-engine, adopt, continue, next, checkpoint,
               autosave-mode, project-stage-detect, log-lesson, memory-prune,
               memory-shard
-utility     → ccgs-merge, hotfix, skill-improve, skill-test
+framework   → skill-test, skill-improve, framework-release
+analytics   → ab-test, economy-simulation, player-segmentation, retention-analysis,
+              telemetry-design
+utility     → ccgs-merge, hotfix
 ```
 
 ## Agent tiers

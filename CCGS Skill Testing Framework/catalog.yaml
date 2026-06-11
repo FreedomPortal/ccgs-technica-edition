@@ -344,7 +344,7 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: medium
-    category: utility
+    category: framework
 
   - name: export-module
     spec: ""
@@ -377,11 +377,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: framework
 
   - name: start
     spec: CCGS Skill Testing Framework/skills/workflow/start.md
-    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -389,11 +388,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: workflow
 
   - name: next
     spec: CCGS Skill Testing Framework/skills/workflow/next.md
-    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -401,11 +399,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: workflow
 
   - name: brainstorm
     spec: CCGS Skill Testing Framework/skills/authoring/brainstorm.md
-    category: authoring
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -413,11 +410,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: authoring
 
   - name: project-stage-detect
     spec: CCGS Skill Testing Framework/skills/workflow/project-stage-detect.md
-    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -425,11 +421,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: workflow
 
   - name: setup-engine
     spec: CCGS Skill Testing Framework/skills/workflow/setup-engine.md
-    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -437,7 +432,7 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: workflow
 
   - name: quick-design
     spec: CCGS Skill Testing Framework/skills/authoring/quick-design.md
@@ -628,7 +623,6 @@ skills:
 
   - name: reverse-document
     spec: CCGS Skill Testing Framework/skills/pipeline/reverse-document.md
-    category: pipeline
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -636,11 +630,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: pipeline
 
   - name: bug-report
     spec: CCGS Skill Testing Framework/skills/qa/bug-report.md
-    category: qa
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -648,7 +641,7 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: qa
 
   - name: hotfix
     spec: CCGS Skill Testing Framework/skills/utility/hotfix.md
@@ -751,7 +744,6 @@ skills:
 
   - name: onboard
     spec: CCGS Skill Testing Framework/skills/workflow/onboard.md
-    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -759,7 +751,7 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: workflow
 
   - name: l10n-i18n
     spec: CCGS Skill Testing Framework/skills/localization/l10n-i18n.md
@@ -774,7 +766,6 @@ skills:
 
   - name: launch-checklist
     spec: CCGS Skill Testing Framework/skills/publish/launch-checklist.md
-    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -782,11 +773,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: publish
 
   - name: release-checklist
     spec: CCGS Skill Testing Framework/skills/publish/release-checklist.md
-    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -794,11 +784,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: publish
 
   - name: adopt
     spec: CCGS Skill Testing Framework/skills/workflow/adopt.md
-    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -806,11 +795,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: workflow
 
   - name: smoke-check
     spec: CCGS Skill Testing Framework/skills/qa/smoke-check.md
-    category: qa
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -818,11 +806,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: qa
 
   - name: soak-test
     spec: CCGS Skill Testing Framework/skills/qa/soak-test.md
-    category: qa
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -830,11 +817,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: qa
 
   - name: test-setup
     spec: CCGS Skill Testing Framework/skills/pipeline/test-setup.md
-    category: pipeline
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -842,11 +828,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: pipeline
 
   - name: test-helpers
     spec: CCGS Skill Testing Framework/skills/qa/test-helpers.md
-    category: qa
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -854,11 +839,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: qa
 
   - name: regression-suite
     spec: CCGS Skill Testing Framework/skills/qa/regression-suite.md
-    category: qa
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -866,11 +850,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: qa
 
   - name: qa-plan
     spec: CCGS Skill Testing Framework/skills/qa/qa-plan.md
-    category: qa
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -878,11 +861,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: qa
 
   - name: bug-triage
     spec: CCGS Skill Testing Framework/skills/qa/bug-triage.md
-    category: qa
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -890,11 +872,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: qa
 
   - name: asset-spec
     spec: CCGS Skill Testing Framework/skills/authoring/asset-spec.md
-    category: authoring
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -902,11 +883,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: authoring
 
   - name: day-one-patch
     spec: CCGS Skill Testing Framework/skills/publish/day-one-patch.md
-    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -914,12 +894,11 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: publish
 
   # CCGS:TE additions — Session Continuity
   - name: autosave-mode
     spec: CCGS Skill Testing Framework/skills/workflow/autosave-mode.md
-    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -927,11 +906,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: medium
-    category: utility
+    category: workflow
 
   - name: checkpoint
     spec: CCGS Skill Testing Framework/skills/workflow/checkpoint.md
-    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -939,11 +917,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: medium
-    category: utility
+    category: workflow
 
   - name: continue
     spec: CCGS Skill Testing Framework/skills/workflow/continue.md
-    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -951,7 +928,7 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: medium
-    category: utility
+    category: workflow
 
   - name: memory-prune
     spec: CCGS Skill Testing Framework/skills/workflow/memory-prune.md
@@ -967,7 +944,6 @@ skills:
   # CCGS:TE additions — Publishing & Go-To-Market
   - name: publish-check
     spec: CCGS Skill Testing Framework/skills/publish/publish-check.md
-    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -975,7 +951,7 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: medium
-    category: utility
+    category: publish
 
   - name: market-research
     spec: CCGS Skill Testing Framework/skills/publish/market-research.md
@@ -990,7 +966,6 @@ skills:
 
   - name: marketing-plan
     spec: CCGS Skill Testing Framework/skills/publish/marketing-plan.md
-    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -998,11 +973,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: publish
 
   - name: community-plan
     spec: CCGS Skill Testing Framework/skills/publish/community-plan.md
-    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1010,11 +984,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: publish
 
   - name: analytics-setup
     spec: CCGS Skill Testing Framework/skills/pipeline/analytics-setup.md
-    category: pipeline
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1022,11 +995,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: pipeline
 
   - name: press-outreach
     spec: CCGS Skill Testing Framework/skills/publish/press-outreach.md
-    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1034,7 +1006,7 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: publish
 
   - name: publish-steam-page
     spec: CCGS Skill Testing Framework/skills/publish/publish-steam-page.md
@@ -1115,7 +1087,6 @@ skills:
 
   - name: refine-copy
     spec: CCGS Skill Testing Framework/skills/publish/refine-copy.md
-    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1123,11 +1094,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: publish
 
   - name: log-lesson
     spec: CCGS Skill Testing Framework/skills/workflow/log-lesson.md
-    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1135,7 +1105,7 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: workflow
 
   - name: team-publish
     spec: CCGS Skill Testing Framework/skills/team/team-publish.md
@@ -1151,7 +1121,6 @@ skills:
   # CCGS:TE additions — Post-Launch Lifecycle
   - name: live-ops-plan
     spec: CCGS Skill Testing Framework/skills/publish/live-ops-plan.md
-    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1159,11 +1128,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: publish
 
   - name: dlc-design
     spec: CCGS Skill Testing Framework/skills/publish/dlc-design.md
-    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1171,11 +1139,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: publish
 
   - name: mod-support
     spec: CCGS Skill Testing Framework/skills/authoring/mod-support.md
-    category: authoring
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1183,11 +1150,10 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: authoring
 
   - name: monetization-design
     spec: CCGS Skill Testing Framework/skills/publish/monetization-design.md
-    category: publish
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1195,7 +1161,7 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: publish
 
   - name: post-mortem
     spec: CCGS Skill Testing Framework/skills/sprint/post-mortem.md
@@ -1210,7 +1176,6 @@ skills:
 
   - name: taste-gate
     spec: CCGS Skill Testing Framework/skills/gate/taste-gate.md
-    category: gate
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1218,7 +1183,7 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: utility
+    category: gate
 
   - name: setup-tool
     spec: CCGS Skill Testing Framework/skills/pipeline/setup-tool.md
@@ -1489,7 +1454,6 @@ skills:
 
   - name: memory-shard
     spec: CCGS Skill Testing Framework/skills/workflow/memory-shard.md
-    category: workflow
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1497,7 +1461,107 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: medium
+    category: workflow
+
+  # Newly catalogued — added 2026-06-11 (found on disk, uncatalogued)
+  - name: sprint-close
+    spec: ""
+    last_static: "2026-06-11"
+    last_static_result: "COMPLIANT"
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: critical
+    category: sprint
+
+  - name: wishlist
+    spec: ""
+    last_static: "2026-06-11"
+    last_static_result: "COMPLIANT"
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: medium
+    category: pipeline
+
+  - name: refresh-docs
+    spec: ""
+    last_static: "2026-06-11"
+    last_static_result: "COMPLIANT"
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: medium
     category: utility
+
+  - name: framework-release
+    spec: ""
+    last_static: "2026-06-11"
+    last_static_result: "COMPLIANT"
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: framework
+
+  - name: ab-test
+    spec: ""
+    last_static: "2026-06-11"
+    last_static_result: "WARNINGS"
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: high
+    category: analytics
+
+  - name: economy-simulation
+    spec: ""
+    last_static: "2026-06-11"
+    last_static_result: "COMPLIANT"
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: high
+    category: analytics
+
+  - name: player-segmentation
+    spec: ""
+    last_static: "2026-06-11"
+    last_static_result: "COMPLIANT"
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: medium
+    category: analytics
+
+  - name: retention-analysis
+    spec: ""
+    last_static: "2026-06-11"
+    last_static_result: "WARNINGS"
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: high
+    category: analytics
+
+  - name: telemetry-design
+    spec: ""
+    last_static: "2026-06-11"
+    last_static_result: "COMPLIANT"
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: high
+    category: analytics
 
 agents:
   # Tier 1 Directors (Opus)
