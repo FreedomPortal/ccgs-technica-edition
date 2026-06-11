@@ -47,6 +47,17 @@ Additional per mode:
 
 Identify gaps: GDDs that are stubs, missing system descriptions, undefined mechanics. List them as "Source gaps — these sections will be incomplete." Do not stop; proceed with available material.
 
+Check whether the target output file already exists:
+- **manual** → `production/publishing/game-manual.md`
+- **guide** → `production/publishing/strategy-guide.md`
+- **help-text** → `production/publishing/help-text.md`
+
+If the file exists, use `AskUserQuestion`:
+- Prompt: "A [mode] file already exists at [path]. How would you like to proceed?"
+- Options:
+  - `Update` — review existing content and update changed sections only
+  - `Recreate` — generate fresh from current GDDs (existing file will be overwritten)
+
 ---
 
 ## Mode: manual
@@ -151,6 +162,10 @@ Brief:
 >
 > Also write help strings for any UI element in the HUD design doc that has no tutorial coverage.
 > Group by: Workshop / Arena / Menus / Inventory / Other.
+
+Ask: "May I write the help text catalogue to `production/publishing/help-text.md`?"
+
+Wait for confirmation before writing.
 
 **Write:** `production/publishing/help-text.md`
 
