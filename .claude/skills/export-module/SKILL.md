@@ -282,3 +282,5 @@ Next steps:
   - LOW portability: review ADAPTER.md stubs first — significant wiring required.
   [If ADR-less]: Run /architecture-decision for [system-name] to add contract docs to future exports.
 ```
+
+Verdict: COMPLETE — module exported to `exports/modules/[system-name]/`.

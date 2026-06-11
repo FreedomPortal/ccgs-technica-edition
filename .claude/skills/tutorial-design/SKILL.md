@@ -148,3 +148,5 @@ Next steps:
   - Run /player-docs help-text to generate in-game help strings from this doc
   - Run /ux-review design/tutorial/tutorial-design.md to validate flow
 ```
+
+Verdict: COMPLETE — tutorial design written.

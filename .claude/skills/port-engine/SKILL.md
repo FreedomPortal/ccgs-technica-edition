@@ -337,3 +337,13 @@ Pure logic — no porting changes required.
 | No target engine reference | Use built-in knowledge; note unverified status |
 | No `src/` directory | Stop — "No source files found. Check working directory." |
 | Unsupported engine pair | Proceed with best-effort; mark all as [UNVERIFIED] |
+
+---
+
+## Recommended Next Steps
+
+Verdict: COMPLETE — porting guide written.
+
+- Review the Rethink-class APIs first — these require design decisions before any coding begins
+- Run `/refresh-docs update [target-engine] scripting --web` to get versioned target API docs
+- Run `/architecture-decision` for each Rethink-class system to document the new architecture contract

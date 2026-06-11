@@ -1,6 +1,9 @@
 ---
 name: sprint-close
 description: Orchestrates full sprint close-out sequence with confirmation gates between each step.
+argument-hint: "(no argument needed)"
+user-invocable: true
+allowed-tools: Read, Glob, Write, Task, AskUserQuestion
 model: haiku
 ---
 

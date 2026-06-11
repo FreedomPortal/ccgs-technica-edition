@@ -1,6 +1,9 @@
 ---
 name: refresh-docs
 description: Audit engine reference doc staleness and populate module files via version-aware web fetch. audit: staleness report. update [engine] [module]: prompts for target version, uses WebSearch/WebFetch, writes with approval.
+argument-hint: "[audit | update [engine] [module] [--web]]"
+user-invocable: true
+allowed-tools: Read, Glob, Write, WebSearch, WebFetch
 model: sonnet
 ---
 
@@ -248,3 +251,12 @@ Keep these updated as engine doc sites change:
 ### Unreal Engine
 - Release notes: `https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-release-notes`
 - Migration guide: `https://dev.epicgames.com/documentation/en-us/unreal-engine/updating-and-migrating-projects-in-unreal-engine`
+
+---
+
+## Recommended Next Steps
+
+Verdict: COMPLETE — engine reference updated.
+
+- Run `/refresh-docs audit` to check overall reference health after updates
+- Run `/refresh-docs update [engine] [module] --web` to populate additional modules

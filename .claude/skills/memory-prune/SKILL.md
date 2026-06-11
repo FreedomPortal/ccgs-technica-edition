@@ -123,7 +123,7 @@ Estimated active.md reduction: ~NNN lines.
 
 If total removals = 0: print "Nothing to prune — all entries are current." and skip to Phase 5.
 
-Otherwise, ask: "May I apply these removals?"
+Otherwise, ask: "May I write these removals to the files listed above?"
 
 ---
 

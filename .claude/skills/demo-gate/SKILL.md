@@ -221,7 +221,7 @@ Create `production/session-state/drafts/` if it does not exist.
 
 When verdict is **PASS** and user confirms:
 
-Ask: "Gate passed. May I update `production/demo/[demo-id]/state.txt` to '[Target Sub-Stage]'?"
+Ask: "Gate passed. May I write '[Target Sub-Stage]' to `production/demo/[demo-id]/state.txt`?"
 
 If yes:
 1. Create `production/demo/[demo-id]/` directory if it doesn't exist
@@ -281,3 +281,8 @@ For other gates: offer the most logical next demo skill + "Stop here for this se
 - Mark MANUAL CHECK NEEDED rather than assuming PASS on unverifiable items
 - The verdict is advisory — the user makes the final call on whether to advance
 - Never auto-fix missing artifacts to manufacture a PASS — report the gap and name the skill to run
+
+## Recommended Next Steps
+
+- **On PASS**: advance using the next-step widget in Section 6 (e.g., `/demo-build`, `/demo-playtest`, `/demo-polish`, `/demo-integrate`)
+- **On FAIL/CONCERNS**: resolve blockers, then re-run `/demo-gate [id] [target-sub-stage]`

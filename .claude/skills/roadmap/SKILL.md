@@ -1,6 +1,9 @@
 ---
 name: roadmap
 description: Scope-definition authority. Writes production/roadmap.yaml (machine-readable scope registry) and production/roadmap.md (human-readable narrative). Read by /create-epics, /backlog, /sprint-plan. Modes: init, update, view.
+argument-hint: "[init | update | view]"
+user-invocable: true
+allowed-tools: Read, Glob, Write, AskUserQuestion
 model: sonnet
 ---
 
@@ -202,3 +205,13 @@ Read `production/roadmap.yaml` and current epic statuses (glob `production/epics
 - `roadmap.yaml` is the scope authority — `/create-epics` reads it, not the other way around
 - Wishlist items are surfaced as "potential future scope" but never auto-promoted
 - Never modify `production/backlog.yaml` — roadmap.yaml owns scope; backlog reads from it
+
+---
+
+## Recommended Next Steps
+
+Verdict: COMPLETE — roadmap written.
+
+- Run `/create-epics` to generate epic directories from roadmap scope
+- Run `/backlog init` to build the story registry from current epic files
+- Run `/export-status` for a velocity-based completion horizon

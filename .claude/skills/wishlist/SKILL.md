@@ -253,3 +253,13 @@ Confirm: "Pruned: [N] deleted, [N] deferred, [N] refined, [N] kept."
 - Promoted items stay in the file with `status: promoted` — they are the audit trail
 - Deleted items are gone permanently — no archive; IDs are never reused
 - This skill is a capture and triage tool, not a planning tool — no scope analysis, no estimates
+
+---
+
+## Recommended Next Steps
+
+Verdict: COMPLETE — wishlist updated.
+
+- Run `/roadmap update` to consider promoting refined items into milestone scope
+- Run `/wishlist promote [id]` then `/create-epics` to graduate an item to committed work
+- Run `/wishlist view` to review the full wishlist state

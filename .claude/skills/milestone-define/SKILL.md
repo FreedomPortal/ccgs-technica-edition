@@ -1,6 +1,9 @@
 ---
 name: milestone-define
 description: Create or update milestone definition files — scope contracts that specify what a build includes, excludes, quality bar, and exit criteria. Modes: init [name], list, activate [name].
+argument-hint: "[init [name] | list | activate [name]]"
+user-invocable: true
+allowed-tools: Read, Glob, Write, Edit, AskUserQuestion
 model: sonnet
 ---
 
@@ -148,3 +151,13 @@ production/
       alpha.md
     vertical-slice-review-2026-06-09.md   ← backward-looking gate report (existing)
 ```
+
+---
+
+## Recommended Next Steps
+
+Verdict: COMPLETE — milestone definition written.
+
+- Run `/milestone-define activate [name]` to set as the active milestone
+- Run `/roadmap init` to assign epics to this milestone
+- Run `/gate-check` to evaluate exit criteria at milestone end

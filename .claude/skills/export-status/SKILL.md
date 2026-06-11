@@ -1,6 +1,9 @@
 ---
 name: export-status
 description: Generate a production status report with velocity metrics, predictability score, scope creep rate, and milestone completion horizon. Modes: full (complete report), lean (key metrics + horizon), metrics (raw numbers only). Output: production/reports/status-YYYY-MM-DD.md.
+argument-hint: "[full | lean | metrics]"
+user-invocable: true
+allowed-tools: Read, Glob, Write
 model: sonnet
 ---
 
@@ -237,3 +240,13 @@ After computing velocity, verify the formulas produce plausible output:
 - Predictability index should be < 1.0 when must-have % data is missing from sprint files
 
 Never fail hard. Always produce a partial report with available data.
+
+---
+
+## Recommended Next Steps
+
+Verdict: COMPLETE — status report written.
+
+- Run `/milestone-review` for a full milestone health assessment
+- Run `/roadmap update` if new GDDs or epics were added since last roadmap run
+- Run `/sprint-plan` to plan the next sprint based on current backlog state

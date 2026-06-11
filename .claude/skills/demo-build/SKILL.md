@@ -261,7 +261,7 @@ If present and non-zero: report PASS.
 
 ## Phase 7: Log Result
 
-Ask: "May I log this demo build to `production/qa/demo-builds.md`?"
+Ask: "May I write this build entry to `production/qa/demo-builds.md`?"
 
 If yes, create or append to `production/qa/demo-builds.md`:
 

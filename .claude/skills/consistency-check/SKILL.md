@@ -181,6 +181,13 @@ Date: [date]
 Registry entries checked: [N entities, N items, N formulas, N constants]
 GDDs scanned: [N] ([list names])
 
+### Conflict Summary
+
+| Severity | Entry | Source GDD | Conflicting GDD | Attribute |
+|----------|-------|------------|-----------------|-----------|
+| 🔴 CONFLICT | [name] | [source] | [other] | [attr] |
+| ⚠️ STALE | [name] | [source] | — | [attr] |
+
 ---
 
 ### Conflicts Found (must resolve before architecture)
@@ -226,7 +233,7 @@ Verdict: PASS | CONFLICTS FOUND
 ## Phase 6: Registry Corrections
 
 If stale registry entries were found, ask:
-> "May I update `design/registry/entities.yaml` to fix the [N] stale entries?"
+> "May I write [N] corrections to `design/registry/entities.yaml`?"
 
 For each stale entry:
 - Update the `value` / attribute field
@@ -304,7 +311,7 @@ Never end the skill with plain text. Always close with this widget.
 
 ---
 
-## Recovery / Reference
+## Recommended Next Steps
 
 - **If PASS**: Run `/review-all-gdds` for holistic design-theory review, or
   `/create-architecture` if all MVP GDDs are complete.

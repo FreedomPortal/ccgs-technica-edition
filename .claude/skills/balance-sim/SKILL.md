@@ -273,3 +273,13 @@ LOW confidence: always append to report header — "⚠️ LOW CONFIDENCE — re
 | 3+ ambiguous rules unresolved | Run simulation with conservative interpretations; mark LOW confidence |
 | All fights VOID | STOP — "GDD rules insufficient to simulate this matchup. Specify: [list missing rules]." |
 | Batch agent returns non-JSON | Discard batch; note in VOID count; continue with remaining batches |
+
+---
+
+## Recommended Next Steps
+
+Verdict: COMPLETE — simulation report written.
+
+- Run `/balance-check` for a static formula-based analysis to cross-verify simulation findings
+- Run `/consistency-check` if simulated values diverge from GDD-defined stats
+- After tuning: re-run `/balance-sim [scenario] --iterations 200` to confirm improvement

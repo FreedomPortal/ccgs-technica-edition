@@ -179,4 +179,6 @@ Next steps:
               → Suitable for Steam Guides post after Release
   [help-text] → Share with ux-designer for placement review
               → Feed strings to localization pipeline via /localization-export
+
+Verdict: COMPLETE — player documentation written.
 ```

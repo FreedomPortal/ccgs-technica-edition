@@ -1,6 +1,9 @@
 ---
 name: backlog
 description: Create and maintain production/backlog.yaml — the canonical cross-sprint story registry. sprint-status.yaml is a generated view; backlog.yaml is the source of truth.
+argument-hint: "[init | update | view | story [id] [status]]"
+user-invocable: true
+allowed-tools: Read, Glob, Write
 model: haiku
 ---
 
@@ -229,3 +232,13 @@ stories:
 ## Staleness Warning
 
 This file can go stale if skills that close stories (`/story-done`) and close sprints (`/sprint-close`) do not write to it. Phase 2 (Write Path) wires those skills to keep this file current. Until Phase 2 is complete, run `/backlog update` after each story completion or sprint close to resync.
+
+---
+
+## Recommended Next Steps
+
+Verdict: COMPLETE — backlog synchronized.
+
+- After `init`: run `/roadmap init` to assign `milestone_target` values to stories
+- After `update`: run `/export-status` to regenerate the production status report
+- Run `/backlog view` to render `backlog.md` for human reading

@@ -255,4 +255,14 @@ Files written:
 Commit these two files together with the framework changes that prompted this release.
 Suggested commit message:
   chore: framework release v2.0.0
+
+---
+
+## Recommended Next Steps
+
+Verdict: COMPLETE — framework version bumped.
+
+- Commit the two written files together with the framework changes that triggered this release
+- Tag the release: `git tag v[VERSION]`
+- Run `/skill-test suite` after any skill additions or changes to verify static compliance
 ```
