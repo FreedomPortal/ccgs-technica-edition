@@ -61,7 +61,7 @@ workflow    → start, onboard, setup-engine, adopt, continue, next, checkpoint,
 framework   → skill-test, skill-improve, framework-release, ccgs-merge
 analytics   → ab-test, economy-simulation, player-segmentation, retention-analysis,
               telemetry-design
-utility     → export-build, hotfix
+utility     → export-build, hotfix, day-one-patch
 ```
 
 ## Agent tiers
