@@ -174,7 +174,7 @@ Demo skills manage the isolated vertical slice pipeline. They must ensure that d
 
 ### `framework`
 
-**Skills**: skill-test, skill-improve, framework-release
+**Skills**: skill-test, skill-improve, framework-release, ccgs-merge
 
 Framework skills maintain the skill/agent testing infrastructure itself. They operate
 exclusively on framework artifacts and must never touch game source. They must be
@@ -213,7 +213,7 @@ skills (A/B test, segmentation, telemetry) rather than leaving analysis open-end
 **Skills**: start, help, brainstorm, onboard, adopt, hotfix, prototype, localize,
 launch-checklist, release-checklist, smoke-check, soak-test, test-setup, test-helpers,
 regression-suite, qa-plan, bug-triage, bug-report, playtest-report, asset-spec,
-reverse-document, project-stage-detect, setup-engine,
+reverse-document, project-stage-detect, setup-engine, export-build,
 day-one-patch, and any other skills not in categories above
 
 Utility skills pass the 7 standard static checks. If they happen to spawn director
@@ -243,7 +243,7 @@ QA skills produce test artifacts, coverage reports, and defect documentation. Th
 
 ### `publish`
 
-**Skills**: export-build, publish-crowdfunding, publish-devlog, publish-pitch, publish-review, publish-social, publish-steam-page, community-plan, day-one-patch, dlc-design, launch-checklist, live-ops-plan, marketing-plan, press-outreach, publish-check, refine-copy, release-checklist
+**Skills**: publish-crowdfunding, publish-devlog, publish-pitch, publish-review, publish-social, publish-steam-page, community-plan, day-one-patch, dlc-design, launch-checklist, live-ops-plan, marketing-plan, press-outreach, publish-check, refine-copy, release-checklist
 
 Publish skills compile project materials into external-facing artifacts or manage the publishing roadmap. Read project state before generating output; never auto-push to external platforms.
 

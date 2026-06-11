@@ -336,7 +336,7 @@ skills:
 
   # Low — analysis, reporting, utility skills
   - name: skill-test
-    spec: CCGS Skill Testing Framework/skills/utility/skill-test.md
+    spec: CCGS Skill Testing Framework/skills/framework/skill-test.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -369,7 +369,7 @@ skills:
     category: utility
 
   - name: skill-improve
-    spec: CCGS Skill Testing Framework/skills/utility/skill-improve.md
+    spec: CCGS Skill Testing Framework/skills/framework/skill-improve.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1075,7 +1075,7 @@ skills:
     category: publish
 
   - name: export-build
-    spec: CCGS Skill Testing Framework/skills/publish/export-build.md
+    spec: CCGS Skill Testing Framework/skills/utility/export-build.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1083,7 +1083,7 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: low
-    category: publish
+    category: utility
 
   - name: refine-copy
     spec: CCGS Skill Testing Framework/skills/publish/refine-copy.md
@@ -1409,7 +1409,7 @@ skills:
 
   # Uncatalogued skills present in .claude/skills/ — added 2026-06-05
   - name: ccgs-merge
-    spec: CCGS Skill Testing Framework/skills/utility/ccgs-merge.md
+    spec: CCGS Skill Testing Framework/skills/framework/ccgs-merge.md
     last_static: ""
     last_static_result: ""
     last_spec: ""
@@ -1417,7 +1417,7 @@ skills:
     last_category: "2026-06-11"
     last_category_result: "PASS"
     priority: medium
-    category: utility
+    category: framework
 
   - name: code-recon
     spec: CCGS Skill Testing Framework/skills/analysis/code-recon.md
