@@ -1,6 +1,6 @@
 ---
 name: release-checklist
-description: "Generates a comprehensive pre-release validation checklist covering build verification, certification requirements, store metadata, and launch readiness."
+description: "Per-build, per-platform submission checklist: verifies this specific build is ready to submit to a store or platform. Covers build health, cert requirements, and store metadata for the targeted platform only. Not a full launch gate — use /launch-checklist for that."
 argument-hint: "[platform: pc|console|mobile|all]"
 user-invocable: true
 allowed-tools: Read, Glob, Grep, Write
@@ -8,6 +8,8 @@ model: sonnet
 ---
 
 > **Explicit invocation only**: This skill should only run when the user explicitly requests it with `/release-checklist`. Do not auto-invoke based on context matching.
+
+> **Scope**: Every check in this skill applies to **this build and platform submission only**. It does not validate overall launch readiness, marketing, community, or infrastructure. For the full go/no-go gate before going live, run `/launch-checklist`.
 
 ## Phase 1: Parse Arguments
 
@@ -140,7 +142,7 @@ Add platform-specific sections based on the argument:
 - [ ] Third-party license attributions complete
 - [ ] Pricing configured for all regions
 
-### Launch Readiness
+### Submission-Scoped Readiness
 - [ ] Analytics / telemetry verified and receiving data
 - [ ] Crash reporting configured and dashboard accessible
 - [ ] Day-one patch prepared and tested (if needed)
