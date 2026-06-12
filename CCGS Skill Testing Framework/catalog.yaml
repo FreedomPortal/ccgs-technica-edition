@@ -885,6 +885,17 @@ skills:
     priority: low
     category: qa
 
+  - name: run-tests
+    spec: "CCGS Skill Testing Framework/skills/qa/run-tests.md"
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: high
+    category: qa
+
   - name: asset-spec
     spec: CCGS Skill Testing Framework/skills/authoring/asset-spec.md
     last_static: ""
