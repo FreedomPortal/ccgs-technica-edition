@@ -36,10 +36,11 @@ authoring   → design-system, quick-design, architecture-decision, art-bible,
 readiness   → story-readiness, story-done
 pipeline    → create-epics, create-stories, dev-story, create-control-manifest,
               propagate-design-change, map-systems, prototype, reverse-document,
-              analytics-setup, test-setup
-analysis    → consistency-check, balance-check, content-audit, code-review,
-              tech-debt, scope-check, estimate, perf-profile, asset-audit,
-              security-audit, test-evidence-review, test-flakiness
+              analytics-setup, test-setup, project-gap
+analysis    → consistency-check, balance-check, content-audit, gdd-coverage,
+              asset-coverage, data-schema-coverage, code-review, tech-debt, scope-check,
+              estimate, perf-profile, asset-audit, security-audit, test-evidence-review,
+              test-flakiness
 qa          → bug-report, bug-triage, qa-plan, regression-suite, smoke-check,
               soak-test, test-helpers, playtest-report
 team        → team-combat, team-narrative, team-audio, team-level, team-ui,

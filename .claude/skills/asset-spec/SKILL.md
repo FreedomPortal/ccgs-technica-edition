@@ -298,8 +298,9 @@ Use `AskUserQuestion`:
   - `[A] Spec another system — /asset-spec system:[next-system]`
   - `[B] Spec a level — /asset-spec level:[level-name]`
   - `[C] Spec a character — /asset-spec character:[character-name]`
-  - `[D] Run /asset-audit — validate delivered assets against specs`
-  - `[E] Stop here`
+  - `[D] Run /asset-coverage — check which specced assets have been delivered`
+  - `[E] Run /asset-audit — validate delivered assets against specs`
+  - `[F] Stop here`
 
 ---
 

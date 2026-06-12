@@ -555,6 +555,50 @@ skills:
     priority: low
     category: analysis
 
+  - name: gdd-coverage
+    spec: CCGS Skill Testing Framework/skills/analysis/gdd-coverage.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: medium
+    category: analysis
+
+  - name: asset-coverage
+    spec: CCGS Skill Testing Framework/skills/analysis/asset-coverage.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: medium
+    category: analysis
+
+  - name: data-schema-coverage
+    spec: CCGS Skill Testing Framework/skills/analysis/data-schema-coverage.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: medium
+    category: analysis
+
+  - name: project-gap
+    spec: CCGS Skill Testing Framework/skills/pipeline/project-gap.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: high
+    category: pipeline
+
   - name: tech-debt
     spec: CCGS Skill Testing Framework/skills/analysis/tech-debt.md
     last_static: ""

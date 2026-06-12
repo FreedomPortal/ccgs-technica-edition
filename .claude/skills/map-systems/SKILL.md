@@ -361,4 +361,6 @@ If context reaches or exceeds 70% at any point, append this notice:
 - Run `/design-system [first-system-in-order]` to author the first GDD (use design order from the index)
 - Run `/map-systems next` to always pick the highest-priority undesigned system automatically
 - Run `/design-review design/gdd/[system].md` in a fresh session after each GDD is authored
+- Run `/gdd-coverage` at any time to audit GDD file coverage against the index and check 8-section completeness
+- Run `/gdd-coverage --roadmap` to generate a milestone-grouped documentation plan (GDDs + ADRs)
 - Run `/gate-check pre-production` when all MVP GDDs are authored and reviewed

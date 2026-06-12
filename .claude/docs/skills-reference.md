@@ -1,6 +1,6 @@
 # Available Skills (Slash Commands)
 
-115 slash commands organized by phase. Type `/` in Claude Code to access any of them.
+120 slash commands organized by phase. Type `/` in Claude Code to access any of them.
 
 ## Onboarding & Navigation
 
@@ -81,6 +81,10 @@
 | `/code-review` | Architectural code review for a file or changeset |
 | `/balance-check` | Analyze game balance data, formulas, and config — flag outliers |
 | `/content-audit` | Audit GDD-specified content counts against implemented content |
+| `/gdd-coverage` | Audit GDD file coverage vs. systems-index — missing GDDs, incomplete sections, ADR gaps. `--roadmap` writes `production/doc-roadmap.md`. `--update-index` syncs status fields. |
+| `/asset-coverage` | Audit asset delivery — manifest Done/Approved entries vs. actual files in `assets/`. Flags missing files and orphans. `--roadmap` writes `production/asset-roadmap.md`. |
+| `/data-schema-coverage` | Audit data file schema completeness — extracts required fields from GDDs, checks JSON/YAML/CSV in `assets/data/` for missing or empty fields. `--roadmap` writes `production/data-roadmap.md`. |
+| `/project-gap` | Meta-aggregator: scans GDD, data, asset, and backlog layers; produces unified priority-ordered gap list with exact next action per gap. `--stories` pipes top gaps to `/create-stories`. |
 | `/scope-check` | Analyze feature or sprint scope against original plan, flag scope creep |
 | `/perf-profile` | Structured performance profiling with bottleneck identification |
 | `/tech-debt` | Scan, track, prioritize, and report on technical debt |
@@ -96,6 +100,7 @@
 | `/smoke-check` | Run critical path smoke test gate before QA hand-off |
 | `/soak-test` | Generate a soak test protocol for extended play sessions |
 | `/regression-suite` | Map test coverage to GDD critical paths, identify fixed bugs without regression tests |
+| `/run-tests` | Run the project test suite headlessly (all / unit / integration / single file). Engine-aware: routes to GDUnit4, Unity Test Runner, or Unreal headless runner. |
 | `/test-setup` | Scaffold the test framework and CI/CD pipeline for the project's engine |
 | `/test-helpers` | Generate engine-specific test helper libraries for the test suite |
 | `/test-evidence-review` | Quality review of test files and manual evidence documents |

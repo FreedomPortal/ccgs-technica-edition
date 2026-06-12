@@ -923,14 +923,35 @@ If scope is growing:
 This compares current scope against the original plan and flags scope increase,
 recommends cuts.
 
-### Step 7.3: Content Tracking
+### Step 7.3: Content & Coverage Tracking
 
 ```
 /content-audit
 ```
 
-Compares GDD-specified content against what has been implemented. Catches
+Compares GDD-specified content counts against implemented files. Catches
 content gaps early.
+
+For deeper coverage audits, use the four-layer coverage stack:
+
+```
+/gdd-coverage           → which systems have no GDD or incomplete sections
+/asset-coverage         → which committed assets have no delivered file
+/data-schema-coverage   → which data files are missing required fields
+/project-gap            → unified gap list across all layers, priority-ordered
+```
+
+Generate per-layer production roadmaps with the `--roadmap` flag on any
+coverage skill:
+
+```
+/gdd-coverage --roadmap       → production/doc-roadmap.md
+/asset-coverage --roadmap     → production/asset-roadmap.md
+/data-schema-coverage --roadmap → production/data-roadmap.md
+```
+
+Run `/project-gap --stories` to pipe the top gaps directly into
+`/create-stories` and get them into the sprint backlog.
 
 ### Step 7.4: Design Change Propagation
 
@@ -1052,7 +1073,7 @@ Guides you through structured performance profiling:
 Analyzes balance data for statistical outliers, broken progression curves,
 degenerate strategies, and economy imbalances.
 
-### Step 8.3: Asset Audit
+### Step 8.3: Asset Audit & Coverage
 
 ```
 /asset-audit
@@ -1060,6 +1081,14 @@ degenerate strategies, and economy imbalances.
 
 Verifies naming conventions, file format standards, and size budgets across
 all assets.
+
+```
+/asset-coverage
+```
+
+Cross-references `design/assets/asset-manifest.md` against actual files in
+`assets/`. Flags assets marked Done or Approved that have no delivered file —
+catches production gaps before final QA.
 
 ### Step 8.4: Playtesting (Required: 3 Sessions)
 
@@ -1649,7 +1678,7 @@ conflicts go to `producer`.
 | `/story-done` | 8-phase story completion review | 5 |
 | `/estimate` | Effort estimation with risk assessment | 4-5 |
 
-#### Reviews and Analysis (16)
+#### Reviews and Analysis (21)
 
 | Command | Purpose | Phase |
 |---------|---------|-------|
@@ -1658,7 +1687,11 @@ conflicts go to `producer`.
 | `/balance-check` | Game balance formula analysis | 5-6 |
 | `/asset-audit` | Asset naming, format, size verification | 6 |
 | `/asset-spec` | Per-asset visual specs and AI generation prompts | 5-6 |
-| `/content-audit` | GDD-specified content vs. implemented | 5 |
+| `/content-audit` | GDD-specified content vs. implemented count | 5 |
+| `/gdd-coverage` | GDD file coverage vs. systems-index — missing GDDs, incomplete sections, ADR gaps | 2-5 |
+| `/asset-coverage` | Asset delivery coverage — manifest vs. actual files in `assets/` | 6 |
+| `/data-schema-coverage` | Data file schema completeness — required fields vs. JSON/YAML content | 5-6 |
+| `/project-gap` | Meta-aggregator: unified gap list across GDD/data/asset/backlog layers | Any |
 | `/consistency-check` | Cross-GDD entity and formula inconsistency scan | 2+ |
 | `/scope-check` | Scope creep detection | 5 |
 | `/perf-profile` | Performance profiling workflow | 6 |
@@ -1677,7 +1710,7 @@ conflicts go to `producer`.
 | `/tutorial-design` | Design tutorial sequence — mechanic audit, teaching order, scaffolding strategy | 4 |
 | `/player-docs` | Generate player docs — manual/guide/help-text modes | 8-9 |
 
-#### QA and Testing (9)
+#### QA and Testing (10)
 
 | Command | Purpose | Phase |
 |---------|---------|-------|
@@ -1685,6 +1718,7 @@ conflicts go to `producer`.
 | `/smoke-check` | Critical path smoke test gate before QA hand-off | 5-6 |
 | `/soak-test` | Soak test protocol for extended play sessions | 6 |
 | `/regression-suite` | Map test coverage, identify fixed bugs lacking regression tests | 5-6 |
+| `/run-tests` | Run project test suite headlessly (all/unit/integration/file). Engine-aware: GDUnit4, Unity, Unreal. | 5-6 |
 | `/test-setup` | Scaffold test framework and CI/CD pipeline | 4 |
 | `/test-helpers` | Generate engine-specific test helper libraries | 4-5 |
 | `/test-evidence-review` | Quality review of test files and manual evidence | 5 |
