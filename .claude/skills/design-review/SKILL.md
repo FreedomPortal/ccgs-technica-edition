@@ -124,9 +124,10 @@ Issue all Task calls simultaneously. Do NOT spawn one at a time.
 > Be specific and critical. Disagreement with the main review is welcome.
 >
 > Tag every finding with its type:
-> - `[DESIGN]` — affects player-facing experience, economy stability, or core loop
+> - `[DESIGN]` — affects player-facing experience, economy stability, or core loop **in a way the player would notice**. You MUST state the specific player-facing impact. "Code doesn't match doc" is NOT `[DESIGN]` by itself.
 > - `[IMPL]` — affects engineer clarity (formula completeness, interface definition, edge case handling)
-> - `[SPEC]` — documentation consistency, wording, AC determinism, test fixture detail"
+> - `[SPEC]` — documentation consistency, wording, AC determinism, test fixture detail
+> - `[SYNC]` — code/GDD reference mismatch with no runtime or player-facing impact (field name drift, minor value discrepancy not affecting behavior, terminology mismatch). NEVER blocking."
 
 **Additional instructions per agent type:**
 
@@ -147,6 +148,8 @@ After all specialists respond, spawn `creative-director` as the **senior reviewe
 
 If specialists disagree with each other or with the creative-director, do NOT silently pick one view. Present the disagreement explicitly in Phase 4 so the user can adjudicate.
 
+**Severity tiebreaker**: When specialists disagree on whether a finding is `[DESIGN]` vs. `[SPEC]` or `[SYNC]`, default to the **lower severity** unless `creative-director` provides explicit player-experience justification. Disagreement about documentation drift defaults to `[SYNC]`.
+
 Mark every finding with its source: `[game-designer]`, `[economy-designer]`, `[creative-director]` etc.
 
 ---
@@ -155,13 +158,21 @@ Mark every finding with its source: `[game-designer]`, `[economy-designer]`, `[c
 
 Run this check before writing the Phase 4 output. Apply after Phase 3b (or directly after Phase 3 if spec-polish mode is active).
 
+**Step 0 — Pre-check: downgrade weak `[DESIGN]` items**
+
+Before running conditions 1–4, scan all remaining `[DESIGN]` blocking items. For each:
+- If the justification does NOT include an explicit "player would notice X" statement → downgrade to `[SPEC]`, add note: *(downgraded: no player-facing impact stated)*
+- If the item is about code/GDD naming drift, field mismatches, or documentation inconsistency with no runtime effect → downgrade to `[SYNC]`
+
+Apply silently. Only items with a genuine player-experience argument survive as `[DESIGN]`.
+
 **Reclassification condition** — ALL of the following must be true:
 1. Architecture is coherent — no structural design flaws found
 2. All formulas are mathematically correct (boundary values don't go degenerate)
-3. Zero `[DESIGN]` blocking items remain
-4. All remaining blockers are `[IMPL]` or `[SPEC]` only
+3. Zero `[DESIGN]` blocking items remain (after Step 0 downgrade)
+4. All remaining blockers are `[IMPL]`, `[SPEC]`, or `[SYNC]`
 
-**If ALL conditions are met:** force verdict to **APPROVED WITH IMPLEMENTATION NOTES**. Do not issue NEEDS REVISION. The `[IMPL]` and `[SPEC]` items are listed as implementation tickets in Phase 4 output, not as blockers. Design is frozen.
+**If ALL conditions are met:** force verdict to **APPROVED WITH IMPLEMENTATION NOTES**. Do not issue NEEDS REVISION. `[IMPL]`/`[SPEC]` items go to Implementation Tickets; `[SYNC]` items go to Sync Debt. Design is frozen.
 
 **If any condition is NOT met:** proceed with normal verdict selection (NEEDS REVISION or MAJOR REVISION NEEDED).
 
@@ -183,8 +194,8 @@ Re-review: [Yes — prior verdict was X on YYYY-MM-DD / No — first review]
 - ✗ loot-system.md — NOT FOUND (file does not exist yet)
 
 ### Required Before Implementation
-[Numbered list — blocking issues only. Each item tagged with source agent AND finding type: `[DESIGN]`, `[IMPL]`, or `[SPEC]`.]
-[Example: `1. [economy-designer][DESIGN] Drop rates produce negative expected value at level cap.`]
+[Numbered list — blocking issues only. Each item tagged with source agent AND finding type: `[DESIGN]`, `[IMPL]`, or `[SPEC]`. `[SYNC]` items are NEVER listed here — they go to Sync Debt.]
+[Example: `1. [economy-designer][DESIGN] Drop rates produce negative expected value at level cap — player progression halts at level cap.`]
 [Omit this section if verdict is APPROVED WITH IMPLEMENTATION NOTES — use Implementation Tickets instead.]
 
 ### Recommended Revisions
@@ -193,6 +204,10 @@ Re-review: [Yes — prior verdict was X on YYYY-MM-DD / No — first review]
 ### Implementation Tickets
 [Only present when verdict is APPROVED WITH IMPLEMENTATION NOTES.]
 [List all `[IMPL]` and `[SPEC]` items here as actionable tickets for engineers/QA. These do NOT block implementation.]
+
+### Sync Debt
+[Present whenever any `[SYNC]` items exist — regardless of verdict.]
+[List code/GDD reference mismatches here. Never blocking. Clean up opportunistically.]
 
 ### Specialist Disagreements
 [Any cases where agents disagreed with each other or with the main review.
