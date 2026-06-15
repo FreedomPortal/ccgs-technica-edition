@@ -174,6 +174,14 @@ if [ -z "$stage" ]; then
   fi
 fi
 
+# --- Review mode ---
+review_mode_label=""
+review_mode_file="$cwd/production/review-mode.txt"
+if [ -f "$review_mode_file" ]; then
+  review_mode=$(head -1 "$review_mode_file" | tr -d '\r\n')
+  [ -n "$review_mode" ] && review_mode_label=" [${review_mode}]"
+fi
+
 # --- Sprint number (Pre-Production through Release) ---
 sprint_label=""
 case "$stage" in
@@ -230,4 +238,4 @@ fi
 # --- Assemble ---
 printf "%s\n%s" \
   "🤖 ${model} | ${ctx_label} | ${rl_label} ${rl_reset_label} | ${wl_label} ${wl_reset_label} | ${repo_branch}" \
-  "🎯 ${stage}${sprint_label}${breadcrumb}"
+  "🎯 ${stage}${review_mode_label}${sprint_label}${breadcrumb}"
