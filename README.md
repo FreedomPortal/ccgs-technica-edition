@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
   <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-53-blueviolet" alt="53 Agents"></a>
-  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-146-green" alt="146 Skills"></a>
+  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-147-green" alt="147 Skills"></a>
   <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-15-orange" alt="15 Hooks"></a>
   <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-15-red" alt="15 Rules"></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
@@ -104,6 +104,7 @@ Owns the player insight loop — telemetry design, player segmentation, A/B test
 | `/memory-shard` | Split an agent's flat `MEMORY.md` into topic shards — run when any agent's memory exceeds \~150 lines |
 | `/memory-prune` | Remove stale forward-looking entries from agent memory and session state — run at sprint boundaries or before `/gate-check` and `/architecture-review` |
 | `/autosave-mode` | Configure crash-protection level for long tasks: `off` / `remind` / `enforce` — set once per project, survives sessions |
+| `/review-mode` | Change the project-wide director review level: `full` (every key step) / `lean` (phase gates only) / `solo` (no director reviews) — updates `production/review-mode.txt`, respected by 40+ skills |
 | `/log-lesson` | Encode a lesson from external review, playtesting, or press feedback into `production/publishing/writing-lessons.md` |
 | `/wishlist` | Lightweight holding area for uncommitted ideas — distinct from the backlog (committed work). Modes: add, view, promote, defer, prune. Data: `production/wishlist.yaml`. |
 
@@ -332,7 +333,7 @@ A living vocabulary file at `docs/CONTEXT.md` — canonical names for game conce
 
 ```
 🤖 Claude Haiku 4.5 | ctx: 42% | 5h: 61% 1h 20m | 7d: 38% 4d 2h | my-game (main)
-🎯 Production | Sprint 3 | Combat System > Melee Combat > Hitbox detection
+🎯 Production [lean] | Sprint 3 | Combat System > Melee Combat > Hitbox detection
 ```
 
 New segments:
