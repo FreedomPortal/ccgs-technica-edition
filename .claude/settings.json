@@ -28,7 +28,12 @@
       "Bash(python3*)",
       "Bash(py *)",
       "Bash(rtk *)",
-      "Bash(jq *)"
+      "Bash(jq *)",
+      "Bash(git check-ignore *)",
+      "Bash(cd \"C:\\TechnicaGames\\ccgs-technica-edition\" && git status*)",
+      "Bash(cd \"C:\\TechnicaGames\\ccgs-technica-edition\" && git log *)",
+      "Bash(cd \"C:\\TechnicaGames\\ccgs-technica-edition\" && git diff *)",
+      "Bash(cd \"C:\\TechnicaGames\\ccgs-technica-edition\" && git show *)"
     ],
     "deny": [
       "Bash(rm -rf *)",
