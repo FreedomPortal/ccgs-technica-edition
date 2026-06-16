@@ -253,6 +253,59 @@ Skip this phase for Config/Data stories (no code tests required).
 
 ---
 
+## Phase 4c: Deferred Story Stub Check
+
+**Run for every story, before Phase 5.**
+
+Grep the story file body for any of these patterns (case-insensitive):
+- `deferred`
+- `later story`
+- `future story`
+- `later sprint`
+
+If **no matches found**: proceed silently.
+
+If **matches found**: for each match, extract the deferred item description. Then:
+
+1. Glob `production/epics/[epic-slug]/story-*.md` — list all story files in the same epic directory.
+2. Check whether any existing story file covers the deferred item (by name or filename keyword match).
+3. If a stub exists → proceed silently. Note "Deferred item `[X]` has a stub at `[path]`."
+4. If **no stub exists** → flag as **ADVISORY**:
+
+   > ⚠️ **Deferred story stub missing**: This story defers `[item]` but no stub exists in
+   > `production/epics/[slug]/`. Create a stub story file before this story is marked done,
+   > or it will fall through the backlog permanently.
+
+   Use `AskUserQuestion`:
+   - Prompt: "Deferred item found with no backlog stub: `[item]`. How do you want to handle this?"
+   - Options:
+     - `[A] Create a stub story file now — I'll fill in details later (Recommended)`
+     - `[B] Skip — I'll create the stub manually`
+
+   If [A]: create a minimal stub at `production/epics/[slug]/story-NNN-[kebab-name].md`:
+   ```markdown
+   # Story: [Deferred Item Name]
+
+   > **Epic**: [Epic Name]
+   > **Status**: Not Started
+   > **Story ID**: TBD
+   > **Source**: Deferred from [this story file path]
+
+   ## Context
+
+   Deferred from [story name]: "[exact deferred text from story]"
+
+   ## Acceptance Criteria
+
+   - [ ] AC-1: [TBD — fill in before sprint planning]
+   ```
+   Confirm: "Stub created at `[path]`."
+
+   If [B]: continue without creating the stub. Add to Completion Notes in Phase 7:
+   "Deferred item `[X]` has no backlog stub — add manually before next sprint planning."
+
+---
+
 ## Phase 5: Lead Programmer Code Review Gate
 
 **Review mode check** — apply before spawning LP-CODE-REVIEW:

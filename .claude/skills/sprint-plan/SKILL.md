@@ -57,15 +57,25 @@ GDD scan in Phase 1 then runs as a **secondary check** — surfaces new stories 
 
 1. **Read the current milestone** from `production/milestones/`.
 
-2. **Read the previous sprint** (if any) from `production/sprints/` to
+2. **Read `production/roadmap.yaml`** (if it exists):
+   - Extract `active_milestone` — confirm it matches the milestone from step 1.
+   - For the active milestone, read each entry's `slug` and `epic_status`.
+   - Flag any system with `epic_status: in-progress` — these are incomplete epics
+     that may need stories this sprint.
+   - Flag any system with `epic_status: done` that has stories in backlog.yaml still
+     `in-sprint` or `ready` — this is a status mismatch worth surfacing to the user.
+   - Note all in-progress epics for Phase 1c (interaction coverage check).
+   - If roadmap.yaml is missing: continue — degraded mode, no epic status signal.
+
+3. **Read the previous sprint** (if any) from `production/sprints/` to
    understand velocity and carryover.
 
-3. **Scan design documents** in `design/gdd/` for features tagged as ready
+4. **Scan design documents** in `design/gdd/` for features tagged as ready
    for implementation.
 
-4. **Check the risk register** at `production/risk-register/`.
+5. **Check the risk register** at `production/risk-register/`.
 
-5. **Check for pipeline tooling work** — `Glob` for `tools/TOOL_SPEC.md`.
+6. **Check for pipeline tooling work** — `Glob` for `tools/TOOL_SPEC.md`.
    - **Found**: Read it to identify the tool name and purpose. Then ask:
      > "I found `tools/TOOL_SPEC.md` — [tool name]: [one-line purpose]. How many
      > sprint points do you want to allocate to pipeline tooling this sprint?
