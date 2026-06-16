@@ -412,11 +412,21 @@ If "Fix first": stop here and list what the user flagged. Do not write any files
 **Code Review**: [Pending / Complete / Skipped]
 ```
 
-4. If the user chose "Close and log tech debt": append each advisory deviation to `docs/tech-debt-register.md` in this format:
+4. If the user chose "Close and log tech debt": append each advisory deviation to `production/tech-debt/register.md` in this format:
    ```
-   - **[date]** ([story title]): [deviation description] — tracked from [story file path]
+   ## TD-NNN: [Short description]
+
+   **Status**: Open
+   **Severity**: Low / Medium / High
+   **Sprint Logged**: Sprint [N]
+   **Source Story**: [story file path]
+
+   [One-paragraph description of the deviation and why it was deferred]
+
+   ### Target Fix
+   [Sprint or milestone when this should be addressed]
    ```
-   Create the file with a `# Tech Debt Register` heading if it does not exist.
+   Determine the next TD-NNN by reading the existing file and incrementing the highest existing ID. Create the file with a `# Tech Debt Register` heading if it does not exist.
 
 5. **Update `production/sprint-status.yaml`** (if it exists):
    - Find the entry matching this story's file path or ID

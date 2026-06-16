@@ -178,6 +178,21 @@ items pass or are explicitly marked N/A with a stated reason.
     found in story — skipping asset check." This item auto-passes.
   - This is an existence-only check. Do not validate file format or content.
 
+### Art Generation Pre-flight
+
+*Only runs when `Type: Visual/Feel` AND the story body mentions an external art tool: `PixelLab`, `Aseprite`, `generate`, `pixel art`, or `sprite sheet`.*
+
+- [ ] **External art exists on disk before implementation begins**: If the story requires generating sprites via an external tool (PixelLab, Aseprite), those output files must be committed to `assets/` before this story is picked up for implementation. Art generation is an external step — it cannot be parallelized with code implementation that depends on the files.
+  - Scan the story's Acceptance Criteria for asset paths (e.g., `assets/art/robots/spare/char_head_spare_default.png`).
+  - For each asset path found: use Glob to check if the file exists.
+  - If **all art files already exist**: pass — note "Art pre-flight PASS: [N] files found."
+  - If **any art file is missing**: **BLOCKED** —
+    > ⚠️ **Art pre-flight BLOCKED**: This story requires art that does not yet exist on disk.
+    > Generate sprites externally (PixelLab → Aseprite → export PNG), commit to `assets/`, then pick up this story.
+    > Missing: [list of paths]
+  - If no asset paths are found in the story but external art is mentioned: **NEEDS WORK** — "Story mentions external art generation but no asset file paths are specified in Acceptance Criteria. Add expected output paths so the pre-flight check can run."
+  - If this check does not trigger (story is not Visual/Feel or mentions no external art tool): skip silently.
+
 ### Definition of Done
 
 - [ ] **Minimum testable acceptance criteria by story type**:
