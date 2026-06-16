@@ -57,7 +57,7 @@ found — burndown assessment skipped."
 **First: check for `production/sprint-status.yaml`.**
 
 If it exists, read it directly — it is the authoritative source for **current sprint status**.
-Extract status for each story from the `status` field. No markdown scanning needed.
+Extract for each story: `id`, `name`, `status`, `priority`, `owner`, `estimate_days`, `blocker`.
 Use its `sprint`, `goal`, `start`, `end` fields instead of re-parsing the sprint plan.
 
 Note: `sprint-status.yaml` is a view of the current sprint only. `production/backlog.yaml` is
@@ -137,17 +137,19 @@ Keep the output concise. The story status table is mandatory — do not truncate
 
 ### Progress: [complete/total] tasks ([%])
 
-| Story / Task         | Priority   | Status      | Owner   | Blocker        |
-|----------------------|------------|-------------|---------|----------------|
-| [title]              | Must Have  | DONE        | [owner] |                |
-| [title]              | Must Have  | IN PROGRESS | [owner] |                |
-| [title]              | Must Have  | BLOCKED     | [owner] | [brief reason] |
-| [title]              | Should Have| NOT STARTED | [owner] |                |
+| ID     | Story Name                              | Priority    | Status      | Owner   | Blocker        |
+|--------|-----------------------------------------|-------------|-------------|---------|----------------|
+| S7-01  | Workshop Drag-and-Drop — Body Part …    | Must Have   | DONE        | [owner] |                |
+| S7-02  | Workshop Engine Part Grid — Placement … | Must Have   | IN PROGRESS | [owner] |                |
+| S7-03  | Robot Art MVP — Full Spare Set …        | Must Have   | BLOCKED     | [owner] | [brief reason] |
+| S6-10  | TD-017: Damage Number Y Position Fix    | Should Have | NOT STARTED | [owner] |                |
+
+Always show both `id` and full `name` from `sprint-status.yaml`. Truncate name at ~40 chars with `…` only if the table would be unreadable in a narrow terminal — otherwise show in full.
 
 ### Attention Needed
-| Story / Task         | Status      | Last Updated   | Days Stale | Note           |
-|----------------------|-------------|----------------|------------|----------------|
-| [title]              | IN PROGRESS | [date or N/A]  | [N days]   | [STALE / no timestamp — cannot check staleness / inline task — cannot check staleness] |
+| ID    | Story Name                              | Status      | Last Updated  | Days Stale | Note           |
+|-------|-----------------------------------------|-------------|---------------|------------|----------------|
+| S7-02 | Workshop Engine Part Grid — Placement … | IN PROGRESS | [date or N/A] | [N days]   | [STALE / no timestamp — cannot check staleness / inline task — cannot check staleness] |
 
 *(Omit this section entirely if no IN PROGRESS stories are stale or have timestamp concerns.)*
 
