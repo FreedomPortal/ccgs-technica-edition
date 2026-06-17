@@ -124,7 +124,7 @@ For each acceptance criterion in the story:
 ```
 | Criterion | Test | Status |
 |-----------|------|--------|
-| AC-1: [criterion text] | tests/unit/test_foo.gd::test_bar | COVERED |
+| AC-1: [criterion text] | tests/unit/[system]/test_foo.[ext]::test_bar | COVERED |
 | AC-2: [criterion text] | Manual playtest confirmation | COVERED |
 | AC-3: [criterion text] | — | UNTESTED |
 ```
@@ -354,7 +354,7 @@ Before updating any files, present the full report:
 ### Test-Criterion Traceability
 | Criterion | Test | Status |
 |-----------|------|--------|
-| AC-1: [text] | [test file::test name] | COVERED |
+| AC-1: [text] | [tests/unit/system/test_file.[ext]::test_name] | COVERED |
 | AC-2: [text] | Manual confirmation | COVERED |
 | AC-3: [text] | — | UNTESTED |
 

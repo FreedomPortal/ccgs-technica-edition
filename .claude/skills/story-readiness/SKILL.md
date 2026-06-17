@@ -166,7 +166,8 @@ items pass or are explicitly marked N/A with a stated reason.
 
 - [ ] **Referenced assets exist**: Scan the story text for asset path patterns
   (paths containing `assets/`, or file extensions `.png`, `.jpg`, `.svg`,
-  `.wav`, `.ogg`, `.mp3`, `.glb`, `.gltf`, `.tres`, `.tscn`, `.res`).
+  `.wav`, `.ogg`, `.mp3`, `.glb`, `.gltf`, or engine-specific scene/resource
+  formats — e.g. `.tscn`/`.tres` for Godot, `.unity` for Unity, `.umap` for Unreal).
   - For each asset path found: use Glob to check whether the file exists.
   - If any referenced asset does not exist: **NEEDS WORK** — note the missing
     path(s). (The story references assets that have not been created yet.
@@ -180,10 +181,10 @@ items pass or are explicitly marked N/A with a stated reason.
 
 ### Art Generation Pre-flight
 
-*Only runs when `Type: Visual/Feel` AND the story body mentions an external art tool: `PixelLab`, `Aseprite`, `generate`, `pixel art`, or `sprite sheet`.*
+*Only runs when `Type: Visual/Feel` AND the story body mentions an external art tool: `Aseprite`, `generate`, `pixel art`, `sprite sheet`, or any named external art generation tool.*
 
 - [ ] **External art exists on disk before implementation begins**: If the story requires generating sprites via an external tool (PixelLab, Aseprite), those output files must be committed to `assets/` before this story is picked up for implementation. Art generation is an external step — it cannot be parallelized with code implementation that depends on the files.
-  - Scan the story's Acceptance Criteria for asset paths (e.g., `assets/art/robots/spare/char_head_spare_default.png`).
+  - Scan the story's Acceptance Criteria for asset paths (e.g., `assets/art/characters/hero/char_idle_01.png`).
   - For each asset path found: use Glob to check if the file exists.
   - If **all art files already exist**: pass — note "Art pre-flight PASS: [N] files found."
   - If **any art file is missing**: **BLOCKED** —

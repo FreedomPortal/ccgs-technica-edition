@@ -139,9 +139,9 @@ Keep the output concise. The story status table is mandatory — do not truncate
 
 | ID     | Story Name                              | Priority    | Status      | Owner   | Blocker        |
 |--------|-----------------------------------------|-------------|-------------|---------|----------------|
-| S7-01  | Workshop Drag-and-Drop — Body Part …    | Must Have   | DONE        | [owner] |                |
-| S7-02  | Workshop Engine Part Grid — Placement … | Must Have   | IN PROGRESS | [owner] |                |
-| S7-03  | Robot Art MVP — Full Spare Set …        | Must Have   | BLOCKED     | [owner] | [brief reason] |
+| S7-01  | Player Movement — Core Input Handling   | Must Have   | DONE        | [owner] |                |
+| S7-02  | Enemy AI — Patrol State Machine         | Must Have   | IN PROGRESS | [owner] |                |
+| S7-03  | HUD Art MVP — Health Bar Sprites        | Must Have   | BLOCKED     | [owner] | [brief reason] |
 | S6-10  | TD-017: Damage Number Y Position Fix    | Should Have | NOT STARTED | [owner] |                |
 
 Always show both `id` and full `name` from `sprint-status.yaml`. Truncate name at ~40 chars with `…` only if the table would be unreadable in a narrow terminal — otherwise show in full.
@@ -149,7 +149,7 @@ Always show both `id` and full `name` from `sprint-status.yaml`. Truncate name a
 ### Attention Needed
 | ID    | Story Name                              | Status      | Last Updated  | Days Stale | Note           |
 |-------|-----------------------------------------|-------------|---------------|------------|----------------|
-| S7-02 | Workshop Engine Part Grid — Placement … | IN PROGRESS | [date or N/A] | [N days]   | [STALE / no timestamp — cannot check staleness / inline task — cannot check staleness] |
+| S7-02 | Enemy AI — Patrol State Machine         | IN PROGRESS | [date or N/A] | [N days]   | [STALE / no timestamp — cannot check staleness / inline task — cannot check staleness] |
 
 *(Omit this section entirely if no IN PROGRESS stories are stale or have timestamp concerns.)*
 
