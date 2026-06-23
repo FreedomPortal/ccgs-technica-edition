@@ -57,12 +57,15 @@ Check in this order:
 1. **Read `production/stage.txt`** — if it exists and has content, this is the
    authoritative phase name. Map it to a catalog phase key:
    - "Concept" → `concept`
+   - "Prototype" → `prototype`
    - "Systems Design" → `systems-design`
    - "Technical Setup" → `technical-setup`
    - "Pre-Production" → `pre-production`
+   - "Vertical Slice" → `vertical-slice`
    - "Production" → `production`
    - "Polish" → `polish`
    - "Release" → `release`
+   - "Post-Launch" → `post-launch`
 
 2. **If stage.txt is missing**, infer phase from artifacts (most-advanced match wins):
    - `src/` has 10+ source files → `production`
@@ -105,9 +108,9 @@ If the step has `artifact.note` (no glob):
 If the step has no `artifact` field:
 - Mark as **UNKNOWN** — completion not trackable (e.g. repeatable implementation work)
 
-### Special case: production phase — read `sprint-status.yaml`
+### Special case: production or vertical-slice phase — read `sprint-status.yaml`
 
-When the current phase is `production`, check for `production/sprint-status.yaml`
+When the current phase is `production` or `vertical-slice`, check for `production/sprint-status.yaml`
 before doing any glob-based story checks. If it exists, read it directly:
 
 - Stories with `status: in-progress` → surface as "currently active"
@@ -156,7 +159,7 @@ If `active.md` shows an active task or epic:
 Keep it **short and direct**. This is a quick orientation, not a report.
 
 ```
-## Where You Are: [Phase Label]
+## Where You Are: [Phase Label] (Active Sprint N — if sprint-status.yaml exists)
 
 **In progress:** [from active.md, if any]
 
