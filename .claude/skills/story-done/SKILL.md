@@ -306,6 +306,50 @@ If **matches found**: for each match, extract the deferred item description. The
 
 ---
 
+## Phase 4d: Presentation Readiness (Advisory)
+
+**Run for every story. Skip only if the story has no visual or interactive output (pure data migration, config change, etc.).**
+
+Use `AskUserQuestion`:
+
+```
+question: "Presentation readiness (advisory): Is this feature screenworthy as-is?"
+options:
+  - "Yes — ready to screenshot or GIF"
+  - "Has issues — I'll describe them"
+  - "N/A — not a visual or interactive feature"
+```
+
+If **"Yes"** or **"N/A"**: proceed silently to Phase 5.
+
+If **"Has issues"**: prompt the user:
+
+> "Describe each presentation issue in one line. I'll log them to the epic's polish register."
+
+After receiving the user's description:
+
+1. Determine the epic slug from the story file path (e.g., `production/epics/workshop-ui/story-006.md` → slug `workshop-ui`, epic name `Workshop UI`).
+2. Locate or create `production/epics/[slug]/POLISH.md`:
+   - **If the file does not exist**: create it with this header:
+     ```markdown
+     # Polish Register — [epic-name]
+     *Small visual/presentation issues. Not backlog stories. Swept before showable events.*
+
+     | ID | Issue | Status | Sprint | Story |
+     |----|-------|--------|--------|-------|
+     ```
+   - **If the file exists**: read it to determine the next ID (count existing `| P` rows and increment).
+3. For each issue described, append one row:
+   ```
+   | P[NNN] | [issue description] | open | [current sprint, e.g. S8] | [story ID, e.g. S8-06] |
+   ```
+   Use three-digit zero-padded IDs (`P001`, `P002`, …).
+4. Confirm: "Logged [N] item(s) to `[path]`."
+
+Proceed to Phase 5.
+
+---
+
 ## Phase 5: Lead Programmer Code Review Gate
 
 **Review mode check** — apply before spawning LP-CODE-REVIEW:

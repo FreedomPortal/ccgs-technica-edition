@@ -83,6 +83,10 @@ Optionally (fast check only — do not do a deep scan): grep `src/` for a
 directory or file name that matches the story's system slug to check for
 implementation evidence. This is a hint only, not a definitive status.
 
+**Polish register scan**: Glob all `production/epics/*/POLISH.md`. For each file
+found, count rows where the Status column contains `open`. Store the per-epic
+counts for the output in Section 5.
+
 ### Stale Story Detection
 
 After collecting status for all stories, check each IN PROGRESS story for staleness:
@@ -164,6 +168,15 @@ and note any Should Haves the team could pull.]
 ### Emerging Risks
 [Any risks visible from the story scan: missing files, cascading blockers,
 stories with no owner. If none, write "None identified."]
+
+### Polish Register
+[Include only if any POLISH.md files have open items. If all registries are empty or no files exist, omit this section entirely.]
+
+| Epic | Open Items |
+|------|-----------|
+| [epic-name] | [N] |
+
+*Sweep before next devlog, demo, or gate-check. Run `/smoke-check` to surface details.*
 
 ### Recommendation
 [One concrete action, or "Sprint is on track — no action needed."]

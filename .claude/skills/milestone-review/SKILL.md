@@ -30,6 +30,9 @@ Read all sprint reports for sprints within this milestone from `production/sprin
 
 - Scan for `TODO`, `FIXME`, `HACK` markers that indicate incomplete work
 - Check the risk register at `production/risk-register/`
+- Glob all `production/epics/*/POLISH.md`. For each file, count open items and
+  identify any that have been open for more than one sprint (compare the Sprint
+  column against the current sprint number). Store for Phase 3 report.
 
 ---
 
@@ -70,6 +73,15 @@ Read all sprint reports for sprints within this milestone from `production/sprin
 - **FIXME count**: [N]
 - **HACK count**: [N]
 - **Technical debt items**: [List critical ones]
+
+## Presentation Readiness
+
+| Epic | Open Polish Items | Aging (>1 sprint) |
+|------|------------------|-------------------|
+| [epic-name] | [N] | [list IDs or "none"] |
+
+[If all registries clean:] "No open polish items across all epics."
+[If aging items exist:] "⚠ [N] item(s) open more than one sprint — review before next showable event."
 
 ## Risk Assessment
 | Risk | Status | Impact if Realized | Mitigation Status |

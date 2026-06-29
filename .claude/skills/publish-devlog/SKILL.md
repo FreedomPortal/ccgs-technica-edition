@@ -34,6 +34,69 @@ Read the following files:
 
 ---
 
+## 2b. Derive and Confirm Topic List
+
+From the activity read in Phase 2, derive 4–7 candidate devlog topics. Each topic is
+a concrete, specific thing that could be written about — a feature shipped, a problem
+solved, a decision made, a pivot, a surprise, something that failed.
+
+**Do not derive vague topics** ("made progress on UI") — every topic must name
+a specific thing ("replaced BoxMesh placeholders with 3D silhouettes in the Arena
+SubViewport").
+
+Present the list as numbered items in conversation:
+
+```
+Here are the candidate topics I found. I'll write from these — tell me what to cut,
+correct, or add.
+
+1. [topic]
+2. [topic]
+3. [topic]
+...
+```
+
+Then use `AskUserQuestion`:
+
+```
+question: "Which topics do you want to cut from the devlog?"
+multiSelect: true
+options: [each topic as a short label]
+```
+
+If the user cuts topics, remove them from the list. After that, ask:
+
+> "Anything to add or correct? Reply with new topics or corrections, or 'none'."
+
+Wait for the reply. Update the topic list accordingly. Store the confirmed list —
+the writing in Phase 4 must cover every confirmed topic and only confirmed topics.
+
+---
+
+## 2c. Developer Interview
+
+Print the following block verbatim in conversation, then wait for the user's reply:
+
+```
+Before I write, I want to capture your perspective — this is what makes a devlog
+feel human rather than generated. Answer any or all:
+
+1. How did this period feel? (frustrated, relieved, excited, stuck, surprised —
+   your own words, not press-release words)
+2. What are you most proud of?
+3. What was the hardest or most unexpected part?
+4. Is there something you want readers to really understand or feel from this?
+5. Anything you want to downplay, skip, or not dwell on?
+
+Reply freely — I'll use your words directly.
+```
+
+Store the user's answers verbatim as **voice notes**. In Phase 4, weave them
+directly into the writing — the user's own phrasing takes precedence over anything
+derived from the activity log. Do not paraphrase or polish away the user's voice.
+
+---
+
 ## 3. Ask Tone and Platform
 
 Use `AskUserQuestion`:
@@ -48,11 +111,17 @@ Use `AskUserQuestion`:
 
 ## 4. Write Devlog
 
+Write from three inputs in priority order:
+1. **Voice notes** (Phase 2c) — the user's own words and emphasis. Use them directly.
+2. **Confirmed topic list** (Phase 2b) — cover every confirmed topic; omit nothing from the list.
+3. **Activity log** (Phase 2) — fill in concrete detail where the user's answers were brief.
+
 Save to: `production/publishing/devlog-[N]-[YYYY-MM-DD].md`
 
 Ask: "May I write the devlog to `production/publishing/devlog-[N]-[YYYY-MM-DD].md`?"
 
-Structure:
+Structure — map confirmed topics onto sections. The four-section template below is a
+default; adjust section count and titles to fit the confirmed topic list if needed:
 
 ```markdown
 # Devlog #[N]: [Specific thing you built — not generic]

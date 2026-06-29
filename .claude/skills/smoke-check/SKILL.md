@@ -170,6 +170,22 @@ fully close those stories.
 
 ---
 
+## Phase 3b: Polish Register Sweep
+
+Glob all `production/epics/*/POLISH.md`. For each file found, read it and extract
+all rows where the Status column contains `open`. Collect into a flat list:
+
+```
+[epic-name] — P[NNN]: [issue description] (Story: [story ID], Sprint: [sprint])
+```
+
+Store for Phase 5 report. If no POLISH.md files exist or all items are resolved,
+note "Polish register: clean."
+
+This phase is advisory. Open polish items never affect the PASS/FAIL verdict.
+
+---
+
 ## Phase 4: Run Manual Smoke Checks
 
 Draw the smoke test checklist from, in priority order:
@@ -317,6 +333,20 @@ will determine whether the automated test row contributes to a FAIL verdict."
 - [ ] [Other check] — FAIL: [user's description]
 - [x] Save / load — PASS
 - [-] Performance — not checked this session
+
+---
+
+### Polish Register (Advisory)
+
+[If open items found in Phase 3b:]
+
+| Epic | ID | Issue | Story |
+|------|----|-------|-------|
+| [epic-name] | P[NNN] | [description] | [story ID] |
+
+*These do not block the smoke check. Resolve before next devlog, demo, or gate-check.*
+
+[If clean:] "Polish register: clean — no open presentation issues."
 
 ---
 
