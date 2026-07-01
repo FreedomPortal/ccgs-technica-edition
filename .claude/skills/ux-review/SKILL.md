@@ -94,6 +94,11 @@ Run all checks against a `ux-spec.md`-based document.
 - [ ] The player context on arrival is specific (not just "they opened the
   inventory")
 
+**Objective & Navigation Text**
+- [ ] Any objective or goal text specifies both the action and the location — "pick up the key from the throne room" not "find the key"
+- [ ] Objective tracker/marker has documented update-on-progress behavior (what event triggers the update, not just "updates when complete")
+- [ ] Win and loss conditions are communicated explicitly before or at gameplay start — players should never have to ask "did I win?" or "does this end?"
+
 **Completeness of States**
 - [ ] Error state is documented (not just happy path)
 - [ ] Empty state is documented (no data scenario)
@@ -136,9 +141,15 @@ Run all checks against a `ux-spec.md`-based document.
 - [ ] Any new patterns invented in this spec are flagged for addition to the
   pattern library
 
+**Terminology & Tooltips**
+- [ ] Every game-specific keyword (status effect, card term, unique mechanic name) either defines inline on first appearance or links to an accessible glossary — never assumes the player knows the term
+- [ ] Hover/inspect tooltips are specified for every stat name, keyword, and icon — not just those already flagged in the accessibility section
+- [ ] A character/stats screen or equivalent shows base values and current values so players can evaluate whether an upgrade is meaningful
+
 **Localization**
 - [ ] Character limit warnings present for all text-heavy elements
 - [ ] Any layout-critical text has been flagged for 40% expansion accommodation
+- [ ] Font size specified in the spec meets minimum legibility at 1440p/4K on a 27"+ monitor (stylized, pixel-art, and cursive fonts require larger minimums than standard fonts)
 
 **Acceptance Criteria Quality**
 - [ ] Criteria are specific enough for a QA tester who hasn't seen the design docs
@@ -175,6 +186,9 @@ Run all checks against a `hud-design.md`-based document.
 - [ ] HUD elements in the Feedback & Notification section have queue/priority
   behavior defined
 - [ ] Visual Budget compliance: total simultaneous elements is within budget
+- [ ] Objective markers have documented update-on-progress rules — stale markers that still point to completed steps actively mislead players
+- [ ] Interactive objects and required items have documented visual distinction spec (glow, outline, icon, or particle) so players don't walk past critical elements
+- [ ] The persistent goal tracker specifies what happens when no objective is active (hidden, placeholder text, or alternate content)
 
 ### GDD Alignment
 
