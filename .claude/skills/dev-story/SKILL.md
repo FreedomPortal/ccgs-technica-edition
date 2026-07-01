@@ -1,7 +1,7 @@
 ---
 name: dev-story
 description: "Read a story file and implement it. Loads the full context (story, GDD requirement, ADR guidelines, control manifest), routes to the right programmer agent for the system and engine, implements the code and test, and confirms each acceptance criterion. The core implementation skill — run after /story-readiness, before /code-review and /story-done."
-argument-hint: "[story-path]"
+argument-hint: "[story-ID or path]"
 user-invocable: true
 allowed-tools: Read, Glob, Grep, Write, Bash, Task, AskUserQuestion
 model: sonnet
@@ -15,11 +15,11 @@ drives implementation to completion — including writing the test.
 
 **The loop for every story:**
 ```
-/qa-plan sprint           ← define test requirements before sprint begins
-/story-readiness [path]   ← validate before starting
-/dev-story [path]         ← implement it  (this skill)
-/code-review [files]      ← review it
-/story-done [path]        ← verify and close it
+/qa-plan sprint               ← define test requirements before sprint begins
+/story-readiness [ID or path] ← validate before starting
+/dev-story [ID or path]       ← implement it  (this skill)
+/code-review [files]          ← review it
+/story-done [ID or path]      ← verify and close it
 ```
 
 **After all sprint stories are done:** run `/team-qa sprint` to execute the full QA cycle and get a sign-off verdict before advancing the project stage.
@@ -28,9 +28,25 @@ drives implementation to completion — including writing the test.
 
 ---
 
+## Phase 0: Resolve Story Reference
+
+If `$ARGUMENTS[0]` is blank, skip to Phase 1 — the no-argument path applies.
+
+Determine whether the argument is a story ID or a file path:
+- **File path**: contains `/` or `\`, or ends with `.md` → use as-is
+- **Story ID**: anything else (e.g., `S8-01`, `S3-05`, `art-pipeline-011`)
+
+If it is a **story ID**:
+1. Read `production/backlog.yaml`
+2. Find the entry where `id:` matches `$ARGUMENTS[0]` (case-insensitive)
+3. If found: use its `file:` field as the resolved path. Proceed to Phase 1 with this path.
+4. If not found: report "Story ID '$ARGUMENTS[0]' not found in production/backlog.yaml." Glob `production/epics/**/*.md`, list the 5 most recently modified story files as suggestions. Stop.
+
+---
+
 ## Phase 1: Find the Story
 
-**If a path is provided**: read that file directly.
+**If a path is provided** (or resolved from Phase 0): read that file directly.
 
 **If no argument**: check `production/session-state/active.md` for the active
 story. If found, confirm: "Continuing work on [story title] — is that correct?"

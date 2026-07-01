@@ -1,7 +1,7 @@
 ---
 name: story-done
 description: "End-of-story completion review. Reads the story file, verifies each acceptance criterion against the implementation, checks for GDD/ADR deviations, prompts code review, updates story status to Complete, and surfaces the next ready story from the sprint."
-argument-hint: "[story-file-path] [--review full|lean|solo]"
+argument-hint: "[story-ID or path] [--review full|lean|solo]"
 user-invocable: true
 allowed-tools: Read, Glob, Grep, Bash, Write, Edit, AskUserQuestion, Task
 model: sonnet
@@ -19,6 +19,24 @@ forgotten, and the story file reflects actual completion status.
 
 ---
 
+## Phase 0: Resolve Story Reference
+
+If `$ARGUMENTS[0]` is blank or is `--review`, skip to Phase 1 — the no-argument path applies.
+
+Strip any `--review [full|lean|solo]` flag from the arguments first. The remaining first token is the story reference.
+
+Determine whether it is a story ID or a file path:
+- **File path**: contains `/` or `\`, or ends with `.md` → use as-is
+- **Story ID**: anything else (e.g., `S8-01`, `S3-05`, `art-pipeline-011`)
+
+If it is a **story ID**:
+1. Read `production/backlog.yaml`
+2. Find the entry where `id:` matches the token (case-insensitive)
+3. If found: use its `file:` field as the resolved path. Proceed to Phase 1 with this path.
+4. If not found: report "Story ID '[token]' not found in production/backlog.yaml." Glob `production/epics/**/*.md`, list the 5 most recently modified story files as suggestions. Stop.
+
+---
+
 ## Phase 1: Find the Story
 
 Resolve the review mode (once, store for all gate spawns this run):
@@ -28,7 +46,7 @@ Resolve the review mode (once, store for all gate spawns this run):
 
 See `.claude/docs/director-gates.md` for the full check pattern.
 
-**If a file path is provided** (e.g., `/story-done production/epics/core/story-damage-calculator.md`):
+**If a file path is provided** (or resolved from Phase 0, e.g., `/story-done S8-01` or `/story-done production/epics/core/story-damage-calculator.md`):
 read that file directly.
 
 **If no argument is provided:**

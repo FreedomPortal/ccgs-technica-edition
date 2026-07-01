@@ -1,7 +1,7 @@
 ---
 name: story-readiness
 description: "Validate that a story file is implementation-ready. Checks for embedded GDD requirements, ADR references, engine notes, clear acceptance criteria, and no open design questions. Produces READY / NEEDS WORK / BLOCKED verdict with specific gaps. Use when user says 'is this story ready', 'can I start on this story', 'is story X ready to implement'."
-argument-hint: "[story-file-path or 'all' or 'sprint']"
+argument-hint: "[story-ID or path, or 'all' or 'sprint']"
 user-invocable: true
 allowed-tools: Read, Glob, Grep, AskUserQuestion, Task
 model: sonnet
@@ -21,7 +21,23 @@ gap list for each non-ready story.
 
 ---
 
-## Phase 0: Resolve Review Mode
+## Phase 0a: Resolve Story Reference
+
+If `$ARGUMENTS[0]` is blank, `all`, or `sprint`, skip to Phase 0b — these are scope keywords, not story references.
+
+Determine whether the argument is a story ID or a file path:
+- **File path**: contains `/` or `\`, or ends with `.md` → use as-is
+- **Story ID**: anything else (e.g., `S8-01`, `S3-05`, `art-pipeline-011`)
+
+If it is a **story ID**:
+1. Read `production/backlog.yaml`
+2. Find the entry where `id:` matches `$ARGUMENTS[0]` (case-insensitive)
+3. If found: use its `file:` field as the resolved path. Treat this path as the "specific path" argument for Phase 1.
+4. If not found: report "Story ID '$ARGUMENTS[0]' not found in production/backlog.yaml." Glob `production/epics/**/*.md`, list the 5 most recently modified story files as suggestions. Stop.
+
+---
+
+## Phase 0b: Resolve Review Mode
 
 Resolve the review mode once at startup (store for all gate spawns this run):
 
@@ -35,9 +51,9 @@ See `.claude/docs/director-gates.md` for the full check pattern and mode definit
 
 ## 1. Parse Arguments
 
-**Scope:** `$ARGUMENTS[0]` (blank = ask user via AskUserQuestion)
+**Scope:** `$ARGUMENTS[0]` (blank = ask user via AskUserQuestion; if a story ID was resolved in Phase 0a, treat that resolved path as a specific path)
 
-- **Specific path** (e.g., `/story-readiness production/epics/combat/story-001-basic-attack.md`):
+- **Specific path** (e.g., `/story-readiness production/epics/combat/story-001-basic-attack.md` or `/story-readiness S8-01`):
   validate that single story file.
 - **`sprint`**: read the current sprint plan from `production/sprints/` (most
   recent file), extract every story path it references, validate each one.
@@ -366,6 +382,6 @@ Handle the verdict per standard rules in `director-gates.md`:
 
 ## Recommended Next Steps
 
-- Run `/dev-story [story-path]` to begin implementation once the story is READY
+- Run `/dev-story [story-ID or path]` to begin implementation once the story is READY
 - Run `/story-readiness sprint` to check all stories in the current sprint at once
 - Run `/create-stories [epic-slug]` if a story file is missing entirely
