@@ -37,6 +37,141 @@ The project progresses through these stages:
 
 ---
 
+## Phase 0: Evidence Pre-flight
+
+Runs before argument parsing, before any Opus reasoning, before spawning directors.
+Checks file *existence* only — not quality (that's Phase 3). If blocking evidence is
+missing, gate-check stops here with a clear checklist of what to fix first.
+
+**Skip with `--skip-preflight`** (add to any gate-check invocation to bypass).
+
+---
+
+### 0a: Detect Target Gate
+
+1. Strip `--skip-preflight` and `--review [full|lean|solo]` and `--scope [name]`
+   flags from `$ARGUMENTS` before reading the target phase.
+2. If `$ARGUMENTS[0]` names a phase → that is the target gate.
+3. If blank → read `production/stage.txt` (single line, e.g. `Vertical Slice`).
+   If not found → read `production/milestones/active.txt` and infer current stage
+   from the milestone slug (`vertical-slice` → stage is likely Vertical Slice).
+   If still unclear → skip pre-flight silently and proceed to Phase 1.
+4. Map current stage to the next transition (e.g. Vertical Slice → Production).
+   That transition determines which evidence checklist to run below.
+
+---
+
+### 0b: Evidence Checklists
+
+Run only the checklist for the detected transition. All items marked **BLOCKING**
+must be present before gate-check can proceed. **ADVISORY** items are noted but
+do not stop the run.
+
+#### Concept → Prototype
+| # | Evidence | Path / Glob | Level |
+|---|----------|-------------|-------|
+| 1 | Game concept doc | `design/gdd/game-concept.md` | BLOCKING |
+
+#### Prototype → Systems Design
+| # | Evidence | Path / Glob | Level |
+|---|----------|-------------|-------|
+| 1 | Game concept doc | `design/gdd/game-concept.md` | BLOCKING |
+| 2 | Prototype report with PROCEED verdict | `prototypes/*/REPORT.md` | BLOCKING |
+
+For item 2: if file exists, grep for `PROCEED` (case-insensitive). If found: PASS. If file exists but no PROCEED verdict: flag as BLOCKING — "Prototype report found but no PROCEED verdict."
+
+#### Systems Design → Technical Setup
+| # | Evidence | Path / Glob | Level |
+|---|----------|-------------|-------|
+| 1 | Systems index | `design/gdd/systems-index.md` | BLOCKING |
+| 2 | Cross-GDD review report | `design/gdd/gdd-cross-review-*.md` | BLOCKING |
+
+#### Technical Setup → Pre-Production
+| # | Evidence | Path / Glob | Level |
+|---|----------|-------------|-------|
+| 1 | Art bible | `design/art/art-bible.md` | BLOCKING |
+| 2 | At least 3 ADRs | `docs/architecture/adr-*.md` (count ≥ 3) | BLOCKING |
+| 3 | Architecture review report | `docs/architecture/*review*.md` or `docs/architecture/*architecture-review*.md` | BLOCKING |
+| 4 | Test directories | `tests/unit/` and `tests/integration/` exist | ADVISORY |
+
+#### Pre-Production → Vertical Slice
+| # | Evidence | Path / Glob | Level |
+|---|----------|-------------|-------|
+| 1 | Art bible | `design/art/art-bible.md` | BLOCKING |
+| 2 | At least one epic defined | `production/epics/*/EPIC.md` | BLOCKING |
+| 3 | Key UX specs | `design/ux/*.md` (count ≥ 1) | BLOCKING |
+| 4 | Control manifest | `docs/architecture/control-manifest.md` | ADVISORY |
+
+#### Vertical Slice → Production
+| # | Evidence | Path / Glob | Level |
+|---|----------|-------------|-------|
+| 1 | VS milestone review OR prototype report with PROCEED/CONDITIONAL GO | `production/milestones/*review*.md` or `prototypes/*/REPORT.md` | BLOCKING |
+| 2 | At least one sprint plan | `production/sprints/sprint-*.md` | BLOCKING |
+| 3 | At least one playtest report | `production/playtests/*.md` | BLOCKING |
+
+For item 1: if milestone review file found, grep for `PROCEED`, `CONDITIONAL GO`, `GO` (case-insensitive). Present if any match.
+
+#### Production → Polish
+| # | Evidence | Path / Glob | Level |
+|---|----------|-------------|-------|
+| 1 | Smoke check report | `production/qa/smoke-*.md` | BLOCKING |
+| 2 | QA sign-off (team-qa output) | `production/qa/qa-signoff-*.md` or `production/qa/team-qa-*.md` | BLOCKING |
+| 3 | At least 3 playtest reports | `production/playtests/*.md` (count ≥ 3) | BLOCKING |
+| 4 | QA plan | `production/qa/qa-plan-*.md` or `production/qa/plan-*.md` | ADVISORY |
+
+For item 1: if file found, grep for `PASS` (case-insensitive) in the verdict line. If FAIL or PASS WITH WARNINGS is the only verdict: flag as ADVISORY — "Smoke check report found but last verdict was not PASS."
+
+#### Polish → Release
+| # | Evidence | Path / Glob | Level |
+|---|----------|-------------|-------|
+| 1 | QA sign-off | `production/qa/qa-signoff-*.md` or `production/qa/team-qa-*.md` | BLOCKING |
+| 2 | Smoke check with PASS verdict | `production/qa/smoke-*.md` | BLOCKING |
+| 3 | Publishing roadmap | `production/publishing/publishing-roadmap.md` | BLOCKING |
+| 4 | Store page draft | `production/publishing/store-page*.md` | BLOCKING |
+| 5 | Press kit | `production/publishing/presskit*.md` | BLOCKING |
+| 6 | Release checklist or launch checklist | `production/qa/release-checklist*.md` or `production/qa/launch-checklist*.md` | ADVISORY |
+
+---
+
+### 0c: Output and Decision
+
+Run all checks simultaneously (parallel Glob/Grep). Then:
+
+**Format the result:**
+
+```
+## Evidence Pre-flight: [Current Stage] → [Target Stage]
+
+  ✓ production/playtests/playtest-2026-05-01.md          found
+  ✓ production/sprints/sprint-8.md                       found
+  ✗ production/qa/smoke-2026-06-29.md                    MISSING → run /smoke-check
+  ✗ production/qa/qa-signoff-sprint8.md                  MISSING → run /team-qa sprint
+
+PREFLIGHT BLOCKED — 2 required evidence files missing.
+Resolve these before gate-check can run.
+To skip this check: /gate-check [phase] --skip-preflight
+```
+
+If all BLOCKING items are present (advisory items may still be missing):
+
+```
+## Evidence Pre-flight: [Current Stage] → [Target Stage]
+
+  ✓ [path]    found
+  ✓ [path]    found
+  ⚠ [path]    ADVISORY MISSING → run [skill]
+
+PREFLIGHT PASSED — all blocking evidence present. [N advisory items noted above.]
+Proceeding to gate-check...
+```
+
+**Decision:**
+- Any BLOCKING item missing → stop here. Do NOT proceed to Phase 1. Output the checklist.
+- All BLOCKING items present → print the PREFLIGHT PASSED line and continue to Phase 1.
+- `--skip-preflight` flag present → skip Phase 0 entirely, note "Pre-flight skipped (--skip-preflight)." at the top of the final report.
+
+---
+
 ## 1. Parse Arguments
 
 **Target phase:** `$ARGUMENTS[0]` (blank = auto-detect current stage, then validate next transition)
