@@ -152,13 +152,12 @@ Do not issue a GO against an OFF TRACK verdict unless the user explicitly select
 
 ## Phase 4: Save Review
 
-Present the review to the user.
+Write the review to `production/milestones/[milestone-name]-review-[date].md`.
+Create `production/milestones/` if it does not exist.
 
-Ask: "May I write this to `production/milestones/[milestone-name]-review.md`?"
+Report: "Milestone review written → `production/milestones/[milestone-name]-review-[date].md`"
 
-If yes, write the file, creating the directory if needed. Verdict: **COMPLETE** — milestone review saved.
-
-If no, stop here. Verdict: **BLOCKED** — user declined write.
+Verdict: **COMPLETE** — milestone review saved.
 
 ---
 
