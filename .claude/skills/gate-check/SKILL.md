@@ -108,8 +108,10 @@ For item 2: if file exists, grep for `PROCEED` (case-insensitive). If found: PAS
 | 1 | VS milestone review OR prototype report with PROCEED/CONDITIONAL GO | `production/milestones/*review*.md` or `prototypes/*/REPORT.md` | BLOCKING |
 | 2 | At least one sprint plan | `production/sprints/sprint-*.md` | BLOCKING |
 | 3 | At least one playtest report | `production/playtests/*.md` | BLOCKING |
+| 4 | At least one audio file (placeholder SFX acceptable) | `assets/**/*.wav`, `assets/**/*.ogg`, `assets/**/*.mp3` | ADVISORY |
 
 For item 1: if milestone review file found, grep for `PROCEED`, `CONDITIONAL GO`, `GO` (case-insensitive). Present if any match.
+For item 4: Glob all three extensions. Count total. If 0: note as ADVISORY MISSING — will surface as BLOCKING in the gate definition's Player-Facing Element Coverage check.
 
 #### Production → Polish
 | # | Evidence | Path / Glob | Level |
@@ -361,6 +363,19 @@ A depends on B). If any cycle is detected (e.g. A→B→A, or A→B→C→A):
 - [ ] String table scaffolded (`assets/data/strings/strings-en.json` exists) — ADVISORY if missing; entering Production without it means retrofitting all UI strings mid-sprint
 - [ ] `/l10n-i18n` audit run (`production/localization/i18n-audit-*.md` exists) — ADVISORY; i18n architectural issues found in Production cost far more to fix
 
+**Player-Facing Element Coverage** *(check all four before issuing verdict)*:
+
+| Dimension | Minimum bar for PASS | How to verify |
+|---|---|---|
+| **Art** | At least one complete body-part set renders correctly in arena | Playtest report confirms (manual) |
+| **Sound** | At least placeholder SFX on core interactions: equip, attack, hit, defeat | `Glob assets/**/*.{wav,ogg,mp3}` — 0 files = **BLOCKING** |
+| **UI** | Core screens (workshop, arena) communicate game state without external guidance | Playtest report confirms (manual) |
+| **Controls** | Primary input path (build → fight → outcome) works end-to-end | Playtest report confirms (manual) |
+
+For **Sound**: Glob `assets/**/*.wav`, `assets/**/*.ogg`, `assets/**/*.mp3`. If total count is 0 → BLOCKING: "No audio exists on any interaction. Placeholder SFX on equip, attack, hit, and defeat is the minimum before advancing. Full audio design and mixing belong to Polish." If > 0 → verify the most recent playtest report confirms audio was present during the session.
+
+> **Why sound is blocking at this gate**: Playtesting an audio-absent build produces systematically optimistic feedback — players mentally compensate for missing SFX. "The core mechanic feels good" cannot be honestly confirmed without at minimum placeholder audio on core interactions. Full audio design and volume calibration belong to Polish, not VS.
+
 **Quality Checks:**
 - [ ] **Core loop fun is validated** — playtest data confirms the central mechanic is enjoyable, not just functional
 - [ ] **Developer has personally played the Vertical Slice** — not just built it; artifact evidence alone is insufficient
@@ -374,6 +389,7 @@ A depends on B). If any cycle is detected (e.g. A→B→A, or A→B→C→A):
 > **Verdict rules:**
 > - **Any validation item is NO** → verdict is automatically FAIL. An unfun or incomplete Vertical Slice must not advance to Production.
 > - **Developer has not personally played** → verdict is FAIL regardless of other checks. Artifact-only PASS is insufficient.
+> - **Sound coverage is absent (0 audio files)** → verdict is automatically FAIL. Placeholder SFX on core interactions is the minimum bar; full audio design belongs to Polish.
 > - All checks YES → eligible for PASS.
 
 ---
@@ -802,6 +818,7 @@ Based on the verdict, suggest specific next steps:
 - **Missing stories for an epic?** → `/create-stories [epic-slug]` (run after each epic is created)
 - **Stories not implementation-ready?** → `/story-readiness` to validate stories before developers pick them up
 - **Tests failing?** → delegate to `lead-programmer` or `qa-tester`
+- **No audio on any interaction (VS gate)** → `/team-audio` to produce direction + SFX spec; implement placeholder SFX on equip, attack, hit, and defeat before re-gating; full audio design and mixing belong to Polish
 - **No playtest data?** → `/playtest-report`
 - **No playtest sessions beyond the minimum?** → Additional sessions give more reliable signal. 3+ total is recommended before committing the full team. Use `/playtest-report` to structure findings.
 - **No Difficulty Curve doc?** → Create `design/difficulty-curve.md` from the template at `.claude/docs/templates/difficulty-curve.md` — or use `/quick-design "difficulty curve"` for a guided session.
