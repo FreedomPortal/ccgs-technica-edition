@@ -41,4 +41,7 @@ if [ -n "$LAST_MSG" ]; then
     } > "$DRAFT_FILE" 2>/dev/null
 fi
 
+# Autosave: inject reminder into model context so active.md gets updated
+echo "=== Autosave: $AGENT_NAME completed at $TIMESTAMP — write settled changes to production/session-state/active.md now ==="
+
 exit 0

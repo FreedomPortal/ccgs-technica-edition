@@ -22,17 +22,16 @@ fi
 
 # Trigger on significant design/architecture writes
 if echo "$FILE_PATH" | grep -qE '(design/gdd/|docs/architecture/|design/ux/|design/narrative/)'; then
-    echo "" >&2
-    echo "=== MEMORY CHECKPOINT ===" >&2
-    echo "A design or architecture file was just written." >&2
-    echo "Before continuing: did this session surface any of the following?" >&2
-    echo "  - New comparable titles or reference games" >&2
-    echo "  - Design decisions, pillars, or settled questions" >&2
-    echo "  - Technical constraints or architectural choices" >&2
-    echo "  - Production facts (scope, dates, platform, monetization)" >&2
-    echo "If yes -- write to the relevant agent memory file NOW." >&2
-    echo "Crashes lose unbacked knowledge. Don't wait until session end." >&2
-    echo "=========================" >&2
+    echo ""
+    echo "=== MEMORY CHECKPOINT ==="
+    echo "Design/architecture file written: $FILE_PATH"
+    echo "That file IS the record of the decision — do not duplicate it in agent memory."
+    echo "Only write to agent memory if this session also surfaced knowledge NOT in that file:"
+    echo "  - Comparable titles, references, or inspirations"
+    echo "  - Constraints, lessons, or preferences not captured in the doc"
+    echo "  - Settled questions that exist only in conversation"
+    echo "If none of the above — no agent memory write needed. The doc is enough."
+    echo "========================="
 fi
 
 exit 0

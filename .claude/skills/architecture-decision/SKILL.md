@@ -455,3 +455,8 @@ If there are no remaining priority ADRs and no undesigned GDD systems, offer onl
 > assessment. Running it here would invalidate the review.
 
 Update any stories that were `Status: Blocked` pending this ADR to `Status: Ready`.
+
+**Checkpoint notice (always include at the very end):**
+> The ADR is the permanent record of this decision — do not duplicate it in agent memory.
+> Run `/checkpoint` only if this session surfaced knowledge not captured in the ADR:
+> constraints, comparables, lessons, or settled questions that live only in conversation.
