@@ -19,6 +19,7 @@ for _candidate in python3 python; do
 done
 if command -v jq &>/dev/null; then
   model=$(echo "$input" | jq -r '.model.display_name // "Unknown"')
+  effort=$(echo "$input" | jq -r '.effort.level // empty')
   used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
   rl_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
   wl_pct=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
@@ -35,6 +36,7 @@ sd = rl.get('seven_day', {})
 cw = d.get('context_window', {})
 ws = d.get('workspace', {})
 print(d.get('model', {}).get('display_name', 'Unknown'))
+print(d.get('effort', {}).get('level',''))
 print(cw.get('used_percentage', ''))
 print(fh.get('used_percentage', ''))
 print(sd.get('used_percentage', ''))
@@ -43,15 +45,17 @@ print(sd.get('resets_at', ''))
 print(ws.get('current_dir', d.get('cwd', '')))
 " 2>/dev/null)
   model=$(echo "$_parse" | sed -n '1p')
-  used_pct=$(echo "$_parse" | sed -n '2p')
-  rl_pct=$(echo "$_parse" | sed -n '3p')
-  wl_pct=$(echo "$_parse" | sed -n '4p')
-  rl_reset=$(echo "$_parse" | sed -n '5p')
-  wl_reset=$(echo "$_parse" | sed -n '6p')
-  cwd=$(echo "$_parse" | sed -n '7p')
+  effort=$(echo "$_parse" | sed -n '2p')
+  used_pct=$(echo "$_parse" | sed -n '3p')
+  rl_pct=$(echo "$_parse" | sed -n '4p')
+  wl_pct=$(echo "$_parse" | sed -n '5p')
+  rl_reset=$(echo "$_parse" | sed -n '6p')
+  wl_reset=$(echo "$_parse" | sed -n '7p')
+  cwd=$(echo "$_parse" | sed -n '8p')
   [ -z "$model" ] && model="Unknown"
 else
   model=$(echo "$input" | grep -oE '"display_name"\s*:\s*"[^"]*"' | head -1 | sed 's/.*: *"//;s/"//')
+  effort=$(echo "$input" | grep -oE '"level"\s*:\s*"[^"]*"' | head -1 | sed 's/.*: *"//;s/"//')
   used_pct=$(echo "$input" | grep -oE '"used_percentage"\s*:\s*[0-9]+' | head -1 | sed 's/.*: *//')
   rl_pct=$(echo "$input" | grep -oE '"five_hour"\s*:\s*\{[^}]+\}' | grep -oE '"used_percentage"\s*:\s*[0-9.]+' | grep -oE '[0-9]+' | cut -d. -f1)
   wl_pct=$(echo "$input" | grep -oE '"seven_day"\s*:\s*\{[^}]+\}' | grep -oE '"used_percentage"\s*:\s*[0-9.]+' | grep -oE '[0-9]+' | cut -d. -f1)
@@ -235,7 +239,14 @@ if [ -n "$git_root" ]; then
   [ -n "$branch" ] && repo_branch="${repo_name} (${branch})"
 fi
 
+# --- Model + effort label ---
+model_label=""
+if [ -n "$model" ] && [ "$model" != "Unknown" ]; then
+  model_label="$model"
+  [ -n "$effort" ] && model_label="${model_label} (${effort})"
+fi
+
 # --- Assemble ---
 printf "%s\n%s" \
-  "🤖 ${model} | ${ctx_label} | ${rl_label} ${rl_reset_label} | ${wl_label} ${wl_reset_label} | ${repo_branch}" \
+  "🤖 ${model_label} | ${ctx_label} | ${rl_label} ${rl_reset_label} | ${wl_label} ${wl_reset_label} | ${repo_branch}" \
   "🎯 ${stage}${review_mode_label}${sprint_label}${breadcrumb}"
