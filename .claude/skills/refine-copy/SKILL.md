@@ -355,6 +355,20 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 
 ---
 
+### Pass 9: Writeprint (conditional)
+
+After all de-AI passes, check for a Writeprint Profile Pack — resolve in order: `$WRITEPRINT_ROOT` env var → `~/.writeprint/` → `./writeprint/`. Pack lives at `[root]/profile/[name]/` (use `publishing` if it exists, else `default`).
+
+- **No pack resolves** → skip this pass silently. Never block on it.
+- **Pack exists but `meta.yaml` says `validated: false`** → skip, and note "writeprint profile found but unvalidated — not applied."
+- **Validated pack** → apply the Consumer Protocol (`[root]/CONSUMER.md`): map the content's audience to a register, then apply in priority order — anti-patterns (hard bans) > register-appropriate error profile > knowledge-map > style dials > adjust toward the nearest exemplars.
+
+Ordering rationale: Passes 1–8 remove generic machine tells; this pass adds the user's specific fingerprint. The target is not "neutral human" — it is *this* human. Pass 9 overrides Pass 8's generic voice techniques where they conflict: the profile's actual voice beats invented personality.
+
+The Pass 8 exclusions apply here too (formal documentation, patch notes, legal/compliance text get style dials and anti-patterns only — no error profile injection).
+
+---
+
 ## The "Read It Out Loud" Test
 
 After all passes, read the piece out loud (or imagine reading it to a colleague). Flag anything that:
@@ -412,7 +426,7 @@ When reviewing without rewriting (if asked):
 6. Check whether flagged patterns have a non-AI explanation (e.g., a table has three rows because there are three real items, not because AI forced a triad)
 
 When called by an export skill (automatic pass):
-- Apply all passes in sequence
+- Apply all passes in sequence (including Pass 9 if a validated writeprint profile resolves)
 - Edit the file in-place
 - Do NOT include the Changes table in the saved file — keep the output clean
 - No user approval needed before the edit
